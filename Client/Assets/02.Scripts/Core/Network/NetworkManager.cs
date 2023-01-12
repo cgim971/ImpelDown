@@ -60,7 +60,6 @@ public class NetworkManager : MonoBehaviour {
                 else {
                     Debug.LogError($"There is no handler for this packet : {pMsg.Id}");
                 }
-
             }
         }
 

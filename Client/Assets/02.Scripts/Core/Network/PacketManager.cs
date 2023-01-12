@@ -1,7 +1,9 @@
 using Google.Protobuf;
+using ImpelDown.Proto;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PacketManager : MonoBehaviour {
@@ -17,7 +19,8 @@ public class PacketManager : MonoBehaviour {
     }
 
     private void Register() {
-
+        _onRecv.Add((ushort)MSGID.SInit, MakePacket<S_Init>);
+        _handlers.Add((ushort)MSGID.SInit, new SInitHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

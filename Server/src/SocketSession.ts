@@ -5,16 +5,34 @@ import PacketManager from "./PacketManager";
 
 export default class SocketSession {
 
-    _socket: WebSocket;
-    _playerId: number;
+    private _socket: WebSocket;
+    private _playerId: number;
+
+    private _roomIndex: number;
+    private _playerRoomId: number;
 
     constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
         this._socket = socket;
         this._playerId = playerId;
+        this._roomIndex = 0;
+        this._playerRoomId = 0;
 
         this._socket.on("close", () => {
             CloseCallback();
         });
+    }
+
+    getPlayerId(): number {
+        return this._playerId;
+    }
+
+    setPlayerRoom(roomIndex: number = -1, playerRoomId: number = -1) {
+        this._roomIndex = roomIndex;
+        this._playerRoomId = playerRoomId;
+    }
+
+    getPlayerRoom(): number {
+        return this._playerRoomId;
     }
 
     getInt16FEFromBuffer(buffer: Buffer): number {

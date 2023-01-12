@@ -7,33 +7,37 @@ interface SessionDictionary {
 
 export default class SessionManager {
     static Instance: SessionManager;
-    sessionMap: SessionDictionary = {};
-    count: number = 0;
+    private _sessionMap: SessionDictionary = {};
+    private _count: number = 0;
 
     constructor() {
-        this.sessionMap = {};
-        this.count = 0;
+        this._sessionMap = {};
+        this._count = 0;
     }
 
     addSession(session: SocketSession, id: number): void {
-        this.sessionMap[id] = session;
-        this.count += 1;
+        this._sessionMap[id] = session;
+        this._count += 1;
     }
 
     removeSession(id: number) {
-        delete this.sessionMap[id];
-        this.count -= 1;
+        delete this._sessionMap[id];
+        this._count -= 1;
     }
 
     getSession(id: number): SocketSession {
-        return this.sessionMap[id];
+        return this._sessionMap[id];
     }
 
     broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
-        for (let index in this.sessionMap) {
-            if (exceptSender == true && senderId == this.sessionMap[index]._playerId) continue;
+        for (let index in this._sessionMap) {
+            if (exceptSender == true && senderId == this._sessionMap[index].getPlayerId()) continue;
 
-            this.sessionMap[index].SendData(payload, msgCode);
+            this._sessionMap[index].SendData(payload, msgCode);
         }
+    }
+
+    getCount(): number {
+        return this._count;
     }
 }

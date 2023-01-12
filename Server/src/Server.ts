@@ -1,7 +1,9 @@
 import Express, { Application } from 'express';
 import { IncomingMessage } from 'http';
 import WS, { RawData } from 'ws';
+import { impelDown } from './packet/packet';
 import PacketManager from './PacketManager';
+import RoomManager from './RoomManager';
 import SessionManager from './SessionManager';
 import SocketSession from './SocketSession';
 
@@ -19,14 +21,26 @@ const socketServer: WS.Server = new WS.Server({
 
 PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
+RoomManager.Instance = new RoomManager();
 
+let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
-    console.log("A");
+    const id: number = playerId;
 
-    let session:SocketSession = new SocketSession(soc, 0, ()=>{
+    let session: SocketSession = new SocketSession(soc, id, () => {
 
     });
 
     SessionManager.Instance.addSession(session, 0);
-    console.log(SessionManager.Instance.count);
+    let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: id });
+    let msg: impelDown.S_Init = new impelDown.S_Init({ playerInfo: playerInfo });
+    session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
+    console.log(id);
+    playerId += 1;
+    
+    soc.on("message", (data: RawData, isBinary: boolean) => {
+        if (isBinary == true) {
+            session.receiveMsg(data);
+        }
+    });
 });

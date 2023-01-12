@@ -5,13 +5,40 @@ option csharp_namespace = "ImpelDown.Proto";
 
 enum MSGID 
 {
-    S_ENTER = 0;
-    S_INIT = 1;
-    C_ENTER = 2;
-    S_INITLIST = 3;
-    C_MOVE = 4;
-    S_PLAYERLIST = 5;
-    S_LEAVE = 6;
+    S_INIT = 0;
+
+    C_CREATE_ROOM = 10;
+    C_JOIN_ROOM = 11;
+    C_EXIT_ROOM = 12;
+    C_DELETE_ROOM = 13;
+
+    S_ROOM_INIT = 20;
+    S_ROOM_INITLIST = 21;
 }
 
+message PlayerInfo{
+    int32 playerId = 1;
+}
 
+message S_Init{
+    PlayerInfo playerInfo = 1;
+}
+
+message C_Create_Room{
+    PlayerInfo playerInfo = 1;
+    int32 _maximumPeople = 2;
+}
+
+message C_Join_Room{
+    PlayerInfo playerInfo = 1;
+    int32 roomIndex = 2;
+}
+
+message C_Exit_Room{
+    PlayerInfo playerInfo = 1;
+    int32 roomIndex = 2;
+}
+
+message C_Delete_Room{
+    int32 roomIndex = 1;
+}

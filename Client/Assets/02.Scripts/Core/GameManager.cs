@@ -17,11 +17,9 @@ public class GameManager : MonoBehaviour {
     private static GameManager _instance = null;
 
 
-
     [SerializeField] private string _url = string.Empty;
 
     [SerializeField] private PlayerController _playerControllerPrefab;
-
 
     public PlayerController PlayerControlller => _playerController;
     private PlayerController _playerController;
