@@ -3,7 +3,6 @@ import { IncomingMessage } from 'http';
 import WS, { RawData } from 'ws';
 import { impelDown } from './packet/packet';
 import PacketManager from './PacketManager';
-import RoomManager from './RoomManager';
 import SessionManager from './SessionManager';
 import SocketSession from './SocketSession';
 
@@ -21,7 +20,6 @@ const socketServer: WS.Server = new WS.Server({
 
 PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
-RoomManager.Instance = new RoomManager();
 
 let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {

@@ -7,14 +7,6 @@ enum MSGID
 {
     S_INIT = 0;
 
-    C_CREATE_ROOM = 10;
-    C_JOIN_ROOM = 11;
-    C_EXIT_ROOM = 12;
-    C_DELETE_ROOM = 13;
-    C_DEBUG_ROOM = 14;
-
-    S_ROOM_INIT = 20;
-    S_ROOM_INITLIST = 21;
 }
 
 message PlayerInfo{
@@ -23,26 +15,4 @@ message PlayerInfo{
 
 message S_Init{
     PlayerInfo playerInfo = 1;
-}
-
-message C_Create_Room{
-    PlayerInfo playerInfo = 1;
-    int32 _maximumPeople = 2;
-}
-
-message C_Join_Room{
-    PlayerInfo playerInfo = 1;
-    int32 roomIndex = 2;
-}
-
-message C_Exit_Room{
-    PlayerInfo playerInfo = 1;
-}
-
-message C_Delete_Room{
-    PlayerInfo playerInfo = 1;
-}
-
-message C_Debug_Room{
-    int32 roomIndex = 1;
 }
