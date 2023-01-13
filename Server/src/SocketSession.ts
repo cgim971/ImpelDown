@@ -14,8 +14,8 @@ export default class SocketSession {
     constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
         this._socket = socket;
         this._playerId = playerId;
-        this._roomIndex = 0;
-        this._playerRoomId = 0;
+        this._roomIndex = -1;
+        this._playerRoomId = -1;
 
         this._socket.on("close", () => {
             CloseCallback();
@@ -31,8 +31,8 @@ export default class SocketSession {
         this._playerRoomId = playerRoomId;
     }
 
-    getPlayerRoom(): number {
-        return this._playerRoomId;
+    getPlayerRoomIndex(): number {
+        return this._roomIndex;
     }
 
     getInt16FEFromBuffer(buffer: Buffer): number {

@@ -1,3 +1,4 @@
+import RoomManager from "./RoomManager";
 import SocketSession from "./SocketSession";
 
 interface SessionDictionary {
@@ -37,10 +38,17 @@ export default class Room {
     }
 
     exitRoom(session: SocketSession): void {
-        console.log("Exit room [%d] - Player : %d", this._roomIndex, session.getPlayerId());
-        delete this._sessionMap[session.getPlayerId()];
-        session.setPlayerRoom();
-        this._currentPeopleCount--;
+        let playerId : number = session.getPlayerId();
+        
+        console.log("Exit room [%d] - Player : %d", this._roomIndex,playerId);
+        delete this._sessionMap[playerId];
+        
+        if(--this._currentPeopleCount == 0){
+            RoomManager.Instance.deleteRoom(playerId);
+        }
+        else{
+            session.setPlayerRoom();
+        }
     }
 
     deleteRoom(): void {
@@ -49,6 +57,16 @@ export default class Room {
             let session: SocketSession = this._sessionMap[sessionIndex]
             if (session != null) {
                 this.exitRoom(session);
+            }
+        }
+    }
+
+    debugRoom():void{
+        let sessionIndex: number = 0;
+        for (sessionIndex = 0; sessionIndex < this._maximumPeople; sessionIndex++) {
+            let session: SocketSession = this._sessionMap[sessionIndex]
+            if (session != null) {
+                console.log(session.getPlayerId());
             }
         }
     }

@@ -1,7 +1,7 @@
-import RoomManager from "../RoomManager";
-import SocketSession from "../SocketSession";
-import { impelDown } from "./packet";
-import { PacketHandler } from "./PacketHandler";
+import RoomManager from "../../RoomManager";
+import SocketSession from "../../SocketSession";
+import { impelDown } from "./../packet";
+import { PacketHandler } from "./../PacketHandler";
 
 export default class CCreateRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {

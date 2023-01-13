@@ -11,6 +11,7 @@ enum MSGID
     C_JOIN_ROOM = 11;
     C_EXIT_ROOM = 12;
     C_DELETE_ROOM = 13;
+    C_DEBUG_ROOM = 14;
 
     S_ROOM_INIT = 20;
     S_ROOM_INITLIST = 21;
@@ -36,9 +37,12 @@ message C_Join_Room{
 
 message C_Exit_Room{
     PlayerInfo playerInfo = 1;
-    int32 roomIndex = 2;
 }
 
 message C_Delete_Room{
+    PlayerInfo playerInfo = 1;
+}
+
+message C_Debug_Room{
     int32 roomIndex = 1;
 }
