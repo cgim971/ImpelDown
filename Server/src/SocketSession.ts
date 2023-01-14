@@ -41,7 +41,7 @@ export default class SocketSession {
 
     receiveMsg(data: RawData): void {
         let code: number = this.getInt16FEFromBuffer(data.slice(2, 4) as Buffer);
-        PacketManager.Instance.handlerMap[code].handleMsg(this, data.slice(4) as Buffer);
+        PacketManager.Instance.getHandlerMap()[code].handleMsg(this, data.slice(4) as Buffer);
     }
 
     SendData(payload: Uint8Array, msgCode: number): void {

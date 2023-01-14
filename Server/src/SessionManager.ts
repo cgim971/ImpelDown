@@ -1,7 +1,7 @@
 import { impelDown } from "./packet/packet";
 import SocketSession from "./SocketSession";
 
-interface SessionDictionary {
+export interface SessionDictionary {
     [key: number]: SocketSession;
 }
 
