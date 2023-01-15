@@ -33,25 +33,31 @@ export default class RoomManager {
     // 방 생성 생성한 사람은 방 입장도 함
     createRoom(playerId: number, maximumPeople: number = 4): void {
         let room: Room = new Room(maximumPeople);
-        let index: number = 0;  
+        let index: number = 0;
         this._count += 1;
         for (index = 0; index < this._count; index++) {
             if (this._roomMap[index] == null) {
                 break;
             }
         }
+
+        console.log("방 생성 - %d", index);
+
         this._roomMap[index] = room;
         this.joinRoom(index, playerId);
 
-        let playerInfo : impelDown.PlayerInfo = new impelDown.PlayerInfo({playerId});
-        let sCreateRoom = new impelDown.S_Create_Room({ playerInfo, maximumPeople });
+        let sCreateRoom: impelDown.S_Create_Room = new impelDown.S_Create_Room({ roomInfos: this.getRoomList(playerId) });
         SessionManager.Instance.broadCastMessage(sCreateRoom.serialize(), impelDown.MSGID.S_CREATE_ROOM, playerId, false);
     }
 
     // 방 입장
-    joinRoom(roomIndex: number, playerId: number): void {
-        this._roomMap[roomIndex].joinRoom(playerId);
-        console.log("Join room [%d]", roomIndex);
+    joinRoom(roomId: number, playerId: number): void {
+        this._roomMap[roomId].joinRoom(playerId);
+        console.log("Join room [%d]", roomId);
+
+        let roomInfo: impelDown.RoomInfo = this._roomMap[roomId].getRoomInfo(roomId, playerId);
+        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ roomInfo });
+        SessionManager.Instance.broadCastMessage(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM, playerId, false);
     }
 
     // 방 나가기
@@ -81,5 +87,18 @@ export default class RoomManager {
         }
 
         return -1;
+    }
+
+    getRoomList(playerId: number): impelDown.RoomInfo[] {
+        let list: impelDown.RoomInfo[] = [];
+
+        for (let index in this._roomMap) {
+            let room = this._roomMap[index];
+
+            let roomInfo: impelDown.RoomInfo = this._roomMap[index].getRoomInfo(+index, playerId);
+            list.push(roomInfo);
+        }
+
+        return list;
     }
 }

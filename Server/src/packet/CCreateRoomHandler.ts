@@ -8,9 +8,8 @@ export default class CCreateRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
         let cCreateRoom = impelDown.C_Create_Room.deserialize(buffer);
 
-        let { playerInfo, maximumPeople } = cCreateRoom;
+        let { playerInfo, maximumPeople } = cCreateRoom.roomInfo;
 
-        console.log("방 생성 -");
         RoomManager.Instance.createRoom(playerInfo.playerId, maximumPeople);
     }
 }

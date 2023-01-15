@@ -41,9 +41,10 @@ export default class Room {
             }
         }
 
-        let maximumPeople: number = this._maximumPeople;
-        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ playerInfos: this.getPlayerList(), maximumPeople: this._maximumPeople, currentPeople: this._count });
-        this.broadCastMessage(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
+        // let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId });
+        // let roomInfo: impelDown.RoomInfo = new impelDown.RoomInfo({ playerInfo, maximumPeople: this._maximumPeople, currentPeople: this._count, playerInfos: this.getPlayerList() });
+        // let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ roomInfo });
+        // this.broadCastMessage(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
         // 생성 룸 매니저
         // 그 친구를 통해 내용을 전달 받는다
     }
@@ -79,5 +80,19 @@ export default class Room {
         }
 
         return list;
+    }
+
+    getRoomMaximumCount(): number {
+        return this._maximumPeople;
+    }
+
+    getPlayerCount(): number {
+        return this._count;
+    }
+
+    getRoomInfo(roomId: number, playerId: number): impelDown.RoomInfo {
+        let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId });
+        let roomInfo: impelDown.RoomInfo = new impelDown.RoomInfo({ roomId, playerInfo, maximumPeople: this._maximumPeople, currentPeople: this._count, playerInfos: this.getPlayerList() });
+        return roomInfo;
     }
 }

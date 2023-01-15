@@ -12,12 +12,12 @@ enum MSGID
 
     C_CREATE_ROOM = 21;
     S_CREATE_ROOM = 22;
-    C_JOIN_ROOM = 23;
-    S_JOIN_ROOM = 24;
-    C_EXIT_ROOM = 25;
-    S_EXIT_ROOM = 26;
+    S_CREATE_ROOMS = 23;
 
-    S_ROOM_SETTING = 30;
+    C_JOIN_ROOM = 24;
+    S_JOIN_ROOM = 25;
+    C_EXIT_ROOM = 26;
+    S_EXIT_ROOM = 27;
 
 }
 
@@ -28,7 +28,6 @@ message Position{
 
 message PlayerInfo{
     int32 playerId = 1;
-    
 }
 
 message PlayerData{
@@ -53,24 +52,26 @@ message C_Exit{
 }
 
 
-
+message RoomInfo {
+    int32 roomId = 1;
+    PlayerInfo playerInfo = 2;
+    int32 maximumPeople = 3;
+    int32 currentPeople = 4;
+    repeated PlayerInfo playerInfos = 5;
+}
 
 message C_Create_Room{
-    PlayerInfo playerInfo = 1;
-    int32 maximumPeople = 2;
+    RoomInfo roomInfo = 1;
 }
 
 message S_Create_Room{
-    PlayerInfo playerInfo = 1;
-    int32 maximumPeople = 2;
+    repeated RoomInfo roomInfos = 1;
+}
+
+message C_Join_Room{
+    RoomInfo roomInfo = 1;
 }
 
 message S_Join_Room{
-    repeated PlayerInfo playerInfos = 1;
-    int32 maximumPeople = 2;
-    int32 currentPeople = 3;
-}
-
-message S_Room_Setting{
-    
+    RoomInfo roomInfo = 1;
 }
