@@ -4,12 +4,8 @@ import SocketSession from "../SocketSession";
 import { impelDown } from "./packet";
 import { PacketHandler } from "./PacketHandler";
 
-export default class CCreateRoomHandler implements PacketHandler {
+export default class CRoomListHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
-        let cCreateRoom = impelDown.C_Create_Room.deserialize(buffer);
-
-        let { hostInfo, maximumPeople } = cCreateRoom.roomInfo;
-
-        RoomManager.Instance.createRoom(hostInfo.playerId, maximumPeople);
+        RoomManager.Instance.sendRoomList();
     }
 }

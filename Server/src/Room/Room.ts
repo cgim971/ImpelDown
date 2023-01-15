@@ -2,6 +2,7 @@ import RoomSocketSession from "./RoomSocketSession";
 import SessionManager, { SessionDictionary } from "../SessionManager";
 import RoomManager from "./RoomManager";
 import { impelDown } from "../packet/packet";
+import SocketSession from "../SocketSession";
 
 export default class Room {
     // 게임 참여 가능 수
@@ -11,12 +12,19 @@ export default class Room {
     private _playerMap: SessionDictionary = {};
     private _count: number = 0;
 
-    constructor(roomIndex: number = -1, maximumPeople: number = 4) {
+    private _roomId: number = -1;
+
+    private _hostId: number = -1;
+
+    constructor(roomId: number = -1, maximumPeople: number = 4, hostId: number) {
         this._manager = new RoomSocketSession();
 
         this._maximumPeople = maximumPeople;
         this._playerMap = {};
         this._count = 0;
+
+        this._roomId = roomId;
+        this._hostId = hostId;
     }
 
     broadCastMessage(payload: Uint8Array, msgCode: number, roomId: number = 0): void {
@@ -26,6 +34,10 @@ export default class Room {
     }
 
     joinRoom(playerId: number): void {
+        let plaeyrSocket: SocketSession = SessionManager.Instance.getSession(playerId);
+
+        if(plaeyrSocket.getPlayerRoomIndex() != -1) return;
+        
         if (this._maximumPeople <= this._count + 1) {
             console.log("Aleady Full!");
             return;
@@ -35,8 +47,8 @@ export default class Room {
 
         for (let index: number = 0; index < this._count; index++) {
             if (this._playerMap[index] == null) {
-                this._playerMap[index] = SessionManager.Instance.getSession(playerId);
-                SessionManager.Instance.getSession(playerId).setPlayerRoom(RoomManager.Instance.getRoomIndex(this), index);
+                this._playerMap[index] = plaeyrSocket;
+                plaeyrSocket.setPlayerRoom(this._roomId, index);
                 break;
             }
         }
@@ -76,6 +88,7 @@ export default class Room {
 
         for (let idx in this._playerMap) {
             let player = this._playerMap[idx];
+            if (player.getPlayerId() == this._hostId) continue;
             list.push(new impelDown.PlayerInfo({ playerId: player.getPlayerId() }));
         }
 
@@ -90,9 +103,9 @@ export default class Room {
         return this._count;
     }
 
-    getRoomInfo(roomId: number, playerId: number): impelDown.RoomInfo {
-        let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId });
-        let roomInfo: impelDown.RoomInfo = new impelDown.RoomInfo({ roomId, playerInfo, maximumPeople: this._maximumPeople, currentPeople: this._count, playerInfos: this.getPlayerList() });
+    getRoomInfo(): impelDown.RoomInfo {
+        let hostInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: this._hostId });
+        let roomInfo: impelDown.RoomInfo = new impelDown.RoomInfo({ roomId: this._roomId, hostInfo, maximumPeople: this._maximumPeople, currentPeople: this._count, playerInfos: this.getPlayerList() });
         return roomInfo;
     }
 }

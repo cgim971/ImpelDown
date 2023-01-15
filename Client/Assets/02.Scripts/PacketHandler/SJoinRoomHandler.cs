@@ -8,6 +8,6 @@ public class SJoinRoomHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Join_Room msg = packet as S_Join_Room;
 
-
+        //RoomManager.Instance.RefreshRoom();
     }
 }

@@ -30,6 +30,9 @@ public class PacketManager : MonoBehaviour {
 
         _onRecv.Add((ushort)MSGID.SJoinRoom, MakePacket<S_Join_Room>);
         _handlers.Add((ushort)MSGID.SJoinRoom, new SJoinRoomHandler());
+
+        _onRecv.Add((ushort)MSGID.SRoomlist, MakePacket<S_RoomList>);
+        _handlers.Add((ushort)MSGID.SRoomlist, new SRoomListHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

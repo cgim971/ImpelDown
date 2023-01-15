@@ -32,22 +32,30 @@ export default class RoomManager {
 
     // 방 생성 생성한 사람은 방 입장도 함
     createRoom(playerId: number, maximumPeople: number = 4): void {
-        let room: Room = new Room(maximumPeople);
-        let index: number = 0;
+        let plaeyrSocket: SocketSession = SessionManager.Instance.getSession(playerId);
+        if (plaeyrSocket.getPlayerRoomIndex() != -1) {
+            console.log("Aleready Join room!");
+            return;
+        }
+
+        let roomId: number = 0;
         this._count += 1;
-        for (index = 0; index < this._count; index++) {
-            if (this._roomMap[index] == null) {
+        for (roomId = 0; roomId < this._count; roomId++) {
+            if (this._roomMap[roomId] == null) {
                 break;
             }
         }
+        let room: Room = new Room(roomId, maximumPeople, playerId);
+        console.log("방 생성 - %d", roomId);
 
-        console.log("방 생성 - %d", index);
+        this._roomMap[roomId] = room;
+        this.joinRoom(roomId, playerId);
 
-        this._roomMap[index] = room;
-        this.joinRoom(index, playerId);
+        this.sendRoomList();
 
-        let sCreateRoom: impelDown.S_Create_Room = new impelDown.S_Create_Room({ roomInfos: this.getRoomList(playerId) });
-        SessionManager.Instance.broadCastMessage(sCreateRoom.serialize(), impelDown.MSGID.S_CREATE_ROOM, playerId, false);
+        // let roomInfo: impelDown.RoomInfo = this._roomMap[roomId].getRoomInfo();
+        // let sCreateRoom: impelDown.S_Create_Room = new impelDown.S_Create_Room({ roomInfo: roomInfo });
+        // SessionManager.Instance.broadCastMessage(sCreateRoom.serialize(), impelDown.MSGID.S_CREATE_ROOM, playerId, false);
     }
 
     // 방 입장
@@ -55,9 +63,9 @@ export default class RoomManager {
         this._roomMap[roomId].joinRoom(playerId);
         console.log("Join room [%d]", roomId);
 
-        let roomInfo: impelDown.RoomInfo = this._roomMap[roomId].getRoomInfo(roomId, playerId);
-        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ roomInfo });
-        SessionManager.Instance.broadCastMessage(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM, playerId, false);
+        // let roomInfo: impelDown.RoomInfo = this._roomMap[roomId].getRoomInfo();
+        // let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ roomInfo });
+        // SessionManager.Instance.broadCastMessage(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM, playerId, false);
     }
 
     // 방 나가기
@@ -71,34 +79,30 @@ export default class RoomManager {
         delete this._roomMap[roomIndex];
     }
 
-    // 방 번호 
-    getRoomIndex(room: Room): number {
-        let count: number = this._count;
-        let index: number = 0;
-        while (count > 0) {
-            if (this._roomMap[index] != null) {
-                count -= 1;
 
-                if (this._roomMap[index] == room) {
-                    return index;
-                }
-            }
-            index++;
-        }
+    // getRoomList(playerId: number): impelDown.RoomInfo[] {
+    //     let list: impelDown.RoomInfo[] = [];
 
-        return -1;
-    }
+    //     for (let index in this._roomMap) {
+    //         let room = this._roomMap[index];
 
-    getRoomList(playerId: number): impelDown.RoomInfo[] {
+    //         let roomInfo: impelDown.RoomInfo = this._roomMap[index].getRoomInfo(playerId);
+    //         list.push(roomInfo);
+    //     }
+
+    //     return list;
+    // }
+
+    sendRoomList() {
         let list: impelDown.RoomInfo[] = [];
 
         for (let index in this._roomMap) {
             let room = this._roomMap[index];
-
-            let roomInfo: impelDown.RoomInfo = this._roomMap[index].getRoomInfo(+index, playerId);
+            let roomInfo: impelDown.RoomInfo = room.getRoomInfo();
             list.push(roomInfo);
         }
 
-        return list;
+        let sRoomList: impelDown.S_RoomList = new impelDown.S_RoomList({ roomInfos: list });
+        SessionManager.Instance.broadCastMessage(sRoomList.serialize(), impelDown.MSGID.S_ROOMLIST);
     }
 }

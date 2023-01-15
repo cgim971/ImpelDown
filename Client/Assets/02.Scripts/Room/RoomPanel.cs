@@ -13,7 +13,7 @@ public class RoomPanel : MonoBehaviour {
     private void Start() {
         Btn = GetComponent<Button>();
         Btn.onClick.AddListener(() => {
-            Debug.Log(Room);
+
         });
     }
 
