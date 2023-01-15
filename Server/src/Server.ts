@@ -3,6 +3,7 @@ import { IncomingMessage } from 'http';
 import WS, { RawData } from 'ws';
 import { impelDown } from './packet/packet';
 import PacketManager from './PacketManager';
+import RoomManager from './Room/RoomManager';
 import SessionManager from './SessionManager';
 import SocketSession from './SocketSession';
 
@@ -20,6 +21,7 @@ const socketServer: WS.Server = new WS.Server({
 
 PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
+RoomManager.Instance = new RoomManager();
 
 let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
@@ -30,8 +32,7 @@ socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     });
 
     SessionManager.Instance.addSession(session, id);
-    let position: impelDown.Position = new impelDown.Position({ x: 0, y: 0 });
-    let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: id, Position:position});
+    let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: id});
     let msg: impelDown.S_Init = new impelDown.S_Init({ playerInfo: playerInfo });
     session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
     playerId += 1;

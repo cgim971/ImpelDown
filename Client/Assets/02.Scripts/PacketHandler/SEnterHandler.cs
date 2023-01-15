@@ -10,5 +10,7 @@ public class SEnterHandler : IPacketHandler
         S_Enter msg = packet as S_Enter;
 
         Debug.Log(msg.PlayerInfo.PlayerId);
+
+        GameManager.Instance.PlayerId = msg.PlayerInfo.PlayerId;
     }
 }

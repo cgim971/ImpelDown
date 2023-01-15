@@ -232,11 +232,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 730530444}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2dadae2ccae3ae4ba42209ef9be03ef, type: 3}
+  m_Script: {fileID: 11500000, guid: 76b15494231be9c4f917a6ef9f12f703, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maximumPeople: 5
-  deleteRoomIndex: 3
 --- !u!4 &730530446
 Transform:
   m_ObjectHideFlags: 0
@@ -296,3 +294,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _url: ws://172.31.3.19:8181
   _playerControllerPrefab: {fileID: 3099569841542094996, guid: be125ff8acb95214dbcedbb9ff4f9e4f, type: 3}
+  PlayerId: 0

@@ -1,6 +1,7 @@
 import RoomSocketSession from "./RoomSocketSession";
 import SessionManager, { SessionDictionary } from "../SessionManager";
 import RoomManager from "./RoomManager";
+import { impelDown } from "../packet/packet";
 
 export default class Room {
     // 게임 참여 가능 수
@@ -16,8 +17,6 @@ export default class Room {
         this._maximumPeople = maximumPeople;
         this._playerMap = {};
         this._count = 0;
-
-
     }
 
     broadCastMessage(payload: Uint8Array, msgCode: number, roomId: number = 0): void {
@@ -42,6 +41,9 @@ export default class Room {
             }
         }
 
+        let maximumPeople: number = this._maximumPeople;
+        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ playerInfos: this.getPlayerList(), maximumPeople: this._maximumPeople, currentPeople: this._count });
+        this.broadCastMessage(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
         // 생성 룸 매니저
         // 그 친구를 통해 내용을 전달 받는다
     }
@@ -60,11 +62,22 @@ export default class Room {
         }
     }
 
-    startGame():void{
+    startGame(): void {
 
     }
 
-    endGame():void{
+    endGame(): void {
 
+    }
+
+    getPlayerList(): impelDown.PlayerInfo[] {
+        let list: impelDown.PlayerInfo[] = [];
+
+        for (let idx in this._playerMap) {
+            let player = this._playerMap[idx];
+            list.push(new impelDown.PlayerInfo({ playerId: player.getPlayerId() }));
+        }
+
+        return list;
     }
 }

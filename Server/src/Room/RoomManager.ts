@@ -1,3 +1,4 @@
+import { impelDown } from "../packet/packet";
 import SessionManager from "../SessionManager";
 import SocketSession from "../SocketSession";
 import Room from "./Room";
@@ -30,9 +31,9 @@ export default class RoomManager {
     }
 
     // 방 생성 생성한 사람은 방 입장도 함
-    createRoom(maximumPeople: number = 4, playerId: number): void {
+    createRoom(playerId: number, maximumPeople: number = 4): void {
         let room: Room = new Room(maximumPeople);
-        let index: number = 0;
+        let index: number = 0;  
         this._count += 1;
         for (index = 0; index < this._count; index++) {
             if (this._roomMap[index] == null) {
@@ -41,7 +42,10 @@ export default class RoomManager {
         }
         this._roomMap[index] = room;
         this.joinRoom(index, playerId);
-        return;
+
+        let playerInfo : impelDown.PlayerInfo = new impelDown.PlayerInfo({playerId});
+        let sCreateRoom = new impelDown.S_Create_Room({ playerInfo, maximumPeople });
+        SessionManager.Instance.broadCastMessage(sCreateRoom.serialize(), impelDown.MSGID.S_CREATE_ROOM, playerId, false);
     }
 
     // 방 입장

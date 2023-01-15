@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour {
 
     private PlayerController _playerController;
 
+    public int PlayerId = -1;
+
 
     private void Awake() {
         if (_instance != null)
@@ -35,10 +37,5 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
-    }
-
-    public PlayerController SetPlayer() {
-        _playerController = Instantiate(_playerControllerPrefab);
-        return _playerController;
     }
 }
