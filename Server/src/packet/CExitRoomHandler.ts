@@ -4,13 +4,10 @@ import SocketSession from "../SocketSession";
 import { impelDown } from "./packet";
 import { PacketHandler } from "./PacketHandler";
 
-export default class CJoinRoomHandler implements PacketHandler {
+export default class CExitRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
-        let cJoinRoom = impelDown.C_Join_Room.deserialize(buffer);
+        let cExitRoom = impelDown.C_Exit_Room.deserialize(buffer);
 
-        let roomId: number = cJoinRoom.roomId;
-        let playerId: number = cJoinRoom.playerId;
-
-        RoomManager.Instance.joinRoom(roomId, playerId);
+        RoomManager.Instance.exitRoom(cExitRoom.playerInfo.playerId);
     }
-} 
+}

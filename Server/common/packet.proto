@@ -72,11 +72,20 @@ message S_Create_Room{
 }
 
 message C_Join_Room{
-    int32 roomId = 1;
+    int32 playerId = 1;
+    int32 roomId = 2;
 }
 
 message S_Join_Room{
     RoomInfo roomInfo = 1;
+}
+
+message C_Exit_Room{
+    PlayerInfo playerInfo = 1;
+}
+
+message S_Exit_Room{
+
 }
 
 message C_RoomList{

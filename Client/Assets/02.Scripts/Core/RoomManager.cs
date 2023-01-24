@@ -33,11 +33,12 @@ public class RoomManager : MonoBehaviour {
     }
 
     public void ExitRoom() {
-
+        PlayerInfo playerInfo = new PlayerInfo { PlayerId = GameManager.Instance.PlayerId };
+        C_Exit_Room cExitRoom = new C_Exit_Room { PlayerInfo = playerInfo };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CExitRoom, cExitRoom);
     }
 
     public void RefreshRoomList(List<RoomInfo> roomInfos) {
-
         Transform[] childList = Content.GetComponentsInChildren<Transform>();
         if (childList != null) {
             for (int i = 1; i < childList.Length; i++) {
@@ -49,7 +50,7 @@ public class RoomManager : MonoBehaviour {
 
         foreach (RoomInfo roomInfo in roomInfos) {
             GameObject roomPanel = Instantiate(Room, Content);
-            roomPanel.GetComponent<RoomPanel>().RoomInfo = roomInfo;
+            roomPanel.GetComponent<RoomPanel>().Init(roomInfo);
         }
     }
 }

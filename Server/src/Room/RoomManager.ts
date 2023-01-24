@@ -46,7 +46,6 @@ export default class RoomManager {
             }
         }
         let room: Room = new Room(roomId, maximumPeople, playerId);
-        console.log("방 생성 - %d", roomId);
 
         this._roomMap[roomId] = room;
         this.joinRoom(roomId, playerId);
@@ -60,8 +59,14 @@ export default class RoomManager {
 
     // 방 입장
     joinRoom(roomId: number, playerId: number): void {
+        if(this._roomMap[roomId] == null){
+            console.log("No Room!");
+            return;
+        }
+        
         this._roomMap[roomId].joinRoom(playerId);
-        console.log("Join room [%d]", roomId);
+
+        this.sendRoomList();
 
         // let roomInfo: impelDown.RoomInfo = this._roomMap[roomId].getRoomInfo();
         // let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({ roomInfo });
@@ -71,12 +76,22 @@ export default class RoomManager {
     // 방 나가기
     exitRoom(playerId: number): void {
         let roomIndex: number = SessionManager.Instance.getSession(playerId).getPlayerRoomIndex();
+
+        if(roomIndex == -1){
+            console.log("No Room!");
+            return;
+        }
+        
         this._roomMap[roomIndex].exitRoom(playerId);
+
+        this.sendRoomList();
     }
 
     // 방 삭제
     deleteRoom(roomIndex: number): void {
         delete this._roomMap[roomIndex];
+
+        this.sendRoomList();
     }
 
 

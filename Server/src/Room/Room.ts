@@ -36,10 +36,13 @@ export default class Room {
     joinRoom(playerId: number): void {
         let plaeyrSocket: SocketSession = SessionManager.Instance.getSession(playerId);
 
-        if(plaeyrSocket.getPlayerRoomIndex() != -1) return;
-        
+        if (plaeyrSocket.getPlayerRoomIndex() != -1) {
+            console.log("Already room");
+            return;
+        }
+
         if (this._maximumPeople <= this._count + 1) {
-            console.log("Aleady Full!");
+            console.log("Already Full!");
             return;
         }
 
@@ -62,12 +65,15 @@ export default class Room {
     }
 
     exitRoom(playerId: number): void {
-        let roomIndex = SessionManager.Instance.getSession(playerId).getPlayerRoomIndex();
+        let plaeyrSocket: SocketSession = SessionManager.Instance.getSession(playerId);
+
+        let roomIndex = plaeyrSocket.getPlayerRoomIndex();
         if (this._count == 0) {
             console.log("No Room!");
             return;
         }
 
+        plaeyrSocket.setPlayerRoom();
         delete this._playerMap[playerId];
 
         if (--this._count == 0) {

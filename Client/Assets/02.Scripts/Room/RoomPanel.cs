@@ -7,13 +7,14 @@ using UnityEngine.UI;
 public class RoomPanel : MonoBehaviour {
 
     public Button Btn;
-    public RoomInfo RoomInfo;
-    public int Room;
+    private RoomInfo _roomInfo;
 
-    private void Start() {
-        Btn = GetComponent<Button>();
+    public void Init(RoomInfo roomInfo) {
+        _roomInfo = roomInfo;
+
         Btn.onClick.AddListener(() => {
-
+            C_Join_Room cJoinRoom = new C_Join_Room { PlayerId = GameManager.Instance.PlayerId, RoomId = _roomInfo.RoomId };
+            NetworkManager.Instance.RegisterSend((ushort)MSGID.CJoinRoom, cJoinRoom);
         });
     }
 

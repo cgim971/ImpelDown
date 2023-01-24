@@ -1,5 +1,6 @@
 import CCreateRoomHandler from "./packet/CCreateRoomHandler";
 import CEnterHandler from "./packet/CEnterHandler";
+import CExitRoomHandler from "./packet/CExitRoomHandler";
 import CJoinRoomHandler from "./packet/CJoinRoomHandler";
 import CRoomListHandler from "./packet/CRoomListHandler";
 import { impelDown } from "./packet/packet";
@@ -27,6 +28,7 @@ export default class PacketManager {
         this._handlerMap[impelDown.MSGID.C_ENTER] = new CEnterHandler;
         this._handlerMap[impelDown.MSGID.C_CREATE_ROOM] = new CCreateRoomHandler;
         this._handlerMap[impelDown.MSGID.C_JOIN_ROOM] = new CJoinRoomHandler;
+        this._handlerMap[impelDown.MSGID.C_EXIT_ROOM] = new CExitRoomHandler;
         this._handlerMap[impelDown.MSGID.C_ROOMLIST] = new CRoomListHandler;
     }
 }
