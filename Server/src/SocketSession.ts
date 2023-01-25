@@ -8,14 +8,14 @@ export default class SocketSession {
     private _socket: WebSocket;
     private _playerId: number;
 
+    private _room: boolean;
     private _roomIndex: number;
-    private _playerRoomId: number;
 
     constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
         this._socket = socket;
         this._playerId = playerId;
+        this._room = false;
         this._roomIndex = -1;
-        this._playerRoomId = -1;
 
         this._socket.on("close", () => {
             CloseCallback();
@@ -26,14 +26,23 @@ export default class SocketSession {
         return this._playerId;
     }
 
-    setPlayerRoom(roomIndex: number = -1, playerRoomId: number = -1) {
-        this._roomIndex = roomIndex;
-        this._playerRoomId = playerRoomId;
+    setRoom(room: boolean): void {
+        this._room = room;
     }
 
-    getPlayerRoomIndex(): number {
+    getRoom(): boolean {
+        return this._room;
+    }
+
+    setRoomIndex(roomIndex:number):void{
+        this._roomIndex = roomIndex;
+    }
+
+    getRoomIndex():number{
         return this._roomIndex;
     }
+    
+    
 
     getInt16FEFromBuffer(buffer: Buffer): number {
         return buffer.readInt16LE();

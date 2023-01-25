@@ -5,6 +5,7 @@ import { impelDown } from './packet/packet';
 import PacketManager from './PacketManager';
 import SessionManager from './SessionManager';
 import SocketSession from './SocketSession';
+import RoomManager from './Room/RoomManager';
 
 const App: Application = Express();
 
@@ -20,8 +21,9 @@ const socketServer: WS.Server = new WS.Server({
 
 PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
+RoomManager.Instance = new RoomManager();
 
-let playerId: number = 0;
+let playerId: number = 1;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     const id: number = playerId;
 

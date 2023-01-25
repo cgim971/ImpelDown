@@ -8,6 +8,13 @@ enum MSGID
     S_INIT = 0;
     C_ENTER = 1;
     S_ENTER = 2;
+
+
+    C_CREATE_ROOM = 20;
+    C_JOIN_ROOM = 21;
+    C_EXIT_ROOM = 22;
+    S_REFRESH_ROOM = 25;
+    S_REFRESH_ROOM_LIST = 26;
 }
 
 message PlayerInfo{
@@ -24,4 +31,32 @@ message C_Enter{
 
 message S_Enter{
     PlayerInfo playerInfo = 1;
+}   
+
+message RoomInfo{
+    int32 playerId = 1;
+    int32 roomIndex = 2;
+    int32 maxPeople = 3;
+    int32 currentPeople = 4;
+    repeated PlayerInfo playerInfos = 5;
+}
+
+message C_Create_Room{
+    RoomInfo roomInfo = 1;
+}
+
+message C_Join_Room{
+    RoomInfo roomInfo = 1;
+}
+
+message C_Exit_Room{
+    RoomInfo roomInfo = 1;
+}
+
+message S_Refresh_Room{
+    RoomInfo roomInfo = 1;
+}
+
+message S_Refresh_Room_List{
+    repeated RoomInfo roomInfos = 1;
 }

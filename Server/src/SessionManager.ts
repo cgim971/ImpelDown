@@ -1,7 +1,7 @@
 import { impelDown } from "./packet/packet";
 import SocketSession from "./SocketSession";
 
-interface SessionDictionary {
+export interface SessionDictionary {
     [key: number]: SocketSession;
 }
 
@@ -32,7 +32,16 @@ export default class SessionManager {
     broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
         for (let index in this._sessionMap) {
             if (exceptSender == true && senderId == this._sessionMap[index].getPlayerId()) continue;
+            
+            this._sessionMap[index].SendData(payload, msgCode);
+        }
+    }
 
+    // 방에 안 들어가있다면
+    broadCastMessageNoRoom(payload: Uint8Array, msgCode: number) {
+        for (let index in this._sessionMap) {
+            if (this._sessionMap[index].getRoom() == true) continue;
+            
             this._sessionMap[index].SendData(payload, msgCode);
         }
     }

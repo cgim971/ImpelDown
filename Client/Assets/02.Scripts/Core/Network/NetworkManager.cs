@@ -22,21 +22,17 @@ public class NetworkManager : MonoBehaviour {
 
     private static NetworkManager _instance = null;
 
-
     private string _url = string.Empty;
 
     private ClientWebSocket _socket = null;
     private RecvBuffer _recvBuffer = null;
 
-
     private CancellationTokenSource _quitSource = null;
     private CancellationToken _quitToken = CancellationToken.None;
-
 
     private PacketManager _packetManager = null;
     private Queue<PacketMessage> _sendQueue = null;
     private bool _isReadyToSend = true;
-
 
     public void Init(string url) {
         _url = url;
