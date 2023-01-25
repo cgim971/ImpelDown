@@ -6,7 +6,8 @@ option csharp_namespace = "ImpelDown.Proto";
 enum MSGID 
 {
     S_INIT = 0;
-
+    C_ENTER = 1;
+    S_ENTER = 2;
 }
 
 message PlayerInfo{
@@ -14,5 +15,13 @@ message PlayerInfo{
 }
 
 message S_Init{
+    PlayerInfo playerInfo = 1;
+}
+
+message C_Enter{
+    PlayerInfo playerInfo = 1;
+}
+
+message S_Enter{
     PlayerInfo playerInfo = 1;
 }

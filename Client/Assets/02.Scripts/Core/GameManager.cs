@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour {
     #endregion
     private static GameManager _instance = null;
 
-
     [SerializeField] private string _url = string.Empty;
 
     [SerializeField] private PlayerController _playerControllerPrefab;
@@ -35,6 +34,9 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
+
+        RoomManager.Instance = gameObject.AddComponent<RoomManager>();
+        RoomManager.Instance.Init();
     }
 
     public PlayerController SetPlayer() {

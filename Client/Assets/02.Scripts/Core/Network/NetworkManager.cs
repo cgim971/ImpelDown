@@ -23,9 +23,7 @@ public class NetworkManager : MonoBehaviour {
     private static NetworkManager _instance = null;
 
 
-
     private string _url = string.Empty;
-
 
     private ClientWebSocket _socket = null;
     private RecvBuffer _recvBuffer = null;
