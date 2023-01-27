@@ -8,6 +8,6 @@ public class SRefreshRoomHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Refresh_Room msg = packet as S_Refresh_Room;
 
-        Debug.Log(msg.RoomInfo.ToString());
+        Debug.Log("Room Info : "+msg.RoomInfo.ToString());
     }
 }

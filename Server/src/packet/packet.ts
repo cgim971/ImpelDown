@@ -12,6 +12,7 @@ export namespace impelDown {
         C_CREATE_ROOM = 20,
         C_JOIN_ROOM = 21,
         C_EXIT_ROOM = 22,
+        C_REFRESH_ROOM = 23,
         S_REFRESH_ROOM = 25,
         S_REFRESH_ROOM_LIST = 26
     }
@@ -659,6 +660,46 @@ export namespace impelDown {
         }
         static deserializeBinary(bytes: Uint8Array): C_Exit_Room {
             return C_Exit_Room.deserialize(bytes);
+        }
+    }
+    export class C_Refresh_Room extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {}) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") { }
+        }
+        static fromObject(data: {}): C_Refresh_Room {
+            const message = new C_Refresh_Room({});
+            return message;
+        }
+        toObject() {
+            const data: {} = {};
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Refresh_Room {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Refresh_Room();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Refresh_Room {
+            return C_Refresh_Room.deserialize(bytes);
         }
     }
     export class S_Refresh_Room extends pb_1.Message {

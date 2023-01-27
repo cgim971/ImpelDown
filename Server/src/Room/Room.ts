@@ -26,6 +26,12 @@ export default class Room {
     }
 
     joinRoom(player: SocketSession) {
+        if (this._maxPeople <= this._currentPeople) {
+            console.log("The room is full!");
+            RoomManager.Instance.refreshRoomList();
+            return;
+        }
+
         for (let index: number = 0; index < this._maxPeople; index++) {
             if (this._sessionMap[index] == null) {
                 this._sessionMap[index] = player;
@@ -36,8 +42,8 @@ export default class Room {
             }
         }
 
-        let roomInfo = new impelDown.RoomInfo({ playerId: this._hostSocket.getPlayerId(), roomIndex: this._roomIndex, maxPeople: this._maxPeople, currentPeople: this._currentPeople, playerInfos:this.getPlayerList() });
-        let sRefreshRoom = new impelDown.S_Refresh_Room({roomInfo:roomInfo});
+        let roomInfo = new impelDown.RoomInfo({ playerId: this._hostSocket.getPlayerId(), roomIndex: this._roomIndex, maxPeople: this._maxPeople, currentPeople: this._currentPeople, playerInfos: this.getPlayerList() });
+        let sRefreshRoom = new impelDown.S_Refresh_Room({ roomInfo: roomInfo });
 
         this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
     }
@@ -78,11 +84,23 @@ export default class Room {
         }
     }
 
+    getHostId(): number {
+        return this._hostSocket.getPlayerId();
+    }
+
+    getMaxPeople(): number {
+        return this._maxPeople;
+    }
+
+    getCurrentPeopleCount(): number {
+        return this._currentPeople;
+    }
+
     getPlayerList(): impelDown.PlayerInfo[] {
-        let list :impelDown.PlayerInfo[] = [];
+        let list: impelDown.PlayerInfo[] = [];
         for (let index in this._sessionMap) {
-            if(this._sessionMap[index] != null){
-                list.push(new impelDown.PlayerInfo({playerId:this._sessionMap[index].getPlayerId()}));
+            if (this._sessionMap[index] != null) {
+                list.push(new impelDown.PlayerInfo({ playerId: this._sessionMap[index].getPlayerId() }));
             }
         }
 

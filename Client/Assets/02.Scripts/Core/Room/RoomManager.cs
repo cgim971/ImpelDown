@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviour {
+
     #region Property
     public static RoomManager Instance {
         get {
@@ -20,11 +21,25 @@ public class RoomManager : MonoBehaviour {
 
     public void Init() { }
 
-    public void Update() {
-        if (Input.GetKeyDown(KeyCode.A)) {
-            RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId, MaxPeople = 4 };
-            C_Create_Room cCreateRoom = new C_Create_Room { RoomInfo = roomInfo };
-            NetworkManager.Instance.RegisterSend((ushort)MSGID.CCreateRoom, cCreateRoom);
-        }
+    public void CreateRoom() {
+        RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId, MaxPeople = 4 };
+        C_Create_Room cCreateRoom = new C_Create_Room { RoomInfo = roomInfo };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CCreateRoom, cCreateRoom);
+    }
+
+    public void JoinRoom(int index) {
+        RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId, RoomIndex = index };
+        C_Join_Room cJoinRoom = new C_Join_Room { RoomInfo = roomInfo };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CJoinRoom, cJoinRoom);
+    }
+
+    public void ExitRoom() {
+        RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId };
+        C_Exit_Room cExitRoom = new C_Exit_Room { RoomInfo = roomInfo };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CExitRoom, cExitRoom);
+    }
+
+    public void RefreshRoom() {
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CRefreshRoom, null);
     }
 }

@@ -13,6 +13,7 @@ enum MSGID
     C_CREATE_ROOM = 20;
     C_JOIN_ROOM = 21;
     C_EXIT_ROOM = 22;
+    C_REFRESH_ROOM = 23;
     S_REFRESH_ROOM = 25;
     S_REFRESH_ROOM_LIST = 26;
 }
@@ -52,6 +53,7 @@ message C_Join_Room{
 message C_Exit_Room{
     RoomInfo roomInfo = 1;
 }
+
 
 message S_Refresh_Room{
     RoomInfo roomInfo = 1;
