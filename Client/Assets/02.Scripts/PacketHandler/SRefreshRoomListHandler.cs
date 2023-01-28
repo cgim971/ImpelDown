@@ -14,6 +14,6 @@ public class SRefreshRoomListHandler : IPacketHandler {
             roomInfoList.Add(roomInfo);
         }
 
-        RoomManager.Instance.RefreshRoomList(roomInfoList);
+        RoomListManager.Instance.RefreshRoomList(roomInfoList);
     }
 }

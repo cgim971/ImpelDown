@@ -4,10 +4,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SRefreshRoomHandler : IPacketHandler {
+public class SJoinRoomHandler : IPacketHandler {
     public void Process(IMessage packet) {
-        S_Refresh_Room msg = packet as S_Refresh_Room;
+        S_Join_Room msg = packet as S_Join_Room;
 
-        Debug.Log("Room Info : "+msg.RoomInfo.ToString());
+        RoomListManager.Instance.RoomIn();
     }
 }

@@ -16,7 +16,7 @@ public class NetworkManager : MonoBehaviour {
 
             return _instance;
         }
-        set { _instance = value; }
+        set => _instance = value;
     }
     #endregion
 

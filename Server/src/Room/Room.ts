@@ -42,10 +42,9 @@ export default class Room {
             }
         }
 
-        let roomInfo = new impelDown.RoomInfo({ playerId: this._hostSocket.getPlayerId(), roomIndex: this._roomIndex, maxPeople: this._maxPeople, currentPeople: this._currentPeople, playerInfos: this.getPlayerList() });
-        let sRefreshRoom = new impelDown.S_Refresh_Room({ roomInfo: roomInfo });
-
-        // this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
+        let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: player.getPlayerId(), roomIndex: this._roomIndex });
+        let sJoinRoom = new impelDown.S_Join_Room({ playerInfo });
+        player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
     }
 
     exitRoom(player: SocketSession) {
@@ -69,6 +68,9 @@ export default class Room {
                     break;
                 }
             }
+
+            let sExitRoom: impelDown.S_Exit_Room = new impelDown.S_Exit_Room();
+            player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
         }
         else {
             // 방 삭제 - 방에 사람이 없을 때만 삭제

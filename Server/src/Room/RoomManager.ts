@@ -65,13 +65,27 @@ export default class RoomManager {
         }
 
         room.joinRoom(player);
+        this.refreshRoomList();
     }
 
     exitRoom(playerId: number, roomIndex: number): void {
         let player: SocketSession = SessionManager.Instance.getSession(playerId);
+        if (player.getRoomIndex() == -1) {
+            console.log("Not already the room");
+            return;
+        }
+
         let room: Room = this._roomMap[roomIndex];
+        if (room == null) {
+            console.log("No Room");
+
+            let sRefreshRoomList: impelDown.S_Refresh_Room_List = new impelDown.S_Refresh_Room_List({ roomInfos: this.getRoomList() });
+            player.SendData(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOM_LIST);
+            return;
+        }
 
         room.exitRoom(player);
+        this.refreshRoomList();
     }
 
     deleteRoom(roomIndex: number): void {
