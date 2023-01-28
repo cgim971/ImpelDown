@@ -18,5 +18,4 @@ public class Test : MonoBehaviour {
             RoomManager.Instance.RefreshRoom();
         });
     }
-
 }

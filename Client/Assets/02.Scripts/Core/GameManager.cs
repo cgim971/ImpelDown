@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour {
 
     [SerializeField] private string _url = string.Empty;
 
-    [SerializeField] private PlayerController _playerControllerPrefab;
-
+    [SerializeField] public PlayerController _playerControllerPrefab;
     private PlayerController _playerController;
+
+    public GameObject RoomPanel;
+    public Transform Content;
 
 
     private void Awake() {
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance.Connection();
 
         RoomManager.Instance = gameObject.AddComponent<RoomManager>();
-        RoomManager.Instance.Init();
+        RoomManager.Instance.Init(RoomPanel, Content);
     }
 
     public PlayerController SetPlayer() {

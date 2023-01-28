@@ -1,3 +1,4 @@
+using Google.Protobuf;
 using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,10 +17,15 @@ public class RoomManager : MonoBehaviour {
         set { _instance = value; }
     }
     #endregion
-
     private static RoomManager _instance = null;
 
-    public void Init() { }
+    public GameObject RoomPanel;
+    public Transform Content;
+
+    public void Init(GameObject roomPanel, Transform content) {
+        RoomPanel = roomPanel;
+        Content = content;
+    }
 
     public void CreateRoom() {
         RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId, MaxPeople = 4 };
@@ -40,6 +46,25 @@ public class RoomManager : MonoBehaviour {
     }
 
     public void RefreshRoom() {
-        NetworkManager.Instance.RegisterSend((ushort)MSGID.CRefreshRoom, null);
+        C_Refresh_Room cRefreshRoom = new C_Refresh_Room();
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CRefreshRoom, cRefreshRoom);
+    }
+
+    public void RefreshRoomList(List<RoomInfo> roomInfoList) {
+
+        Transform[] childList = Content.gameObject.GetComponentsInChildren<Transform>();
+
+        if (childList != null) {
+            for (int i = 1; i < childList.Length; i++) {
+                if (childList[i] != Content) {
+                    Destroy(childList[i].gameObject);
+                }
+            }
+        }
+
+        for (int i = 0; i < roomInfoList.Count; i++) {
+            GameObject newRoomPanel = Instantiate(RoomPanel, Content);
+            newRoomPanel.GetComponent<RoomPanel>().Init(roomInfoList[i]);
+        }
     }
 }

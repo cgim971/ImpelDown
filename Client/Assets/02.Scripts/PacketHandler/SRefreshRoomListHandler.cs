@@ -8,9 +8,12 @@ public class SRefreshRoomListHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Refresh_Room_List msg = packet as S_Refresh_Room_List;
 
-        Debug.Log("RoomInfos");
+        List<RoomInfo> roomInfoList = new List<RoomInfo>();
         foreach (RoomInfo roomInfo in msg.RoomInfos) {
-            Debug.Log(roomInfo.ToString());
+            Debug.Log(roomInfo);
+            roomInfoList.Add(roomInfo);
         }
+
+        RoomManager.Instance.RefreshRoomList(roomInfoList);
     }
 }

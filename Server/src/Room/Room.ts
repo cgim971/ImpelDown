@@ -45,7 +45,7 @@ export default class Room {
         let roomInfo = new impelDown.RoomInfo({ playerId: this._hostSocket.getPlayerId(), roomIndex: this._roomIndex, maxPeople: this._maxPeople, currentPeople: this._currentPeople, playerInfos: this.getPlayerList() });
         let sRefreshRoom = new impelDown.S_Refresh_Room({ roomInfo: roomInfo });
 
-        this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
+        // this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
     }
 
     exitRoom(player: SocketSession) {
@@ -76,10 +76,8 @@ export default class Room {
         }
     }
 
-    broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
+    broadCastMessage(payload: Uint8Array, msgCode: number): void {
         for (let index in this._sessionMap) {
-            if (exceptSender == true && senderId == this._sessionMap[index].getPlayerId()) continue;
-
             this._sessionMap[index].SendData(payload, msgCode);
         }
     }

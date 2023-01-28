@@ -19,6 +19,7 @@ export default class RoomManager {
     }
 
     refreshRoomList(): void {
+        console.log("A");
         let sRefreshRoomList: impelDown.S_Refresh_Room_List = new impelDown.S_Refresh_Room_List({ roomInfos: this.getRoomList() });
         SessionManager.Instance.broadCastMessage(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOM_LIST);
     }
@@ -49,7 +50,19 @@ export default class RoomManager {
 
     joinRoom(playerId: number, roomIndex: number): void {
         let player: SocketSession = SessionManager.Instance.getSession(playerId);
+        if (player.getRoomIndex() != -1) {
+            console.log("Already in the room");
+            return;
+        }
+
         let room: Room = this._roomMap[roomIndex];
+        if (room == null) {
+            console.log("No Room");
+
+            let sRefreshRoomList: impelDown.S_Refresh_Room_List = new impelDown.S_Refresh_Room_List({ roomInfos: this.getRoomList() });
+            player.SendData(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOM_LIST);
+            return;
+        }
 
         room.joinRoom(player);
     }

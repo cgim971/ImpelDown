@@ -54,6 +54,10 @@ message C_Exit_Room{
     RoomInfo roomInfo = 1;
 }
 
+message C_Refresh_Room{
+    
+}
+
 
 message S_Refresh_Room{
     RoomInfo roomInfo = 1;
