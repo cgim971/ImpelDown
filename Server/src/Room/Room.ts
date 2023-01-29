@@ -76,6 +76,10 @@ export default class Room {
             // 방 삭제 - 방에 사람이 없을 때만 삭제
             RoomManager.Instance.deleteRoom(this._roomIndex);
         }
+
+        let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: player.getPlayerId(), roomIndex: this._roomIndex });
+        let sExitRoom = new impelDown.S_Exit_Room({ playerInfo });
+        player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
     }
 
     broadCastMessage(payload: Uint8Array, msgCode: number): void {

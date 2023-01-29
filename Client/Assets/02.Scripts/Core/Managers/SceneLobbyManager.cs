@@ -18,11 +18,18 @@ public class SceneLobbyManager : MonoBehaviour {
     private static SceneLobbyManager _instance = null;
 
 
+    [Header("Room List Manager")]
     public GameObject RoomPanel = null;
     public Transform Content = null;
+
+    [Space(10f)]
     public Button CreateRoomBtn = null;
     public Button RefreshRoomListBtn = null;
     public Button ExitRoomBtn = null;
+
+    [Space(10f)]
+    public GameObject RoomInPanel = null;
+    public GameObject RoomOutPanel = null;
 
 
     private void Awake() {
@@ -35,6 +42,6 @@ public class SceneLobbyManager : MonoBehaviour {
 
     private void Init() {
         RoomListManager.Instance = gameObject.AddComponent<RoomListManager>();
-        RoomListManager.Instance.Init(RoomPanel, Content, CreateRoomBtn, RefreshRoomListBtn, ExitRoomBtn);
+        RoomListManager.Instance.Init(RoomPanel, Content);
     }
 }

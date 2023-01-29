@@ -996,6 +996,8 @@ MonoBehaviour:
   CreateRoomBtn: {fileID: 614195956}
   RefreshRoomListBtn: {fileID: 476657999}
   ExitRoomBtn: {fileID: 1703453230}
+  RoomInPanel: {fileID: 749945830}
+  RoomOutPanel: {fileID: 291313649}
 --- !u!1 &749945830
 GameObject:
   m_ObjectHideFlags: 0

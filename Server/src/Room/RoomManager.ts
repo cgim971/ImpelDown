@@ -19,7 +19,6 @@ export default class RoomManager {
     }
 
     refreshRoomList(): void {
-        console.log("A");
         let sRefreshRoomList: impelDown.S_Refresh_Room_List = new impelDown.S_Refresh_Room_List({ roomInfos: this.getRoomList() });
         SessionManager.Instance.broadCastMessage(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOM_LIST);
     }
@@ -68,14 +67,14 @@ export default class RoomManager {
         this.refreshRoomList();
     }
 
-    exitRoom(playerId: number, roomIndex: number): void {
+    exitRoom(playerId: number): void {
         let player: SocketSession = SessionManager.Instance.getSession(playerId);
         if (player.getRoomIndex() == -1) {
             console.log("Not already the room");
             return;
         }
 
-        let room: Room = this._roomMap[roomIndex];
+        let room: Room = this._roomMap[player.getRoomIndex()];
         if (room == null) {
             console.log("No Room");
 
@@ -93,15 +92,17 @@ export default class RoomManager {
     }
 
     getRoomList(): impelDown.RoomInfo[] {
+        console.log("__");
         let list: impelDown.RoomInfo[] = [];
         for (let index in this._roomMap) {
             let room: Room = this._roomMap[index];
             if (room != null) {
                 let roomIndex: number = +index;
                 list.push(new impelDown.RoomInfo({ playerId: room.getHostId(), roomIndex, maxPeople: room.getMaxPeople(), currentPeople: room.getCurrentPeopleCount(), playerInfos: room.getPlayerList() }));
+                console.log(room.getHostId() + " \nRoom Index : " + roomIndex + " \nRoom People : " + room.getCurrentPeopleCount() + " / " + room.getMaxPeople() + "\nPlayerInfo : " + room.getPlayerList());
             }
         }
-
+        console.log("__");
         return list;
     }
 }

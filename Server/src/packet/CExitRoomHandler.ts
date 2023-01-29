@@ -6,6 +6,9 @@ import { impelDown } from "./packet";
 
 export default class CExitRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
-        
+        let cExitRoom = impelDown.C_Exit_Room.deserialize(buffer);
+        let playerId: number = cExitRoom.roomInfo.playerId;
+
+        RoomManager.Instance.exitRoom(playerId);
     }
 }

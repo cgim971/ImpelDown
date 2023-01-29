@@ -22,21 +22,23 @@ public class RoomListManager : MonoBehaviour {
     private GameObject _roomPanel;
     private Transform _content;
 
-    public void Init(GameObject roomPanel, Transform content, Button createRoomBtn, Button refreshRoomListBtn, Button exitRoomBtn) {
+    public void Init(GameObject roomPanel, Transform content) {
         _roomPanel = roomPanel;
         _content = content;
 
-        createRoomBtn.onClick.AddListener(() => CreateRoom());
-        refreshRoomListBtn.onClick.AddListener(() => RefreshRoom());
-        exitRoomBtn.onClick.AddListener(() => ExitRoom());
+        SceneLobbyManager.Instance.CreateRoomBtn.onClick.AddListener(() => CreateRoom());
+        SceneLobbyManager.Instance.RefreshRoomListBtn.onClick.AddListener(() => RefreshRoom());
+        SceneLobbyManager.Instance.ExitRoomBtn.onClick.AddListener(() => ExitRoom());
     }
 
     public void RoomIn() {
-        Debug.Log("Room In");
+        SceneLobbyManager.Instance.RoomInPanel.SetActive(true);
+        SceneLobbyManager.Instance.RoomOutPanel.SetActive(false);
     }
 
     public void RoomOut() {
-        Debug.Log("Room Out");
+        SceneLobbyManager.Instance.RoomInPanel.SetActive(false);
+        SceneLobbyManager.Instance.RoomOutPanel.SetActive(true);
     }
 
 
