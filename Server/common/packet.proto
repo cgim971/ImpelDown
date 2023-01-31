@@ -19,6 +19,12 @@ enum MSGID
     S_EXIT_ROOM = 26;
     S_REFRESH_ROOM_LIST = 27;
 
+    C_GAME_START = 40;
+    S_GAME_START = 41;
+    
+    
+
+    
 }
 
 message PlayerData {
