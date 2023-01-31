@@ -26,9 +26,7 @@ public class RoomListManager : MonoBehaviour {
         _roomPanel = roomPanel;
         _content = content;
 
-        SceneLobbyManager.Instance.CreateRoomBtn.onClick.AddListener(() => CreateRoom());
-        SceneLobbyManager.Instance.RefreshRoomListBtn.onClick.AddListener(() => RefreshRoom());
-        SceneLobbyManager.Instance.ExitRoomBtn.onClick.AddListener(() => ExitRoom());
+        
     }
 
     public void RoomIn() {
@@ -36,6 +34,10 @@ public class RoomListManager : MonoBehaviour {
         SceneLobbyManager.Instance.RoomOutPanel.SetActive(false);
 
         RefreshRoomInfo();
+    }
+    public void RefreshRoomInfo() {
+        RoomData roomInfo = RoomManager.Instance.RoomData;
+        SceneLobbyManager.Instance.Text.text = $"Room Index : {roomInfo.RoomIndex}\n {roomInfo.CurrentPeople} / {roomInfo.MaxPeople}";
 
         if (RoomManager.Instance.RoomData.HostId == GameManager.Instance.PlayerInfo.PlayerId) {
             SceneLobbyManager.Instance.StartBtn.SetActive(true);
@@ -45,15 +47,11 @@ public class RoomListManager : MonoBehaviour {
         }
     }
 
-    public void RefreshRoomInfo() {
-        RoomData roomInfo = RoomManager.Instance.RoomData;
-        SceneLobbyManager.Instance.Text.text = $"Room Index : {roomInfo.RoomIndex}\n {roomInfo.CurrentPeople} / {roomInfo.MaxPeople}";
-    }
-
     public void RoomOut() {
         SceneLobbyManager.Instance.RoomInPanel.SetActive(false);
         SceneLobbyManager.Instance.RoomOutPanel.SetActive(true);
     }
+
 
 
     public void CreateRoom() {

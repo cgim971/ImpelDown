@@ -1,3 +1,4 @@
+import JobTimer from "../JobTimer";
 import { SessionDictionary } from "../SessionManager";
 import SocketSession from "../SocketSession";
 import { impelDown } from "../packet/packet";
@@ -11,6 +12,21 @@ export default class Room {
 
     private _sessionMap: SessionDictionary = {};
 
+    private _playGame: boolean = false;
+
+    private _moveTimer = new JobTimer(40, () => {
+        let list: impelDown.PlayerAllData[] = [];
+        for (let index in this._sessionMap) {
+            if (this._sessionMap[index] != null) {
+                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() });
+                let posAndRot: impelDown.PosAndRot = this._sessionMap[index].getPosAndRot();
+                list.push(new impelDown.PlayerAllData({ playerData, posAndRot }));
+            }
+        }
+
+        let data = new impelDown.S_Player_List({ playerAllData: list });
+        this.broadCastMessage(data.serialize(), impelDown.MSGID.S_PLAYER_LIST);
+    });
 
     constructor(hostSocket: SocketSession, maxPeople: number) {
         this._hostSocket = hostSocket;
@@ -19,6 +35,22 @@ export default class Room {
         this._roomIndex = 0;
 
         this._sessionMap = {};
+
+        this._playGame = false;
+    }
+
+    playGame(mapIndex:number): void {
+        if (this._playGame == true) {
+            console.log("Error - Already Start!");
+            return;
+        }
+        this._playGame = true;
+
+        let mapData : impelDown.MapData = new impelDown.MapData({mapIndex: mapIndex});
+        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({mapData:mapData });
+        this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
+        
+        this._moveTimer.startTimer();
     }
 
     setRoomIndex(roomIndex: number): void {

@@ -32,6 +32,12 @@ public class PacketManager : MonoBehaviour {
         _handlers.Add((ushort)MSGID.SExitRoom, new SExitRoomHandler());
 
 
+
+        _onRecv.Add((ushort)MSGID.SGameStart, MakePacket<S_Game_Start>);
+        _handlers.Add((ushort)MSGID.SGameStart, new SGameStartHandler());
+
+        _onRecv.Add((ushort)MSGID.SPlayerList, MakePacket<S_Player_List>);
+        _handlers.Add((ushort)MSGID.SPlayerList, new SPlayerListHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

@@ -21,10 +21,19 @@ enum MSGID
 
     C_GAME_START = 40;
     S_GAME_START = 41;
-    
+    S_INIT_LIST = 42;
+    S_PLAYER_LIST =43;
+    C_MOVE = 44;
+
     
 
     
+}
+
+
+message PlayerAllData {
+    PlayerData playerData = 1;
+    PosAndRot posAndRot = 2;
 }
 
 message PlayerData {
@@ -78,5 +87,37 @@ message S_Exit_Room {
 
 message S_Refresh_Room_List {
     repeated RoomData roomInfos = 1;
+}
+
+
+message MapData {
+    int32 mapIndex = 1;
+}
+
+message PosAndRot {
+    float x = 1;
+    float y = 2;
+    float rot = 3;
+}
+
+message C_Game_Start {
+    PlayerData playerData = 1;
+    MapData mapData = 2;
+}
+
+message S_Game_Start {
+    MapData mapData = 1;
+}
+
+message S_Init_List {
+
+}
+
+message S_Player_List {
+   repeated PlayerAllData playerAllData = 1;
+}
+
+message C_Move {
+    PosAndRot posAndRot = 1;
 }
 

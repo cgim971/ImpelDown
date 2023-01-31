@@ -26,5 +26,7 @@ public class RoomManager : MonoBehaviour {
 
     public void Init() { }
 
-
+    public void StartGame(int roomIndex) {
+        
+    }
 }
