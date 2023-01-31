@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour {
+[System.Serializable]
+public class PlayerInfo {
+    public int PlayerId = 0;
 
 }

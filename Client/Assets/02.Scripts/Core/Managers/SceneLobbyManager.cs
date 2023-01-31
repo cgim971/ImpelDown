@@ -31,6 +31,9 @@ public class SceneLobbyManager : MonoBehaviour {
     public GameObject RoomInPanel = null;
     public GameObject RoomOutPanel = null;
 
+    public GameObject StartBtn = null;
+    public Text Text = null;
+
 
     private void Awake() {
         if (_instance != null)

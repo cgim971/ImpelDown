@@ -42,8 +42,8 @@ export default class Room {
             }
         }
 
-        let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: player.getPlayerId(), roomIndex: this._roomIndex });
-        let sJoinRoom = new impelDown.S_Join_Room({ playerInfo });
+        let roomData: impelDown.RoomData = new impelDown.RoomData({ hostId: this.getHostId(), roomIndex: this._roomIndex, maxPeople: this._maxPeople, currentPeople: this._currentPeople, playerDatas: this.getPlayerList() });
+        let sJoinRoom = new impelDown.S_Join_Room({ roomData });
         player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
     }
 
@@ -77,8 +77,7 @@ export default class Room {
             RoomManager.Instance.deleteRoom(this._roomIndex);
         }
 
-        let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: player.getPlayerId(), roomIndex: this._roomIndex });
-        let sExitRoom = new impelDown.S_Exit_Room({ playerInfo });
+        let sExitRoom = new impelDown.S_Exit_Room();
         player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
     }
 
@@ -100,11 +99,11 @@ export default class Room {
         return this._currentPeople;
     }
 
-    getPlayerList(): impelDown.PlayerInfo[] {
-        let list: impelDown.PlayerInfo[] = [];
+    getPlayerList(): impelDown.PlayerData[] {
+        let list: impelDown.PlayerData[] = [];
         for (let index in this._sessionMap) {
             if (this._sessionMap[index] != null) {
-                list.push(new impelDown.PlayerInfo({ playerId: this._sessionMap[index].getPlayerId() }));
+                list.push(new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() }));
             }
         }
 

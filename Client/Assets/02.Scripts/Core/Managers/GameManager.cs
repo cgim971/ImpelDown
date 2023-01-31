@@ -15,14 +15,13 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public PlayerController PlayerController => _playerController;
+    public PlayerInfo PlayerInfo => _playerInfo;
     #endregion
     private static GameManager _instance = null;
 
     [SerializeField] private string _url = string.Empty;
 
-    [SerializeField] public PlayerController _playerControllerPrefab;
-    private PlayerController _playerController;
+    private PlayerInfo _playerInfo;
 
     private void Awake() {
         if (_instance != null)
@@ -42,8 +41,13 @@ public class GameManager : MonoBehaviour {
         RoomManager.Instance.Init();
     }
 
-    public PlayerController SetPlayer() {
-        _playerController = Instantiate(_playerControllerPrefab);
-        return _playerController;
+    public PlayerInfo SetPlayer() {
+        PlayerInfo newPlayerInfo = new PlayerInfo();
+        _playerInfo = newPlayerInfo; 
+        return _playerInfo;
+    }
+
+    private void OnApplicationQuit() {
+        RoomListManager.Instance.ExitRoom();
     }
 }

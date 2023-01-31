@@ -32,8 +32,8 @@ socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     });
 
     SessionManager.Instance.addSession(session, id);
-    let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: id, roomIndex: session.getRoomIndex() });
-    let msg: impelDown.S_Init = new impelDown.S_Init({ playerInfo: playerInfo });
+    let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: id, roomIndex: session.getRoomIndex() });
+    let msg: impelDown.S_Init = new impelDown.S_Init({ playerData: playerData });
     session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
     playerId += 1;
 

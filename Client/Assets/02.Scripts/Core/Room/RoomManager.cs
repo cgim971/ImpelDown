@@ -16,9 +16,15 @@ public class RoomManager : MonoBehaviour {
         }
         set => _instance = value;
     }
+
+    public RoomData RoomData { get => _roomData; set => _roomData = value; }
+
     #endregion
     private static RoomManager _instance = null;
 
+    private RoomData _roomData = null;
+
     public void Init() { }
+
 
 }

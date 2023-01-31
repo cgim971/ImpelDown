@@ -91,18 +91,15 @@ export default class RoomManager {
         delete this._roomMap[roomIndex];
     }
 
-    getRoomList(): impelDown.RoomInfo[] {
-        console.log("__");
-        let list: impelDown.RoomInfo[] = [];
+    getRoomList(): impelDown.RoomData[] {
+        let list: impelDown.RoomData[] = [];
         for (let index in this._roomMap) {
             let room: Room = this._roomMap[index];
             if (room != null) {
                 let roomIndex: number = +index;
-                list.push(new impelDown.RoomInfo({ playerId: room.getHostId(), roomIndex, maxPeople: room.getMaxPeople(), currentPeople: room.getCurrentPeopleCount(), playerInfos: room.getPlayerList() }));
-                console.log(room.getHostId() + " \nRoom Index : " + roomIndex + " \nRoom People : " + room.getCurrentPeopleCount() + " / " + room.getMaxPeople() + "\nPlayerInfo : " + room.getPlayerList());
+                list.push(new impelDown.RoomData({ hostId: room.getHostId(), roomIndex, maxPeople: room.getMaxPeople(), currentPeople: room.getCurrentPeopleCount(), playerDatas: room.getPlayerList() }));
             }
         }
-        console.log("__");
         return list;
     }
 }

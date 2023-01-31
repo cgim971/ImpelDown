@@ -34,6 +34,20 @@ public class RoomListManager : MonoBehaviour {
     public void RoomIn() {
         SceneLobbyManager.Instance.RoomInPanel.SetActive(true);
         SceneLobbyManager.Instance.RoomOutPanel.SetActive(false);
+
+        RefreshRoomInfo();
+
+        if (RoomManager.Instance.RoomData.HostId == GameManager.Instance.PlayerInfo.PlayerId) {
+            SceneLobbyManager.Instance.StartBtn.SetActive(true);
+        }
+        else {
+            SceneLobbyManager.Instance.StartBtn.SetActive(false);
+        }
+    }
+
+    public void RefreshRoomInfo() {
+        RoomData roomInfo = RoomManager.Instance.RoomData;
+        SceneLobbyManager.Instance.Text.text = $"Room Index : {roomInfo.RoomIndex}\n {roomInfo.CurrentPeople} / {roomInfo.MaxPeople}";
     }
 
     public void RoomOut() {
@@ -43,20 +57,20 @@ public class RoomListManager : MonoBehaviour {
 
 
     public void CreateRoom() {
-        RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId, MaxPeople = 4 };
-        C_Create_Room cCreateRoom = new C_Create_Room { RoomInfo = roomInfo };
+        RoomData roomData = new RoomData { PlayerId = GameManager.Instance.PlayerInfo.PlayerId, MaxPeople = 4 };
+        C_Create_Room cCreateRoom = new C_Create_Room { RoomData = roomData };
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CCreateRoom, cCreateRoom);
     }
 
     public void JoinRoom(int index) {
-        RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId, RoomIndex = index };
-        C_Join_Room cJoinRoom = new C_Join_Room { RoomInfo = roomInfo };
+        RoomData roomData = new RoomData { PlayerId = GameManager.Instance.PlayerInfo.PlayerId, RoomIndex = index };
+        C_Join_Room cJoinRoom = new C_Join_Room { RoomData = roomData };
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CJoinRoom, cJoinRoom);
     }
 
     public void ExitRoom() {
-        RoomInfo roomInfo = new RoomInfo { PlayerId = GameManager.Instance.PlayerController.PlayerId };
-        C_Exit_Room cExitRoom = new C_Exit_Room { RoomInfo = roomInfo };
+        RoomData roomData = new RoomData { PlayerId = GameManager.Instance.PlayerInfo.PlayerId };
+        C_Exit_Room cExitRoom = new C_Exit_Room { RoomData = roomData };
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CExitRoom, cExitRoom);
     }
 
@@ -65,7 +79,7 @@ public class RoomListManager : MonoBehaviour {
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CRefreshRoom, cRefreshRoom);
     }
 
-    public void RefreshRoomList(List<RoomInfo> roomInfoList) {
+    public void RefreshRoomList(List<RoomData> roomInfoList) {
         Transform[] childList = _content.gameObject.GetComponentsInChildren<Transform>();
 
         if (childList != null) {
@@ -78,6 +92,12 @@ public class RoomListManager : MonoBehaviour {
 
         for (int i = 0; i < roomInfoList.Count; i++) {
             GameObject newRoomPanel = Instantiate(_roomPanel, _content);
+            if (RoomManager.Instance.RoomData != null) {
+                if (roomInfoList[i].RoomIndex == RoomManager.Instance.RoomData.RoomIndex) {
+                    RoomManager.Instance.RoomData = roomInfoList[i];
+                    RefreshRoomInfo();
+                }
+            }
             newRoomPanel.GetComponent<RoomPanel>().Init(roomInfoList[i]);
         }
     }
