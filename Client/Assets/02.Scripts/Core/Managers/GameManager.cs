@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour {
 
     private PlayerInfo _playerInfo;
 
+    public PlayerController PlayerControllerPrefab;
+
     private void Awake() {
         if (_instance != null)
             Debug.LogError("Multiple GameManager is running!");
@@ -48,12 +50,10 @@ public class GameManager : MonoBehaviour {
         return _playerInfo;
     }
 
-
     public void StartGame() {
         PlayerData playerData = new PlayerData { PlayerId = GameManager.Instance.PlayerInfo.PlayerId, RoomIndex = RoomManager.Instance.RoomData.RoomIndex };
         MapData mapData = new MapData { MapIndex = 0 };
-        C_Game_Start cGameStart = new C_Game_Start { PlayerData = playerData, MapData = mapData};
+        C_Game_Start cGameStart = new C_Game_Start { PlayerData = playerData, MapData = mapData };
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameStart, cGameStart);
     }
-
 }

@@ -39,17 +39,17 @@ export default class Room {
         this._playGame = false;
     }
 
-    playGame(mapIndex:number): void {
+    playGame(mapIndex: number): void {
         if (this._playGame == true) {
             console.log("Error - Already Start!");
             return;
         }
         this._playGame = true;
 
-        let mapData : impelDown.MapData = new impelDown.MapData({mapIndex: mapIndex});
-        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({mapData:mapData });
+        let mapData: impelDown.MapData = new impelDown.MapData({ mapIndex: mapIndex });
+        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ mapData: mapData, playerAllDatas: this.getPlayerAllDataList() });
         this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
-        
+
         this._moveTimer.startTimer();
     }
 
@@ -136,6 +136,19 @@ export default class Room {
         for (let index in this._sessionMap) {
             if (this._sessionMap[index] != null) {
                 list.push(new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() }));
+            }
+        }
+
+        return list;
+    }
+
+    getPlayerAllDataList(): impelDown.PlayerAllData[] {
+        let list: impelDown.PlayerAllData[] = [];
+        for (let index in this._sessionMap) {
+            if (this._sessionMap[index] != null) {
+                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() });
+                let posAndRot: impelDown.PosAndRot = this._sessionMap[index].getPosAndRot();
+                list.push(new impelDown.PlayerAllData({ playerData: playerData, posAndRot: posAndRot }));
             }
         }
 

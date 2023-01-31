@@ -9,14 +9,13 @@ public class SGameStartHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Game_Start msg = packet as S_Game_Start;
 
-        string mapName = string.Empty;
-        switch (msg.MapData.MapIndex) {
-            case 0:
-                mapName = "Forest";
-                break;
+        List<PlayerAllData> playerAllDataList = new List<PlayerAllData>();
+
+        foreach (PlayerAllData playerAllData in msg.PlayerAllDatas) {
+            playerAllDataList.Add(playerAllData);
         }
 
-        SceneManager.LoadScene(mapName);
+        RoomManager.Instance.StartGame(playerAllDataList, msg.MapData.MapIndex);
     }
 
 }

@@ -21,9 +21,8 @@ enum MSGID
 
     C_GAME_START = 40;
     S_GAME_START = 41;
-    S_INIT_LIST = 42;
-    S_PLAYER_LIST =43;
-    C_MOVE = 44;
+    S_PLAYER_LIST =42;
+    C_MOVE = 43;
 
     
 
@@ -107,10 +106,7 @@ message C_Game_Start {
 
 message S_Game_Start {
     MapData mapData = 1;
-}
-
-message S_Init_List {
-
+    repeated PlayerAllData playerAllDatas = 2;
 }
 
 message S_Player_List {

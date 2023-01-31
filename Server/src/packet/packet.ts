@@ -18,9 +18,8 @@ export namespace impelDown {
         S_REFRESH_ROOM_LIST = 27,
         C_GAME_START = 40,
         S_GAME_START = 41,
-        S_INIT_LIST = 42,
-        S_PLAYER_LIST = 43,
-        C_MOVE = 44
+        S_PLAYER_LIST = 42,
+        C_MOVE = 43
     }
     export class PlayerAllData extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -1307,12 +1306,16 @@ export namespace impelDown {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             mapData?: MapData;
+            playerAllDatas?: PlayerAllData[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("mapData" in data && data.mapData != undefined) {
                     this.mapData = data.mapData;
+                }
+                if ("playerAllDatas" in data && data.playerAllDatas != undefined) {
+                    this.playerAllDatas = data.playerAllDatas;
                 }
             }
         }
@@ -1325,21 +1328,35 @@ export namespace impelDown {
         get has_mapData() {
             return pb_1.Message.getField(this, 1) != null;
         }
+        get playerAllDatas() {
+            return pb_1.Message.getRepeatedWrapperField(this, PlayerAllData, 2) as PlayerAllData[];
+        }
+        set playerAllDatas(value: PlayerAllData[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 2, value);
+        }
         static fromObject(data: {
             mapData?: ReturnType<typeof MapData.prototype.toObject>;
+            playerAllDatas?: ReturnType<typeof PlayerAllData.prototype.toObject>[];
         }): S_Game_Start {
             const message = new S_Game_Start({});
             if (data.mapData != null) {
                 message.mapData = MapData.fromObject(data.mapData);
+            }
+            if (data.playerAllDatas != null) {
+                message.playerAllDatas = data.playerAllDatas.map(item => PlayerAllData.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
                 mapData?: ReturnType<typeof MapData.prototype.toObject>;
+                playerAllDatas?: ReturnType<typeof PlayerAllData.prototype.toObject>[];
             } = {};
             if (this.mapData != null) {
                 data.mapData = this.mapData.toObject();
+            }
+            if (this.playerAllDatas != null) {
+                data.playerAllDatas = this.playerAllDatas.map((item: PlayerAllData) => item.toObject());
             }
             return data;
         }
@@ -1349,6 +1366,8 @@ export namespace impelDown {
             const writer = w || new pb_1.BinaryWriter();
             if (this.has_mapData)
                 writer.writeMessage(1, this.mapData, () => this.mapData.serialize(writer));
+            if (this.playerAllDatas.length)
+                writer.writeRepeatedMessage(2, this.playerAllDatas, (item: PlayerAllData) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1361,6 +1380,9 @@ export namespace impelDown {
                     case 1:
                         reader.readMessage(message.mapData, () => message.mapData = MapData.deserialize(reader));
                         break;
+                    case 2:
+                        reader.readMessage(message.playerAllDatas, () => pb_1.Message.addToRepeatedWrapperField(message, 2, PlayerAllData.deserialize(reader), PlayerAllData));
+                        break;
                     default: reader.skipField();
                 }
             }
@@ -1371,46 +1393,6 @@ export namespace impelDown {
         }
         static deserializeBinary(bytes: Uint8Array): S_Game_Start {
             return S_Game_Start.deserialize(bytes);
-        }
-    }
-    export class S_Init_List extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
-        }
-        static fromObject(data: {}): S_Init_List {
-            const message = new S_Init_List({});
-            return message;
-        }
-        toObject() {
-            const data: {} = {};
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Init_List {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Init_List();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): S_Init_List {
-            return S_Init_List.deserialize(bytes);
         }
     }
     export class S_Player_List extends pb_1.Message {
