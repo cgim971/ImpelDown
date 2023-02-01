@@ -42,5 +42,7 @@ public class MapDataExtractor {
                 writer.WriteLine("");
             }
         }
+
+        Debug.Log("Map");
     }
 }
