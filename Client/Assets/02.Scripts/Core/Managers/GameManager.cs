@@ -42,9 +42,10 @@ public class GameManager : MonoBehaviour {
         RoomManager.Instance.Init();
     }
 
-    public PlayerInfo SetPlayer() {
+    public PlayerInfo SetPlayer(PlayerData playerData) {
         PlayerInfo newPlayerInfo = new PlayerInfo();
         _playerInfo = newPlayerInfo;
+        _playerInfo.PlayerId = playerData.PlayerId;
         return _playerInfo;
     }
 

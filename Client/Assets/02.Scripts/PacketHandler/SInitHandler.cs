@@ -8,8 +8,7 @@ public class SInitHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Init msg = packet as S_Init;
 
-        PlayerInfo player  = GameManager.Instance.SetPlayer();
-        player.PlayerId = msg.PlayerData.PlayerId;
+        PlayerInfo player  = GameManager.Instance.SetPlayer(msg.PlayerData);
 
         C_Enter cEnter = new C_Enter { PlayerData = msg.PlayerData };
 

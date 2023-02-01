@@ -44,20 +44,26 @@ public class RoomManager : MonoBehaviour {
     private IEnumerator CreatePlayer(List<PlayerAllData> playerAllDataList) {
         yield return null;
 
+        PlayerManager.Instance = new PlayerManager();
+
         foreach (PlayerAllData playerAllData in playerAllDataList) {
-            GameObject newPlayer = null;
+            PlayerController newPlayer = null;
             switch (playerAllData.PlayerData.PlayerCharacterIndex) {
                 case 0:
-                    newPlayer = Instantiate(Resources.Load<GameObject>("Prefabs/Players/Pirate/PiratePlayer"));
+                    newPlayer = Instantiate(Resources.Load<GameObject>("Prefabs/Players/Pirate/PiratePlayer")).GetComponent<PlayerController>();
                     break;
             }
             newPlayer.transform.position = new Vector2(playerAllData.PosAndRot.X, playerAllData.PosAndRot.Y);
-            newPlayer.transform.rotation = Quaternion.Euler(0, 0, playerAllData.PosAndRot.Rot);
 
             if (playerAllData.PlayerData.PlayerId == GameManager.Instance.PlayerInfo.PlayerId) {
+                newPlayer.Init(true, playerAllData.PlayerData.PlayerId);
                 GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>().m_Follow = newPlayer.transform;
             }
+            else {
+                newPlayer.Init(false, playerAllData.PlayerData.PlayerId);
+            }
 
+            PlayerManager.Instance.AddRemotePlayer(newPlayer);
         }
     }
 }

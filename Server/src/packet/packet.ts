@@ -1488,40 +1488,40 @@ export namespace impelDown {
     export class C_Move extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            posAndRot?: PosAndRot;
+            playerAllData?: PlayerAllData;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("posAndRot" in data && data.posAndRot != undefined) {
-                    this.posAndRot = data.posAndRot;
+                if ("playerAllData" in data && data.playerAllData != undefined) {
+                    this.playerAllData = data.playerAllData;
                 }
             }
         }
-        get posAndRot() {
-            return pb_1.Message.getWrapperField(this, PosAndRot, 1) as PosAndRot;
+        get playerAllData() {
+            return pb_1.Message.getWrapperField(this, PlayerAllData, 1) as PlayerAllData;
         }
-        set posAndRot(value: PosAndRot) {
+        set playerAllData(value: PlayerAllData) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
-        get has_posAndRot() {
+        get has_playerAllData() {
             return pb_1.Message.getField(this, 1) != null;
         }
         static fromObject(data: {
-            posAndRot?: ReturnType<typeof PosAndRot.prototype.toObject>;
+            playerAllData?: ReturnType<typeof PlayerAllData.prototype.toObject>;
         }): C_Move {
             const message = new C_Move({});
-            if (data.posAndRot != null) {
-                message.posAndRot = PosAndRot.fromObject(data.posAndRot);
+            if (data.playerAllData != null) {
+                message.playerAllData = PlayerAllData.fromObject(data.playerAllData);
             }
             return message;
         }
         toObject() {
             const data: {
-                posAndRot?: ReturnType<typeof PosAndRot.prototype.toObject>;
+                playerAllData?: ReturnType<typeof PlayerAllData.prototype.toObject>;
             } = {};
-            if (this.posAndRot != null) {
-                data.posAndRot = this.posAndRot.toObject();
+            if (this.playerAllData != null) {
+                data.playerAllData = this.playerAllData.toObject();
             }
             return data;
         }
@@ -1529,8 +1529,8 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_posAndRot)
-                writer.writeMessage(1, this.posAndRot, () => this.posAndRot.serialize(writer));
+            if (this.has_playerAllData)
+                writer.writeMessage(1, this.playerAllData, () => this.playerAllData.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1541,7 +1541,7 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.posAndRot, () => message.posAndRot = PosAndRot.deserialize(reader));
+                        reader.readMessage(message.playerAllData, () => message.playerAllData = PlayerAllData.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }

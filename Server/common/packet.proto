@@ -115,6 +115,6 @@ message S_Player_List {
 }
 
 message C_Move {
-    PosAndRot posAndRot = 1;
+    PlayerAllData playerAllData = 1;
 }
 

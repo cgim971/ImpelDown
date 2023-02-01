@@ -50,14 +50,14 @@ namespace ImpelDown.Proto {
             "ASABKAsyEi5pbXBlbERvd24uTWFwRGF0YRIwCg5wbGF5ZXJBbGxEYXRhcxgC",
             "IAMoCzIYLmltcGVsRG93bi5QbGF5ZXJBbGxEYXRhIkAKDVNfUGxheWVyX0xp",
             "c3QSLwoNcGxheWVyQWxsRGF0YRgBIAMoCzIYLmltcGVsRG93bi5QbGF5ZXJB",
-            "bGxEYXRhIjEKBkNfTW92ZRInCglwb3NBbmRSb3QYASABKAsyFC5pbXBlbERv",
-            "d24uUG9zQW5kUm90KvQBCgVNU0dJRBIKCgZTX0lOSVQQABILCgdDX0VOVEVS",
-            "EAESCwoHU19FTlRFUhACEhEKDUNfQ1JFQVRFX1JPT00QFBIPCgtDX0pPSU5f",
-            "Uk9PTRAVEg8KC0NfRVhJVF9ST09NEBYSEgoOQ19SRUZSRVNIX1JPT00QFxIP",
-            "CgtTX0pPSU5fUk9PTRAZEg8KC1NfRVhJVF9ST09NEBoSFwoTU19SRUZSRVNI",
-            "X1JPT01fTElTVBAbEhAKDENfR0FNRV9TVEFSVBAoEhAKDFNfR0FNRV9TVEFS",
-            "VBApEhEKDVNfUExBWUVSX0xJU1QQKhIKCgZDX01PVkUQK0ISqgIPSW1wZWxE",
-            "b3duLlByb3RvYgZwcm90bzM="));
+            "bGxEYXRhIjkKBkNfTW92ZRIvCg1wbGF5ZXJBbGxEYXRhGAEgASgLMhguaW1w",
+            "ZWxEb3duLlBsYXllckFsbERhdGEq9AEKBU1TR0lEEgoKBlNfSU5JVBAAEgsK",
+            "B0NfRU5URVIQARILCgdTX0VOVEVSEAISEQoNQ19DUkVBVEVfUk9PTRAUEg8K",
+            "C0NfSk9JTl9ST09NEBUSDwoLQ19FWElUX1JPT00QFhISCg5DX1JFRlJFU0hf",
+            "Uk9PTRAXEg8KC1NfSk9JTl9ST09NEBkSDwoLU19FWElUX1JPT00QGhIXChNT",
+            "X1JFRlJFU0hfUk9PTV9MSVNUEBsSEAoMQ19HQU1FX1NUQVJUECgSEAoMU19H",
+            "QU1FX1NUQVJUECkSEQoNU19QTEFZRVJfTElTVBAqEgoKBkNfTU9WRRArQhKq",
+            "Ag9JbXBlbERvd24uUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -79,7 +79,7 @@ namespace ImpelDown.Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Game_Start), global::ImpelDown.Proto.C_Game_Start.Parser, new[]{ "PlayerData", "MapData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Game_Start), global::ImpelDown.Proto.S_Game_Start.Parser, new[]{ "MapData", "PlayerAllDatas" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Player_List), global::ImpelDown.Proto.S_Player_List.Parser, new[]{ "PlayerAllData" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Move), global::ImpelDown.Proto.C_Move.Parser, new[]{ "PosAndRot" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Move), global::ImpelDown.Proto.C_Move.Parser, new[]{ "PlayerAllData" }, null, null, null, null)
           }));
     }
     #endregion
@@ -3976,7 +3976,7 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_Move(C_Move other) : this() {
-      posAndRot_ = other.posAndRot_ != null ? other.posAndRot_.Clone() : null;
+      playerAllData_ = other.playerAllData_ != null ? other.playerAllData_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3986,15 +3986,15 @@ namespace ImpelDown.Proto {
       return new C_Move(this);
     }
 
-    /// <summary>Field number for the "posAndRot" field.</summary>
-    public const int PosAndRotFieldNumber = 1;
-    private global::ImpelDown.Proto.PosAndRot posAndRot_;
+    /// <summary>Field number for the "playerAllData" field.</summary>
+    public const int PlayerAllDataFieldNumber = 1;
+    private global::ImpelDown.Proto.PlayerAllData playerAllData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::ImpelDown.Proto.PosAndRot PosAndRot {
-      get { return posAndRot_; }
+    public global::ImpelDown.Proto.PlayerAllData PlayerAllData {
+      get { return playerAllData_; }
       set {
-        posAndRot_ = value;
+        playerAllData_ = value;
       }
     }
 
@@ -4013,7 +4013,7 @@ namespace ImpelDown.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(PosAndRot, other.PosAndRot)) return false;
+      if (!object.Equals(PlayerAllData, other.PlayerAllData)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -4021,7 +4021,7 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (posAndRot_ != null) hash ^= PosAndRot.GetHashCode();
+      if (playerAllData_ != null) hash ^= PlayerAllData.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -4040,9 +4040,9 @@ namespace ImpelDown.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (posAndRot_ != null) {
+      if (playerAllData_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(PosAndRot);
+        output.WriteMessage(PlayerAllData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -4054,9 +4054,9 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (posAndRot_ != null) {
+      if (playerAllData_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(PosAndRot);
+        output.WriteMessage(PlayerAllData);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -4068,8 +4068,8 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (posAndRot_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PosAndRot);
+      if (playerAllData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerAllData);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -4083,11 +4083,11 @@ namespace ImpelDown.Proto {
       if (other == null) {
         return;
       }
-      if (other.posAndRot_ != null) {
-        if (posAndRot_ == null) {
-          PosAndRot = new global::ImpelDown.Proto.PosAndRot();
+      if (other.playerAllData_ != null) {
+        if (playerAllData_ == null) {
+          PlayerAllData = new global::ImpelDown.Proto.PlayerAllData();
         }
-        PosAndRot.MergeFrom(other.PosAndRot);
+        PlayerAllData.MergeFrom(other.PlayerAllData);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -4105,10 +4105,10 @@ namespace ImpelDown.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (posAndRot_ == null) {
-              PosAndRot = new global::ImpelDown.Proto.PosAndRot();
+            if (playerAllData_ == null) {
+              PlayerAllData = new global::ImpelDown.Proto.PlayerAllData();
             }
-            input.ReadMessage(PosAndRot);
+            input.ReadMessage(PlayerAllData);
             break;
           }
         }
@@ -4127,10 +4127,10 @@ namespace ImpelDown.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            if (posAndRot_ == null) {
-              PosAndRot = new global::ImpelDown.Proto.PosAndRot();
+            if (playerAllData_ == null) {
+              PlayerAllData = new global::ImpelDown.Proto.PlayerAllData();
             }
-            input.ReadMessage(PosAndRot);
+            input.ReadMessage(PlayerAllData);
             break;
           }
         }

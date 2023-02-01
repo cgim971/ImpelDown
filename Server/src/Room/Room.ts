@@ -100,9 +100,6 @@ export default class Room {
                     break;
                 }
             }
-
-            let sExitRoom: impelDown.S_Exit_Room = new impelDown.S_Exit_Room();
-            player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
         }
         else {
             // 방 삭제 - 방에 사람이 없을 때만 삭제
