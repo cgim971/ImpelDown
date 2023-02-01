@@ -38,6 +38,7 @@ message PlayerAllData {
 message PlayerData {
     int32 playerId = 1;
     int32 roomIndex = 2;
+    int32 playerCharacterIndex = 3;
 }
 
 message S_Init {

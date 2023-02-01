@@ -24,8 +24,6 @@ public class GameManager : MonoBehaviour {
 
     private PlayerInfo _playerInfo;
 
-    public PlayerController PlayerControllerPrefab;
-
     private void Awake() {
         if (_instance != null)
             Debug.LogError("Multiple GameManager is running!");

@@ -1,3 +1,4 @@
+using Cinemachine;
 using Google.Protobuf;
 using ImpelDown.Proto;
 using System.Collections;
@@ -44,13 +45,19 @@ public class RoomManager : MonoBehaviour {
         yield return null;
 
         foreach (PlayerAllData playerAllData in playerAllDataList) {
-            PlayerController newPlayer = Instantiate(GameManager.Instance.PlayerControllerPrefab);
+            GameObject newPlayer = null;
+            switch (playerAllData.PlayerData.PlayerCharacterIndex) {
+                case 0:
+                    newPlayer = Instantiate(Resources.Load<GameObject>("Prefabs/Players/Pirate/PiratePlayer"));
+                    break;
+            }
             newPlayer.transform.position = new Vector2(playerAllData.PosAndRot.X, playerAllData.PosAndRot.Y);
             newPlayer.transform.rotation = Quaternion.Euler(0, 0, playerAllData.PosAndRot.Rot);
 
             if (playerAllData.PlayerData.PlayerId == GameManager.Instance.PlayerInfo.PlayerId) {
-                GameManager.Instance.PlayerInfo.PlayerController = newPlayer;
+                GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>().m_Follow = newPlayer.transform;
             }
+
         }
     }
 }

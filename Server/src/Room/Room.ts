@@ -146,7 +146,7 @@ export default class Room {
         let list: impelDown.PlayerAllData[] = [];
         for (let index in this._sessionMap) {
             if (this._sessionMap[index] != null) {
-                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() });
+                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() , playerCharacterIndex: this._sessionMap[index].getCharacterIndex()});
                 let posAndRot: impelDown.PosAndRot = this._sessionMap[index].getPosAndRot();
                 list.push(new impelDown.PlayerAllData({ playerData: playerData, posAndRot: posAndRot }));
             }
