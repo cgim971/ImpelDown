@@ -13,18 +13,11 @@ public class GameManager : MonoBehaviour {
             return _instance;
         }
     }
-    public PlayerController PlayerController => _playerController;
-
     #endregion
     private static GameManager _instance = null;
 
 
     [SerializeField] private string _url = string.Empty;
-
-    [SerializeField] private PlayerController _playerControllerPrefab;
-
-    private PlayerController _playerController;
-
 
     private void Awake() {
         if (_instance != null)
@@ -35,10 +28,5 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
-    }
-
-    public PlayerController SetPlayer() {
-        _playerController = Instantiate(_playerControllerPrefab);
-        return _playerController;
     }
 }

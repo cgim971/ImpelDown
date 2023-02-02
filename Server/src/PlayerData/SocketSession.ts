@@ -1,38 +1,33 @@
 import WebSocket, { RawData } from "ws";
-import { impelDown } from "./packet/packet";
-import PacketManager from "./PacketManager";
+import { impelDown } from "../packet/packet";
+import PacketManager from "../PacketManager";
+import RoomData from "./RoomData";
+import PlayerData from "./PlayerData";
 
 
 export default class SocketSession {
-
     private _socket: WebSocket;
-    private _playerId: number;
-
-    private _roomIndex: number;
-    private _playerRoomId: number;
-
+    
+    private _playerData :PlayerData;
+    private _roomData : RoomData;
+    
+    
     constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
         this._socket = socket;
-        this._playerId = playerId;
-        this._roomIndex = -1;
-        this._playerRoomId = -1;
-
+        
+        this._playerData = new PlayerData(playerId);
+        this._roomData = new RoomData();
+        
         this._socket.on("close", () => {
             CloseCallback();
         });
     }
 
-    getPlayerId(): number {
-        return this._playerId;
+    getPlayerData(): PlayerData {
+        return this._playerData;
     }
-
-    setPlayerRoom(roomIndex: number = -1, playerRoomId: number = -1) {
-        this._roomIndex = roomIndex;
-        this._playerRoomId = playerRoomId;
-    }
-
-    getPlayerRoomIndex(): number {
-        return this._roomIndex;
+    getRoomData() :RoomData{
+        return this._roomData;
     }
 
     getInt16FEFromBuffer(buffer: Buffer): number {
@@ -41,7 +36,7 @@ export default class SocketSession {
 
     receiveMsg(data: RawData): void {
         let code: number = this.getInt16FEFromBuffer(data.slice(2, 4) as Buffer);
-        PacketManager.Instance.handlerMap[code].handleMsg(this, data.slice(4) as Buffer);
+        PacketManager.Instance.getHandlerMap()[code].handleMsg(this, data.slice(4) as Buffer);
     }
 
     SendData(payload: Uint8Array, msgCode: number): void {

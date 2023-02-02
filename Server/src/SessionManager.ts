@@ -1,5 +1,5 @@
 import { impelDown } from "./packet/packet";
-import SocketSession from "./SocketSession";
+import SocketSession from "./PlayerData/SocketSession";
 
 interface SessionDictionary {
     [key: number]: SocketSession;
@@ -8,21 +8,21 @@ interface SessionDictionary {
 export default class SessionManager {
     static Instance: SessionManager;
     private _sessionMap: SessionDictionary = {};
-    private _count: number = 0;
+    private _socketSessionCount: number = 0;
 
     constructor() {
         this._sessionMap = {};
-        this._count = 0;
+        this._socketSessionCount = 0;
     }
 
     addSession(session: SocketSession, id: number): void {
         this._sessionMap[id] = session;
-        this._count += 1;
+        this._socketSessionCount += 1;
     }
 
     removeSession(id: number) {
         delete this._sessionMap[id];
-        this._count -= 1;
+        this._socketSessionCount -= 1;
     }
 
     getSession(id: number): SocketSession {
@@ -31,13 +31,13 @@ export default class SessionManager {
 
     broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
         for (let index in this._sessionMap) {
-            if (exceptSender == true && senderId == this._sessionMap[index].getPlayerId()) continue;
+            if (exceptSender == true && senderId == this._sessionMap[index].getPlayerData().getPlayerId()) continue;
 
             this._sessionMap[index].SendData(payload, msgCode);
         }
     }
 
-    getCount(): number {
-        return this._count;
+    getSocketSessionCount(): number {
+        return this._socketSessionCount;
     }
 }

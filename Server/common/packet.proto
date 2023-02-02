@@ -7,12 +7,37 @@ enum MSGID
 {
     S_INIT = 0;
 
+
+
+    C_MATCH_MAKING = 1;
+
+
+
+
+
+
+
+
+
+
+
+
 }
 
-message PlayerInfo{
+message PlayerInfo {
     int32 playerId = 1;
 }
 
-message S_Init{
-    PlayerInfo playerInfo = 1;
+message Position {
+    float x = 1;
+    float y = 2;
+}
+
+message S_Init {
+    int32 playerId = 1;
+}
+
+
+message C_Match_Making {
+    
 }

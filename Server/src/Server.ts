@@ -4,7 +4,9 @@ import WS, { RawData } from 'ws';
 import { impelDown } from './packet/packet';
 import PacketManager from './PacketManager';
 import SessionManager from './SessionManager';
-import SocketSession from './SocketSession';
+import SocketSession from './PlayerData/SocketSession';
+import RoomManager from './Match/Room/RoomManager';
+import MatchManager from './Match/MatchManager';
 
 const App: Application = Express();
 
@@ -20,22 +22,24 @@ const socketServer: WS.Server = new WS.Server({
 
 PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
+MatchManager.Instance = new MatchManager();
+RoomManager.Instance = new RoomManager();   
 
 let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     const id: number = playerId;
 
     let session: SocketSession = new SocketSession(soc, id, () => {
-
+        SessionManager.Instance.removeSession(id);
+        return;
     });
 
     SessionManager.Instance.addSession(session, id);
-    let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: id });
-    let msg: impelDown.S_Init = new impelDown.S_Init({ playerInfo: playerInfo });
+    let msg: impelDown.S_Init = new impelDown.S_Init({ playerId: id });
     session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
     console.log(id);
     playerId += 1;
-    
+
     soc.on("message", (data: RawData, isBinary: boolean) => {
         if (isBinary == true) {
             session.receiveMsg(data);
