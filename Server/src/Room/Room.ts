@@ -47,10 +47,28 @@ export default class Room {
         this._playGame = true;
 
         let mapData: impelDown.MapData = new impelDown.MapData({ mapIndex: mapIndex });
-        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ mapData: mapData, playerAllDatas: this.getPlayerAllDataList() });
+        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ mapData: mapData, playerAllDatas: this.setTailIndex(this.getPlayerAllDataList()) });
         this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
 
         this._moveTimer.startTimer();
+    }
+
+    setTailIndex(list: impelDown.PlayerAllData[]): impelDown.PlayerAllData[] {
+        let index: number = Math.floor(Math.random() * 100);
+        while (index--) {
+            let index1: number = Math.floor(Math.random() * this._currentPeople );
+            let index2: number = Math.floor(Math.random() * this._currentPeople );
+            let temp = list[index1];
+            list[index1] = list[index2];
+            list[index2] = temp;
+        }
+
+        let tailIndex = 0;
+        for (let index in list) {
+            list[index].playerData.tailIndex = tailIndex++;
+        }
+
+        return list;
     }
 
     setRoomIndex(roomIndex: number): void {
@@ -104,7 +122,7 @@ export default class Room {
         else {
             // 방 삭제 - 방에 사람이 없을 때만 삭제
             RoomManager.Instance.deleteRoom(this._roomIndex);
-        }
+        }   
 
         let sExitRoom = new impelDown.S_Exit_Room();
         player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
@@ -143,7 +161,7 @@ export default class Room {
         let list: impelDown.PlayerAllData[] = [];
         for (let index in this._sessionMap) {
             if (this._sessionMap[index] != null) {
-                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() , playerCharacterIndex: this._sessionMap[index].getCharacterIndex()});
+                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId(), playerCharacterIndex: this._sessionMap[index].getCharacterIndex() });
                 let posAndRot: impelDown.PosAndRot = this._sessionMap[index].getPosAndRot();
                 list.push(new impelDown.PlayerAllData({ playerData: playerData, posAndRot: posAndRot }));
             }

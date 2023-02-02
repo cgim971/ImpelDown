@@ -123,6 +123,7 @@ export namespace impelDown {
             playerId?: number;
             roomIndex?: number;
             playerCharacterIndex?: number;
+            tailIndex?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -135,6 +136,9 @@ export namespace impelDown {
                 }
                 if ("playerCharacterIndex" in data && data.playerCharacterIndex != undefined) {
                     this.playerCharacterIndex = data.playerCharacterIndex;
+                }
+                if ("tailIndex" in data && data.tailIndex != undefined) {
+                    this.tailIndex = data.tailIndex;
                 }
             }
         }
@@ -156,10 +160,17 @@ export namespace impelDown {
         set playerCharacterIndex(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
+        get tailIndex() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set tailIndex(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
         static fromObject(data: {
             playerId?: number;
             roomIndex?: number;
             playerCharacterIndex?: number;
+            tailIndex?: number;
         }): PlayerData {
             const message = new PlayerData({});
             if (data.playerId != null) {
@@ -171,6 +182,9 @@ export namespace impelDown {
             if (data.playerCharacterIndex != null) {
                 message.playerCharacterIndex = data.playerCharacterIndex;
             }
+            if (data.tailIndex != null) {
+                message.tailIndex = data.tailIndex;
+            }
             return message;
         }
         toObject() {
@@ -178,6 +192,7 @@ export namespace impelDown {
                 playerId?: number;
                 roomIndex?: number;
                 playerCharacterIndex?: number;
+                tailIndex?: number;
             } = {};
             if (this.playerId != null) {
                 data.playerId = this.playerId;
@@ -187,6 +202,9 @@ export namespace impelDown {
             }
             if (this.playerCharacterIndex != null) {
                 data.playerCharacterIndex = this.playerCharacterIndex;
+            }
+            if (this.tailIndex != null) {
+                data.tailIndex = this.tailIndex;
             }
             return data;
         }
@@ -200,6 +218,8 @@ export namespace impelDown {
                 writer.writeInt32(2, this.roomIndex);
             if (this.playerCharacterIndex != 0)
                 writer.writeInt32(3, this.playerCharacterIndex);
+            if (this.tailIndex != 0)
+                writer.writeInt32(4, this.tailIndex);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -217,6 +237,9 @@ export namespace impelDown {
                         break;
                     case 3:
                         message.playerCharacterIndex = reader.readInt32();
+                        break;
+                    case 4:
+                        message.tailIndex = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }

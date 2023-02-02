@@ -1,5 +1,6 @@
 using Cinemachine;
 using Google.Protobuf;
+using Google.Protobuf.Collections;
 using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ public class RoomManager : MonoBehaviour {
 
     public void Init() { }
 
-    public void StartGame(List<PlayerAllData> playerAllDataList, int roomIndex) {
+    public void StartGame(RepeatedField<PlayerAllData> playerAllDataList, int roomIndex) {
         string mapName = string.Empty;
         switch (roomIndex) {
             case 0:
@@ -41,7 +42,7 @@ public class RoomManager : MonoBehaviour {
         StartCoroutine(CreatePlayer(playerAllDataList));
     }
 
-    private IEnumerator CreatePlayer(List<PlayerAllData> playerAllDataList) {
+    private IEnumerator CreatePlayer(RepeatedField<PlayerAllData> playerAllDataList) {
         yield return null;
 
         PlayerManager.Instance = new PlayerManager();

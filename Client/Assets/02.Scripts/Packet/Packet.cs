@@ -26,43 +26,43 @@ namespace ImpelDown.Proto {
           string.Concat(
             "CgxwYWNrZXQucHJvdG8SCWltcGVsRG93biJjCg1QbGF5ZXJBbGxEYXRhEikK",
             "CnBsYXllckRhdGEYASABKAsyFS5pbXBlbERvd24uUGxheWVyRGF0YRInCglw",
-            "b3NBbmRSb3QYAiABKAsyFC5pbXBlbERvd24uUG9zQW5kUm90Ik8KClBsYXll",
+            "b3NBbmRSb3QYAiABKAsyFC5pbXBlbERvd24uUG9zQW5kUm90ImIKClBsYXll",
             "ckRhdGESEAoIcGxheWVySWQYASABKAUSEQoJcm9vbUluZGV4GAIgASgFEhwK",
-            "FHBsYXllckNoYXJhY3RlckluZGV4GAMgASgFIjMKBlNfSW5pdBIpCgpwbGF5",
-            "ZXJEYXRhGAEgASgLMhUuaW1wZWxEb3duLlBsYXllckRhdGEiNAoHQ19FbnRl",
-            "chIpCgpwbGF5ZXJEYXRhGAEgASgLMhUuaW1wZWxEb3duLlBsYXllckRhdGEi",
-            "NAoHU19FbnRlchIpCgpwbGF5ZXJEYXRhGAEgASgLMhUuaW1wZWxEb3duLlBs",
-            "YXllckRhdGEilQEKCFJvb21EYXRhEhAKCHBsYXllcklkGAEgASgFEg4KBmhv",
-            "c3RJZBgCIAEoBRIRCglyb29tSW5kZXgYAyABKAUSEQoJbWF4UGVvcGxlGAQg",
-            "ASgFEhUKDWN1cnJlbnRQZW9wbGUYBSABKAUSKgoLcGxheWVyRGF0YXMYBiAD",
-            "KAsyFS5pbXBlbERvd24uUGxheWVyRGF0YSI2Cg1DX0NyZWF0ZV9Sb29tEiUK",
-            "CHJvb21EYXRhGAEgASgLMhMuaW1wZWxEb3duLlJvb21EYXRhIjQKC0NfSm9p",
-            "bl9Sb29tEiUKCHJvb21EYXRhGAEgASgLMhMuaW1wZWxEb3duLlJvb21EYXRh",
-            "IjQKC0NfRXhpdF9Sb29tEiUKCHJvb21EYXRhGAEgASgLMhMuaW1wZWxEb3du",
-            "LlJvb21EYXRhIhAKDkNfUmVmcmVzaF9Sb29tIjQKC1NfSm9pbl9Sb29tEiUK",
-            "CHJvb21EYXRhGAEgASgLMhMuaW1wZWxEb3duLlJvb21EYXRhIg0KC1NfRXhp",
-            "dF9Sb29tIj0KE1NfUmVmcmVzaF9Sb29tX0xpc3QSJgoJcm9vbUluZm9zGAEg",
-            "AygLMhMuaW1wZWxEb3duLlJvb21EYXRhIhsKB01hcERhdGESEAoIbWFwSW5k",
-            "ZXgYASABKAUiLgoJUG9zQW5kUm90EgkKAXgYASABKAISCQoBeRgCIAEoAhIL",
-            "CgNyb3QYAyABKAIiXgoMQ19HYW1lX1N0YXJ0EikKCnBsYXllckRhdGEYASAB",
-            "KAsyFS5pbXBlbERvd24uUGxheWVyRGF0YRIjCgdtYXBEYXRhGAIgASgLMhIu",
-            "aW1wZWxEb3duLk1hcERhdGEiZQoMU19HYW1lX1N0YXJ0EiMKB21hcERhdGEY",
-            "ASABKAsyEi5pbXBlbERvd24uTWFwRGF0YRIwCg5wbGF5ZXJBbGxEYXRhcxgC",
-            "IAMoCzIYLmltcGVsRG93bi5QbGF5ZXJBbGxEYXRhIkAKDVNfUGxheWVyX0xp",
-            "c3QSLwoNcGxheWVyQWxsRGF0YRgBIAMoCzIYLmltcGVsRG93bi5QbGF5ZXJB",
-            "bGxEYXRhIjkKBkNfTW92ZRIvCg1wbGF5ZXJBbGxEYXRhGAEgASgLMhguaW1w",
-            "ZWxEb3duLlBsYXllckFsbERhdGEq9AEKBU1TR0lEEgoKBlNfSU5JVBAAEgsK",
-            "B0NfRU5URVIQARILCgdTX0VOVEVSEAISEQoNQ19DUkVBVEVfUk9PTRAUEg8K",
-            "C0NfSk9JTl9ST09NEBUSDwoLQ19FWElUX1JPT00QFhISCg5DX1JFRlJFU0hf",
-            "Uk9PTRAXEg8KC1NfSk9JTl9ST09NEBkSDwoLU19FWElUX1JPT00QGhIXChNT",
-            "X1JFRlJFU0hfUk9PTV9MSVNUEBsSEAoMQ19HQU1FX1NUQVJUECgSEAoMU19H",
-            "QU1FX1NUQVJUECkSEQoNU19QTEFZRVJfTElTVBAqEgoKBkNfTU9WRRArQhKq",
-            "Ag9JbXBlbERvd24uUHJvdG9iBnByb3RvMw=="));
+            "FHBsYXllckNoYXJhY3RlckluZGV4GAMgASgFEhEKCXRhaWxJbmRleBgEIAEo",
+            "BSIzCgZTX0luaXQSKQoKcGxheWVyRGF0YRgBIAEoCzIVLmltcGVsRG93bi5Q",
+            "bGF5ZXJEYXRhIjQKB0NfRW50ZXISKQoKcGxheWVyRGF0YRgBIAEoCzIVLmlt",
+            "cGVsRG93bi5QbGF5ZXJEYXRhIjQKB1NfRW50ZXISKQoKcGxheWVyRGF0YRgB",
+            "IAEoCzIVLmltcGVsRG93bi5QbGF5ZXJEYXRhIpUBCghSb29tRGF0YRIQCghw",
+            "bGF5ZXJJZBgBIAEoBRIOCgZob3N0SWQYAiABKAUSEQoJcm9vbUluZGV4GAMg",
+            "ASgFEhEKCW1heFBlb3BsZRgEIAEoBRIVCg1jdXJyZW50UGVvcGxlGAUgASgF",
+            "EioKC3BsYXllckRhdGFzGAYgAygLMhUuaW1wZWxEb3duLlBsYXllckRhdGEi",
+            "NgoNQ19DcmVhdGVfUm9vbRIlCghyb29tRGF0YRgBIAEoCzITLmltcGVsRG93",
+            "bi5Sb29tRGF0YSI0CgtDX0pvaW5fUm9vbRIlCghyb29tRGF0YRgBIAEoCzIT",
+            "LmltcGVsRG93bi5Sb29tRGF0YSI0CgtDX0V4aXRfUm9vbRIlCghyb29tRGF0",
+            "YRgBIAEoCzITLmltcGVsRG93bi5Sb29tRGF0YSIQCg5DX1JlZnJlc2hfUm9v",
+            "bSI0CgtTX0pvaW5fUm9vbRIlCghyb29tRGF0YRgBIAEoCzITLmltcGVsRG93",
+            "bi5Sb29tRGF0YSINCgtTX0V4aXRfUm9vbSI9ChNTX1JlZnJlc2hfUm9vbV9M",
+            "aXN0EiYKCXJvb21JbmZvcxgBIAMoCzITLmltcGVsRG93bi5Sb29tRGF0YSIb",
+            "CgdNYXBEYXRhEhAKCG1hcEluZGV4GAEgASgFIi4KCVBvc0FuZFJvdBIJCgF4",
+            "GAEgASgCEgkKAXkYAiABKAISCwoDcm90GAMgASgCIl4KDENfR2FtZV9TdGFy",
+            "dBIpCgpwbGF5ZXJEYXRhGAEgASgLMhUuaW1wZWxEb3duLlBsYXllckRhdGES",
+            "IwoHbWFwRGF0YRgCIAEoCzISLmltcGVsRG93bi5NYXBEYXRhImUKDFNfR2Ft",
+            "ZV9TdGFydBIjCgdtYXBEYXRhGAEgASgLMhIuaW1wZWxEb3duLk1hcERhdGES",
+            "MAoOcGxheWVyQWxsRGF0YXMYAiADKAsyGC5pbXBlbERvd24uUGxheWVyQWxs",
+            "RGF0YSJACg1TX1BsYXllcl9MaXN0Ei8KDXBsYXllckFsbERhdGEYASADKAsy",
+            "GC5pbXBlbERvd24uUGxheWVyQWxsRGF0YSI5CgZDX01vdmUSLwoNcGxheWVy",
+            "QWxsRGF0YRgBIAEoCzIYLmltcGVsRG93bi5QbGF5ZXJBbGxEYXRhKvQBCgVN",
+            "U0dJRBIKCgZTX0lOSVQQABILCgdDX0VOVEVSEAESCwoHU19FTlRFUhACEhEK",
+            "DUNfQ1JFQVRFX1JPT00QFBIPCgtDX0pPSU5fUk9PTRAVEg8KC0NfRVhJVF9S",
+            "T09NEBYSEgoOQ19SRUZSRVNIX1JPT00QFxIPCgtTX0pPSU5fUk9PTRAZEg8K",
+            "C1NfRVhJVF9ST09NEBoSFwoTU19SRUZSRVNIX1JPT01fTElTVBAbEhAKDENf",
+            "R0FNRV9TVEFSVBAoEhAKDFNfR0FNRV9TVEFSVBApEhEKDVNfUExBWUVSX0xJ",
+            "U1QQKhIKCgZDX01PVkUQK0ISqgIPSW1wZWxEb3duLlByb3RvYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerAllData), global::ImpelDown.Proto.PlayerAllData.Parser, new[]{ "PlayerData", "PosAndRot" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerData), global::ImpelDown.Proto.PlayerData.Parser, new[]{ "PlayerId", "RoomIndex", "PlayerCharacterIndex" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerData), global::ImpelDown.Proto.PlayerData.Parser, new[]{ "PlayerId", "RoomIndex", "PlayerCharacterIndex", "TailIndex" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Init), global::ImpelDown.Proto.S_Init.Parser, new[]{ "PlayerData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Enter), global::ImpelDown.Proto.C_Enter.Parser, new[]{ "PlayerData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Enter), global::ImpelDown.Proto.S_Enter.Parser, new[]{ "PlayerData" }, null, null, null, null),
@@ -387,6 +387,7 @@ namespace ImpelDown.Proto {
       playerId_ = other.playerId_;
       roomIndex_ = other.roomIndex_;
       playerCharacterIndex_ = other.playerCharacterIndex_;
+      tailIndex_ = other.tailIndex_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -432,6 +433,18 @@ namespace ImpelDown.Proto {
       }
     }
 
+    /// <summary>Field number for the "tailIndex" field.</summary>
+    public const int TailIndexFieldNumber = 4;
+    private int tailIndex_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TailIndex {
+      get { return tailIndex_; }
+      set {
+        tailIndex_ = value;
+      }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override bool Equals(object other) {
@@ -450,6 +463,7 @@ namespace ImpelDown.Proto {
       if (PlayerId != other.PlayerId) return false;
       if (RoomIndex != other.RoomIndex) return false;
       if (PlayerCharacterIndex != other.PlayerCharacterIndex) return false;
+      if (TailIndex != other.TailIndex) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -460,6 +474,7 @@ namespace ImpelDown.Proto {
       if (PlayerId != 0) hash ^= PlayerId.GetHashCode();
       if (RoomIndex != 0) hash ^= RoomIndex.GetHashCode();
       if (PlayerCharacterIndex != 0) hash ^= PlayerCharacterIndex.GetHashCode();
+      if (TailIndex != 0) hash ^= TailIndex.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -490,6 +505,10 @@ namespace ImpelDown.Proto {
         output.WriteRawTag(24);
         output.WriteInt32(PlayerCharacterIndex);
       }
+      if (TailIndex != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(TailIndex);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -512,6 +531,10 @@ namespace ImpelDown.Proto {
         output.WriteRawTag(24);
         output.WriteInt32(PlayerCharacterIndex);
       }
+      if (TailIndex != 0) {
+        output.WriteRawTag(32);
+        output.WriteInt32(TailIndex);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -530,6 +553,9 @@ namespace ImpelDown.Proto {
       }
       if (PlayerCharacterIndex != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerCharacterIndex);
+      }
+      if (TailIndex != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TailIndex);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -551,6 +577,9 @@ namespace ImpelDown.Proto {
       }
       if (other.PlayerCharacterIndex != 0) {
         PlayerCharacterIndex = other.PlayerCharacterIndex;
+      }
+      if (other.TailIndex != 0) {
+        TailIndex = other.TailIndex;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -579,6 +608,10 @@ namespace ImpelDown.Proto {
             PlayerCharacterIndex = input.ReadInt32();
             break;
           }
+          case 32: {
+            TailIndex = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -604,6 +637,10 @@ namespace ImpelDown.Proto {
           }
           case 24: {
             PlayerCharacterIndex = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            TailIndex = input.ReadInt32();
             break;
           }
         }
