@@ -1,3 +1,4 @@
+import CCatchHandler from "./packet/CCatchHandler";
 import CCreateRoomHandler from "./packet/CCreateRoomHandler";
 import CEnterHandler from "./packet/CEnterHandler";
 import CExitRoomHandler from "./packet/CExitRoomHandler";
@@ -31,6 +32,6 @@ export default class PacketManager {
 
         this.handlerMap[impelDown.MSGID.C_GAME_START] = new CGameStartHandler();
         this.handlerMap[impelDown.MSGID.C_MOVE] = new CMoveHandler();
-        
+        this.handlerMap[impelDown.MSGID.C_CATCH] = new CCatchHandler();
     }
 }

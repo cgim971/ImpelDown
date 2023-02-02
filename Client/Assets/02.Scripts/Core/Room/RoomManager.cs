@@ -57,11 +57,11 @@ public class RoomManager : MonoBehaviour {
             newPlayer.transform.position = new Vector2(playerAllData.PosAndRot.X, playerAllData.PosAndRot.Y);
 
             if (playerAllData.PlayerData.PlayerId == GameManager.Instance.PlayerInfo.PlayerId) {
-                newPlayer.Init(true, playerAllData.PlayerData.PlayerId);
+                newPlayer.Init(true, playerAllData.PlayerData.PlayerId, playerAllData.PlayerData.TailIndex);
                 GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>().m_Follow = newPlayer.transform;
             }
             else {
-                newPlayer.Init(false, playerAllData.PlayerData.PlayerId);
+                newPlayer.Init(false, playerAllData.PlayerData.PlayerId, playerAllData.PlayerData.TailIndex);
             }
 
             PlayerManager.Instance.AddRemotePlayer(newPlayer);

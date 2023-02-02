@@ -19,7 +19,8 @@ export namespace impelDown {
         C_GAME_START = 40,
         S_GAME_START = 41,
         S_PLAYER_LIST = 42,
-        C_MOVE = 43
+        C_MOVE = 43,
+        C_CATCH = 44
     }
     export class PlayerAllData extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -1576,6 +1577,76 @@ export namespace impelDown {
         }
         static deserializeBinary(bytes: Uint8Array): C_Move {
             return C_Move.deserialize(bytes);
+        }
+    }
+    export class C_Catch extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerData?: PlayerData;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerData" in data && data.playerData != undefined) {
+                    this.playerData = data.playerData;
+                }
+            }
+        }
+        get playerData() {
+            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
+        }
+        set playerData(value: PlayerData) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_playerData() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        static fromObject(data: {
+            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
+        }): C_Catch {
+            const message = new C_Catch({});
+            if (data.playerData != null) {
+                message.playerData = PlayerData.fromObject(data.playerData);
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
+            } = {};
+            if (this.playerData != null) {
+                data.playerData = this.playerData.toObject();
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_playerData)
+                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Catch {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Catch();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Catch {
+            return C_Catch.deserialize(bytes);
         }
     }
 }

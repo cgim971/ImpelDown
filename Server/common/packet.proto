@@ -23,6 +23,7 @@ enum MSGID
     S_GAME_START = 41;
     S_PLAYER_LIST =42;
     C_MOVE = 43;
+    C_CATCH = 44;   
 
     
 
@@ -117,5 +118,9 @@ message S_Player_List {
 
 message C_Move {
     PlayerAllData playerAllData = 1;
+}
+
+message C_Catch {
+    PlayerData playerData = 1;
 }
 

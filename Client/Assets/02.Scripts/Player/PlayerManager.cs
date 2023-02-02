@@ -49,4 +49,17 @@ public class PlayerManager {
             }
         }
     }
+
+    public int GetTargetId(int tailIndex) {
+        int targetTailIndex = tailIndex - 1;
+        if (targetTailIndex < 0) {
+            targetTailIndex = _remotePlayerList.Count;
+        }
+        foreach (PlayerController player in _remotePlayerList.Values) {
+            if (player.TailIndex == targetTailIndex) { return player.PlayerId; } 
+        }
+
+
+        return 0;
+    }
 }
