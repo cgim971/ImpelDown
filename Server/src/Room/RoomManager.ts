@@ -116,4 +116,8 @@ export default class RoomManager {
         }
         return list;
     }
+
+    getRoom(roomIndex:number):Room{
+return this._roomMap[roomIndex];
+    }
 }

@@ -17,7 +17,7 @@ public class PlayerMove : MonoBehaviour {
     }
 
 
-    public void InputCheck() {
+    public void CheckInput() {
         CheckMove();
     }
 

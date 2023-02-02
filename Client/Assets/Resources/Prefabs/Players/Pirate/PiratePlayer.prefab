@@ -115,7 +115,7 @@ GameObject:
   - component: {fileID: 1793964296958897844}
   - component: {fileID: 7463869715624401281}
   - component: {fileID: 7540841868133771291}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PiratePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

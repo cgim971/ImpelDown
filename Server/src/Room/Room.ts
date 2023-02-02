@@ -1,5 +1,5 @@
 import JobTimer from "../JobTimer";
-import { SessionDictionary } from "../SessionManager";
+import SessionManager, { SessionDictionary } from "../SessionManager";
 import SocketSession from "../SocketSession";
 import { impelDown } from "../packet/packet";
 import RoomManager from "./RoomManager";
@@ -56,8 +56,8 @@ export default class Room {
     setTailIndex(list: impelDown.PlayerAllData[]): impelDown.PlayerAllData[] {
         let index: number = Math.floor(Math.random() * 100);
         while (index--) {
-            let index1: number = Math.floor(Math.random() * this._currentPeople );
-            let index2: number = Math.floor(Math.random() * this._currentPeople );
+            let index1: number = Math.floor(Math.random() * this._currentPeople);
+            let index2: number = Math.floor(Math.random() * this._currentPeople);
             let temp = list[index1];
             list[index1] = list[index2];
             list[index2] = temp;
@@ -70,6 +70,42 @@ export default class Room {
 
         return list;
     }
+
+    die(playerId: number): void {
+        let player: SocketSession = SessionManager.Instance.getSession(playerId);
+        let playerAllDataList: impelDown.PlayerAllData[] = this.getPlayerAllDataList();
+
+        if (player == this._hostSocket) {
+            for (let index: number = 0; index < this._maxPeople; index++) {
+                if (this._sessionMap[index] != player) {
+                    this._hostSocket = this._sessionMap[index];
+                    break;
+                }
+            }
+        }
+
+        for (let index: number = 0; index < this._maxPeople; index++) {
+            if (this._sessionMap[index] == player) {
+                delete this._sessionMap[index];
+                this._currentPeople -= 1;
+                break;
+            }
+        }
+        let tailIndex = 0;
+        for (let playerAllData in playerAllDataList) {
+            if (playerAllDataList[playerAllData].playerData.playerId == playerId) {
+                tailIndex = playerAllDataList[playerAllData].playerData.tailIndex;
+            }
+        }
+        playerAllDataList = this.getPlayerAllDataList();
+        for (let playerAllData in playerAllDataList) {
+            if (playerAllDataList[playerAllData].playerData.tailIndex > tailIndex) {
+                playerAllDataList[playerAllData].playerData.tailIndex -= 1;
+            }
+        }
+        console.log("DIE" + player.getPlayerId());
+    }
+
 
     setRoomIndex(roomIndex: number): void {
         this._roomIndex = roomIndex;
@@ -122,7 +158,7 @@ export default class Room {
         else {
             // 방 삭제 - 방에 사람이 없을 때만 삭제
             RoomManager.Instance.deleteRoom(this._roomIndex);
-        }   
+        }
 
         let sExitRoom = new impelDown.S_Exit_Room();
         player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);

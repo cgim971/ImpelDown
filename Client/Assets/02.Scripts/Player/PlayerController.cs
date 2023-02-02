@@ -24,20 +24,30 @@ public class PlayerController : MonoBehaviour {
     public PlayerCatch PlayerCatch => _playerCatch;
     private PlayerCatch _playerCatch;
 
+    public int TailIndex => _tailIndex;
+    private int _tailIndex = 0;
+
     private void Awake() {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerMove = gameObject.AddComponent<PlayerMove>();
         _playerCatch = gameObject.AddComponent<PlayerCatch>();
-
         _playerMove.Init(this);
+        _playerCatch.Init(this);
     }
 
-    public void Init(bool isPlayer, int playerId) {
+    public void Init(bool isPlayer, int playerId, int tailIndex) {
         _isPlayer = isPlayer;
         _playerId = playerId;
+        _tailIndex = tailIndex;
 
         if (_isPlayer == true) {
             StartCoroutine(SendPositionAndRotation());
+        }
+    }
+
+    public void Start() {
+        if(_isPlayer == true) {
+            _playerCatch.SetTargetId(PlayerManager.Instance.GetTargetId(TailIndex));
         }
     }
 
@@ -45,7 +55,8 @@ public class PlayerController : MonoBehaviour {
     private void Update() {
         if (_isPlayer == true) {
             PlayAnimation();
-            _playerMove.InputCheck();
+            _playerMove.CheckInput();
+            _playerCatch.CheckInput();
         }
     }
 
