@@ -8,24 +8,40 @@ enum MSGID
     S_INIT = 0;
 
 
+    C_MATCH_MAKING = 20;
+    C_CREATE_ROOM = 21;
+    S_CREATE_ROOM = 22;
+    C_JOIN_ROOM = 23;
+    S_JOIN_ROOM = 24;
+    C_EXIT_ROOM = 25;
+    S_EXIT_ROOM = 26;
+    C_REFRESH_ROOMLIST = 27;
+    S_REFRESH_ROOMLIST = 28;
 
-    C_MATCH_MAKING = 1;
+    C_GAME_START = 31;
+    S_GAME_START = 32;
 
 
-
-
-
-
-
-
-
-
-
+    C_MAGICIAN_SKILL = 40;
+    S_MAGICIAN_SKILL = 41;
+    C_ROBOT_SKILL = 42;
+    S_ROBOT_SKILL = 43;
+    C_HUNTER_SKILL = 44;
+    S_HUNTER_SKILL = 45;
+    C_NINJA_SKILL = 46;
+    S_NINJA_SKILL = 47;
+    C_PIRATE_SKILL = 48;
+    S_PIRATE_SKILL = 49;
+    C_RACCOON_SKILL = 50;
+    S_RACCOON_SKILL = 51;
+    C_WEREWOLF = 52;
+    S_WEREWOLF = 53;
 
 }
 
 message PlayerInfo {
     int32 playerId = 1;
+    string playerName = 2;  
 }
 
 message Position {
@@ -37,7 +53,38 @@ message S_Init {
     int32 playerId = 1;
 }
 
+message RoomInfo {
+    int32 roomIndex = 1;
+    PlayerInfo hostPlayer = 2;
+    int32 maxPeople = 3;
+    int32 currentPeople = 4;
+}
 
 message C_Match_Making {
-    
+    int32 playerId = 1;
+}
+message C_Create_Room {
+    int32 playerId = 1;
+    int32 maxPeople = 2;
+}
+message S_Create_Room {
+
+}
+message C_Join_Room {
+
+}
+message S_Join_Room {
+
+}
+message C_Exit_Room {
+
+} 
+message S_Exit_Room {
+
+}
+message C_Refresh_RoomList {
+
+}
+message S_Refresh_RoomList{
+    RoomInfo roomInfo = 1;
 }

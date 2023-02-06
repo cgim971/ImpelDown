@@ -11,7 +11,6 @@ export default class SocketSession {
     private _playerData :PlayerData;
     private _roomData : RoomData;
     
-    
     constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
         this._socket = socket;
         
@@ -30,6 +29,13 @@ export default class SocketSession {
         return this._roomData;
     }
 
+    getPlayerInfo(): impelDown.PlayerInfo{
+        return new impelDown.PlayerInfo({
+            playerId : this._playerData.getPlayerId(),
+            playerName: ""
+        })
+    }
+    
     getInt16FEFromBuffer(buffer: Buffer): number {
         return buffer.readInt16LE();
     }

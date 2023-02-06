@@ -1,3 +1,4 @@
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,4 +30,13 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
     }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.A)) {
+            C_Match_Making cMatchMaking= new C_Match_Making { PlayerId = 0 };
+            NetworkManager.Instance.RegisterSend((ushort)MSGID.CMatchMaking, cMatchMaking);
+        }
+    }
+
 }
+    

@@ -21,6 +21,9 @@ public class PacketManager : MonoBehaviour {
     private void Register() {
         _onRecv.Add((ushort)MSGID.SInit, MakePacket<S_Init>);
         _handlers.Add((ushort)MSGID.SInit, new SInitHandler());
+
+        _onRecv.Add((ushort)MSGID.SRefreshRoomlist, MakePacket<S_Refresh_RoomList>);
+        _handlers.Add((ushort)MSGID.SRefreshRoomlist, new SRefreshRoomListHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

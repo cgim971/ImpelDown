@@ -37,7 +37,6 @@ socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     SessionManager.Instance.addSession(session, id);
     let msg: impelDown.S_Init = new impelDown.S_Init({ playerId: id });
     session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
-    console.log(id);
     playerId += 1;
 
     soc.on("message", (data: RawData, isBinary: boolean) => {
