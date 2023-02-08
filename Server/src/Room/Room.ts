@@ -1,4 +1,5 @@
-import { SessionDictionary } from "../SessionManager";
+import JobTimer from "../JobTimer";
+import SessionManager, { SessionDictionary } from "../SessionManager";
 import SocketSession from "../SocketSession";
 import { impelDown } from "../packet/packet";
 import RoomManager from "./RoomManager";
@@ -11,6 +12,21 @@ export default class Room {
 
     private _sessionMap: SessionDictionary = {};
 
+    private _playGame: boolean = false;
+
+    private _moveTimer = new JobTimer(40, () => {
+        let list: impelDown.PlayerAllData[] = [];
+        for (let index in this._sessionMap) {
+            if (this._sessionMap[index] != null) {
+                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() });
+                let posAndRot: impelDown.PosAndRot = this._sessionMap[index].getPosAndRot();
+                list.push(new impelDown.PlayerAllData({ playerData, posAndRot }));
+            }
+        }
+
+        let data = new impelDown.S_Player_List({ playerAllData: list });
+        this.broadCastMessage(data.serialize(), impelDown.MSGID.S_PLAYER_LIST);
+    });
 
     constructor(hostSocket: SocketSession, maxPeople: number) {
         this._hostSocket = hostSocket;
@@ -19,7 +35,77 @@ export default class Room {
         this._roomIndex = 0;
 
         this._sessionMap = {};
+
+        this._playGame = false;
     }
+
+    playGame(mapIndex: number): void {
+        if (this._playGame == true) {
+            console.log("Error - Already Start!");
+            return;
+        }
+        this._playGame = true;
+
+        let mapData: impelDown.MapData = new impelDown.MapData({ mapIndex: mapIndex });
+        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ mapData: mapData, playerAllDatas: this.setTailIndex(this.getPlayerAllDataList()) });
+        this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
+
+        this._moveTimer.startTimer();
+    }
+
+    setTailIndex(list: impelDown.PlayerAllData[]): impelDown.PlayerAllData[] {
+        let index: number = Math.floor(Math.random() * 100);
+        while (index--) {
+            let index1: number = Math.floor(Math.random() * this._currentPeople);
+            let index2: number = Math.floor(Math.random() * this._currentPeople);
+            let temp = list[index1];
+            list[index1] = list[index2];
+            list[index2] = temp;
+        }
+
+        let tailIndex = 0;
+        for (let index in list) {
+            list[index].playerData.tailIndex = tailIndex++;
+        }
+
+        return list;
+    }
+
+    die(playerId: number): void {
+        let player: SocketSession = SessionManager.Instance.getSession(playerId);
+        let playerAllDataList: impelDown.PlayerAllData[] = this.getPlayerAllDataList();
+
+        if (player == this._hostSocket) {
+            for (let index: number = 0; index < this._maxPeople; index++) {
+                if (this._sessionMap[index] != player) {
+                    this._hostSocket = this._sessionMap[index];
+                    break;
+                }
+            }
+        }
+
+        for (let index: number = 0; index < this._maxPeople; index++) {
+            if (this._sessionMap[index] == player) {
+                delete this._sessionMap[index];
+                this._currentPeople -= 1;
+                break;
+            }
+        }
+        let tailIndex = 0;
+        for (let playerAllData in playerAllDataList) {
+            if (playerAllDataList[playerAllData].playerData.playerId == playerId) {
+                tailIndex = playerAllDataList[playerAllData].playerData.tailIndex;
+            }
+        }
+        playerAllDataList = this.getPlayerAllDataList();
+        for (let playerAllData in playerAllDataList) {
+            if (playerAllDataList[playerAllData].playerData.tailIndex > tailIndex) {
+                playerAllDataList[playerAllData].playerData.tailIndex -= 1;
+            }
+        }
+        console.log("DIE" + player.getPlayerId());
+    }
+
 
     setRoomIndex(roomIndex: number): void {
         this._roomIndex = roomIndex;
@@ -68,9 +154,6 @@ export default class Room {
                     break;
                 }
             }
-
-            let sExitRoom: impelDown.S_Exit_Room = new impelDown.S_Exit_Room();
-            player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
         }
         else {
             // 방 삭제 - 방에 사람이 없을 때만 삭제
@@ -104,6 +187,19 @@ export default class Room {
         for (let index in this._sessionMap) {
             if (this._sessionMap[index] != null) {
                 list.push(new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId() }));
+            }
+        }
+
+        return list;
+    }
+
+    getPlayerAllDataList(): impelDown.PlayerAllData[] {
+        let list: impelDown.PlayerAllData[] = [];
+        for (let index in this._sessionMap) {
+            if (this._sessionMap[index] != null) {
+                let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: this._sessionMap[index].getPlayerId(), playerCharacterIndex: this._sessionMap[index].getCharacterIndex() });
+                let posAndRot: impelDown.PosAndRot = this._sessionMap[index].getPosAndRot();
+                list.push(new impelDown.PlayerAllData({ playerData: playerData, posAndRot: posAndRot }));
             }
         }
 

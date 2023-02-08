@@ -46,5 +46,11 @@ public class SceneLobbyManager : MonoBehaviour {
     private void Init() {
         RoomListManager.Instance = gameObject.AddComponent<RoomListManager>();
         RoomListManager.Instance.Init(RoomPanel, Content);
+
+        CreateRoomBtn.onClick.AddListener(() => RoomListManager.Instance.CreateRoom());
+        RefreshRoomListBtn.onClick.AddListener(() => RoomListManager.Instance.RefreshRoom());
+        ExitRoomBtn.onClick.AddListener(() => RoomListManager.Instance.ExitRoom());
+
+        StartBtn.GetComponent<Button>().onClick.AddListener(() => GameManager.Instance.StartGame());
     }
 }

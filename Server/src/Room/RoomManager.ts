@@ -18,6 +18,20 @@ export default class RoomManager {
         this._roomCount = 0;
     }
 
+
+    startGame(roomIndex:number, mapIndex:number): void {
+        let room: Room = this._roomMap[roomIndex];
+        if (room == null) {
+            console.log("No Room");
+            return;
+        }
+
+        room.playGame(mapIndex);
+    }
+
+
+
+
     refreshRoomList(): void {
         let sRefreshRoomList: impelDown.S_Refresh_Room_List = new impelDown.S_Refresh_Room_List({ roomInfos: this.getRoomList() });
         SessionManager.Instance.broadCastMessage(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOM_LIST);
@@ -101,5 +115,9 @@ export default class RoomManager {
             }
         }
         return list;
+    }
+
+    getRoom(roomIndex:number):Room{
+return this._roomMap[roomIndex];
     }
 }

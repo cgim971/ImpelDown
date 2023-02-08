@@ -1,3 +1,4 @@
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -41,13 +42,17 @@ public class GameManager : MonoBehaviour {
         RoomManager.Instance.Init();
     }
 
-    public PlayerInfo SetPlayer() {
+    public PlayerInfo SetPlayer(PlayerData playerData) {
         PlayerInfo newPlayerInfo = new PlayerInfo();
-        _playerInfo = newPlayerInfo; 
+        _playerInfo = newPlayerInfo;
+        _playerInfo.PlayerId = playerData.PlayerId;
         return _playerInfo;
     }
 
-    private void OnApplicationQuit() {
-        RoomListManager.Instance.ExitRoom();
+    public void StartGame() {
+        PlayerData playerData = new PlayerData { PlayerId = GameManager.Instance.PlayerInfo.PlayerId, RoomIndex = RoomManager.Instance.RoomData.RoomIndex };
+        MapData mapData = new MapData { MapIndex = 0 };
+        C_Game_Start cGameStart = new C_Game_Start { PlayerData = playerData, MapData = mapData };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameStart, cGameStart);
     }
 }

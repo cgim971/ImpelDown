@@ -11,11 +11,16 @@ export default class SocketSession {
     private _room: boolean;
     private _roomIndex: number;
 
+    private _posAndRot: impelDown.PosAndRot;
+    private _characterIndex: number;
+
     constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
         this._socket = socket;
         this._playerId = playerId;
         this._room = false;
         this._roomIndex = -1;
+        this._posAndRot = new impelDown.PosAndRot();
+        this._characterIndex = 0;
 
         this._socket.on("close", () => {
             CloseCallback();
@@ -34,14 +39,21 @@ export default class SocketSession {
         return this._room;
     }
 
-    setRoomIndex(roomIndex:number):void{
+    setRoomIndex(roomIndex: number): void {
         this._roomIndex = roomIndex;
     }
 
-    getRoomIndex():number{
+    getRoomIndex(): number {
         return this._roomIndex;
     }
-    
+
+    setCharacterIndex(characterIndex:number):void{
+        this._characterIndex = characterIndex;
+    }
+
+    getCharacterIndex():number{
+        return this._characterIndex;
+    }
     
 
     getInt16FEFromBuffer(buffer: Buffer): number {
@@ -68,5 +80,13 @@ export default class SocketSession {
         sendBuffer.set(payload, 4);
 
         this._socket.send(sendBuffer);
+    }
+
+
+    setPosAndRot(posAndRot: impelDown.PosAndRot): void {
+        this._posAndRot = posAndRot;
+    }
+    getPosAndRot(): impelDown.PosAndRot {
+        return this._posAndRot;
     }
 }
