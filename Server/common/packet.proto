@@ -86,5 +86,5 @@ message C_Refresh_RoomList {
 
 }
 message S_Refresh_RoomList{
-    RoomInfo roomInfo = 1;
+   repeated RoomInfo roomInfos = 1;
 }

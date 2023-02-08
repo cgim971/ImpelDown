@@ -28,7 +28,7 @@ export default class RoomManager {
         let room: Room = new Room(hostSocket, roomIndex, maxPeople);
         this._roomMap[roomIndex] = room;
 
-        this.sRefreshRoomList(room, hostSocket);
+        this.sRefreshRoomList();
     }
 
     deleteRoom(roomIndex: number): void {
@@ -54,7 +54,7 @@ export default class RoomManager {
             let room: Room = this._roomMap[index];
             room.joinRoom(player);
 
-            this.sRefreshRoomList(room, player);
+            this.sRefreshRoomList();
             return;
         }
 
@@ -71,10 +71,26 @@ export default class RoomManager {
         return room;
     }
 
-    sRefreshRoomList(room: Room, player: SocketSession): void {
-        let roomInfo: impelDown.RoomInfo = room.getRoomInfo();
-        let sRefreshRoomList: impelDown.S_Refresh_RoomList = new impelDown.S_Refresh_RoomList({roomInfo});
-        console.log(sRefreshRoomList.roomInfo);
-        player.SendData(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOMLIST);
+    sRefreshRoomList(): void {
+
+        let roomInfos: impelDown.RoomInfo[] = [];
+
+        for (let index in this._roomMap) {
+            let room: Room = this._roomMap[index];
+            if (room != null) {
+                roomInfos.push(room.getRoomInfo());
+            }
+        }
+
+        let sRefreshRoomList: impelDown.S_Refresh_RoomList = new impelDown.S_Refresh_RoomList({ roomInfos });
+        this.broadCastMessage(sRefreshRoomList.serialize(), impelDown.MSGID.S_REFRESH_ROOMLIST);
+    }
+
+    broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
+        let sessionMap = SessionManager.Instance.getSessionMap();
+        for (let index in sessionMap) {
+            // if (sessionMap[index].getRoomData().getIsRoom() == true) continue;
+            sessionMap[index].SendData(payload, msgCode);
+        }
     }
 }

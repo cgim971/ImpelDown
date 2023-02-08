@@ -819,40 +819,37 @@ export namespace impelDown {
     export class S_Refresh_RoomList extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            roomInfo?: RoomInfo;
+            roomInfos?: RoomInfo[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("roomInfo" in data && data.roomInfo != undefined) {
-                    this.roomInfo = data.roomInfo;
+                if ("roomInfos" in data && data.roomInfos != undefined) {
+                    this.roomInfos = data.roomInfos;
                 }
             }
         }
-        get roomInfo() {
-            return pb_1.Message.getWrapperField(this, RoomInfo, 1) as RoomInfo;
+        get roomInfos() {
+            return pb_1.Message.getRepeatedWrapperField(this, RoomInfo, 1) as RoomInfo[];
         }
-        set roomInfo(value: RoomInfo) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_roomInfo() {
-            return pb_1.Message.getField(this, 1) != null;
+        set roomInfos(value: RoomInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
         }
         static fromObject(data: {
-            roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
+            roomInfos?: ReturnType<typeof RoomInfo.prototype.toObject>[];
         }): S_Refresh_RoomList {
             const message = new S_Refresh_RoomList({});
-            if (data.roomInfo != null) {
-                message.roomInfo = RoomInfo.fromObject(data.roomInfo);
+            if (data.roomInfos != null) {
+                message.roomInfos = data.roomInfos.map(item => RoomInfo.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
-                roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
+                roomInfos?: ReturnType<typeof RoomInfo.prototype.toObject>[];
             } = {};
-            if (this.roomInfo != null) {
-                data.roomInfo = this.roomInfo.toObject();
+            if (this.roomInfos != null) {
+                data.roomInfos = this.roomInfos.map((item: RoomInfo) => item.toObject());
             }
             return data;
         }
@@ -860,8 +857,8 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_roomInfo)
-                writer.writeMessage(1, this.roomInfo, () => this.roomInfo.serialize(writer));
+            if (this.roomInfos.length)
+                writer.writeRepeatedMessage(1, this.roomInfos, (item: RoomInfo) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -872,7 +869,7 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.roomInfo, () => message.roomInfo = RoomInfo.deserialize(reader));
+                        reader.readMessage(message.roomInfos, () => pb_1.Message.addToRepeatedWrapperField(message, 1, RoomInfo.deserialize(reader), RoomInfo));
                         break;
                     default: reader.skipField();
                 }

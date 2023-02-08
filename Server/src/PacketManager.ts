@@ -1,4 +1,6 @@
+import CCreateRoomHandler from "./packet/CCreateRoomHandler";
 import CMatchMakingHandler from "./packet/CMatchMakingHandler";
+import CRefreshRoomList from "./packet/CRefreshRoomList";
 import { impelDown } from "./packet/packet";
 import { PacketHandler } from "./packet/PacketHandler";
 
@@ -16,11 +18,13 @@ export default class PacketManager {
         this.register();
     }
 
-    getHandlerMap():HandlerDictionary{
+    getHandlerMap(): HandlerDictionary {
         return this._handlerMap;
     }
-    
+
     register(): void {
         this._handlerMap[impelDown.MSGID.C_MATCH_MAKING] = new CMatchMakingHandler();
+        this._handlerMap[impelDown.MSGID.C_CREATE_ROOM] = new CCreateRoomHandler();
+        this._handlerMap[impelDown.MSGID.C_REFRESH_ROOMLIST] = new CRefreshRoomList();
     }
 }

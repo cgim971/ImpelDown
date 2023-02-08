@@ -37,6 +37,10 @@ export default class SessionManager {
         }
     }
 
+    getSessionMap(): SessionDictionary {
+        return this._sessionMap;
+    }
+
     getSocketSessionCount(): number {
         return this._socketSessionCount;
     }

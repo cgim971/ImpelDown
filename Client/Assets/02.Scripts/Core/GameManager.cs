@@ -14,11 +14,17 @@ public class GameManager : MonoBehaviour {
             return _instance;
         }
     }
+
+    public int PlayerId {
+        get => _playerId;
+        set => _playerId = value;
+    }
     #endregion
     private static GameManager _instance = null;
 
-
     [SerializeField] private string _url = string.Empty;
+
+    private int _playerId = -1;
 
     private void Awake() {
         if (_instance != null)
@@ -33,10 +39,8 @@ public class GameManager : MonoBehaviour {
 
     private void Update() {
         if (Input.GetKeyDown(KeyCode.A)) {
-            C_Match_Making cMatchMaking= new C_Match_Making { PlayerId = 0 };
-            NetworkManager.Instance.RegisterSend((ushort)MSGID.CMatchMaking, cMatchMaking);
+
         }
     }
 
 }
-    
