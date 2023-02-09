@@ -16,10 +16,14 @@ public class LobbySceneManager : MonoBehaviour {
     #endregion
     private static LobbySceneManager _instance = null;
 
+    [Header("Room Out")]
     [SerializeField] private Button _matchMakingBtn;
     [SerializeField] private Button _refreshRoomListBtn;
     [SerializeField] private Button _createRoomBtn;
     [SerializeField] private InputField _maxPeopleField;
+
+    [Header("Room In")]
+    [SerializeField] private Button _exitRoomBtn;
 
 
     private void Awake() {
@@ -30,6 +34,8 @@ public class LobbySceneManager : MonoBehaviour {
         _matchMakingBtn.onClick.AddListener(() => MatchManager.Instance.MatchMaking());
         _refreshRoomListBtn.onClick.AddListener(() => MatchManager.Instance.RefreshRoomList());
         _createRoomBtn.onClick.AddListener(() => MatchManager.Instance.CreateRoom(int.Parse(_maxPeopleField.text.ToString())));
+
+        _exitRoomBtn.onClick.AddListener(() => MatchManager.Instance.ExitRoom());
     }
 
 }

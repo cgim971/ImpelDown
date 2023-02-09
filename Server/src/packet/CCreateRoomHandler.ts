@@ -4,7 +4,7 @@ import SessionManager from "../SessionManager";
 import { impelDown } from "./packet";
 import RoomManager from "../Match/Room/RoomManager";
 
-export default class CCreateRoomHandler implements PacketHandler {
+export default class CExitRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
         let cCreateRoom: impelDown.C_Create_Room = impelDown.C_Create_Room.deserialize(buffer);
         let player = SessionManager.Instance.getSession(cCreateRoom.playerId);

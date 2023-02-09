@@ -17,7 +17,7 @@ export default class RoomManager {
 
     createRoom(hostSocket: SocketSession, maxPeople: number) {
         if (hostSocket.getRoomData().getIsRoom() == true) {
-            console.log("Error - Already In Room!");
+            console.log("Error_CreateRoom - Already In Room!");
             return;
         }
 
@@ -31,6 +31,37 @@ export default class RoomManager {
         this.sRefreshRoomList();
     }
 
+    joinRoom(player: SocketSession, roomIndex: number): void {
+        let room: Room = this._roomMap[roomIndex];
+        if (room == null) {
+            console.log("Error_JoinRoom - No Room!");
+            return;
+        }
+
+        room.joinRoom(player);
+        this.sRefreshRoomList();
+        return;
+    }
+
+    exitRoom(player: SocketSession): void {
+        let room: Room | null = null;
+        for (let index in this._roomMap) {
+            if (this._roomMap[index].getRoomIndex() == player.getRoomData().getRoomIndex()) {
+                room = this._roomMap[index];
+                break;
+            }
+        }
+
+        if(room == null){
+            console.log("Error_ExitRoom - No Room!");
+            return;
+        }
+
+        room.exitRoom(player);
+        this.sRefreshRoomList();
+        return;
+    }
+
     deleteRoom(roomIndex: number): void {
         // 사람이 한 명도 없으면 방 삭제
         let room: Room = this._roomMap[roomIndex];
@@ -40,6 +71,8 @@ export default class RoomManager {
         }
 
         delete this._roomMap[roomIndex];
+        this.sRefreshRoomList();
+        return;
     }
 
     // 방찾기
@@ -60,6 +93,7 @@ export default class RoomManager {
 
         console.log("No Room");
         this.createRoom(player, 8);
+        return;
     }
 
     getRoom(roomIndex: number): Room | null {
@@ -89,6 +123,7 @@ export default class RoomManager {
     broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
         let sessionMap = SessionManager.Instance.getSessionMap();
         for (let index in sessionMap) {
+            // 방에 들어간 사람 제외하고 갱신
             // if (sessionMap[index].getRoomData().getIsRoom() == true) continue;
             sessionMap[index].SendData(payload, msgCode);
         }

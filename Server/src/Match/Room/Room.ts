@@ -1,5 +1,7 @@
 import SocketSession from "../../PlayerData/SocketSession";
+import SessionManager from "../../SessionManager";
 import { impelDown } from "../../packet/packet";
+import RoomManager from "./RoomManager";
 
 interface PlayerDictionary {
     [key: number]: SocketSession;
@@ -9,7 +11,6 @@ export default class Room {
     private _hostSocket: SocketSession;
 
     private _playerMap: PlayerDictionary = {};
-    // private _ghostPlayerMap: PlayerDictionary = {};
     private _playerCount: number;
     private _roomIndex: number;
     private _maxPeople: number;
@@ -35,14 +36,6 @@ export default class Room {
     }
 
     diePlayer(player: SocketSession): void {
-        // 죽으면 유령이 됌
-        // for (let index in this._playerMap) {
-        //     if (this._playerMap[index] == player) {
-        //         this._ghostPlayerMap[index] = player;
-        //         return;
-        //     }
-        // }
-
         for (let index in this._playerMap) {
             if (this._playerMap[index] == player) {
                 delete this._playerMap[index];
@@ -54,12 +47,6 @@ export default class Room {
 
     endGame(): void {
 
-        // 게임이 끝나면 그대로 들어옴
-        // for (let index in this._ghostPlayerMap) {
-        //     if (this._ghostPlayerMap[index] != null) {
-        //         this._playerMap[index] = this._ghostPlayerMap[index];
-        //     }
-        // }
     }
 
     joinRoom(player: SocketSession = this._hostSocket): void {
@@ -72,17 +59,42 @@ export default class Room {
         }
         this._playerMap[playerIndex] = player;
         this._playerCount += 1;
-        player.getRoomData().setIsRoom(this._roomIndex);
+        player.getRoomData().setRoomIndex(this._roomIndex);
+
+        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({});
+        player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
+        return;
     }
 
-
+    // 게임 시작 전
     exitRoom(player: SocketSession): void {
-        if (this._playerCount > 2) {
+        if (this._playerCount > 1) {
             // 플레이어가 2명
+            if (this._hostSocket == player) {
+                // 호스트 변경
+                for(let index in this._playerMap){
+                    if(this._playerMap[index] != player){
+                        this._hostSocket = this._playerMap[index];
+                        break;
+                    }
+                }
+            }
         }
 
-        if (this._hostSocket == player) {
-            // 호스트 변경
+        for (let index in this._playerMap) {
+            if (this._playerMap[index] == player) {
+                delete this._playerMap[index];
+                this._playerCount -= 1;
+                player.getRoomData().setRoomIndex();
+                
+                let sExitRoom: impelDown.S_Exit_Room = new impelDown.S_Exit_Room({});
+                player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
+                break;
+            }
+        }
+
+        if (this._playerCount == 0) {
+            RoomManager.Instance.deleteRoom(this._roomIndex);
         }
         return;
     }

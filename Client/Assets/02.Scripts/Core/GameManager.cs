@@ -36,11 +36,4 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
     }
-
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.A)) {
-
-        }
-    }
-
 }
