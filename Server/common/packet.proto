@@ -6,121 +6,85 @@ option csharp_namespace = "ImpelDown.Proto";
 enum MSGID 
 {
     S_INIT = 0;
-    C_ENTER = 1;
-    S_ENTER = 2;
 
 
-    C_CREATE_ROOM = 20;
-    C_JOIN_ROOM = 21;
-    C_EXIT_ROOM = 22;
-    C_REFRESH_ROOM = 23;
-
-    S_JOIN_ROOM = 25;
+    C_MATCH_MAKING = 20;
+    C_CREATE_ROOM = 21;
+    S_CREATE_ROOM = 22;
+    C_JOIN_ROOM = 23;
+    S_JOIN_ROOM = 24;
+    C_EXIT_ROOM = 25;
     S_EXIT_ROOM = 26;
-    S_REFRESH_ROOM_LIST = 27;
+    C_REFRESH_ROOMLIST = 27;
+    S_REFRESH_ROOMLIST = 28;
 
-    C_GAME_START = 40;
-    S_GAME_START = 41;
-    S_PLAYER_LIST =42;
-    C_MOVE = 43;
-    C_CATCH = 44;   
+    C_GAME_START = 31;
+    S_GAME_START = 32;
 
-    
 
-    
+    C_MAGICIAN_SKILL = 40;
+    S_MAGICIAN_SKILL = 41;
+    C_ROBOT_SKILL = 42;
+    S_ROBOT_SKILL = 43;
+    C_HUNTER_SKILL = 44;
+    S_HUNTER_SKILL = 45;
+    C_NINJA_SKILL = 46;
+    S_NINJA_SKILL = 47;
+    C_PIRATE_SKILL = 48;
+    S_PIRATE_SKILL = 49;
+    C_RACCOON_SKILL = 50;
+    S_RACCOON_SKILL = 51;
+    C_WEREWOLF = 52;
+    S_WEREWOLF = 53;
+
 }
 
-
-message PlayerAllData {
-    PlayerData playerData = 1;
-    PosAndRot posAndRot = 2;
-}
-
-message PlayerData {
+message PlayerInfo {
     int32 playerId = 1;
-    int32 roomIndex = 2;
-    int32 playerCharacterIndex = 3;
-    int32 tailIndex = 4;
+    string playerName = 2;  
+}
+
+message Position {
+    float x = 1;
+    float y = 2;
 }
 
 message S_Init {
-    PlayerData playerData = 1;
-}
-
-message C_Enter {
-    PlayerData playerData = 1;
-}
-
-message S_Enter {
-    PlayerData playerData = 1;
-}   
-
-message RoomData {
     int32 playerId = 1;
-    int32 hostId = 2;
-    int32 roomIndex = 3;
-    int32 maxPeople = 4;
-    int32 currentPeople = 5;
-    repeated PlayerData playerDatas = 6;
 }
 
+message RoomInfo {
+    int32 roomIndex = 1;
+    PlayerInfo hostPlayer = 2;
+    int32 maxPeople = 3;
+    int32 currentPeople = 4;
+}
+
+message C_Match_Making {
+    int32 playerId = 1;
+}
 message C_Create_Room {
-    RoomData roomData = 1;
+    int32 playerId = 1;
+    int32 maxPeople = 2;
 }
+message S_Create_Room {
 
+}
 message C_Join_Room {
-    RoomData roomData = 1;
+    int32 playerId = 1;
+    int32 roomIndex = 2;
 }
-
-message C_Exit_Room {
-    RoomData roomData = 1;
-}
-
-message C_Refresh_Room { }
-
-
 message S_Join_Room {
-    RoomData roomData = 1;
-}
 
+}
+message C_Exit_Room {
+    int32 playerId = 1;
+} 
 message S_Exit_Room {
-    
+
 }
+message C_Refresh_RoomList {}
 
-message S_Refresh_Room_List {
-    repeated RoomData roomInfos = 1;
+message S_Refresh_RoomList{
+   repeated RoomInfo roomInfos = 1;
 }
-
-
-message MapData {
-    int32 mapIndex = 1;
-}
-
-message PosAndRot {
-    float x = 1;
-    float y = 2;
-    float rot = 3;
-}
-
-message C_Game_Start {
-    PlayerData playerData = 1;
-    MapData mapData = 2;
-}
-
-message S_Game_Start {
-    MapData mapData = 1;
-    repeated PlayerAllData playerAllDatas = 2;
-}
-
-message S_Player_List {
-   repeated PlayerAllData playerAllData = 1;
-}
-
-message C_Move {
-    PlayerAllData playerAllData = 1;
-}
-
-message C_Catch {
-    PlayerData playerData = 1;
-}
-

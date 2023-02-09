@@ -1,18 +1,18 @@
 export default class JobTimer {
     action: () => void;
-    time: number = 0;
-    intervalTimer?: NodeJS.Timer;
+    private _time: number = 0;
+    private _intervalTimer?: NodeJS.Timer;
 
-    constructor(time: number, action: () => void) {
-        this.time = time;
+    constructor(_time: number, action: () => void) {
+        this._time = _time;
         this.action = action;
     }
 
     stopTimer(): void {
-        clearInterval(this.intervalTimer);
+        clearInterval(this._intervalTimer);
     }
 
     startTimer(): void {
-        this.intervalTimer = setInterval(this.action, this.time);
+        this._intervalTimer = setInterval(this.action, this._time);
     }
 }

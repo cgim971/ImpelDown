@@ -1,15 +1,13 @@
-import RoomManager from "../Room/RoomManager";
-import SessionManager from "../SessionManager";
-import SocketSession from "../SocketSession";
 import { PacketHandler } from "./PacketHandler";
+import SocketSession from "../PlayerData/SocketSession";
+import SessionManager from "../SessionManager";
 import { impelDown } from "./packet";
-
+import RoomManager from "../Match/Room/RoomManager";
 export default class CJoinRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
-        let cJoinRoom = impelDown.C_Create_Room.deserialize(buffer);
-        let playerId: number = cJoinRoom.roomData.playerId;
-        let roomIndex: number = cJoinRoom.roomData.roomIndex;
-
-        RoomManager.Instance.joinRoom(playerId, roomIndex);
+        let cJoinRoom: impelDown.C_Join_Room = impelDown.C_Join_Room.deserialize(buffer);
+        let player = SessionManager.Instance.getSession(cJoinRoom.playerId);
+        let roomIndex: number = cJoinRoom.roomIndex;
+        RoomManager.Instance.joinRoom(player, roomIndex);
     }
 }

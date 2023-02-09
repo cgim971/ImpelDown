@@ -4,8 +4,9 @@ import WS, { RawData } from 'ws';
 import { impelDown } from './packet/packet';
 import PacketManager from './PacketManager';
 import SessionManager from './SessionManager';
-import SocketSession from './SocketSession';
-import RoomManager from './Room/RoomManager';
+import SocketSession from './PlayerData/SocketSession';
+import RoomManager from './Match/Room/RoomManager';
+import MatchManager from './Match/MatchManager';
 
 const App: Application = Express();
 
@@ -21,19 +22,20 @@ const socketServer: WS.Server = new WS.Server({
 
 PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
-RoomManager.Instance = new RoomManager();
+MatchManager.Instance = new MatchManager();
+RoomManager.Instance = new RoomManager();   
 
-let playerId: number = 1;
+let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     const id: number = playerId;
 
     let session: SocketSession = new SocketSession(soc, id, () => {
-
+        SessionManager.Instance.removeSession(id);
+        return;
     });
 
     SessionManager.Instance.addSession(session, id);
-    let playerData: impelDown.PlayerData = new impelDown.PlayerData({ playerId: id, roomIndex: session.getRoomIndex() });
-    let msg: impelDown.S_Init = new impelDown.S_Init({ playerData: playerData });
+    let msg: impelDown.S_Init = new impelDown.S_Init({ playerId: id });
     session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
     playerId += 1;
 
@@ -42,4 +44,4 @@ socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
             session.receiveMsg(data);
         }
     });
-}); 
+});
