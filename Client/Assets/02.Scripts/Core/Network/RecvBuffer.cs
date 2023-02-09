@@ -5,29 +5,23 @@ using UnityEngine;
 
 public class RecvBuffer {
 
-
     #region Property
     public int DataSize => _writePos - _readPos;
     public int FreeSize => _buffer.Count - _writePos;
-
 
     public ArraySegment<byte> ReaddSegment => new ArraySegment<byte>(_buffer.Array, _buffer.Offset + _readPos, DataSize);
     public ArraySegment<byte> WriteSegment => new ArraySegment<byte>(_buffer.Array, _buffer.Offset + _writePos, FreeSize);
 
     #endregion
 
-
-
     private ArraySegment<byte> _buffer;
 
     private int _readPos;
     private int _writePos;
 
-
     public RecvBuffer(int bufferSize) {
         _buffer = new ArraySegment<byte>(new byte[bufferSize], 0, bufferSize);
     }
-
 
     public void Clean() {
         int dataSize = DataSize;
@@ -56,5 +50,4 @@ public class RecvBuffer {
         _writePos += numOfByte;
         return true;
     }
-
 }
