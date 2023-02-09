@@ -16,13 +16,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
-    public PlayerInfo PlayerInfo => _playerInfo;
+    public int PlayerId {
+        get => playerId; 
+        set {
+            playerId = value;
+        }
+    }
     #endregion
     private static GameManager _instance = null;
 
     [SerializeField] private string _url = string.Empty;
+    private int playerId = -1;
 
-    private PlayerInfo _playerInfo;
 
     private void Awake() {
         if (_instance != null)
@@ -37,22 +42,6 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
-
-        RoomManager.Instance = gameObject.AddComponent<RoomManager>();
-        RoomManager.Instance.Init();
     }
 
-    public PlayerInfo SetPlayer(PlayerData playerData) {
-        PlayerInfo newPlayerInfo = new PlayerInfo();
-        _playerInfo = newPlayerInfo;
-        _playerInfo.PlayerId = playerData.PlayerId;
-        return _playerInfo;
-    }
-
-    public void StartGame() {
-        PlayerData playerData = new PlayerData { PlayerId = GameManager.Instance.PlayerInfo.PlayerId, RoomIndex = RoomManager.Instance.RoomData.RoomIndex };
-        MapData mapData = new MapData { MapIndex = 0 };
-        C_Game_Start cGameStart = new C_Game_Start { PlayerData = playerData, MapData = mapData };
-        NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameStart, cGameStart);
-    }
 }
