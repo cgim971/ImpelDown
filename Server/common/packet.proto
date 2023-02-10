@@ -17,6 +17,8 @@ enum MSGID
     S_EXIT_ROOM = 26;
     C_REFRESH_ROOMLIST = 27;
     S_REFRESH_ROOMLIST = 28;
+    C_REFRESH_ROOM = 29;
+    S_REFRESH_ROOM = 30;
 
     C_GAME_START = 31;
     S_GAME_START = 32;
@@ -58,6 +60,7 @@ message RoomInfo {
     PlayerInfo hostPlayer = 2;
     int32 maxPeople = 3;
     int32 currentPeople = 4;
+    repeated PlayerInfo playerInfos = 5;
 }
 
 message C_Match_Making {
@@ -87,4 +90,12 @@ message C_Refresh_RoomList {}
 
 message S_Refresh_RoomList{
    repeated RoomInfo roomInfos = 1;
+}
+
+message C_Refresh_Room {
+    int32 playerId = 1;
+}
+
+message S_Refresh_Room {
+    RoomInfo roomInfo = 1;
 }

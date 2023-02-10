@@ -24,6 +24,10 @@ public class MatchManager : MonoBehaviour {
     [SerializeField] private CanvasGroup _roomInCanvasGroup;
     [SerializeField] private CanvasGroup _roomOutCanvasGroup;
 
+    [SerializeField] private RoomPlayerPanel _roomPlayerPanel;
+    [SerializeField] private RectTransform _roomPlayerContent;
+
+
     private void Awake() {
         RoomOut();
     }
@@ -51,6 +55,23 @@ public class MatchManager : MonoBehaviour {
 
     public void RefreshRoomList() {
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CRefreshRoomlist, new C_Refresh_RoomList());
+    }
+
+    public void RefreshRoom(RoomInfo roomInfo) {
+        Transform[] childList = _roomPlayerContent.GetComponentsInChildren<Transform>();
+
+        if (childList != null) {
+            for (int i = 1; i < childList.Length; i++) {
+                if (childList[i] != _content) {
+                    Destroy(childList[i].gameObject);
+                }
+            }
+        }
+
+        foreach (PlayerInfo playerInfo in roomInfo.PlayerInfos) {
+            RoomPlayerPanel newRoomPanel = Instantiate(_roomPlayerPanel, _roomPlayerContent);
+            newRoomPanel.Init(playerInfo);
+        }
     }
 
     public void RefreshRoomList(RepeatedField<RoomInfo> roomInfos) {

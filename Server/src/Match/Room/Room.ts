@@ -61,19 +61,21 @@ export default class Room {
         this._playerCount += 1;
         player.getRoomData().setRoomIndex(this._roomIndex);
 
-        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room({});
+        let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room();
         player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
+
+        this.sRefreshRoom();
         return;
     }
 
-    // 게임 시작 전
+    // 게임 시작 전에 나가기
     exitRoom(player: SocketSession): void {
         if (this._playerCount > 1) {
             // 플레이어가 2명
             if (this._hostSocket == player) {
                 // 호스트 변경
-                for(let index in this._playerMap){
-                    if(this._playerMap[index] != player){
+                for (let index in this._playerMap) {
+                    if (this._playerMap[index] != player) {
                         this._hostSocket = this._playerMap[index];
                         break;
                     }
@@ -86,7 +88,7 @@ export default class Room {
                 delete this._playerMap[index];
                 this._playerCount -= 1;
                 player.getRoomData().setRoomIndex();
-                
+
                 let sExitRoom: impelDown.S_Exit_Room = new impelDown.S_Exit_Room({});
                 player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
                 break;
@@ -96,6 +98,8 @@ export default class Room {
         if (this._playerCount == 0) {
             RoomManager.Instance.deleteRoom(this._roomIndex);
         }
+
+        this.sRefreshRoom();
         return;
     }
 
@@ -122,5 +126,28 @@ export default class Room {
             maxPeople: this._maxPeople,
             currentPeople: this._playerCount
         });
+    }
+
+    sRefreshRoom(): void {
+        let sRefreshRoom: impelDown.S_Refresh_Room = new impelDown.S_Refresh_Room({ roomInfo: this.getRoomPlayersInfo() });
+        this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
+    }
+
+    getRoomPlayersInfo(): impelDown.RoomInfo {
+        let roomInfo: impelDown.RoomInfo;
+        roomInfo = this.getRoomInfo();
+
+        let list: impelDown.PlayerInfo[] = [];
+        for (let index in this._playerMap) {
+            list.push(this._playerMap[index].getPlayerInfo());
+        }
+        roomInfo.playerInfos = list;
+        return roomInfo;
+    }
+
+    broadCastMessage(payload: Uint8Array, msgCode: number): void {
+        for (let index in this._playerMap) {
+            this._playerMap[index].SendData(payload, msgCode);
+        }
     }
 }

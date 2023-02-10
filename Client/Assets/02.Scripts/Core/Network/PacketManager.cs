@@ -22,14 +22,17 @@ public class PacketManager : MonoBehaviour {
         _onRecv.Add((ushort)MSGID.SInit, MakePacket<S_Init>);
         _handlers.Add((ushort)MSGID.SInit, new SInitHandler());
 
-        _onRecv.Add((ushort)MSGID.SRefreshRoomlist, MakePacket<S_Refresh_RoomList>);
-        _handlers.Add((ushort)MSGID.SRefreshRoomlist, new SRefreshRoomListHandler());
-
         _onRecv.Add((ushort)MSGID.SJoinRoom, MakePacket<S_Join_Room>);
         _handlers.Add((ushort)MSGID.SJoinRoom, new SJoinRoomHandler());
 
         _onRecv.Add((ushort)MSGID.SExitRoom, MakePacket<S_Exit_Room>);
         _handlers.Add((ushort)MSGID.SExitRoom, new SExitRoomHandler());
+
+        _onRecv.Add((ushort)MSGID.SRefreshRoomlist, MakePacket<S_Refresh_RoomList>);
+        _handlers.Add((ushort)MSGID.SRefreshRoomlist, new SRefreshRoomListHandler());
+
+        _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_Refresh_Room>);
+        _handlers.Add((ushort)MSGID.SRefreshRoom, new SRefreshRoomHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {
