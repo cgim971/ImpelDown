@@ -2982,7 +2982,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dda47d00d88f8f048814d626240e2d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _roomPanel: {fileID: 5519148697506027563, guid: 1f313d3920aac914eb7168550d8f69f6, type: 3}
+  _roomPanel: {fileID: 5519148697506027563, guid: 2d69e3d5e44bcbe42a4610181651fca3, type: 3}
   _content: {fileID: 813485501}
   _roomInCanvasGroup: {fileID: 619447547}
   _roomOutCanvasGroup: {fileID: 676599157}
