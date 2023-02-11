@@ -33,6 +33,11 @@ public class PacketManager : MonoBehaviour {
 
         _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_Refresh_Room>);
         _handlers.Add((ushort)MSGID.SRefreshRoom, new SRefreshRoomHandler());
+
+
+
+        _onRecv.Add((ushort)MSGID.SGameStart, MakePacket<S_Game_Start>);
+        _handlers.Add((ushort)MSGID.SGameStart, new SGameStartHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

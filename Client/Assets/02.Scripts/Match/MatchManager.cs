@@ -32,6 +32,23 @@ public class MatchManager : MonoBehaviour {
         RoomOut();
     }
 
+
+
+    #region Game
+
+    public void StartRoom() {
+        C_Game_Start cGameStart = new C_Game_Start { PlayerId = GameManager.Instance.PlayerId };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameStart, cGameStart);
+    }
+
+
+
+    #endregion
+
+
+
+
+    #region Room
     public void CreateRoom(int maxPeople) {
         maxPeople = Mathf.Clamp(maxPeople, 2, 8);
         C_Create_Room cCreateRoom = new C_Create_Room { PlayerId = GameManager.Instance.PlayerId, MaxPeople = maxPeople };
@@ -72,6 +89,8 @@ public class MatchManager : MonoBehaviour {
             RoomPlayerPanel newRoomPanel = Instantiate(_roomPlayerPanel, _roomPlayerContent);
             newRoomPanel.Init(playerInfo);
         }
+
+        LobbySceneManager.Instance.SetReadyBtn(GameManager.Instance.PlayerId == roomInfo.HostPlayer.PlayerId);
     }
 
     public void RefreshRoomList(RepeatedField<RoomInfo> roomInfos) {
@@ -101,6 +120,8 @@ public class MatchManager : MonoBehaviour {
         SetCanvasGroup(_roomOutCanvasGroup, 1, true, true);
         SetCanvasGroup(_roomInCanvasGroup);
     }
+    #endregion
+
 
     public void SetCanvasGroup(CanvasGroup canvasGroup, float alpha = 0f, bool interactable = false, bool blocksRaycasts = false) {
         canvasGroup.alpha = alpha;

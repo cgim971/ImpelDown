@@ -5,6 +5,7 @@ import CMatchMakingHandler from "./packet/CMatchMakingHandler";
 import CRefreshRoomListHandler from "./packet/CRefreshRoomListHandler";
 import { impelDown } from "./packet/packet";
 import { PacketHandler } from "./packet/PacketHandler";
+import CGameStartHandler from "./packet/CGameStartHandler";
 
 interface HandlerDictionary {
     [key: number]: PacketHandler;
@@ -30,5 +31,9 @@ export default class PacketManager {
         this._handlerMap[impelDown.MSGID.C_JOIN_ROOM] = new CJoinRoomHandler();
         this._handlerMap[impelDown.MSGID.C_EXIT_ROOM] = new CExitRoomHandler();
         this._handlerMap[impelDown.MSGID.C_REFRESH_ROOMLIST] = new CRefreshRoomListHandler();
+
+
+
+        this._handlerMap[impelDown.MSGID.C_GAME_START] = new CGameStartHandler();
     }
 }

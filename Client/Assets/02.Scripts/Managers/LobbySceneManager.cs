@@ -24,6 +24,7 @@ public class LobbySceneManager : MonoBehaviour {
 
     [Header("Room In")]
     [SerializeField] private Button _exitRoomBtn;
+    [SerializeField] private Button _readyBtn;
 
 
     private void Awake() {
@@ -36,6 +37,19 @@ public class LobbySceneManager : MonoBehaviour {
         _createRoomBtn.onClick.AddListener(() => MatchManager.Instance.CreateRoom(int.Parse(_maxPeopleField.text.ToString())));
 
         _exitRoomBtn.onClick.AddListener(() => MatchManager.Instance.ExitRoom());
+        _readyBtn.onClick.AddListener(() => MatchManager.Instance.StartRoom());
+
+        SetReadyBtn();  
+    }
+
+    public void SetReadyBtn(bool isHost = false) {
+        _readyBtn.enabled = isHost;
+        if (isHost) {
+            _readyBtn.GetComponentInChildren<Text>().text = "Start";
+        }
+        else {
+            _readyBtn.GetComponentInChildren<Text>().text = "HELLO";
+        }
     }
 
 }

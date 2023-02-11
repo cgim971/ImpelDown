@@ -1875,7 +1875,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1153353693}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
@@ -1901,7 +1901,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ready
+  m_Text: HELLO
 --- !u!222 &1153353696
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2720,6 +2720,7 @@ MonoBehaviour:
   _createRoomBtn: {fileID: 99691996}
   _maxPeopleField: {fileID: 1322779021}
   _exitRoomBtn: {fileID: 1985199579}
+  _readyBtn: {fileID: 477562411}
 --- !u!4 &1727336329
 Transform:
   m_ObjectHideFlags: 0

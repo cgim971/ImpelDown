@@ -14,6 +14,7 @@ export default class Room {
     private _playerCount: number;
     private _roomIndex: number;
     private _maxPeople: number;
+    private _mapIndex: number;
 
     private _isGameing: boolean;
 
@@ -24,15 +25,19 @@ export default class Room {
         this._playerCount = 0;
         this._roomIndex = roomIndex;
         this._maxPeople = maxPeople;
+        this._mapIndex = 0;
 
         this._isGameing = false;
 
         this.joinRoom();
     }
 
-    startGame(): void {
+    gameStart(): void {
         if (this._isGameing == true) return;
         this._isGameing = true;
+
+        let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ roomInfo: this.getRoomPlayersInfo() })
+        this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
     }
 
     diePlayer(player: SocketSession): void {
@@ -60,6 +65,7 @@ export default class Room {
         this._playerMap[playerIndex] = player;
         this._playerCount += 1;
         player.getRoomData().setRoomIndex(this._roomIndex);
+        player.getPlayerData().setCharacterIndex(5);
 
         let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room();
         player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
@@ -88,6 +94,7 @@ export default class Room {
                 delete this._playerMap[index];
                 this._playerCount -= 1;
                 player.getRoomData().setRoomIndex();
+                player.getPlayerData().setCharacterIndex();
 
                 let sExitRoom: impelDown.S_Exit_Room = new impelDown.S_Exit_Room({});
                 player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
@@ -119,12 +126,18 @@ export default class Room {
         return this._hostSocket;
     }
 
+    setMapIndex(mapIndex: number): void {
+        this._mapIndex = mapIndex;
+    }
+
+
     getRoomInfo(): impelDown.RoomInfo {
         return new impelDown.RoomInfo({
             roomIndex: this._roomIndex,
             hostPlayer: this._hostSocket.getPlayerInfo(),
             maxPeople: this._maxPeople,
-            currentPeople: this._playerCount
+            currentPeople: this._playerCount,
+            mapIndex: this._mapIndex
         });
     }
 

@@ -24,26 +24,28 @@ enum MSGID
     S_GAME_START = 32;
 
 
-    C_MAGICIAN_SKILL = 40;
-    S_MAGICIAN_SKILL = 41;
-    C_ROBOT_SKILL = 42;
-    S_ROBOT_SKILL = 43;
-    C_HUNTER_SKILL = 44;
-    S_HUNTER_SKILL = 45;
-    C_NINJA_SKILL = 46;
-    S_NINJA_SKILL = 47;
-    C_PIRATE_SKILL = 48;
-    S_PIRATE_SKILL = 49;
-    C_RACCOON_SKILL = 50;
-    S_RACCOON_SKILL = 51;
-    C_WEREWOLF = 52;
-    S_WEREWOLF = 53;
+    C_MAGICIAN_SKILL = 60;
+    S_MAGICIAN_SKILL = 61;
+    C_ROBOT_SKILL = 62;
+    S_ROBOT_SKILL = 63;
+    C_HUNTER_SKILL = 64;
+    S_HUNTER_SKILL = 65;
+    C_NINJA_SKILL = 66;
+    S_NINJA_SKILL = 67;
+    C_PIRATE_SKILL = 68;
+    S_PIRATE_SKILL = 69;
+    C_RACCOON_SKILL = 70;
+    S_RACCOON_SKILL = 71;
+    C_WEREWOLF = 72;
+    S_WEREWOLF = 73;
 
 }
 
 message PlayerInfo {
     int32 playerId = 1;
     string playerName = 2;  
+    int32 characterIndex = 3;
+    Position position = 4;
 }
 
 message Position {
@@ -61,6 +63,7 @@ message RoomInfo {
     int32 maxPeople = 3;
     int32 currentPeople = 4;
     repeated PlayerInfo playerInfos = 5;
+    int32 mapIndex = 6;
 }
 
 message C_Match_Making {
@@ -97,5 +100,13 @@ message C_Refresh_Room {
 }
 
 message S_Refresh_Room {
+    RoomInfo roomInfo = 1;
+}
+
+message C_Game_Start {
+    int32 playerId = 1;
+}
+
+message S_Game_Start {
     RoomInfo roomInfo = 1;
 }

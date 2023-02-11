@@ -15,6 +15,19 @@ export default class RoomManager {
         this._roomMap = [];
     }
 
+
+    gameStart(player : SocketSession) {
+        let room: Room = this._roomMap[player.getRoomData().getRoomIndex()];
+        if (room == null) {
+            console.log("Error_JoinRoom - No Room!");
+            return;
+        }
+
+        room.gameStart();
+        return;
+    }
+    
+        
     createRoom(hostSocket: SocketSession, maxPeople: number) {
         if (hostSocket.getRoomData().getIsRoom() == true) {
             console.log("Error_CreateRoom - Already In Room!");
