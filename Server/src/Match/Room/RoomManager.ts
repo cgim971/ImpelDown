@@ -124,7 +124,7 @@ export default class RoomManager {
         let sessionMap = SessionManager.Instance.getSessionMap();
         for (let index in sessionMap) {
             // 방에 들어간 사람 제외하고 갱신
-            // if (sessionMap[index].getRoomData().getIsRoom() == true) continue;
+            if (sessionMap[index].getRoomData().getIsRoom() == true) continue;
             sessionMap[index].SendData(payload, msgCode);
         }
     }
