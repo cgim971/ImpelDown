@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Define 
-{
-    
+public class Define {
+
     public static string MapName(int mapIndex) {
         switch (mapIndex) {
             case 0:
@@ -13,7 +12,5 @@ public class Define
                 return "";
         }
     }
-
-
 
 }

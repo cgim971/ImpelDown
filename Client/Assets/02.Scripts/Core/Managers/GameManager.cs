@@ -1,3 +1,4 @@
+using Cinemachine;
 using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
@@ -51,9 +52,10 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene(Define.MapName(roomInfo.MapIndex));
 
         // 플레이어 생성
-         
+        PlayerManager.Instance = new PlayerManager();
+        PlayerManager.Instance.CreatePlayer(roomInfo.PlayerInfos);
         // 플레이어에 카메라 달기
-
+        // GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>().m_Follow = this.transform;
         //
     }
 
