@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Diagnostics;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class PlayerManager {
     #region Property

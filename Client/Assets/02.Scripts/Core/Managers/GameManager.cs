@@ -47,13 +47,22 @@ public class GameManager : MonoBehaviour {
 
 
     public void GameStart(RoomInfo roomInfo) {
+        StartCoroutine(GmaeStarting(roomInfo));
+       
+    }
+
+    public IEnumerator GmaeStarting(RoomInfo roomInfo) {
+        yield return null;
         // 게임 시작시 맵 이동 후 플레이어 생성
         // 맵 이동
         SceneManager.LoadScene(Define.MapName(roomInfo.MapIndex));
 
+        yield return null;
         // 플레이어 생성
         PlayerManager.Instance = new PlayerManager();
         PlayerManager.Instance.CreatePlayer(roomInfo.PlayerInfos);
+
+        yield return null;
         // 플레이어에 카메라 달기
         // GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>().m_Follow = this.transform;
         //
