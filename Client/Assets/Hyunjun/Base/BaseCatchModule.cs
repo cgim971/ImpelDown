@@ -18,17 +18,13 @@ public abstract class BaseCatchModule : MonoBehaviour
     private LayerMask _playerLayerMask;
     private Camera _mainCam = null;
 
-    private int _playerId = 0;
-    private int _targetId = 0;
-
     protected virtual void Start()
     {
         player = GetComponent<Player>();
         _inputProvider = GetComponent<IInputProvider>();
-        player._InputModule.OnCatchEvent.AddListener(Catch);
+        player.InputModule.OnCatchEvent.AddListener(Catch);
         _playerLayerMask = LayerMask.GetMask("Player");
         _mainCam = Camera.main;
-        _playerId = player.PlayerId;
     }
 
     public void Catch()
@@ -75,11 +71,6 @@ public abstract class BaseCatchModule : MonoBehaviour
         //    return;
         //}
         //StartCoroutine(CatchTime());
-    }
-
-    public void SetTargetId(int targetId)
-    {
-        _targetId = targetId;
     }
 
     IEnumerator CatchTime()

@@ -6,10 +6,9 @@ using Enums;
 /// <summary>
 /// 움직임 추상 클래스
 /// </summary>
-public class BaseMoveModule : MonoBehaviour
-{
+public class BaseMoveModule : MonoBehaviour {
 
-    protected Player player;
+    protected Player _player;
     //움직임이 가능하나 안 가능하나 
     private bool _moveable = true;
     public bool Moveable { get => _moveable; set => _moveable = value; }
@@ -17,37 +16,32 @@ public class BaseMoveModule : MonoBehaviour
     protected IInputProvider _inputProvider;
     Vector3 _targetPos = Vector3.zero;
 
-    protected virtual void Start()
-    {
-        player = GetComponent<Player>();
+    public virtual void Init(Player player) {
+        _player = player;
         _inputProvider = GetComponent<IInputProvider>();
         //이벤트에 추가
-        player._InputModule.OnMoveEvent.AddListener(Move);
+        _player.InputModule.OnMoveEvent.AddListener(Move);
     }
 
-    public void Move()
-    {
+    public void Move() {
         //기존 getaxis와 동일한 기능
         var inputX = _inputProvider.GetAxis(Axis.X);
         var inputY = _inputProvider.GetAxis(Axis.Y);
         //움직일 수 없으면 inputX, inputY = 0 위에서 처리하면 애니메이션이 이상해서 일단 이렇게 함
         if (_moveable == false)
             inputX = inputY = 0;
-        
+
         Vector2 speed = new Vector2(inputX, inputY);
         Vector3 vel = new Vector3(inputX, inputY, 0).normalized;
 
-        player.Rb.velocity = vel * player._Speed;
+        _player.Rb.velocity = vel * _player._Speed;
     }
 
-    public void SetPositionData(Vector3 pos, bool isImmediate)
-    {
-        if (isImmediate)
-        {
-            player.transform.position = pos;
+    public void SetPositionData(Vector3 pos, bool isImmediate) {
+        if (isImmediate) {
+            _player.transform.position = pos;
         }
-        else
-        {
+        else {
             _targetPos = pos;
         }
     }

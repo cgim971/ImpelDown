@@ -240,7 +240,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &7419826489439202008
 Animator:
-  serializedVersion: 3
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -253,10 +253,11 @@ Animator:
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1 &4597748298725278908
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,7 +331,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0031276345, y: -0.08453131}
+  m_Offset: {x: -0.0031276345, y: -0.090958506}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -341,7 +342,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.51645863, y: 1.0650241}
+  m_Size: {x: 0.51645863, y: 0.8293589}
   m_EdgeRadius: 0
 --- !u!114 &8273053872434556294
 MonoBehaviour:

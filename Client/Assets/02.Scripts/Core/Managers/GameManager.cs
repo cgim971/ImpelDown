@@ -64,7 +64,6 @@ public class GameManager : MonoBehaviour {
 
         yield return null;
         // 플레이어에 카메라 달기
-        // GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>().m_Follow = this.transform;
         //
     }
 

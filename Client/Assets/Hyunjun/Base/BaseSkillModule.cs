@@ -25,7 +25,7 @@ public abstract class BaseSkillModule : MonoBehaviour
     //모든 스킬이 필요한 쿨타임
     protected IEnumerator CoolTime()
     {
-        yield return new WaitForSeconds(player._PlayerDataSO.activeCoolTime);
+        yield return new WaitForSeconds(player.PlayerDataSO.activeCoolTime);
         Skillable = true;
     }
 

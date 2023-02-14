@@ -11,7 +11,7 @@ public class PiratePlayer : Player
     public PirateInputModule InputModule => _inputModule as PirateInputModule;
     public PirateSkillModule SkillModule => _skillModule as PirateSkillModule;
     public PirateMoveModule MoveModule => _moveModule as PirateMoveModule;
-    public PirateDataSO PlayerDataSO => _PlayerDataSO as PirateDataSO;
+    public PirateDataSO PlayerDataSO => base.PlayerDataSO as PirateDataSO;
 
     protected override void Awake()
     {

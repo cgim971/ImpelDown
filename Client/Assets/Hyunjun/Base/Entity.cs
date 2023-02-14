@@ -7,8 +7,11 @@ using UnityEngine;
 /// </summary>
 public abstract class Entity : MonoBehaviour
 {
-    protected bool _isPlayer = false;
+    #region Property
     public bool IsPlayer => _isPlayer;
+    #endregion
+
+    protected bool _isPlayer = false;
 
 
     [SerializeField]

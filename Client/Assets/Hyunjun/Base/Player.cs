@@ -11,18 +11,18 @@ public abstract class Player : Entity
 {
     //모든 Base들을 여기서 관리 그래서 나중에 각각의 모듈들이 서로 연결할 때 플레이어만 거쳐가면 됨 그리고 각종 rigidbody도 여기서 관리
     protected BaseInputModule _inputModule;
-    public BaseInputModule _InputModule => _inputModule;
+    public BaseInputModule InputModule => _inputModule;
 
     protected BaseMoveModule _moveModule;
-    public BaseMoveModule _MoveModule => _moveModule;
+    public BaseMoveModule MoveModule => _moveModule;
 
     protected BaseSkillModule _skillModule;
-    public BaseSkillModule _SkillModule => _skillModule;
+    public BaseSkillModule SkillModule => _skillModule;
 
     protected BaseCatchModule _catchModule;
-    public BaseCatchModule _CatchModule => _catchModule;
+    public BaseCatchModule CatchModule => _catchModule;
 
-    public BasePlayerDataSO _PlayerDataSO => _entityDataSO as BasePlayerDataSO;
+    public BasePlayerDataSO PlayerDataSO => _entityDataSO as BasePlayerDataSO;
 
     protected Animator _animator;
     public Animator Animator => _animator;
@@ -36,7 +36,6 @@ public abstract class Player : Entity
     protected override void Awake()
     {
         base.Awake();
-        Init(true, 0);
         _rb = GetComponent<Rigidbody2D>();
         _inputModule = GetComponent<BaseInputModule>();
         _moveModule = GetComponent<BaseMoveModule>();
@@ -50,25 +49,19 @@ public abstract class Player : Entity
         _isPlayer = isPlayer;
         _playerId = playerId;
 
+        _moveModule.Init(this);
+
         if (_isPlayer == true)
         {
             //StartCoroutine(SendPositionAndRotation());
         }
     }
 
-    public void Start()
-    {
-        if (_isPlayer == true)
-        {
-            //_catchModule.SetTargetId(PlayerManager.Instance.GetTargetId(TailIndex));
-        }
-    }
-
-
     private void Update()
     {
         if (_isPlayer == true)
         {
+            InputModule.PlayerUpdate();
             // PlayAnimation();
         }
     }

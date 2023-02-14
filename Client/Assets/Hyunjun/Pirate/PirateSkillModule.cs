@@ -27,7 +27,7 @@ public class PirateSkillModule : BaseSkillModule
     protected override void Start()
     {
         base.Start();
-        player._InputModule.OnSkillEvent.AddListener(Skill);
+        player.InputModule.OnSkillEvent.AddListener(Skill);
         //각종 스킬을 위한 세팅
         line.positionCount = 2;
         line.endWidth = line.startWidth = 0.05f;

@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public class PirateMoveModule : BaseMoveModule
 {
-    protected override void Start()
+    public override void Init(Player player)
     {
-        base.Start();
+        base.Init(player);
     }
 }
