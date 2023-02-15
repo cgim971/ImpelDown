@@ -1,6 +1,7 @@
 import JobTimer from "../../JobTimer";
 import SocketSession from "../../PlayerData/SocketSession";
 import SessionManager from "../../SessionManager";
+import TailManager from "../../TailManager";
 import { impelDown } from "../../packet/packet";
 import RoomManager from "./RoomManager";
 
@@ -19,6 +20,8 @@ export default class Room {
 
     private _isGameing: boolean;
 
+    private TailManager: TailManager;
+
     constructor(hostSocket: SocketSession, roomIndex: number, maxPeople: number) {
         this._hostSocket = hostSocket;
 
@@ -30,6 +33,8 @@ export default class Room {
 
         this._isGameing = false;
 
+        this.TailManager = new TailManager(this);
+
         this.joinRoom();
     }
 
@@ -37,10 +42,12 @@ export default class Room {
         if (this._isGameing == true) return;
         this._isGameing = true;
 
+        this.TailManager.init();
+
         let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ roomInfo: this.getRoomPlayersInfo() })
         this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
 
-        this.gameTimer.startTimer();        
+        this.gameTimer.startTimer();
     }
 
     private gameTimer: JobTimer = new JobTimer(40, () => {
@@ -51,6 +58,20 @@ export default class Room {
         let data: impelDown.S_PlayerList = new impelDown.S_PlayerList({ playerInfos: list });
         this.broadCastMessage(data.serialize(), impelDown.MSGID.S_PLAYERLIST);
     });
+
+    catchPlayer(player: SocketSession, beCatchedPlayer: SocketSession) {
+        let playerTailIndex: number = player.getPlayerData().getTailIndex();
+        let targetTailIndex: number = playerTailIndex - 1 > -1 ? playerTailIndex - 1 : this._playerCount - 1;
+        let beCatchedPlayerTailIndex: number = beCatchedPlayer.getPlayerData().getTailIndex();
+
+        if (targetTailIndex == beCatchedPlayerTailIndex) {
+            console.log("Catch");
+        }
+        else {
+            console.log("False");
+        }
+    }
+
 
     diePlayer(player: SocketSession): void {
         for (let index in this._playerMap) {
@@ -142,6 +163,13 @@ export default class Room {
         this._mapIndex = mapIndex;
     }
 
+    getPlayerMap(): PlayerDictionary {
+        return this._playerMap;
+    }
+
+    getPlayerCount(): number {
+        return this._playerCount;
+    }
 
     getRoomInfo(): impelDown.RoomInfo {
         return new impelDown.RoomInfo({

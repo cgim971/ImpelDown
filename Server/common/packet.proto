@@ -51,6 +51,7 @@ message PlayerInfo {
     string playerName = 2;  
     int32 characterIndex = 3;
     PositionInfo positionInfo = 4;
+    int32 tailIndex = 5;
 }
 
 message Position {

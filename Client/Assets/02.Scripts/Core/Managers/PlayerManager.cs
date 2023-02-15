@@ -31,7 +31,7 @@ public class PlayerManager {
         foreach (PlayerInfo playerInfo in playerList) {
             BasePlayer newPlayer = GameObject.Instantiate(CharacterManager.Instance.PlayerCharacterPrefab(playerInfo.CharacterIndex));
             bool isPlayer = (playerInfo.PlayerId == GameManager.Instance.PlayerId) ? true : false;
-            newPlayer.Init(isPlayer, playerInfo.PlayerId);
+            newPlayer.Init(isPlayer, playerInfo.PlayerId, playerInfo.TailIndex);
             AddRemotePlayer(newPlayer);
         }
     }

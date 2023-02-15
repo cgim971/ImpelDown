@@ -18,6 +18,7 @@ public class BasePlayer : MonoBehaviour {
 
     public bool IsPlayer => _isPlayer;
     public int PlayerId => _playerId;
+    public int TailIndex => _tailIndex;
     #endregion
 
     protected BaseInputModule _baseInputModule;
@@ -31,8 +32,10 @@ public class BasePlayer : MonoBehaviour {
     private Transform _agentRendererTs;
 
 
-    private bool _isPlayer = false;
-    private int _playerId = -1;
+    protected bool _isPlayer = false;
+    protected int _playerId = -1;
+
+    protected int _tailIndex = -1;
 
 
     private float _width = 0;
@@ -43,9 +46,10 @@ public class BasePlayer : MonoBehaviour {
         _agentRendererTs = transform.Find("AgentRenderer");
     }
 
-    public virtual void Init(bool isPlayer, int playerId) {
+    public virtual void Init(bool isPlayer, int playerId, int tailIndex) {
         _isPlayer = isPlayer;
         _playerId = playerId;
+        _tailIndex = tailIndex;
 
         _rigidbody = GetComponent<Rigidbody2D>();
     }

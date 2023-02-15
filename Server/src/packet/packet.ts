@@ -45,6 +45,7 @@ export namespace impelDown {
             playerName?: string;
             characterIndex?: number;
             positionInfo?: PositionInfo;
+            tailIndex?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -60,6 +61,9 @@ export namespace impelDown {
                 }
                 if ("positionInfo" in data && data.positionInfo != undefined) {
                     this.positionInfo = data.positionInfo;
+                }
+                if ("tailIndex" in data && data.tailIndex != undefined) {
+                    this.tailIndex = data.tailIndex;
                 }
             }
         }
@@ -90,11 +94,18 @@ export namespace impelDown {
         get has_positionInfo() {
             return pb_1.Message.getField(this, 4) != null;
         }
+        get tailIndex() {
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
+        }
+        set tailIndex(value: number) {
+            pb_1.Message.setField(this, 5, value);
+        }
         static fromObject(data: {
             playerId?: number;
             playerName?: string;
             characterIndex?: number;
             positionInfo?: ReturnType<typeof PositionInfo.prototype.toObject>;
+            tailIndex?: number;
         }): PlayerInfo {
             const message = new PlayerInfo({});
             if (data.playerId != null) {
@@ -109,6 +120,9 @@ export namespace impelDown {
             if (data.positionInfo != null) {
                 message.positionInfo = PositionInfo.fromObject(data.positionInfo);
             }
+            if (data.tailIndex != null) {
+                message.tailIndex = data.tailIndex;
+            }
             return message;
         }
         toObject() {
@@ -117,6 +131,7 @@ export namespace impelDown {
                 playerName?: string;
                 characterIndex?: number;
                 positionInfo?: ReturnType<typeof PositionInfo.prototype.toObject>;
+                tailIndex?: number;
             } = {};
             if (this.playerId != null) {
                 data.playerId = this.playerId;
@@ -129,6 +144,9 @@ export namespace impelDown {
             }
             if (this.positionInfo != null) {
                 data.positionInfo = this.positionInfo.toObject();
+            }
+            if (this.tailIndex != null) {
+                data.tailIndex = this.tailIndex;
             }
             return data;
         }
@@ -144,6 +162,8 @@ export namespace impelDown {
                 writer.writeInt32(3, this.characterIndex);
             if (this.has_positionInfo)
                 writer.writeMessage(4, this.positionInfo, () => this.positionInfo.serialize(writer));
+            if (this.tailIndex != 0)
+                writer.writeInt32(5, this.tailIndex);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -164,6 +184,9 @@ export namespace impelDown {
                         break;
                     case 4:
                         reader.readMessage(message.positionInfo, () => message.positionInfo = PositionInfo.deserialize(reader));
+                        break;
+                    case 5:
+                        message.tailIndex = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }

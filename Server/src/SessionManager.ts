@@ -1,4 +1,3 @@
-import { impelDown } from "./packet/packet";
 import SocketSession from "./PlayerData/SocketSession";
 
 interface SessionDictionary {
