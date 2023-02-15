@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4133084385886336138}
   - component: {fileID: 5193824676804474631}
   - component: {fileID: 7573290776837635651}
-  - component: {fileID: 4313962021063205035}
   m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
@@ -143,18 +142,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0.04}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &4313962021063205035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2248346477860584434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1740277b875d47948863669ccae9861d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &4597748298234272902
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,11 +256,7 @@ GameObject:
   - component: {fileID: 4597748298725278907}
   - component: {fileID: 4597748298725278909}
   - component: {fileID: 4665719611387032456}
-  - component: {fileID: 8273053872434556294}
-  - component: {fileID: -2262819157002158850}
-  - component: {fileID: 58339640464712573}
-  - component: {fileID: 481641111798280900}
-  - component: {fileID: -8720341493267269157}
+  - component: {fileID: 4152200519119026491}
   m_Layer: 9
   m_Name: PiratePlayer
   m_TagString: Untagged
@@ -305,7 +288,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4597748298725278908}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -344,7 +327,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.51645863, y: 0.8293589}
   m_EdgeRadius: 0
---- !u!114 &8273053872434556294
+--- !u!114 &4152200519119026491
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -353,73 +336,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4597748298725278908}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3ebb3e739a60ae499e241f8d632cb77, type: 3}
+  m_Script: {fileID: 11500000, guid: fe005ecdf4fadf94787a57fba5f522b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _entityDataSO: {fileID: 11400000, guid: 0b3994f9db469294c9f5ce59702b1cfe, type: 2}
---- !u!114 &-2262819157002158850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4597748298725278908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f7490ddf8a38b34092c911bbd8b4bf9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnMoveEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnCatchEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  OnSkillEvent:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &58339640464712573
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4597748298725278908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4b0d2616d524974596b093a0a9c479a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &481641111798280900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4597748298725278908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2ee64e451c77e488027dd4dae2a3db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  catchActive: 1
---- !u!114 &-8720341493267269157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4597748298725278908}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a640ad4114de80f4e90032f30c798c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hook: {fileID: 4203963525575012151}
-  line: {fileID: 5140743126912766455}
-  isHookActive: 0
-  isLineMax: 0
-  isAttach: 0
+  _basePlayerDataSO: {fileID: 11400000, guid: 0956b5a629f666c49b785f578dc081fd, type: 2}
 --- !u!1 &9205853259578134726
 GameObject:
   m_ObjectHideFlags: 0

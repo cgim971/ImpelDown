@@ -16,9 +16,9 @@ public class CharacterManager : MonoBehaviour {
     #endregion
     private static CharacterManager _instance = null;
 
-    [SerializeField] private Player _piratePrefab;
+    [SerializeField] private BasePlayer _piratePrefab;
 
-    public Player PlayerCharacterPrefab(int characterIndex) {
+    public BasePlayer PlayerCharacterPrefab(int characterIndex) {
         switch (characterIndex) {
             case 0:
                 break;

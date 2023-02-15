@@ -23,6 +23,8 @@ enum MSGID
     C_GAME_START = 31;
     S_GAME_START = 32;
 
+    C_MOVE = 35;
+    S_PLAYERLIST = 36;
     
     
 
@@ -47,12 +49,17 @@ message PlayerInfo {
     int32 playerId = 1;
     string playerName = 2;  
     int32 characterIndex = 3;
-    Position position = 4;
+    PositionInfo positionInfo = 4;
 }
 
 message Position {
     float x = 1;
     float y = 2;
+}
+
+message PositionInfo {
+    Position position = 1;
+    float scaleX = 2;
 }
 
 message S_Init {
@@ -106,4 +113,13 @@ message C_Game_Start {
 
 message S_Game_Start {
     RoomInfo roomInfo = 1;
+}
+
+message C_Move {
+    int32 playerId = 1;
+    PositionInfo positionInfo = 2;
+}
+
+message S_PlayerList {
+    repeated PlayerInfo playerInfos = 1;
 }

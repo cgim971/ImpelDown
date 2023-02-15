@@ -1,3 +1,4 @@
+import JobTimer from "../../JobTimer";
 import SocketSession from "../../PlayerData/SocketSession";
 import SessionManager from "../../SessionManager";
 import { impelDown } from "../../packet/packet";
@@ -38,7 +39,18 @@ export default class Room {
 
         let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ roomInfo: this.getRoomPlayersInfo() })
         this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
+
+        this.gameTimer.startTimer();        
     }
+
+    private gameTimer: JobTimer = new JobTimer(40, () => {
+        let list: impelDown.PlayerInfo[] = [];
+        for (let index in this._playerMap) {
+            list.push(this._playerMap[index].getPlayerInfo());
+        }
+        let data: impelDown.S_PlayerList = new impelDown.S_PlayerList({ playerInfos: list });
+        this.broadCastMessage(data.serialize(), impelDown.MSGID.S_PLAYERLIST);
+    });
 
     diePlayer(player: SocketSession): void {
         for (let index in this._playerMap) {

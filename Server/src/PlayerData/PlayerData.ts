@@ -2,38 +2,38 @@ import { impelDown } from "../packet/packet";
 
 export default class PlayerData {
     private _playerId: number;
-    private _playerName : string;
+    private _playerName: string;
     private _characterIndex: number;
-    private _position: impelDown.Position;
+    private _positionInfo: impelDown.PositionInfo;
 
-    constructor(playerId: number, playerName:string) {
+    constructor(playerId: number, playerName: string) {
         this._playerId = playerId;
         this._playerName = playerName;
-        this._position = new impelDown.Position();
+        this._positionInfo = new impelDown.PositionInfo({position: new impelDown.Position({x:0, y:0}), scaleX : 1});
         this._characterIndex = -1;
     }
 
-    
-    getPlayerInfo(): impelDown.PlayerInfo{
+
+    getPlayerInfo(): impelDown.PlayerInfo {
         return new impelDown.PlayerInfo({
-            playerId : this._playerId,
+            playerId: this._playerId,
             playerName: this._playerName,
             characterIndex: this._characterIndex,
-            position : this._position
+            positionInfo: this._positionInfo
         });
     }
-    
-    
+
+
     getPlayerId(): number {
         return this._playerId;
     }
 
-    getPosition(): impelDown.Position {
-        return this._position;
+    getPositionInfo(): impelDown.PositionInfo {
+        return this._positionInfo;
     }
 
-    setPosition(position: impelDown.Position): void {
-        this._position = position;
+    setPositionInfo(positionInfo: impelDown.PositionInfo): void {
+        this._positionInfo = positionInfo;
     }
 
     getCharacterIndex(): number {

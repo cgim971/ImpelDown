@@ -19,19 +19,45 @@ public class PlayerManager {
     #endregion
     private static PlayerManager _instance = null;
 
-    private Dictionary<int, Player> _remotePlayerList;
+    private Dictionary<int, BasePlayer> _remotePlayerList;
 
     public PlayerManager() {
         // 새로운 게임 시작할 시 초기화
-        _remotePlayerList = new Dictionary<int, Player>();
+        _remotePlayerList = new Dictionary<int, BasePlayer>();
     }
 
     public void CreatePlayer(RepeatedField<PlayerInfo> playerList) {
 
         foreach (PlayerInfo playerInfo in playerList) {
-            Player newPlayer = GameObject.Instantiate(CharacterManager.Instance.PlayerCharacterPrefab(playerInfo.CharacterIndex));
-            bool isPlayer = playerInfo.PlayerId == GameManager.Instance.PlayerId ? true : false;
-            // newPlayer.Init(isPlayer, playerInfo.PlayerId);
+            BasePlayer newPlayer = GameObject.Instantiate(CharacterManager.Instance.PlayerCharacterPrefab(playerInfo.CharacterIndex));
+            bool isPlayer = (playerInfo.PlayerId == GameManager.Instance.PlayerId) ? true : false;
+            newPlayer.Init(isPlayer, playerInfo.PlayerId);
+            AddRemotePlayer(newPlayer);
+        }
+    }
+
+    public void AddRemotePlayer(BasePlayer player) {
+        Debug.Log(player.PlayerId);
+        _remotePlayerList.Add(player.PlayerId, player);
+    }
+
+    public void RemoteRemotePlayer(int playerId) {
+        BasePlayer player = null;
+        if (_remotePlayerList.TryGetValue(playerId, out player)) {
+            _remotePlayerList.Remove(playerId);
+            GameObject.Destroy(player.gameObject);
+        }
+    }
+
+    public void UpdateRemotePlayer(RepeatedField<PlayerInfo> playerInfos) {
+        Debug.Log(playerInfos.Count);
+        foreach (PlayerInfo playerInfo in playerInfos) {
+            PositionData positionData = Util.ChangePosition(playerInfo.PositionInfo);
+
+            BasePlayer player = null;
+            if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out player)) {
+                player.SetPositionInfo(positionData);
+            }
         }
     }
 }
