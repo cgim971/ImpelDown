@@ -8,4 +8,8 @@ public class PirateSkillModule : BaseSkillModule {
     public override void Init() {
         _player = GetComponent<PiratePlayer>();
     }
+
+    protected override void Skill() {
+
+    }
 }

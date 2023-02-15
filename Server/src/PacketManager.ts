@@ -7,6 +7,7 @@ import { impelDown } from "./packet/packet";
 import { PacketHandler } from "./packet/PacketHandler";
 import CGameStartHandler from "./packet/CGameStartHandler";
 import CMoveHandler from "./packet/CMoveHandler";
+import CCatchHandler from "./packet/CCatchHandler";
 
 interface HandlerDictionary {
     [key: number]: PacketHandler;
@@ -37,5 +38,6 @@ export default class PacketManager {
 
         this._handlerMap[impelDown.MSGID.C_GAME_START] = new CGameStartHandler();
         this._handlerMap[impelDown.MSGID.C_MOVE] = new CMoveHandler();
+        this._handlerMap[impelDown.MSGID.C_CATCH] = new CCatchHandler();
     }
 }

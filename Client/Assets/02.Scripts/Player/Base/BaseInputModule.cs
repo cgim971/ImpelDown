@@ -17,7 +17,7 @@ public abstract class BaseInputModule : MonoBehaviour {
     }
 
     public void InputCatch() {
-
+        _player.CatchModule.Catch();
     }
 
     public void InputSkill() {

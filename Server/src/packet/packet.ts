@@ -22,6 +22,7 @@ export namespace impelDown {
         S_GAME_START = 32,
         C_MOVE = 35,
         S_PLAYERLIST = 36,
+        C_CATCH = 37,
         C_MAGICIAN_SKILL = 60,
         S_MAGICIAN_SKILL = 61,
         C_ROBOT_SKILL = 62,
@@ -1584,6 +1585,96 @@ export namespace impelDown {
         }
         static deserializeBinary(bytes: Uint8Array): S_PlayerList {
             return S_PlayerList.deserialize(bytes);
+        }
+    }
+    export class C_Catch extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+            beCatchedPlayerId?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("beCatchedPlayerId" in data && data.beCatchedPlayerId != undefined) {
+                    this.beCatchedPlayerId = data.beCatchedPlayerId;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get beCatchedPlayerId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set beCatchedPlayerId(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+            beCatchedPlayerId?: number;
+        }): C_Catch {
+            const message = new C_Catch({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.beCatchedPlayerId != null) {
+                message.beCatchedPlayerId = data.beCatchedPlayerId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+                beCatchedPlayerId?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.beCatchedPlayerId != null) {
+                data.beCatchedPlayerId = this.beCatchedPlayerId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.beCatchedPlayerId != 0)
+                writer.writeInt32(2, this.beCatchedPlayerId);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Catch {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Catch();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.beCatchedPlayerId = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Catch {
+            return C_Catch.deserialize(bytes);
         }
     }
 }

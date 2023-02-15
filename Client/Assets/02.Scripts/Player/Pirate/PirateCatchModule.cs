@@ -7,5 +7,6 @@ public class PirateCatchModule : BaseCatchModule {
 
     public override void Init() {
         _player = GetComponent<PiratePlayer>();
+        base.Init();
     }
 }
