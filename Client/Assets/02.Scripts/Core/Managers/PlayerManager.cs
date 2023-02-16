@@ -41,7 +41,7 @@ public class PlayerManager {
         _remotePlayerList.Add(player.PlayerId, player);
     }
 
-    public void RemoteRemotePlayer(int playerId) {
+    public void RemoveRemotePlayer(int playerId) {
         BasePlayer player = null;
         if (_remotePlayerList.TryGetValue(playerId, out player)) {
             _remotePlayerList.Remove(playerId);

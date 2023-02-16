@@ -26,6 +26,8 @@ enum MSGID
     C_MOVE = 35;
     S_PLAYERLIST = 36;
     C_CATCH = 37;
+
+    S_CATCHED = 40;
     
     
 
@@ -129,4 +131,8 @@ message S_PlayerList {
 message C_Catch {
     int32 playerId = 1;
     int32 beCatchedPlayerId = 2;
+}
+
+message S_Catched {
+    int32 playerId = 1;   
 }
