@@ -44,6 +44,7 @@ export default class TailManager {
         }
     }
 
-    refresh() : void{
+    // 잡거나 잡히면 리스트 갱신
+    refreshList() : void{
     }
 }
