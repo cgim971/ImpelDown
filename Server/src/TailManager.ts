@@ -43,4 +43,7 @@ export default class TailManager {
             }
         }
     }
+
+    refresh() : void{
+    }
 }
