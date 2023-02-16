@@ -1,11 +1,12 @@
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : MonoBehaviour
+{
 
-<<<<<<< Updated upstream
-=======
     public bool IsPlayer => _isPlayer;
     private bool _isPlayer = false;
 
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour {
     public int TailIndex => _tailIndex;
     private int _tailIndex = 0;
 
-    private void Awake() {
-        Init(true, 0, 0);
+    private void Awake()
+    {
         _rigidbody = GetComponent<Rigidbody2D>();
         _playerMove = gameObject.AddComponent<PlayerMove>();
         _playerCatch = gameObject.AddComponent<PlayerCatch>();
@@ -36,51 +37,63 @@ public class PlayerController : MonoBehaviour {
         _playerCatch.Init(this);
     }
 
-    public void Init(bool isPlayer, int playerId, int tailIndex) {
+    public void Init(bool isPlayer, int playerId, int tailIndex)
+    {
         _isPlayer = isPlayer;
         _playerId = playerId;
         _tailIndex = tailIndex;
 
-        if (_isPlayer == true) {
+        if (_isPlayer == true)
+        {
             StartCoroutine(SendPositionAndRotation());
         }
     }
 
-    public void Start() {
-        if(_isPlayer == true) {
+    public void Start()
+    {
+        if (_isPlayer == true)
+        {
             _playerCatch.SetTargetId(PlayerManager.Instance.GetTargetId(TailIndex));
         }
     }
 
 
-    private void Update() {
-        if (_isPlayer == true) {
+    private void Update()
+    {
+        if (_isPlayer == true)
+        {
             PlayAnimation();
             _playerMove.CheckInput();
             _playerCatch.CheckInput();
         }
     }
 
-    public void PlayAnimation() {
+    public void PlayAnimation()
+    {
 
     }
 
-    public void SetAnimation() {
+    public void SetAnimation()
+    {
 
     }
 
-    public void SetPositionData(PositionData positionData, bool isImmediate = false) {
+    public void SetPositionData(PositionData positionData, bool isImmediate = false)
+    {
         _playerMove.SetPositionData(positionData.pos, isImmediate);
     }
 
-    public void SetTailColor(int tailNo) {
+    public void SetTailColor(int tailNo)
+    {
         //_tailController.SetTail(tailNo);
     }
 
-    private IEnumerator SendPositionAndRotation() {
+    private IEnumerator SendPositionAndRotation()
+    {
         PosAndRot posAndRot = new PosAndRot();
 
-        while (gameObject.activeSelf) {
+        while (gameObject.activeSelf)
+        {
             yield return new WaitForSeconds(0.04f);
 
             Vector2 pos = transform.position;
@@ -95,5 +108,4 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
->>>>>>> Stashed changes
 }

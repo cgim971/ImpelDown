@@ -37,6 +37,7 @@ public class NinjaSkillModule : BaseSkillModule
         _skillable = false;
         mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         isDashing = true;
+        StartCoroutine(CoolTime());
         Debug.Log(mouseDir);
     }
 }

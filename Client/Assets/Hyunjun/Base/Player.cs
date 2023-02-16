@@ -94,7 +94,7 @@ public abstract class Player : Entity
         //_tailController.SetTail(tailNo);
     }
 
-    private IEnumerator SendPositionAndRotation()
+    protected IEnumerator SendPositionAndRotation()
     {
         PosAndRot posAndRot = new PosAndRot();
 
