@@ -8,9 +8,16 @@ public class Define {
         switch (mapIndex) {
             case 0:
                 return "Forest";
-            default:
-                return "";
+            case 1:
+                return "Laboratory";
+            case 2:
+                return "MoonBase";
+            case 3:
+                return "City";
+            case 4:
+                return "Ocean";
         }
+        return "";
     }
 
 }

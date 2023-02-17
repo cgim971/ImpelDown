@@ -12,8 +12,8 @@ public class PiratePlayer : BasePlayer {
     public PirateSkillModule PirateSkillModule => _baseSkillModule as PirateSkillModule;
     #endregion
 
-    public override void Init(bool isPlayer, int playerId, int tailIndex) {
-        base.Init(isPlayer, playerId, tailIndex);
+    public override void Init(bool isPlayer, int playerId, int tailIndex, int targetTailIndex) {
+        base.Init(isPlayer, playerId, tailIndex, targetTailIndex);
 
         AddComponents();
 

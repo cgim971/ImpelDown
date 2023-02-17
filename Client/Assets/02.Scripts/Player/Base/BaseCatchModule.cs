@@ -48,7 +48,7 @@ public abstract class BaseCatchModule : MonoBehaviour {
     }
 
     private IEnumerator CatchTime() {
-        yield return new WaitForSeconds(0.05f);
+        yield return null;
         _isCatchable = false;
     }
 }

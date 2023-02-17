@@ -48,7 +48,6 @@ public class GameManager : MonoBehaviour {
 
     public void GameStart(RoomInfo roomInfo) {
         StartCoroutine(GmaeStarting(roomInfo));
-       
     }
 
     public IEnumerator GmaeStarting(RoomInfo roomInfo) {
@@ -61,11 +60,10 @@ public class GameManager : MonoBehaviour {
         // 플레이어 생성
         PlayerManager.Instance = new PlayerManager();
         PlayerManager.Instance.CreatePlayer(roomInfo.PlayerInfos);
-
-        yield return null;
-        // 플레이어에 카메라 달기
-        //
     }
 
-
+    private void OnApplicationQuit() {
+        C_Quit cQuit = new C_Quit { PlayerId = PlayerId };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CQuit, cQuit);
+    }
 }

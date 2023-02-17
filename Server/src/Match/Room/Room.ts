@@ -1,9 +1,10 @@
 import JobTimer from "../../JobTimer";
 import SocketSession from "../../PlayerData/SocketSession";
 import SessionManager from "../../SessionManager";
-import TailManager from "../../TailManager";
+import TailManager from "../TailManager";
 import { impelDown } from "../../packet/packet";
 import RoomManager from "./RoomManager";
+import MapManager from "../MapManager";
 
 interface PlayerDictionary {
     [key: number]: SocketSession;
@@ -12,20 +13,24 @@ interface PlayerDictionary {
 export default class Room {
     private _hostSocket: SocketSession;
 
-    private _playerMap: PlayerDictionary = {};
-    private _playerCount: number;
-    private _roomIndex: number;
-    private _maxPeople: number;
-    private _mapIndex: number;
+    private _playerMap: PlayerDictionary = {}; // 아직 안 죽은 플레이어
+    private _ghostPlayerMap: PlayerDictionary = {}; // 잡힌 플레이어
+    private _playerCount: number; // 현재 플레이어 수
+    private _roomIndex: number; // 방 번호
+    private _maxPeople: number; // 최대 인원
+    private _mapIndex: number; // 맵의 번호
 
-    private _isGameing: boolean;
+    private _isGameing: boolean; // 게임중인지
 
-    private TailManager: TailManager;
+    private _tailManager: TailManager;
+    private _mapManager: MapManager;
 
     constructor(hostSocket: SocketSession, roomIndex: number, maxPeople: number) {
         this._hostSocket = hostSocket;
 
         this._playerMap = [];
+        this._ghostPlayerMap = [];
+
         this._playerCount = 0;
         this._roomIndex = roomIndex;
         this._maxPeople = maxPeople;
@@ -33,7 +38,8 @@ export default class Room {
 
         this._isGameing = false;
 
-        this.TailManager = new TailManager(this);
+        this._tailManager = new TailManager(this);
+        this._mapManager = new MapManager(this);
 
         this.joinRoom();
     }
@@ -42,7 +48,10 @@ export default class Room {
         if (this._isGameing == true) return;
         this._isGameing = true;
 
-        this.TailManager.init();
+        this._tailManager.init();
+        this._mapManager.init();
+
+
 
         let sGameStart: impelDown.S_Game_Start = new impelDown.S_Game_Start({ roomInfo: this.getRoomPlayersInfo() })
         this.broadCastMessage(sGameStart.serialize(), impelDown.MSGID.S_GAME_START);
@@ -60,12 +69,20 @@ export default class Room {
     });
 
     catchPlayer(player: SocketSession, beCatchedPlayer: SocketSession) {
-        let playerTailIndex: number = player.getPlayerData().getTailIndex();
-        let targetTailIndex: number = playerTailIndex - 1 > -1 ? playerTailIndex - 1 : this._playerCount - 1;
+        let playerTargetTailIndex: number = player.getPlayerData().getTargetTailIndex();
         let beCatchedPlayerTailIndex: number = beCatchedPlayer.getPlayerData().getTailIndex();
 
-        if (targetTailIndex == beCatchedPlayerTailIndex) {
+        if (playerTargetTailIndex == beCatchedPlayerTailIndex) {
             console.log("Catch");
+
+            // 꼬리 갱신
+            this._tailManager.refreshTargetTail(player, beCatchedPlayer.getPlayerData().getTargetTailIndex());
+
+            let sCatching: impelDown.S_Catching = new impelDown.S_Catching({ playerInfo: player.getPlayerInfo() })
+            this.broadCastMessage(sCatching.serialize(), impelDown.MSGID.S_CATCHING);
+
+            let sCatched: impelDown.S_Catched = new impelDown.S_Catched({ playerId: beCatchedPlayer.getPlayerData().getPlayerId() });
+            this.broadCastMessage(sCatched.serialize(), impelDown.MSGID.S_CATCHED);
         }
         else {
             console.log("False");
@@ -74,13 +91,13 @@ export default class Room {
 
 
     diePlayer(player: SocketSession): void {
-        for (let index in this._playerMap) {
-            if (this._playerMap[index] == player) {
-                delete this._playerMap[index];
-                this._playerCount -= 1;
-                return;
-            }
-        }
+        // for (let index in this._playerMap) {
+        //     if (this._playerMap[index] == player) {
+        //         delete this._playerMap[index];
+        //         this._playerCount -= 1;
+        //         return;
+        //     }
+        // }
     }
 
     endGame(): void {
@@ -106,6 +123,34 @@ export default class Room {
         this.sRefreshRoom();
         return;
     }
+
+    // 게임 강제 종료 시
+    gameQuitRoom(player: SocketSession) {
+        if (this._playerCount > 1) {
+            // 플레이어가 2명
+            if (this._hostSocket == player) {
+                // 호스트 변경
+                for (let index in this._playerMap) {
+                    if (this._playerMap[index] != player) {
+                        this._hostSocket = this._playerMap[index];
+                        break;
+                    }
+                }
+            }
+        }
+
+        for (let index in this._playerMap) {
+            if (this._playerMap[index] == player) {
+                delete this._playerMap[index];
+                this._playerCount -= 1;
+
+                let sQuit: impelDown.S_Quit = new impelDown.S_Quit({ playerId: player.getPlayerData().getPlayerId() });
+                this.broadCastMessage(sQuit.serialize(), impelDown.MSGID.S_QUIT);
+                break;
+            }
+        }
+    }
+
 
     // 게임 시작 전에 나가기
     exitRoom(player: SocketSession): void {
@@ -162,6 +207,10 @@ export default class Room {
     setMapIndex(mapIndex: number): void {
         this._mapIndex = mapIndex;
     }
+    getMapIndex(): number {
+        return this._mapIndex;
+    }
+
 
     getPlayerMap(): PlayerDictionary {
         return this._playerMap;

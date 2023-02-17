@@ -20,31 +20,41 @@ enum MSGID
     C_REFRESH_ROOM = 29;
     S_REFRESH_ROOM = 30;
 
-    C_GAME_START = 31;
-    S_GAME_START = 32;
+    
 
-    C_MOVE = 35;
-    S_PLAYERLIST = 36;
-    C_CATCH = 37;
+    C_GAME_START = 51;
+    S_GAME_START = 52;
 
-    S_CATCHED = 40;
+    C_MOVE = 55;
+    S_PLAYERLIST = 56;
+    C_CATCH = 57;
+    
+    S_CATCHING = 60;
+    S_CATCHED = 61;
+
+    
+    C_QUIT  = 70;
+    S_QUIT = 71;
+
+    C_GAMEEXIT = 80
+    S_GAMEEXIT = 81;
     
     
 
-    C_MAGICIAN_SKILL = 60;
-    S_MAGICIAN_SKILL = 61;
-    C_ROBOT_SKILL = 62;
-    S_ROBOT_SKILL = 63;
-    C_HUNTER_SKILL = 64;
-    S_HUNTER_SKILL = 65;
-    C_NINJA_SKILL = 66;
-    S_NINJA_SKILL = 67;
-    C_PIRATE_SKILL = 68;
-    S_PIRATE_SKILL = 69;
-    C_RACCOON_SKILL = 70;
-    S_RACCOON_SKILL = 71;
-    C_WEREWOLF = 72;
-    S_WEREWOLF = 73;
+    C_MAGICIAN_SKILL = 100;
+    S_MAGICIAN_SKILL = 101;
+    C_ROBOT_SKILL = 102;
+    S_ROBOT_SKILL = 103;
+    C_HUNTER_SKILL = 104;
+    S_HUNTER_SKILL = 105;
+    C_NINJA_SKILL = 106;
+    S_NINJA_SKILL = 107;
+    C_PIRATE_SKILL = 108;
+    S_PIRATE_SKILL = 109;
+    C_RACCOON_SKILL = 110;
+    S_RACCOON_SKILL = 111;
+    C_WEREWOLF = 112;
+    S_WEREWOLF = 113;
 
 }
 
@@ -54,6 +64,7 @@ message PlayerInfo {
     int32 characterIndex = 3;
     PositionInfo positionInfo = 4;
     int32 tailIndex = 5;
+    int32 targetTailIndex = 6;
 }
 
 message Position {
@@ -133,6 +144,25 @@ message C_Catch {
     int32 beCatchedPlayerId = 2;
 }
 
+message S_Catching {
+    PlayerInfo playerInfo = 1;
+}
 message S_Catched {
     int32 playerId = 1;   
+}
+
+message C_Quit {
+    int32 playerId = 1;
+}
+
+message S_Quit {
+    int32 playerId = 1;
+}
+
+
+message C_GameExit {
+
+}
+message S_GameExit {
+    int32 playerId = 1;
 }

@@ -31,7 +31,10 @@ public class PlayerManager {
         foreach (PlayerInfo playerInfo in playerList) {
             BasePlayer newPlayer = GameObject.Instantiate(CharacterManager.Instance.PlayerCharacterPrefab(playerInfo.CharacterIndex));
             bool isPlayer = (playerInfo.PlayerId == GameManager.Instance.PlayerId) ? true : false;
-            newPlayer.Init(isPlayer, playerInfo.PlayerId, playerInfo.TailIndex);
+            newPlayer.Init(isPlayer, playerInfo.PlayerId, playerInfo.TailIndex, playerInfo.TargetTailIndex);
+            PositionData positionData = Util.ChangePosition(playerInfo.PositionInfo);
+            newPlayer.SetPositionInfo(positionData, true);
+
             AddRemotePlayer(newPlayer);
         }
     }
@@ -50,7 +53,6 @@ public class PlayerManager {
     }
 
     public void UpdateRemotePlayer(RepeatedField<PlayerInfo> playerInfos) {
-        Debug.Log(playerInfos.Count);
         foreach (PlayerInfo playerInfo in playerInfos) {
             PositionData positionData = Util.ChangePosition(playerInfo.PositionInfo);
 
@@ -58,6 +60,12 @@ public class PlayerManager {
             if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out player)) {
                 player.SetPositionInfo(positionData);
             }
+        }
+    }
+
+    public void UpdatePlayerTargetTailIndex(PlayerInfo playerInfo) {
+        if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out BasePlayer player)) {
+            player.SetTargetTailIndex(playerInfo.TargetTailIndex);
         }
     }
 }

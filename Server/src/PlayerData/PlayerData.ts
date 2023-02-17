@@ -6,6 +6,7 @@ export default class PlayerData {
     private _characterIndex: number;
     private _positionInfo: impelDown.PositionInfo;
     private _tailIndex: number;
+    private _targetTailIndex: number;
 
     constructor(playerId: number, playerName: string) {
         this._playerId = playerId;
@@ -13,6 +14,7 @@ export default class PlayerData {
         this._positionInfo = new impelDown.PositionInfo({ position: new impelDown.Position({ x: 0, y: 0 }), scaleX: 1 });
         this._characterIndex = -1;
         this._tailIndex = -1;
+        this._targetTailIndex = -1;
     }
 
 
@@ -22,7 +24,8 @@ export default class PlayerData {
             playerName: this._playerName,
             characterIndex: this._characterIndex,
             positionInfo: this._positionInfo,
-            tailIndex: this._tailIndex
+            tailIndex: this._tailIndex,
+            targetTailIndex: this._targetTailIndex
         });
     }
 
@@ -39,6 +42,10 @@ export default class PlayerData {
         this._positionInfo = positionInfo;
     }
 
+    setPosition(position: impelDown.Position) {
+        this._positionInfo.position = position;
+    }
+
     getCharacterIndex(): number {
         return this._characterIndex;
     }
@@ -53,5 +60,13 @@ export default class PlayerData {
 
     setTailIndex(tailIndex: number) {
         this._tailIndex = tailIndex;
+    }
+
+    getTargetTailIndex(): number {
+        return this._targetTailIndex;
+    }
+
+    setTargetTailIndex(targetTailIndex: number) {
+        this._targetTailIndex = targetTailIndex;
     }
 }

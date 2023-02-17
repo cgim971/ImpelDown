@@ -7,6 +7,7 @@ import SessionManager from './SessionManager';
 import SocketSession from './PlayerData/SocketSession';
 import RoomManager from './Match/Room/RoomManager';
 import MatchManager from './Match/MatchManager';
+import MapDataManager from './MapDataManager';
 
 const App: Application = Express();
 
@@ -24,6 +25,7 @@ PacketManager.Instance = new PacketManager();
 SessionManager.Instance = new SessionManager();
 MatchManager.Instance = new MatchManager();
 RoomManager.Instance = new RoomManager();   
+MapDataManager.Instance = new MapDataManager();
 
 let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {

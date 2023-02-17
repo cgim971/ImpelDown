@@ -1,5 +1,5 @@
-import Room from "./Match/Room/Room";
-import SocketSession from "./PlayerData/SocketSession";
+import Room from "./Room/Room";
+import SocketSession from "../PlayerData/SocketSession";
 
 interface PlayerDictionary {
     [key: number]: SocketSession;
@@ -24,27 +24,29 @@ export default class TailManager {
         for (let i = 0; i < playerCount; i++) {
             list[i] = i;
         }
-        let count: number = Math.floor(Math.random() * 200);
-
+        let count: number = Math.floor(Math.random() * 2000);
+        
+        // 꼬리 섞기
         while (count--) {
             let temp1: number = Math.floor(Math.random() * playerCount);
             let temp2: number = Math.floor(Math.random() * playerCount);
-            let temp: number = list[temp1];
 
+            let temp: number = list[temp1];
             list[temp1] = list[temp2];
             list[temp2] = temp;
         }
 
-        // 꼬리 섞기
         let tailCount = 0;
-        for(let index in this._playerMap){
-            if(this._playerMap[index] != null){
-                this._playerMap[index].getPlayerData().setTailIndex(list[tailCount++]);
+        for (let index in this._playerMap) {
+            if (this._playerMap[index] != null) {
+                this._playerMap[index].getPlayerData().setTailIndex(list[tailCount]);
+                this._playerMap[index].getPlayerData().setTargetTailIndex(list[tailCount] == 0 ? playerCount - 1 : list[tailCount] - 1);
+                tailCount++;
             }
         }
     }
 
-    // 잡거나 잡히면 리스트 갱신
-    refreshList() : void{
+    refreshTargetTail(player: SocketSession, tailIndex: number): void {
+        player.getPlayerData().setTargetTailIndex(tailIndex);
     }
 }

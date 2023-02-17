@@ -8,6 +8,7 @@ public class SCatchedHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Catched msg = packet as S_Catched;
 
-        PlayerManager.Instance.RemoveRemotePlayer(msg.PlayerId);
+        // 30초 시간 필요
+        // PlayerManager.Instance.RemoveRemotePlayer(msg.PlayerId);
     }
-}  
+}

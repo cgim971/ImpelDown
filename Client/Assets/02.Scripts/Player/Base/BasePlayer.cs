@@ -1,3 +1,4 @@
+using Cinemachine;
 using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ public class BasePlayer : MonoBehaviour {
     public bool IsPlayer => _isPlayer;
     public int PlayerId => _playerId;
     public int TailIndex => _tailIndex;
+    public int TargetTailIndex => _targetTailIndex;
     #endregion
 
     protected BaseInputModule _baseInputModule;
@@ -36,6 +38,7 @@ public class BasePlayer : MonoBehaviour {
     protected int _playerId = -1;
 
     protected int _tailIndex = -1;
+    protected int _targetTailIndex = -1;
 
 
     private float _width = 0;
@@ -46,12 +49,20 @@ public class BasePlayer : MonoBehaviour {
         _agentRendererTs = transform.Find("AgentRenderer");
     }
 
-    public virtual void Init(bool isPlayer, int playerId, int tailIndex) {
+    public virtual void Init(bool isPlayer, int playerId, int tailIndex, int targetTailIndex) {
         _isPlayer = isPlayer;
         _playerId = playerId;
         _tailIndex = tailIndex;
+        _targetTailIndex = targetTailIndex;
 
         _rigidbody = GetComponent<Rigidbody2D>();
+
+        if (isPlayer) {
+            CinemachineVirtualCamera vCam = GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>();
+            if (vCam != null) {
+                vCam.m_Follow = this.transform;
+            }
+        }
     }
 
     protected void InitComponent() {
@@ -91,6 +102,10 @@ public class BasePlayer : MonoBehaviour {
     public void SetPositionInfo(PositionData positionData, bool isImmediate = false) {
         _baseMoveModule.SetPositionData(positionData.pos, isImmediate);
         _agentRendererTs.localScale = new Vector3(positionData.scaleX, 1, 1);
+    }
+
+    public void SetTargetTailIndex(int targetTailIndex) {
+        _targetTailIndex = targetTailIndex;
     }
 
     protected virtual IEnumerator SendPosition() {
