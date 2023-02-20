@@ -1,28 +1,27 @@
-import { impelDown } from "./packet/packet";
-import SocketSession from "./SocketSession";
+import SocketSession from "./PlayerData/SocketSession";
 
-export interface SessionDictionary {
+interface SessionDictionary {
     [key: number]: SocketSession;
 }
 
 export default class SessionManager {
     static Instance: SessionManager;
     private _sessionMap: SessionDictionary = {};
-    private _count: number = 0;
+    private _socketSessionCount: number = 0;
 
     constructor() {
         this._sessionMap = {};
-        this._count = 0;
+        this._socketSessionCount = 0;
     }
 
     addSession(session: SocketSession, id: number): void {
         this._sessionMap[id] = session;
-        this._count += 1;
+        this._socketSessionCount += 1;
     }
 
     removeSession(id: number) {
         delete this._sessionMap[id];
-        this._count -= 1;
+        this._socketSessionCount -= 1;
     }
 
     getSession(id: number): SocketSession {
@@ -31,22 +30,17 @@ export default class SessionManager {
 
     broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
         for (let index in this._sessionMap) {
-            if (exceptSender == true && senderId == this._sessionMap[index].getPlayerId()) continue;
-            
+            if (exceptSender == true && senderId == this._sessionMap[index].getPlayerData().getPlayerId()) continue;
+
             this._sessionMap[index].SendData(payload, msgCode);
         }
     }
 
-    // 방에 안 들어가있다면
-    broadCastMessageNoRoom(payload: Uint8Array, msgCode: number) {
-        for (let index in this._sessionMap) {
-            if (this._sessionMap[index].getRoom() == true) continue;
-            
-            this._sessionMap[index].SendData(payload, msgCode);
-        }
+    getSessionMap(): SessionDictionary {
+        return this._sessionMap;
     }
 
-    getCount(): number {
-        return this._count;
+    getSocketSessionCount(): number {
+        return this._socketSessionCount;
     }
 }

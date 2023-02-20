@@ -6,13 +6,7 @@ using UnityEngine;
 
 public class SRefreshRoomListHandler : IPacketHandler {
     public void Process(IMessage packet) {
-        S_Refresh_Room_List msg = packet as S_Refresh_Room_List;
-
-        List<RoomData> roomInfoList = new List<RoomData>();
-        foreach (RoomData roomInfo in msg.RoomInfos) {
-            roomInfoList.Add(roomInfo);
-        }
-
-        RoomListManager.Instance.RefreshRoomList(roomInfoList);
+        S_Refresh_RoomList msg = packet as S_Refresh_RoomList;
+        MatchManager.Instance.RefreshRoomList(msg.RoomInfos);
     }
 }

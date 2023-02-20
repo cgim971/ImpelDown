@@ -7,123 +7,45 @@ import * as pb_1 from "google-protobuf";
 export namespace impelDown {
     export enum MSGID {
         S_INIT = 0,
-        C_ENTER = 1,
-        S_ENTER = 2,
-        C_CREATE_ROOM = 20,
-        C_JOIN_ROOM = 21,
-        C_EXIT_ROOM = 22,
-        C_REFRESH_ROOM = 23,
-        S_JOIN_ROOM = 25,
+        C_MATCH_MAKING = 20,
+        C_CREATE_ROOM = 21,
+        S_CREATE_ROOM = 22,
+        C_JOIN_ROOM = 23,
+        S_JOIN_ROOM = 24,
+        C_EXIT_ROOM = 25,
         S_EXIT_ROOM = 26,
-        S_REFRESH_ROOM_LIST = 27,
-        C_GAME_START = 40,
-        S_GAME_START = 41,
-        S_PLAYER_LIST = 42,
-        C_MOVE = 43,
-        C_CATCH = 44
+        C_REFRESH_ROOMLIST = 27,
+        S_REFRESH_ROOMLIST = 28,
+        C_REFRESH_ROOM = 29,
+        S_REFRESH_ROOM = 30,
+        C_GAME_START = 31,
+        S_GAME_START = 32,
+        C_MOVE = 35,
+        S_PLAYERLIST = 36,
+        C_CATCH = 37,
+        S_CATCHED = 40,
+        C_MAGICIAN_SKILL = 60,
+        S_MAGICIAN_SKILL = 61,
+        C_ROBOT_SKILL = 62,
+        S_ROBOT_SKILL = 63,
+        C_HUNTER_SKILL = 64,
+        S_HUNTER_SKILL = 65,
+        C_NINJA_SKILL = 66,
+        S_NINJA_SKILL = 67,
+        C_PIRATE_SKILL = 68,
+        S_PIRATE_SKILL = 69,
+        C_RACCOON_SKILL = 70,
+        S_RACCOON_SKILL = 71,
+        C_WEREWOLF = 72,
+        S_WEREWOLF = 73
     }
-    export class PlayerAllData extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            playerData?: PlayerData;
-            posAndRot?: PosAndRot;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerData" in data && data.playerData != undefined) {
-                    this.playerData = data.playerData;
-                }
-                if ("posAndRot" in data && data.posAndRot != undefined) {
-                    this.posAndRot = data.posAndRot;
-                }
-            }
-        }
-        get playerData() {
-            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
-        }
-        set playerData(value: PlayerData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_playerData() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        get posAndRot() {
-            return pb_1.Message.getWrapperField(this, PosAndRot, 2) as PosAndRot;
-        }
-        set posAndRot(value: PosAndRot) {
-            pb_1.Message.setWrapperField(this, 2, value);
-        }
-        get has_posAndRot() {
-            return pb_1.Message.getField(this, 2) != null;
-        }
-        static fromObject(data: {
-            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-            posAndRot?: ReturnType<typeof PosAndRot.prototype.toObject>;
-        }): PlayerAllData {
-            const message = new PlayerAllData({});
-            if (data.playerData != null) {
-                message.playerData = PlayerData.fromObject(data.playerData);
-            }
-            if (data.posAndRot != null) {
-                message.posAndRot = PosAndRot.fromObject(data.posAndRot);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-                posAndRot?: ReturnType<typeof PosAndRot.prototype.toObject>;
-            } = {};
-            if (this.playerData != null) {
-                data.playerData = this.playerData.toObject();
-            }
-            if (this.posAndRot != null) {
-                data.posAndRot = this.posAndRot.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerData)
-                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
-            if (this.has_posAndRot)
-                writer.writeMessage(2, this.posAndRot, () => this.posAndRot.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerAllData {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerAllData();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
-                        break;
-                    case 2:
-                        reader.readMessage(message.posAndRot, () => message.posAndRot = PosAndRot.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): PlayerAllData {
-            return PlayerAllData.deserialize(bytes);
-        }
-    }
-    export class PlayerData extends pb_1.Message {
+    export class PlayerInfo extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             playerId?: number;
-            roomIndex?: number;
-            playerCharacterIndex?: number;
+            playerName?: string;
+            characterIndex?: number;
+            positionInfo?: PositionInfo;
             tailIndex?: number;
         }) {
             super();
@@ -132,11 +54,14 @@ export namespace impelDown {
                 if ("playerId" in data && data.playerId != undefined) {
                     this.playerId = data.playerId;
                 }
-                if ("roomIndex" in data && data.roomIndex != undefined) {
-                    this.roomIndex = data.roomIndex;
+                if ("playerName" in data && data.playerName != undefined) {
+                    this.playerName = data.playerName;
                 }
-                if ("playerCharacterIndex" in data && data.playerCharacterIndex != undefined) {
-                    this.playerCharacterIndex = data.playerCharacterIndex;
+                if ("characterIndex" in data && data.characterIndex != undefined) {
+                    this.characterIndex = data.characterIndex;
+                }
+                if ("positionInfo" in data && data.positionInfo != undefined) {
+                    this.positionInfo = data.positionInfo;
                 }
                 if ("tailIndex" in data && data.tailIndex != undefined) {
                     this.tailIndex = data.tailIndex;
@@ -149,39 +74,52 @@ export namespace impelDown {
         set playerId(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
-        get roomIndex() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        get playerName() {
+            return pb_1.Message.getFieldWithDefault(this, 2, "") as string;
         }
-        set roomIndex(value: number) {
+        set playerName(value: string) {
             pb_1.Message.setField(this, 2, value);
         }
-        get playerCharacterIndex() {
+        get characterIndex() {
             return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
         }
-        set playerCharacterIndex(value: number) {
+        set characterIndex(value: number) {
             pb_1.Message.setField(this, 3, value);
         }
+        get positionInfo() {
+            return pb_1.Message.getWrapperField(this, PositionInfo, 4) as PositionInfo;
+        }
+        set positionInfo(value: PositionInfo) {
+            pb_1.Message.setWrapperField(this, 4, value);
+        }
+        get has_positionInfo() {
+            return pb_1.Message.getField(this, 4) != null;
+        }
         get tailIndex() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
         set tailIndex(value: number) {
-            pb_1.Message.setField(this, 4, value);
+            pb_1.Message.setField(this, 5, value);
         }
         static fromObject(data: {
             playerId?: number;
-            roomIndex?: number;
-            playerCharacterIndex?: number;
+            playerName?: string;
+            characterIndex?: number;
+            positionInfo?: ReturnType<typeof PositionInfo.prototype.toObject>;
             tailIndex?: number;
-        }): PlayerData {
-            const message = new PlayerData({});
+        }): PlayerInfo {
+            const message = new PlayerInfo({});
             if (data.playerId != null) {
                 message.playerId = data.playerId;
             }
-            if (data.roomIndex != null) {
-                message.roomIndex = data.roomIndex;
+            if (data.playerName != null) {
+                message.playerName = data.playerName;
             }
-            if (data.playerCharacterIndex != null) {
-                message.playerCharacterIndex = data.playerCharacterIndex;
+            if (data.characterIndex != null) {
+                message.characterIndex = data.characterIndex;
+            }
+            if (data.positionInfo != null) {
+                message.positionInfo = PositionInfo.fromObject(data.positionInfo);
             }
             if (data.tailIndex != null) {
                 message.tailIndex = data.tailIndex;
@@ -191,18 +129,22 @@ export namespace impelDown {
         toObject() {
             const data: {
                 playerId?: number;
-                roomIndex?: number;
-                playerCharacterIndex?: number;
+                playerName?: string;
+                characterIndex?: number;
+                positionInfo?: ReturnType<typeof PositionInfo.prototype.toObject>;
                 tailIndex?: number;
             } = {};
             if (this.playerId != null) {
                 data.playerId = this.playerId;
             }
-            if (this.roomIndex != null) {
-                data.roomIndex = this.roomIndex;
+            if (this.playerName != null) {
+                data.playerName = this.playerName;
             }
-            if (this.playerCharacterIndex != null) {
-                data.playerCharacterIndex = this.playerCharacterIndex;
+            if (this.characterIndex != null) {
+                data.characterIndex = this.characterIndex;
+            }
+            if (this.positionInfo != null) {
+                data.positionInfo = this.positionInfo.toObject();
             }
             if (this.tailIndex != null) {
                 data.tailIndex = this.tailIndex;
@@ -215,17 +157,19 @@ export namespace impelDown {
             const writer = w || new pb_1.BinaryWriter();
             if (this.playerId != 0)
                 writer.writeInt32(1, this.playerId);
-            if (this.roomIndex != 0)
-                writer.writeInt32(2, this.roomIndex);
-            if (this.playerCharacterIndex != 0)
-                writer.writeInt32(3, this.playerCharacterIndex);
+            if (this.playerName.length)
+                writer.writeString(2, this.playerName);
+            if (this.characterIndex != 0)
+                writer.writeInt32(3, this.characterIndex);
+            if (this.has_positionInfo)
+                writer.writeMessage(4, this.positionInfo, () => this.positionInfo.serialize(writer));
             if (this.tailIndex != 0)
-                writer.writeInt32(4, this.tailIndex);
+                writer.writeInt32(5, this.tailIndex);
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerData {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerData();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PlayerInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PlayerInfo();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -234,12 +178,15 @@ export namespace impelDown {
                         message.playerId = reader.readInt32();
                         break;
                     case 2:
-                        message.roomIndex = reader.readInt32();
+                        message.playerName = reader.readString();
                         break;
                     case 3:
-                        message.playerCharacterIndex = reader.readInt32();
+                        message.characterIndex = reader.readInt32();
                         break;
                     case 4:
+                        reader.readMessage(message.positionInfo, () => message.positionInfo = PositionInfo.deserialize(reader));
+                        break;
+                    case 5:
                         message.tailIndex = reader.readInt32();
                         break;
                     default: reader.skipField();
@@ -250,47 +197,62 @@ export namespace impelDown {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): PlayerData {
-            return PlayerData.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): PlayerInfo {
+            return PlayerInfo.deserialize(bytes);
         }
     }
-    export class S_Init extends pb_1.Message {
+    export class Position extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            playerData?: PlayerData;
+            x?: number;
+            y?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerData" in data && data.playerData != undefined) {
-                    this.playerData = data.playerData;
+                if ("x" in data && data.x != undefined) {
+                    this.x = data.x;
+                }
+                if ("y" in data && data.y != undefined) {
+                    this.y = data.y;
                 }
             }
         }
-        get playerData() {
-            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
+        get x() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set playerData(value: PlayerData) {
-            pb_1.Message.setWrapperField(this, 1, value);
+        set x(value: number) {
+            pb_1.Message.setField(this, 1, value);
         }
-        get has_playerData() {
-            return pb_1.Message.getField(this, 1) != null;
+        get y() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set y(value: number) {
+            pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
-            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-        }): S_Init {
-            const message = new S_Init({});
-            if (data.playerData != null) {
-                message.playerData = PlayerData.fromObject(data.playerData);
+            x?: number;
+            y?: number;
+        }): Position {
+            const message = new Position({});
+            if (data.x != null) {
+                message.x = data.x;
+            }
+            if (data.y != null) {
+                message.y = data.y;
             }
             return message;
         }
         toObject() {
             const data: {
-                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
+                x?: number;
+                y?: number;
             } = {};
-            if (this.playerData != null) {
-                data.playerData = this.playerData.toObject();
+            if (this.x != null) {
+                data.x = this.x;
+            }
+            if (this.y != null) {
+                data.y = this.y;
             }
             return data;
         }
@@ -298,8 +260,173 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerData)
-                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
+            if (this.x != 0)
+                writer.writeFloat(1, this.x);
+            if (this.y != 0)
+                writer.writeFloat(2, this.y);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): Position {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new Position();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.x = reader.readFloat();
+                        break;
+                    case 2:
+                        message.y = reader.readFloat();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): Position {
+            return Position.deserialize(bytes);
+        }
+    }
+    export class PositionInfo extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            position?: Position;
+            scaleX?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("position" in data && data.position != undefined) {
+                    this.position = data.position;
+                }
+                if ("scaleX" in data && data.scaleX != undefined) {
+                    this.scaleX = data.scaleX;
+                }
+            }
+        }
+        get position() {
+            return pb_1.Message.getWrapperField(this, Position, 1) as Position;
+        }
+        set position(value: Position) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_position() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        get scaleX() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set scaleX(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            position?: ReturnType<typeof Position.prototype.toObject>;
+            scaleX?: number;
+        }): PositionInfo {
+            const message = new PositionInfo({});
+            if (data.position != null) {
+                message.position = Position.fromObject(data.position);
+            }
+            if (data.scaleX != null) {
+                message.scaleX = data.scaleX;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                position?: ReturnType<typeof Position.prototype.toObject>;
+                scaleX?: number;
+            } = {};
+            if (this.position != null) {
+                data.position = this.position.toObject();
+            }
+            if (this.scaleX != null) {
+                data.scaleX = this.scaleX;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.has_position)
+                writer.writeMessage(1, this.position, () => this.position.serialize(writer));
+            if (this.scaleX != 0)
+                writer.writeFloat(2, this.scaleX);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PositionInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PositionInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.position, () => message.position = Position.deserialize(reader));
+                        break;
+                    case 2:
+                        message.scaleX = reader.readFloat();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): PositionInfo {
+            return PositionInfo.deserialize(bytes);
+        }
+    }
+    export class S_Init extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+        }): S_Init {
+            const message = new S_Init({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -310,7 +437,7 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
+                        message.playerId = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -324,167 +451,24 @@ export namespace impelDown {
             return S_Init.deserialize(bytes);
         }
     }
-    export class C_Enter extends pb_1.Message {
+    export class RoomInfo extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            playerData?: PlayerData;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerData" in data && data.playerData != undefined) {
-                    this.playerData = data.playerData;
-                }
-            }
-        }
-        get playerData() {
-            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
-        }
-        set playerData(value: PlayerData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_playerData() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        static fromObject(data: {
-            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-        }): C_Enter {
-            const message = new C_Enter({});
-            if (data.playerData != null) {
-                message.playerData = PlayerData.fromObject(data.playerData);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-            } = {};
-            if (this.playerData != null) {
-                data.playerData = this.playerData.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerData)
-                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Enter {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Enter();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): C_Enter {
-            return C_Enter.deserialize(bytes);
-        }
-    }
-    export class S_Enter extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            playerData?: PlayerData;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerData" in data && data.playerData != undefined) {
-                    this.playerData = data.playerData;
-                }
-            }
-        }
-        get playerData() {
-            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
-        }
-        set playerData(value: PlayerData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_playerData() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        static fromObject(data: {
-            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-        }): S_Enter {
-            const message = new S_Enter({});
-            if (data.playerData != null) {
-                message.playerData = PlayerData.fromObject(data.playerData);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-            } = {};
-            if (this.playerData != null) {
-                data.playerData = this.playerData.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerData)
-                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Enter {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Enter();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): S_Enter {
-            return S_Enter.deserialize(bytes);
-        }
-    }
-    export class RoomData extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            playerId?: number;
-            hostId?: number;
             roomIndex?: number;
+            hostPlayer?: PlayerInfo;
             maxPeople?: number;
             currentPeople?: number;
-            playerDatas?: PlayerData[];
+            playerInfos?: PlayerInfo[];
+            mapIndex?: number;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [6], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [5], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerId" in data && data.playerId != undefined) {
-                    this.playerId = data.playerId;
-                }
-                if ("hostId" in data && data.hostId != undefined) {
-                    this.hostId = data.hostId;
-                }
                 if ("roomIndex" in data && data.roomIndex != undefined) {
                     this.roomIndex = data.roomIndex;
+                }
+                if ("hostPlayer" in data && data.hostPlayer != undefined) {
+                    this.hostPlayer = data.hostPlayer;
                 }
                 if ("maxPeople" in data && data.maxPeople != undefined) {
                     this.maxPeople = data.maxPeople;
@@ -492,8 +476,176 @@ export namespace impelDown {
                 if ("currentPeople" in data && data.currentPeople != undefined) {
                     this.currentPeople = data.currentPeople;
                 }
-                if ("playerDatas" in data && data.playerDatas != undefined) {
-                    this.playerDatas = data.playerDatas;
+                if ("playerInfos" in data && data.playerInfos != undefined) {
+                    this.playerInfos = data.playerInfos;
+                }
+                if ("mapIndex" in data && data.mapIndex != undefined) {
+                    this.mapIndex = data.mapIndex;
+                }
+            }
+        }
+        get roomIndex() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set roomIndex(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get hostPlayer() {
+            return pb_1.Message.getWrapperField(this, PlayerInfo, 2) as PlayerInfo;
+        }
+        set hostPlayer(value: PlayerInfo) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_hostPlayer() {
+            return pb_1.Message.getField(this, 2) != null;
+        }
+        get maxPeople() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set maxPeople(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get currentPeople() {
+            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
+        }
+        set currentPeople(value: number) {
+            pb_1.Message.setField(this, 4, value);
+        }
+        get playerInfos() {
+            return pb_1.Message.getRepeatedWrapperField(this, PlayerInfo, 5) as PlayerInfo[];
+        }
+        set playerInfos(value: PlayerInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 5, value);
+        }
+        get mapIndex() {
+            return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
+        }
+        set mapIndex(value: number) {
+            pb_1.Message.setField(this, 6, value);
+        }
+        static fromObject(data: {
+            roomIndex?: number;
+            hostPlayer?: ReturnType<typeof PlayerInfo.prototype.toObject>;
+            maxPeople?: number;
+            currentPeople?: number;
+            playerInfos?: ReturnType<typeof PlayerInfo.prototype.toObject>[];
+            mapIndex?: number;
+        }): RoomInfo {
+            const message = new RoomInfo({});
+            if (data.roomIndex != null) {
+                message.roomIndex = data.roomIndex;
+            }
+            if (data.hostPlayer != null) {
+                message.hostPlayer = PlayerInfo.fromObject(data.hostPlayer);
+            }
+            if (data.maxPeople != null) {
+                message.maxPeople = data.maxPeople;
+            }
+            if (data.currentPeople != null) {
+                message.currentPeople = data.currentPeople;
+            }
+            if (data.playerInfos != null) {
+                message.playerInfos = data.playerInfos.map(item => PlayerInfo.fromObject(item));
+            }
+            if (data.mapIndex != null) {
+                message.mapIndex = data.mapIndex;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                roomIndex?: number;
+                hostPlayer?: ReturnType<typeof PlayerInfo.prototype.toObject>;
+                maxPeople?: number;
+                currentPeople?: number;
+                playerInfos?: ReturnType<typeof PlayerInfo.prototype.toObject>[];
+                mapIndex?: number;
+            } = {};
+            if (this.roomIndex != null) {
+                data.roomIndex = this.roomIndex;
+            }
+            if (this.hostPlayer != null) {
+                data.hostPlayer = this.hostPlayer.toObject();
+            }
+            if (this.maxPeople != null) {
+                data.maxPeople = this.maxPeople;
+            }
+            if (this.currentPeople != null) {
+                data.currentPeople = this.currentPeople;
+            }
+            if (this.playerInfos != null) {
+                data.playerInfos = this.playerInfos.map((item: PlayerInfo) => item.toObject());
+            }
+            if (this.mapIndex != null) {
+                data.mapIndex = this.mapIndex;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.roomIndex != 0)
+                writer.writeInt32(1, this.roomIndex);
+            if (this.has_hostPlayer)
+                writer.writeMessage(2, this.hostPlayer, () => this.hostPlayer.serialize(writer));
+            if (this.maxPeople != 0)
+                writer.writeInt32(3, this.maxPeople);
+            if (this.currentPeople != 0)
+                writer.writeInt32(4, this.currentPeople);
+            if (this.playerInfos.length)
+                writer.writeRepeatedMessage(5, this.playerInfos, (item: PlayerInfo) => item.serialize(writer));
+            if (this.mapIndex != 0)
+                writer.writeInt32(6, this.mapIndex);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoomInfo {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RoomInfo();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.roomIndex = reader.readInt32();
+                        break;
+                    case 2:
+                        reader.readMessage(message.hostPlayer, () => message.hostPlayer = PlayerInfo.deserialize(reader));
+                        break;
+                    case 3:
+                        message.maxPeople = reader.readInt32();
+                        break;
+                    case 4:
+                        message.currentPeople = reader.readInt32();
+                        break;
+                    case 5:
+                        reader.readMessage(message.playerInfos, () => pb_1.Message.addToRepeatedWrapperField(message, 5, PlayerInfo.deserialize(reader), PlayerInfo));
+                        break;
+                    case 6:
+                        message.mapIndex = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): RoomInfo {
+            return RoomInfo.deserialize(bytes);
+        }
+    }
+    export class C_Match_Making extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
                 }
             }
         }
@@ -503,91 +655,21 @@ export namespace impelDown {
         set playerId(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
-        get hostId() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
-        }
-        set hostId(value: number) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get roomIndex() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
-        }
-        set roomIndex(value: number) {
-            pb_1.Message.setField(this, 3, value);
-        }
-        get maxPeople() {
-            return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
-        }
-        set maxPeople(value: number) {
-            pb_1.Message.setField(this, 4, value);
-        }
-        get currentPeople() {
-            return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
-        }
-        set currentPeople(value: number) {
-            pb_1.Message.setField(this, 5, value);
-        }
-        get playerDatas() {
-            return pb_1.Message.getRepeatedWrapperField(this, PlayerData, 6) as PlayerData[];
-        }
-        set playerDatas(value: PlayerData[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 6, value);
-        }
         static fromObject(data: {
             playerId?: number;
-            hostId?: number;
-            roomIndex?: number;
-            maxPeople?: number;
-            currentPeople?: number;
-            playerDatas?: ReturnType<typeof PlayerData.prototype.toObject>[];
-        }): RoomData {
-            const message = new RoomData({});
+        }): C_Match_Making {
+            const message = new C_Match_Making({});
             if (data.playerId != null) {
                 message.playerId = data.playerId;
-            }
-            if (data.hostId != null) {
-                message.hostId = data.hostId;
-            }
-            if (data.roomIndex != null) {
-                message.roomIndex = data.roomIndex;
-            }
-            if (data.maxPeople != null) {
-                message.maxPeople = data.maxPeople;
-            }
-            if (data.currentPeople != null) {
-                message.currentPeople = data.currentPeople;
-            }
-            if (data.playerDatas != null) {
-                message.playerDatas = data.playerDatas.map(item => PlayerData.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
                 playerId?: number;
-                hostId?: number;
-                roomIndex?: number;
-                maxPeople?: number;
-                currentPeople?: number;
-                playerDatas?: ReturnType<typeof PlayerData.prototype.toObject>[];
             } = {};
             if (this.playerId != null) {
                 data.playerId = this.playerId;
-            }
-            if (this.hostId != null) {
-                data.hostId = this.hostId;
-            }
-            if (this.roomIndex != null) {
-                data.roomIndex = this.roomIndex;
-            }
-            if (this.maxPeople != null) {
-                data.maxPeople = this.maxPeople;
-            }
-            if (this.currentPeople != null) {
-                data.currentPeople = this.currentPeople;
-            }
-            if (this.playerDatas != null) {
-                data.playerDatas = this.playerDatas.map((item: PlayerData) => item.toObject());
             }
             return data;
         }
@@ -597,42 +679,17 @@ export namespace impelDown {
             const writer = w || new pb_1.BinaryWriter();
             if (this.playerId != 0)
                 writer.writeInt32(1, this.playerId);
-            if (this.hostId != 0)
-                writer.writeInt32(2, this.hostId);
-            if (this.roomIndex != 0)
-                writer.writeInt32(3, this.roomIndex);
-            if (this.maxPeople != 0)
-                writer.writeInt32(4, this.maxPeople);
-            if (this.currentPeople != 0)
-                writer.writeInt32(5, this.currentPeople);
-            if (this.playerDatas.length)
-                writer.writeRepeatedMessage(6, this.playerDatas, (item: PlayerData) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): RoomData {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new RoomData();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Match_Making {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Match_Making();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
                         message.playerId = reader.readInt32();
-                        break;
-                    case 2:
-                        message.hostId = reader.readInt32();
-                        break;
-                    case 3:
-                        message.roomIndex = reader.readInt32();
-                        break;
-                    case 4:
-                        message.maxPeople = reader.readInt32();
-                        break;
-                    case 5:
-                        message.currentPeople = reader.readInt32();
-                        break;
-                    case 6:
-                        reader.readMessage(message.playerDatas, () => pb_1.Message.addToRepeatedWrapperField(message, 6, PlayerData.deserialize(reader), PlayerData));
                         break;
                     default: reader.skipField();
                 }
@@ -642,47 +699,62 @@ export namespace impelDown {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): RoomData {
-            return RoomData.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): C_Match_Making {
+            return C_Match_Making.deserialize(bytes);
         }
     }
     export class C_Create_Room extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            roomData?: RoomData;
+            playerId?: number;
+            maxPeople?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("roomData" in data && data.roomData != undefined) {
-                    this.roomData = data.roomData;
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("maxPeople" in data && data.maxPeople != undefined) {
+                    this.maxPeople = data.maxPeople;
                 }
             }
         }
-        get roomData() {
-            return pb_1.Message.getWrapperField(this, RoomData, 1) as RoomData;
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set roomData(value: RoomData) {
-            pb_1.Message.setWrapperField(this, 1, value);
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
         }
-        get has_roomData() {
-            return pb_1.Message.getField(this, 1) != null;
+        get maxPeople() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set maxPeople(value: number) {
+            pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
-            roomData?: ReturnType<typeof RoomData.prototype.toObject>;
+            playerId?: number;
+            maxPeople?: number;
         }): C_Create_Room {
             const message = new C_Create_Room({});
-            if (data.roomData != null) {
-                message.roomData = RoomData.fromObject(data.roomData);
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.maxPeople != null) {
+                message.maxPeople = data.maxPeople;
             }
             return message;
         }
         toObject() {
             const data: {
-                roomData?: ReturnType<typeof RoomData.prototype.toObject>;
+                playerId?: number;
+                maxPeople?: number;
             } = {};
-            if (this.roomData != null) {
-                data.roomData = this.roomData.toObject();
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.maxPeople != null) {
+                data.maxPeople = this.maxPeople;
             }
             return data;
         }
@@ -690,8 +762,10 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_roomData)
-                writer.writeMessage(1, this.roomData, () => this.roomData.serialize(writer));
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.maxPeople != 0)
+                writer.writeInt32(2, this.maxPeople);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -702,7 +776,10 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.roomData, () => message.roomData = RoomData.deserialize(reader));
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.maxPeople = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -716,155 +793,15 @@ export namespace impelDown {
             return C_Create_Room.deserialize(bytes);
         }
     }
-    export class C_Join_Room extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            roomData?: RoomData;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("roomData" in data && data.roomData != undefined) {
-                    this.roomData = data.roomData;
-                }
-            }
-        }
-        get roomData() {
-            return pb_1.Message.getWrapperField(this, RoomData, 1) as RoomData;
-        }
-        set roomData(value: RoomData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_roomData() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        static fromObject(data: {
-            roomData?: ReturnType<typeof RoomData.prototype.toObject>;
-        }): C_Join_Room {
-            const message = new C_Join_Room({});
-            if (data.roomData != null) {
-                message.roomData = RoomData.fromObject(data.roomData);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                roomData?: ReturnType<typeof RoomData.prototype.toObject>;
-            } = {};
-            if (this.roomData != null) {
-                data.roomData = this.roomData.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.has_roomData)
-                writer.writeMessage(1, this.roomData, () => this.roomData.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Join_Room {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Join_Room();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.roomData, () => message.roomData = RoomData.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): C_Join_Room {
-            return C_Join_Room.deserialize(bytes);
-        }
-    }
-    export class C_Exit_Room extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            roomData?: RoomData;
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("roomData" in data && data.roomData != undefined) {
-                    this.roomData = data.roomData;
-                }
-            }
-        }
-        get roomData() {
-            return pb_1.Message.getWrapperField(this, RoomData, 1) as RoomData;
-        }
-        set roomData(value: RoomData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_roomData() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        static fromObject(data: {
-            roomData?: ReturnType<typeof RoomData.prototype.toObject>;
-        }): C_Exit_Room {
-            const message = new C_Exit_Room({});
-            if (data.roomData != null) {
-                message.roomData = RoomData.fromObject(data.roomData);
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                roomData?: ReturnType<typeof RoomData.prototype.toObject>;
-            } = {};
-            if (this.roomData != null) {
-                data.roomData = this.roomData.toObject();
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.has_roomData)
-                writer.writeMessage(1, this.roomData, () => this.roomData.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Exit_Room {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Exit_Room();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.roomData, () => message.roomData = RoomData.deserialize(reader));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): C_Exit_Room {
-            return C_Exit_Room.deserialize(bytes);
-        }
-    }
-    export class C_Refresh_Room extends pb_1.Message {
+    export class S_Create_Room extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {}) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") { }
         }
-        static fromObject(data: {}): C_Refresh_Room {
-            const message = new C_Refresh_Room({});
+        static fromObject(data: {}): S_Create_Room {
+            const message = new S_Create_Room({});
             return message;
         }
         toObject() {
@@ -878,8 +815,8 @@ export namespace impelDown {
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Refresh_Room {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Refresh_Room();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Create_Room {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Create_Room();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
@@ -892,47 +829,62 @@ export namespace impelDown {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): C_Refresh_Room {
-            return C_Refresh_Room.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): S_Create_Room {
+            return S_Create_Room.deserialize(bytes);
         }
     }
-    export class S_Join_Room extends pb_1.Message {
+    export class C_Join_Room extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            roomData?: RoomData;
+            playerId?: number;
+            roomIndex?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("roomData" in data && data.roomData != undefined) {
-                    this.roomData = data.roomData;
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("roomIndex" in data && data.roomIndex != undefined) {
+                    this.roomIndex = data.roomIndex;
                 }
             }
         }
-        get roomData() {
-            return pb_1.Message.getWrapperField(this, RoomData, 1) as RoomData;
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set roomData(value: RoomData) {
-            pb_1.Message.setWrapperField(this, 1, value);
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
         }
-        get has_roomData() {
-            return pb_1.Message.getField(this, 1) != null;
+        get roomIndex() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set roomIndex(value: number) {
+            pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
-            roomData?: ReturnType<typeof RoomData.prototype.toObject>;
-        }): S_Join_Room {
-            const message = new S_Join_Room({});
-            if (data.roomData != null) {
-                message.roomData = RoomData.fromObject(data.roomData);
+            playerId?: number;
+            roomIndex?: number;
+        }): C_Join_Room {
+            const message = new C_Join_Room({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.roomIndex != null) {
+                message.roomIndex = data.roomIndex;
             }
             return message;
         }
         toObject() {
             const data: {
-                roomData?: ReturnType<typeof RoomData.prototype.toObject>;
+                playerId?: number;
+                roomIndex?: number;
             } = {};
-            if (this.roomData != null) {
-                data.roomData = this.roomData.toObject();
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.roomIndex != null) {
+                data.roomIndex = this.roomIndex;
             }
             return data;
         }
@@ -940,8 +892,56 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_roomData)
-                writer.writeMessage(1, this.roomData, () => this.roomData.serialize(writer));
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.roomIndex != 0)
+                writer.writeInt32(2, this.roomIndex);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Join_Room {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Join_Room();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.roomIndex = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Join_Room {
+            return C_Join_Room.deserialize(bytes);
+        }
+    }
+    export class S_Join_Room extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {}) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") { }
+        }
+        static fromObject(data: {}): S_Join_Room {
+            const message = new S_Join_Room({});
+            return message;
+        }
+        toObject() {
+            const data: {} = {};
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -951,9 +951,6 @@ export namespace impelDown {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.roomData, () => message.roomData = RoomData.deserialize(reader));
-                        break;
                     default: reader.skipField();
                 }
             }
@@ -964,6 +961,73 @@ export namespace impelDown {
         }
         static deserializeBinary(bytes: Uint8Array): S_Join_Room {
             return S_Join_Room.deserialize(bytes);
+        }
+    }
+    export class C_Exit_Room extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+        }): C_Exit_Room {
+            const message = new C_Exit_Room({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Exit_Room {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Exit_Room();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Exit_Room {
+            return C_Exit_Room.deserialize(bytes);
         }
     }
     export class S_Exit_Room extends pb_1.Message {
@@ -1006,10 +1070,50 @@ export namespace impelDown {
             return S_Exit_Room.deserialize(bytes);
         }
     }
-    export class S_Refresh_Room_List extends pb_1.Message {
+    export class C_Refresh_RoomList extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {}) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") { }
+        }
+        static fromObject(data: {}): C_Refresh_RoomList {
+            const message = new C_Refresh_RoomList({});
+            return message;
+        }
+        toObject() {
+            const data: {} = {};
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Refresh_RoomList {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Refresh_RoomList();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): C_Refresh_RoomList {
+            return C_Refresh_RoomList.deserialize(bytes);
+        }
+    }
+    export class S_Refresh_RoomList extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            roomInfos?: RoomData[];
+            roomInfos?: RoomInfo[];
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
@@ -1020,26 +1124,26 @@ export namespace impelDown {
             }
         }
         get roomInfos() {
-            return pb_1.Message.getRepeatedWrapperField(this, RoomData, 1) as RoomData[];
+            return pb_1.Message.getRepeatedWrapperField(this, RoomInfo, 1) as RoomInfo[];
         }
-        set roomInfos(value: RoomData[]) {
+        set roomInfos(value: RoomInfo[]) {
             pb_1.Message.setRepeatedWrapperField(this, 1, value);
         }
         static fromObject(data: {
-            roomInfos?: ReturnType<typeof RoomData.prototype.toObject>[];
-        }): S_Refresh_Room_List {
-            const message = new S_Refresh_Room_List({});
+            roomInfos?: ReturnType<typeof RoomInfo.prototype.toObject>[];
+        }): S_Refresh_RoomList {
+            const message = new S_Refresh_RoomList({});
             if (data.roomInfos != null) {
-                message.roomInfos = data.roomInfos.map(item => RoomData.fromObject(item));
+                message.roomInfos = data.roomInfos.map(item => RoomInfo.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
-                roomInfos?: ReturnType<typeof RoomData.prototype.toObject>[];
+                roomInfos?: ReturnType<typeof RoomInfo.prototype.toObject>[];
             } = {};
             if (this.roomInfos != null) {
-                data.roomInfos = this.roomInfos.map((item: RoomData) => item.toObject());
+                data.roomInfos = this.roomInfos.map((item: RoomInfo) => item.toObject());
             }
             return data;
         }
@@ -1048,18 +1152,18 @@ export namespace impelDown {
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
             if (this.roomInfos.length)
-                writer.writeRepeatedMessage(1, this.roomInfos, (item: RoomData) => item.serialize(writer));
+                writer.writeRepeatedMessage(1, this.roomInfos, (item: RoomInfo) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Refresh_Room_List {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Refresh_Room_List();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Refresh_RoomList {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Refresh_RoomList();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.roomInfos, () => pb_1.Message.addToRepeatedWrapperField(message, 1, RoomData.deserialize(reader), RoomData));
+                        reader.readMessage(message.roomInfos, () => pb_1.Message.addToRepeatedWrapperField(message, 1, RoomInfo.deserialize(reader), RoomInfo));
                         break;
                     default: reader.skipField();
                 }
@@ -1069,44 +1173,44 @@ export namespace impelDown {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): S_Refresh_Room_List {
-            return S_Refresh_Room_List.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): S_Refresh_RoomList {
+            return S_Refresh_RoomList.deserialize(bytes);
         }
     }
-    export class MapData extends pb_1.Message {
+    export class C_Refresh_Room extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            mapIndex?: number;
+            playerId?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("mapIndex" in data && data.mapIndex != undefined) {
-                    this.mapIndex = data.mapIndex;
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
                 }
             }
         }
-        get mapIndex() {
+        get playerId() {
             return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set mapIndex(value: number) {
+        set playerId(value: number) {
             pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            mapIndex?: number;
-        }): MapData {
-            const message = new MapData({});
-            if (data.mapIndex != null) {
-                message.mapIndex = data.mapIndex;
+            playerId?: number;
+        }): C_Refresh_Room {
+            const message = new C_Refresh_Room({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
             }
             return message;
         }
         toObject() {
             const data: {
-                mapIndex?: number;
+                playerId?: number;
             } = {};
-            if (this.mapIndex != null) {
-                data.mapIndex = this.mapIndex;
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
             }
             return data;
         }
@@ -1114,19 +1218,19 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.mapIndex != 0)
-                writer.writeInt32(1, this.mapIndex);
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): MapData {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new MapData();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): C_Refresh_Room {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new C_Refresh_Room();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.mapIndex = reader.readInt32();
+                        message.playerId = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -1136,80 +1240,47 @@ export namespace impelDown {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): MapData {
-            return MapData.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): C_Refresh_Room {
+            return C_Refresh_Room.deserialize(bytes);
         }
     }
-    export class PosAndRot extends pb_1.Message {
+    export class S_Refresh_Room extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            x?: number;
-            y?: number;
-            rot?: number;
+            roomInfo?: RoomInfo;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("x" in data && data.x != undefined) {
-                    this.x = data.x;
-                }
-                if ("y" in data && data.y != undefined) {
-                    this.y = data.y;
-                }
-                if ("rot" in data && data.rot != undefined) {
-                    this.rot = data.rot;
+                if ("roomInfo" in data && data.roomInfo != undefined) {
+                    this.roomInfo = data.roomInfo;
                 }
             }
         }
-        get x() {
-            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        get roomInfo() {
+            return pb_1.Message.getWrapperField(this, RoomInfo, 1) as RoomInfo;
         }
-        set x(value: number) {
-            pb_1.Message.setField(this, 1, value);
+        set roomInfo(value: RoomInfo) {
+            pb_1.Message.setWrapperField(this, 1, value);
         }
-        get y() {
-            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
-        }
-        set y(value: number) {
-            pb_1.Message.setField(this, 2, value);
-        }
-        get rot() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
-        }
-        set rot(value: number) {
-            pb_1.Message.setField(this, 3, value);
+        get has_roomInfo() {
+            return pb_1.Message.getField(this, 1) != null;
         }
         static fromObject(data: {
-            x?: number;
-            y?: number;
-            rot?: number;
-        }): PosAndRot {
-            const message = new PosAndRot({});
-            if (data.x != null) {
-                message.x = data.x;
-            }
-            if (data.y != null) {
-                message.y = data.y;
-            }
-            if (data.rot != null) {
-                message.rot = data.rot;
+            roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
+        }): S_Refresh_Room {
+            const message = new S_Refresh_Room({});
+            if (data.roomInfo != null) {
+                message.roomInfo = RoomInfo.fromObject(data.roomInfo);
             }
             return message;
         }
         toObject() {
             const data: {
-                x?: number;
-                y?: number;
-                rot?: number;
+                roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
             } = {};
-            if (this.x != null) {
-                data.x = this.x;
-            }
-            if (this.y != null) {
-                data.y = this.y;
-            }
-            if (this.rot != null) {
-                data.rot = this.rot;
+            if (this.roomInfo != null) {
+                data.roomInfo = this.roomInfo.toObject();
             }
             return data;
         }
@@ -1217,29 +1288,19 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.x != 0)
-                writer.writeFloat(1, this.x);
-            if (this.y != 0)
-                writer.writeFloat(2, this.y);
-            if (this.rot != 0)
-                writer.writeFloat(3, this.rot);
+            if (this.has_roomInfo)
+                writer.writeMessage(1, this.roomInfo, () => this.roomInfo.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): PosAndRot {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new PosAndRot();
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Refresh_Room {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Refresh_Room();
             while (reader.nextField()) {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        message.x = reader.readFloat();
-                        break;
-                    case 2:
-                        message.y = reader.readFloat();
-                        break;
-                    case 3:
-                        message.rot = reader.readFloat();
+                        reader.readMessage(message.roomInfo, () => message.roomInfo = RoomInfo.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1249,68 +1310,44 @@ export namespace impelDown {
         serializeBinary(): Uint8Array {
             return this.serialize();
         }
-        static deserializeBinary(bytes: Uint8Array): PosAndRot {
-            return PosAndRot.deserialize(bytes);
+        static deserializeBinary(bytes: Uint8Array): S_Refresh_Room {
+            return S_Refresh_Room.deserialize(bytes);
         }
     }
     export class C_Game_Start extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            playerData?: PlayerData;
-            mapData?: MapData;
+            playerId?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerData" in data && data.playerData != undefined) {
-                    this.playerData = data.playerData;
-                }
-                if ("mapData" in data && data.mapData != undefined) {
-                    this.mapData = data.mapData;
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
                 }
             }
         }
-        get playerData() {
-            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set playerData(value: PlayerData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_playerData() {
-            return pb_1.Message.getField(this, 1) != null;
-        }
-        get mapData() {
-            return pb_1.Message.getWrapperField(this, MapData, 2) as MapData;
-        }
-        set mapData(value: MapData) {
-            pb_1.Message.setWrapperField(this, 2, value);
-        }
-        get has_mapData() {
-            return pb_1.Message.getField(this, 2) != null;
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
         }
         static fromObject(data: {
-            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-            mapData?: ReturnType<typeof MapData.prototype.toObject>;
+            playerId?: number;
         }): C_Game_Start {
             const message = new C_Game_Start({});
-            if (data.playerData != null) {
-                message.playerData = PlayerData.fromObject(data.playerData);
-            }
-            if (data.mapData != null) {
-                message.mapData = MapData.fromObject(data.mapData);
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
             }
             return message;
         }
         toObject() {
             const data: {
-                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-                mapData?: ReturnType<typeof MapData.prototype.toObject>;
+                playerId?: number;
             } = {};
-            if (this.playerData != null) {
-                data.playerData = this.playerData.toObject();
-            }
-            if (this.mapData != null) {
-                data.mapData = this.mapData.toObject();
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
             }
             return data;
         }
@@ -1318,10 +1355,8 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerData)
-                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
-            if (this.has_mapData)
-                writer.writeMessage(2, this.mapData, () => this.mapData.serialize(writer));
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1332,10 +1367,7 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
-                        break;
-                    case 2:
-                        reader.readMessage(message.mapData, () => message.mapData = MapData.deserialize(reader));
+                        message.playerId = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -1352,58 +1384,40 @@ export namespace impelDown {
     export class S_Game_Start extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            mapData?: MapData;
-            playerAllDatas?: PlayerAllData[];
+            roomInfo?: RoomInfo;
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [2], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("mapData" in data && data.mapData != undefined) {
-                    this.mapData = data.mapData;
-                }
-                if ("playerAllDatas" in data && data.playerAllDatas != undefined) {
-                    this.playerAllDatas = data.playerAllDatas;
+                if ("roomInfo" in data && data.roomInfo != undefined) {
+                    this.roomInfo = data.roomInfo;
                 }
             }
         }
-        get mapData() {
-            return pb_1.Message.getWrapperField(this, MapData, 1) as MapData;
+        get roomInfo() {
+            return pb_1.Message.getWrapperField(this, RoomInfo, 1) as RoomInfo;
         }
-        set mapData(value: MapData) {
+        set roomInfo(value: RoomInfo) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
-        get has_mapData() {
+        get has_roomInfo() {
             return pb_1.Message.getField(this, 1) != null;
         }
-        get playerAllDatas() {
-            return pb_1.Message.getRepeatedWrapperField(this, PlayerAllData, 2) as PlayerAllData[];
-        }
-        set playerAllDatas(value: PlayerAllData[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 2, value);
-        }
         static fromObject(data: {
-            mapData?: ReturnType<typeof MapData.prototype.toObject>;
-            playerAllDatas?: ReturnType<typeof PlayerAllData.prototype.toObject>[];
+            roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
         }): S_Game_Start {
             const message = new S_Game_Start({});
-            if (data.mapData != null) {
-                message.mapData = MapData.fromObject(data.mapData);
-            }
-            if (data.playerAllDatas != null) {
-                message.playerAllDatas = data.playerAllDatas.map(item => PlayerAllData.fromObject(item));
+            if (data.roomInfo != null) {
+                message.roomInfo = RoomInfo.fromObject(data.roomInfo);
             }
             return message;
         }
         toObject() {
             const data: {
-                mapData?: ReturnType<typeof MapData.prototype.toObject>;
-                playerAllDatas?: ReturnType<typeof PlayerAllData.prototype.toObject>[];
+                roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
             } = {};
-            if (this.mapData != null) {
-                data.mapData = this.mapData.toObject();
-            }
-            if (this.playerAllDatas != null) {
-                data.playerAllDatas = this.playerAllDatas.map((item: PlayerAllData) => item.toObject());
+            if (this.roomInfo != null) {
+                data.roomInfo = this.roomInfo.toObject();
             }
             return data;
         }
@@ -1411,10 +1425,8 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_mapData)
-                writer.writeMessage(1, this.mapData, () => this.mapData.serialize(writer));
-            if (this.playerAllDatas.length)
-                writer.writeRepeatedMessage(2, this.playerAllDatas, (item: PlayerAllData) => item.serialize(writer));
+            if (this.has_roomInfo)
+                writer.writeMessage(1, this.roomInfo, () => this.roomInfo.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1425,10 +1437,7 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.mapData, () => message.mapData = MapData.deserialize(reader));
-                        break;
-                    case 2:
-                        reader.readMessage(message.playerAllDatas, () => pb_1.Message.addToRepeatedWrapperField(message, 2, PlayerAllData.deserialize(reader), PlayerAllData));
+                        reader.readMessage(message.roomInfo, () => message.roomInfo = RoomInfo.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1442,110 +1451,61 @@ export namespace impelDown {
             return S_Game_Start.deserialize(bytes);
         }
     }
-    export class S_Player_List extends pb_1.Message {
-        #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {
-            playerAllData?: PlayerAllData[];
-        }) {
-            super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerAllData" in data && data.playerAllData != undefined) {
-                    this.playerAllData = data.playerAllData;
-                }
-            }
-        }
-        get playerAllData() {
-            return pb_1.Message.getRepeatedWrapperField(this, PlayerAllData, 1) as PlayerAllData[];
-        }
-        set playerAllData(value: PlayerAllData[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 1, value);
-        }
-        static fromObject(data: {
-            playerAllData?: ReturnType<typeof PlayerAllData.prototype.toObject>[];
-        }): S_Player_List {
-            const message = new S_Player_List({});
-            if (data.playerAllData != null) {
-                message.playerAllData = data.playerAllData.map(item => PlayerAllData.fromObject(item));
-            }
-            return message;
-        }
-        toObject() {
-            const data: {
-                playerAllData?: ReturnType<typeof PlayerAllData.prototype.toObject>[];
-            } = {};
-            if (this.playerAllData != null) {
-                data.playerAllData = this.playerAllData.map((item: PlayerAllData) => item.toObject());
-            }
-            return data;
-        }
-        serialize(): Uint8Array;
-        serialize(w: pb_1.BinaryWriter): void;
-        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
-            const writer = w || new pb_1.BinaryWriter();
-            if (this.playerAllData.length)
-                writer.writeRepeatedMessage(1, this.playerAllData, (item: PlayerAllData) => item.serialize(writer));
-            if (!w)
-                return writer.getResultBuffer();
-        }
-        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Player_List {
-            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Player_List();
-            while (reader.nextField()) {
-                if (reader.isEndGroup())
-                    break;
-                switch (reader.getFieldNumber()) {
-                    case 1:
-                        reader.readMessage(message.playerAllData, () => pb_1.Message.addToRepeatedWrapperField(message, 1, PlayerAllData.deserialize(reader), PlayerAllData));
-                        break;
-                    default: reader.skipField();
-                }
-            }
-            return message;
-        }
-        serializeBinary(): Uint8Array {
-            return this.serialize();
-        }
-        static deserializeBinary(bytes: Uint8Array): S_Player_List {
-            return S_Player_List.deserialize(bytes);
-        }
-    }
     export class C_Move extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            playerAllData?: PlayerAllData;
+            playerId?: number;
+            positionInfo?: PositionInfo;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerAllData" in data && data.playerAllData != undefined) {
-                    this.playerAllData = data.playerAllData;
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("positionInfo" in data && data.positionInfo != undefined) {
+                    this.positionInfo = data.positionInfo;
                 }
             }
         }
-        get playerAllData() {
-            return pb_1.Message.getWrapperField(this, PlayerAllData, 1) as PlayerAllData;
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
         }
-        set playerAllData(value: PlayerAllData) {
-            pb_1.Message.setWrapperField(this, 1, value);
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
         }
-        get has_playerAllData() {
-            return pb_1.Message.getField(this, 1) != null;
+        get positionInfo() {
+            return pb_1.Message.getWrapperField(this, PositionInfo, 2) as PositionInfo;
+        }
+        set positionInfo(value: PositionInfo) {
+            pb_1.Message.setWrapperField(this, 2, value);
+        }
+        get has_positionInfo() {
+            return pb_1.Message.getField(this, 2) != null;
         }
         static fromObject(data: {
-            playerAllData?: ReturnType<typeof PlayerAllData.prototype.toObject>;
+            playerId?: number;
+            positionInfo?: ReturnType<typeof PositionInfo.prototype.toObject>;
         }): C_Move {
             const message = new C_Move({});
-            if (data.playerAllData != null) {
-                message.playerAllData = PlayerAllData.fromObject(data.playerAllData);
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.positionInfo != null) {
+                message.positionInfo = PositionInfo.fromObject(data.positionInfo);
             }
             return message;
         }
         toObject() {
             const data: {
-                playerAllData?: ReturnType<typeof PlayerAllData.prototype.toObject>;
+                playerId?: number;
+                positionInfo?: ReturnType<typeof PositionInfo.prototype.toObject>;
             } = {};
-            if (this.playerAllData != null) {
-                data.playerAllData = this.playerAllData.toObject();
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.positionInfo != null) {
+                data.positionInfo = this.positionInfo.toObject();
             }
             return data;
         }
@@ -1553,8 +1513,10 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerAllData)
-                writer.writeMessage(1, this.playerAllData, () => this.playerAllData.serialize(writer));
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.has_positionInfo)
+                writer.writeMessage(2, this.positionInfo, () => this.positionInfo.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1565,7 +1527,10 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.playerAllData, () => message.playerAllData = PlayerAllData.deserialize(reader));
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        reader.readMessage(message.positionInfo, () => message.positionInfo = PositionInfo.deserialize(reader));
                         break;
                     default: reader.skipField();
                 }
@@ -1579,43 +1544,40 @@ export namespace impelDown {
             return C_Move.deserialize(bytes);
         }
     }
-    export class C_Catch extends pb_1.Message {
+    export class S_PlayerList extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            playerData?: PlayerData;
+            playerInfos?: PlayerInfo[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [1], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerData" in data && data.playerData != undefined) {
-                    this.playerData = data.playerData;
+                if ("playerInfos" in data && data.playerInfos != undefined) {
+                    this.playerInfos = data.playerInfos;
                 }
             }
         }
-        get playerData() {
-            return pb_1.Message.getWrapperField(this, PlayerData, 1) as PlayerData;
+        get playerInfos() {
+            return pb_1.Message.getRepeatedWrapperField(this, PlayerInfo, 1) as PlayerInfo[];
         }
-        set playerData(value: PlayerData) {
-            pb_1.Message.setWrapperField(this, 1, value);
-        }
-        get has_playerData() {
-            return pb_1.Message.getField(this, 1) != null;
+        set playerInfos(value: PlayerInfo[]) {
+            pb_1.Message.setRepeatedWrapperField(this, 1, value);
         }
         static fromObject(data: {
-            playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
-        }): C_Catch {
-            const message = new C_Catch({});
-            if (data.playerData != null) {
-                message.playerData = PlayerData.fromObject(data.playerData);
+            playerInfos?: ReturnType<typeof PlayerInfo.prototype.toObject>[];
+        }): S_PlayerList {
+            const message = new S_PlayerList({});
+            if (data.playerInfos != null) {
+                message.playerInfos = data.playerInfos.map(item => PlayerInfo.fromObject(item));
             }
             return message;
         }
         toObject() {
             const data: {
-                playerData?: ReturnType<typeof PlayerData.prototype.toObject>;
+                playerInfos?: ReturnType<typeof PlayerInfo.prototype.toObject>[];
             } = {};
-            if (this.playerData != null) {
-                data.playerData = this.playerData.toObject();
+            if (this.playerInfos != null) {
+                data.playerInfos = this.playerInfos.map((item: PlayerInfo) => item.toObject());
             }
             return data;
         }
@@ -1623,8 +1585,95 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerData)
-                writer.writeMessage(1, this.playerData, () => this.playerData.serialize(writer));
+            if (this.playerInfos.length)
+                writer.writeRepeatedMessage(1, this.playerInfos, (item: PlayerInfo) => item.serialize(writer));
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_PlayerList {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_PlayerList();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.playerInfos, () => pb_1.Message.addToRepeatedWrapperField(message, 1, PlayerInfo.deserialize(reader), PlayerInfo));
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): S_PlayerList {
+            return S_PlayerList.deserialize(bytes);
+        }
+    }
+    export class C_Catch extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+            beCatchedPlayerId?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("beCatchedPlayerId" in data && data.beCatchedPlayerId != undefined) {
+                    this.beCatchedPlayerId = data.beCatchedPlayerId;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get beCatchedPlayerId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set beCatchedPlayerId(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+            beCatchedPlayerId?: number;
+        }): C_Catch {
+            const message = new C_Catch({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.beCatchedPlayerId != null) {
+                message.beCatchedPlayerId = data.beCatchedPlayerId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+                beCatchedPlayerId?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.beCatchedPlayerId != null) {
+                data.beCatchedPlayerId = this.beCatchedPlayerId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.beCatchedPlayerId != 0)
+                writer.writeInt32(2, this.beCatchedPlayerId);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -1635,7 +1684,10 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.playerData, () => message.playerData = PlayerData.deserialize(reader));
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.beCatchedPlayerId = reader.readInt32();
                         break;
                     default: reader.skipField();
                 }
@@ -1647,6 +1699,73 @@ export namespace impelDown {
         }
         static deserializeBinary(bytes: Uint8Array): C_Catch {
             return C_Catch.deserialize(bytes);
+        }
+    }
+    export class S_Catched extends pb_1.Message {
+        #one_of_decls: number[][] = [];
+        constructor(data?: any[] | {
+            playerId?: number;
+        }) {
+            super();
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+            }
+        }
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+        }): S_Catched {
+            const message = new S_Catched({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            return message;
+        }
+        toObject() {
+            const data: {
+                playerId?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            return data;
+        }
+        serialize(): Uint8Array;
+        serialize(w: pb_1.BinaryWriter): void;
+        serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
+            const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (!w)
+                return writer.getResultBuffer();
+        }
+        static deserialize(bytes: Uint8Array | pb_1.BinaryReader): S_Catched {
+            const reader = bytes instanceof pb_1.BinaryReader ? bytes : new pb_1.BinaryReader(bytes), message = new S_Catched();
+            while (reader.nextField()) {
+                if (reader.isEndGroup())
+                    break;
+                switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    default: reader.skipField();
+                }
+            }
+            return message;
+        }
+        serializeBinary(): Uint8Array {
+            return this.serialize();
+        }
+        static deserializeBinary(bytes: Uint8Array): S_Catched {
+            return S_Catched.deserialize(bytes);
         }
     }
 }

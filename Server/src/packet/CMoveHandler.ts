@@ -1,12 +1,11 @@
-import SessionManager from "../SessionManager";
-import SocketSession from "../SocketSession";
 import { PacketHandler } from "./PacketHandler";
+import SocketSession from "../PlayerData/SocketSession";
 import { impelDown } from "./packet";
+import SessionManager from "../SessionManager";
 
 export default class CMoveHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
-        let cMove = impelDown.C_Move.deserialize(buffer);
-
-        SessionManager.Instance.getSession(cMove.playerAllData.playerData.playerId).setPosAndRot(cMove.playerAllData.posAndRot);
+        let cMove: impelDown.C_Move = impelDown.C_Move.deserialize(buffer);
+        SessionManager.Instance.getSession(cMove.playerId).getPlayerData().setPositionInfo(cMove.positionInfo);
     }
 }

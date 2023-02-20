@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Client/Assets/09.Tilemaps/Forest/Forest.prefab.meta
 guid: 027dff94ac7333a43b2d7b5145fd7cf6
+========
+guid: 112797165c64e3840ac9f3946038145f
+>>>>>>>> 수정:Client/Assets/09.Tilemaps/Forest/RoomPanel.prefab.meta
 PrefabImporter:
   externalObjects: {}
   userData: 
