@@ -42,14 +42,10 @@ public class PacketManager : MonoBehaviour {
         _onRecv.Add((ushort)MSGID.SPlayerlist, MakePacket<S_PlayerList>);
         _handlers.Add((ushort)MSGID.SPlayerlist, new SPlayerListHandler());
 
-        _onRecv.Add((ushort)MSGID.SCatching, MakePacket<S_Catching>);
-        _handlers.Add((ushort)MSGID.SCatching, new SCatchingHandler());
+        _onRecv.Add((ushort)MSGID.SCatch, MakePacket<S_Catch>);
+        _handlers.Add((ushort)MSGID.SCatch, new SCatchHandler());
 
-        _onRecv.Add((ushort)MSGID.SCatched, MakePacket<S_Catched>);
-        _handlers.Add((ushort)MSGID.SCatched, new SCatchedHandler());
 
-        _onRecv.Add((ushort)MSGID.SQuit, MakePacket<S_Quit>);
-        _handlers.Add((ushort)MSGID.SQuit, new SQuitHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

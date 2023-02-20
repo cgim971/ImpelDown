@@ -16,10 +16,14 @@ public class PlayerManager {
         }
         set => _instance = value;
     }
+
+    public BasePlayer RemotePlayer {
+        set => _remotePlayer = value;
+    }
     #endregion
     private static PlayerManager _instance = null;
-
     private Dictionary<int, BasePlayer> _remotePlayerList;
+    private BasePlayer _remotePlayer;
 
     public PlayerManager() {
         // 새로운 게임 시작할 시 초기화
@@ -31,7 +35,7 @@ public class PlayerManager {
         foreach (PlayerInfo playerInfo in playerList) {
             BasePlayer newPlayer = GameObject.Instantiate(CharacterManager.Instance.PlayerCharacterPrefab(playerInfo.CharacterIndex));
             bool isPlayer = (playerInfo.PlayerId == GameManager.Instance.PlayerId) ? true : false;
-            newPlayer.Init(isPlayer, playerInfo.PlayerId, playerInfo.TailIndex, playerInfo.TargetTailIndex);
+            newPlayer.Init(isPlayer, playerInfo.PlayerId, playerInfo.PlayerState, playerInfo.TailIndex, playerInfo.TargetTailIndex);
             PositionData positionData = Util.ChangePosition(playerInfo.PositionInfo);
             newPlayer.SetPositionInfo(positionData, true);
 
@@ -40,7 +44,6 @@ public class PlayerManager {
     }
 
     public void AddRemotePlayer(BasePlayer player) {
-        Debug.Log(player.PlayerId);
         _remotePlayerList.Add(player.PlayerId, player);
     }
 
@@ -66,6 +69,15 @@ public class PlayerManager {
     public void UpdatePlayerTargetTailIndex(PlayerInfo playerInfo) {
         if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out BasePlayer player)) {
             player.SetTargetTailIndex(playerInfo.TargetTailIndex);
+        }
+    }
+
+    public void UpdatePlayerState(RepeatedField<PlayerInfo> playerInfos) {
+        foreach (PlayerInfo playerInfo in playerInfos) {
+            BasePlayer player = null;
+            if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out player)) {
+                player.SetPlayerState(playerInfo.PlayerState);
+            }
         }
     }
 }

@@ -28,6 +28,8 @@ public abstract class BaseCatchModule : MonoBehaviour {
         if (!Input.GetMouseButtonDown(0))
             return;
 
+        if (_player.PlayerState == PlayerState.Ghost)
+            return;
 
         RaycastHit2D[] players = Physics2D.CircleCastAll(transform.position, 1.5f, Vector2.right);
         foreach (RaycastHit2D player in players) {

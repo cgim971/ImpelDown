@@ -21,6 +21,7 @@ public class BasePlayer : MonoBehaviour {
     public int PlayerId => _playerId;
     public int TailIndex => _tailIndex;
     public int TargetTailIndex => _targetTailIndex;
+    public PlayerState PlayerState => _playerState;
     #endregion
 
     protected BaseInputModule _baseInputModule;
@@ -32,33 +33,41 @@ public class BasePlayer : MonoBehaviour {
 
     protected Rigidbody2D _rigidbody;
     private Transform _agentRendererTs;
+    private Transform _agentGhostRendererTs;
 
 
     protected bool _isPlayer = false;
     protected int _playerId = -1;
+    protected PlayerState _playerState = PlayerState.None;
 
     protected int _tailIndex = -1;
     protected int _targetTailIndex = -1;
 
 
     private float _width = 0;
+    CinemachineVirtualCamera vCam = null;
 
 
     private void Awake() {
         _width = Screen.width / 2;
         _agentRendererTs = transform.Find("AgentRenderer");
+        _agentGhostRendererTs = transform.Find("AgentGhostRenderer");
     }
 
-    public virtual void Init(bool isPlayer, int playerId, int tailIndex, int targetTailIndex) {
+    public virtual void Init(bool isPlayer, int playerId, PlayerState playerState, int tailIndex, int targetTailIndex) {
         _isPlayer = isPlayer;
         _playerId = playerId;
         _tailIndex = tailIndex;
-        _targetTailIndex = targetTailIndex;
+
+        SetPlayerState(playerState);
+        SetTargetTailIndex(targetTailIndex);
 
         _rigidbody = GetComponent<Rigidbody2D>();
 
         if (isPlayer) {
-            CinemachineVirtualCamera vCam = GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>();
+            PlayerManager.Instance.RemotePlayer = this;
+
+            vCam = GameObject.Find("FollowCam").GetComponent<CinemachineVirtualCamera>();
             if (vCam != null) {
                 vCam.m_Follow = this.transform;
             }
@@ -96,22 +105,47 @@ public class BasePlayer : MonoBehaviour {
         float x = Input.mousePosition.x;
         int scaleX = (int)(x == _width ? transform.localScale.x : x > _width ? 1 : -1);
 
-        _agentRendererTs.localScale = new Vector3(scaleX, 1, 1);
+        transform.localScale = new Vector3(scaleX, 1, 1);
     }
 
     public void SetPositionInfo(PositionData positionData, bool isImmediate = false) {
         _baseMoveModule.SetPositionData(positionData.pos, isImmediate);
-        _agentRendererTs.localScale = new Vector3(positionData.scaleX, 1, 1);
+        transform.localScale = new Vector3(positionData.scaleX, 1, 1);
     }
 
-    public void SetTargetTailIndex(int targetTailIndex) {
-        _targetTailIndex = targetTailIndex;
+    public void SetTargetTailIndex(int targetTailIndex) => _targetTailIndex = targetTailIndex;
+
+    public void SetPlayerState(PlayerState playerState) {
+        _playerState = playerState;
+
+        switch (_playerState) {
+            case PlayerState.None:
+                break;
+            case PlayerState.Alive:
+                if (IsPlayer)
+                    Camera.main.cullingMask = Camera.main.cullingMask & ~(1 << LayerMask.NameToLayer("GhostTs"));
+
+                SetActiveTs(_agentRendererTs);
+                SetActiveTs(_agentGhostRendererTs, false);
+                break;
+            case PlayerState.Catched:
+                break;
+            case PlayerState.Ghost:
+                if (IsPlayer)
+                    Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("GhostTs");
+
+                SetActiveTs(_agentRendererTs, false);
+                SetActiveTs(_agentGhostRendererTs);
+                break;
+        }
     }
+
+    void SetActiveTs(Transform ts, bool isActive = true) => ts.gameObject.SetActive(isActive);
 
     protected virtual IEnumerator SendPosition() {
         PositionInfo positionInfo = new PositionInfo {
             Position = new Position(),
-            ScaleX = _agentRendererTs.localScale.x
+            ScaleX = transform.localScale.x
         };
 
         while (gameObject.activeSelf) {

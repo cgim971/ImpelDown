@@ -29,15 +29,9 @@ enum MSGID
     S_PLAYERLIST = 56;
     C_CATCH = 57;
     
-    S_CATCHING = 60;
-    S_CATCHED = 61;
+    S_CATCH = 58;
 
-    
-    C_QUIT  = 70;
-    S_QUIT = 71;
 
-    C_GAMEEXIT = 80
-    S_GAMEEXIT = 81;
     
     
 
@@ -58,6 +52,13 @@ enum MSGID
 
 }
 
+enum PlayerState {
+    NONE = 0;
+    ALIVE = 1;
+    CATCHED = 2;
+    GHOST = 3;
+}
+
 message PlayerInfo {
     int32 playerId = 1;
     string playerName = 2;  
@@ -65,6 +66,7 @@ message PlayerInfo {
     PositionInfo positionInfo = 4;
     int32 tailIndex = 5;
     int32 targetTailIndex = 6;
+    PlayerState playerState = 7;
 }
 
 message Position {
@@ -144,25 +146,7 @@ message C_Catch {
     int32 beCatchedPlayerId = 2;
 }
 
-message S_Catching {
-    PlayerInfo playerInfo = 1;
-}
-message S_Catched {
-    int32 playerId = 1;   
-}
-
-message C_Quit {
-    int32 playerId = 1;
-}
-
-message S_Quit {
-    int32 playerId = 1;
-}
-
-
-message C_GameExit {
-
-}
-message S_GameExit {
-    int32 playerId = 1;
+message S_Catch {
+    PlayerInfo catchingPlayerInfo = 1;
+    repeated PlayerInfo playerInfos = 2;
 }

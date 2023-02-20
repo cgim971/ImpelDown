@@ -45,7 +45,6 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance.Connection();
     }
 
-
     public void GameStart(RoomInfo roomInfo) {
         StartCoroutine(GmaeStarting(roomInfo));
     }
@@ -60,10 +59,6 @@ public class GameManager : MonoBehaviour {
         // 플레이어 생성
         PlayerManager.Instance = new PlayerManager();
         PlayerManager.Instance.CreatePlayer(roomInfo.PlayerInfos);
-    }
-
-    private void OnApplicationQuit() {
-        C_Quit cQuit = new C_Quit { PlayerId = PlayerId };
-        NetworkManager.Instance.RegisterSend((ushort)MSGID.CQuit, cQuit);
+        PlayerManager.Instance.UpdatePlayerState(roomInfo.PlayerInfos);
     }
 }

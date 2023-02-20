@@ -7,6 +7,7 @@ export default class PlayerData {
     private _positionInfo: impelDown.PositionInfo;
     private _tailIndex: number;
     private _targetTailIndex: number;
+    private _playerState: impelDown.PlayerState;    // 1 이면 한 번도 잡히지 않음, 2면 잡히고 30초, 3이면 유령
 
     constructor(playerId: number, playerName: string) {
         this._playerId = playerId;
@@ -15,6 +16,7 @@ export default class PlayerData {
         this._characterIndex = -1;
         this._tailIndex = -1;
         this._targetTailIndex = -1;
+        this._playerState = impelDown.PlayerState.NONE;
     }
 
 
@@ -25,7 +27,8 @@ export default class PlayerData {
             characterIndex: this._characterIndex,
             positionInfo: this._positionInfo,
             tailIndex: this._tailIndex,
-            targetTailIndex: this._targetTailIndex
+            targetTailIndex: this._targetTailIndex,
+            playerState: this._playerState
         });
     }
 
@@ -68,5 +71,13 @@ export default class PlayerData {
 
     setTargetTailIndex(targetTailIndex: number) {
         this._targetTailIndex = targetTailIndex;
+    }
+
+    setPlayerState(playerState: impelDown.PlayerState = impelDown.PlayerState.ALIVE) {
+        this._playerState = playerState;
+    }
+
+    getPlayerState(): impelDown.PlayerState {
+        return this._playerState;
     }
 }

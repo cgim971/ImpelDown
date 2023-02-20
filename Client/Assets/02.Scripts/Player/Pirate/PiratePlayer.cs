@@ -1,7 +1,9 @@
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Playables;
 
 public class PiratePlayer : BasePlayer {
 
@@ -12,8 +14,8 @@ public class PiratePlayer : BasePlayer {
     public PirateSkillModule PirateSkillModule => _baseSkillModule as PirateSkillModule;
     #endregion
 
-    public override void Init(bool isPlayer, int playerId, int tailIndex, int targetTailIndex) {
-        base.Init(isPlayer, playerId, tailIndex, targetTailIndex);
+    public override void Init(bool isPlayer, int playerId, PlayerState playerState, int tailIndex, int targetTailIndex) {
+        base.Init(isPlayer, playerId, playerState, tailIndex, targetTailIndex);
 
         AddComponents();
 
