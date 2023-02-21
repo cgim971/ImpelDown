@@ -1,19 +1,16 @@
 fileFormatVersion: 2
-guid: e391d3ed55444d145a535a6bac8f8ec9
+guid: 80c37861d38b0fa4aa81ee278543f6fd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4756683309484083523
-    second: pirate_walk_0
+      213: 2383248925460091325
+    second: pirateGirl_ghost_0
   - first:
-      213: 1060541971900625848
-    second: pirate_walk_1
+      213: -8763980418272452436
+    second: pirateGirl_ghost_1
   - first:
-      213: 7395187107985373008
-    second: pirate_walk_2
-  - first:
-      213: 7899587954195611201
-    second: pirate_walk_3
+      213: -3239580001807698819
+    second: pirateGirl_ghost_2
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -104,7 +101,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pirate_walk_0
+      name: pirateGirl_ghost_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,20 +109,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db6fb256bbddcfdb0800000000000000
-      internalID: -4756683309484083523
+      spriteID: db1516d4540031120800000000000000
+      internalID: 2383248925460091325
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pirate_walk_1
+      name: pirateGirl_ghost_1
       rect:
         serializedVersion: 2
         x: 64
@@ -133,20 +130,20 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8b37780fd4dc7be00800000000000000
-      internalID: 1060541971900625848
+      spriteID: ca0246e3e36106680800000000000000
+      internalID: -8763980418272452436
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pirate_walk_2
+      name: pirateGirl_ghost_2
       rect:
         serializedVersion: 2
         x: 128
@@ -154,35 +151,14 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 057340b4e7bf0a660800000000000000
-      internalID: 7395187107985373008
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pirate_walk_3
-      rect:
-        serializedVersion: 2
-        x: 192
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 14eb8c9f369f0ad60800000000000000
-      internalID: 7899587954195611201
+      spriteID: d74fac20723ba03d0800000000000000
+      internalID: -3239580001807698819
       vertices: []
       indices: 
       edges: []

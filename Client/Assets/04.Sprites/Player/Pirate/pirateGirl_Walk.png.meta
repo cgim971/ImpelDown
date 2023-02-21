@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 80c37861d38b0fa4aa81ee278543f6fd
+guid: 0d748d74f34943c4fa0c94685dbb5f75
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2383248925460091325
-    second: pirate_ghost_0
+      213: -3067549325505791586
+    second: pirateGirl_Walk_0
   - first:
-      213: -8763980418272452436
-    second: pirate_ghost_1
+      213: -6144381829008128894
+    second: pirateGirl_Walk_1
   - first:
-      213: -3239580001807698819
-    second: pirate_ghost_2
+      213: 6257443667494372583
+    second: pirateGirl_Walk_2
+  - first:
+      213: -5717274273895213910
+    second: pirateGirl_Walk_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -101,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pirate_ghost_0
+      name: pirateGirl_Walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -115,14 +118,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: db1516d4540031120800000000000000
-      internalID: 2383248925460091325
+      spriteID: e99fc3a1420ed65d0800000000000000
+      internalID: -3067549325505791586
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pirate_ghost_1
+      name: pirateGirl_Walk_1
       rect:
         serializedVersion: 2
         x: 64
@@ -136,14 +139,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ca0246e3e36106680800000000000000
-      internalID: -8763980418272452436
+      spriteID: 2840b95e745cabaa0800000000000000
+      internalID: -6144381829008128894
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pirate_ghost_2
+      name: pirateGirl_Walk_2
       rect:
         serializedVersion: 2
         x: 128
@@ -157,8 +160,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d74fac20723ba03d0800000000000000
-      internalID: -3239580001807698819
+      spriteID: 7e4050bbcd7e6d650800000000000000
+      internalID: 6257443667494372583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pirateGirl_Walk_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa41ffcd65928a0b0800000000000000
+      internalID: -5717274273895213910
       vertices: []
       indices: 
       edges: []

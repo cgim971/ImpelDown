@@ -24,6 +24,8 @@ enum MSGID
 
     C_GAME_START = 51;
     S_GAME_START = 52;
+    C_GAME_EXIT = 53;
+    S_GAME_EXIT = 54;
 
     C_MOVE = 55;
     S_PLAYERLIST = 56;
@@ -32,7 +34,7 @@ enum MSGID
     S_CATCH = 58;
 
 
-    
+    S_GAME_END = 90;
     
 
     C_MAGICIAN_SKILL = 100;
@@ -132,6 +134,15 @@ message S_Game_Start {
     RoomInfo roomInfo = 1;
 }
 
+message C_Game_Exit {
+    int32 playerId = 1;
+}
+
+message S_Game_Exit {
+    int32 playerId = 1;
+    PlayerInfo playerInfo = 2;
+}
+
 message C_Move {
     int32 playerId = 1;
     PositionInfo positionInfo = 2;
@@ -149,4 +160,8 @@ message C_Catch {
 message S_Catch {
     PlayerInfo catchingPlayerInfo = 1;
     repeated PlayerInfo playerInfos = 2;
+}
+
+message S_Game_End {
+    int32 playerId = 1;
 }

@@ -65,12 +65,7 @@ export default class Room {
     }
 
     private gameTimer: JobTimer = new JobTimer(40, () => {
-        let list: impelDown.PlayerInfo[] = [];
-        for (let index in this._playerMap) {
-            list.push(this._playerMap[index].getPlayerInfo());
-        }
-        let data: impelDown.S_PlayerList = new impelDown.S_PlayerList({ playerInfos: list });
-        this.broadCastMessage(data.serialize(), impelDown.MSGID.S_PLAYERLIST);
+        this.sPlayerList();
     });
 
     catchPlayer(player: SocketSession, beCatchedPlayer: SocketSession) {
@@ -82,7 +77,7 @@ export default class Room {
 
             // 꼬리 갱신
             this._tailManager.refreshTargetTail(player, beCatchedPlayer.getPlayerData().getTargetTailIndex());
-            beCatchedPlayer.getPlayerData().setPlayerState(impelDown.PlayerState.GHOST);
+            this.diePlayer(beCatchedPlayer);
 
             let sCatch: impelDown.S_Catch = new impelDown.S_Catch({ catchingPlayerInfo: player.getPlayerInfo(), playerInfos: this.getRoomPlayersInfo().playerInfos });
             this.broadCastMessage(sCatch.serialize(), impelDown.MSGID.S_CATCH);
@@ -93,13 +88,80 @@ export default class Room {
     }
 
 
+    checkGameResult(): void {
+        // 1명마나 살앗따
+        if (this._playerCount - 1 == this._catchedPlayerCount) {
+            for (let index in this._playerMap) {
+                let player: SocketSession = this._playerMap[index];
+                if (player.getPlayerData().getPlayerState() == impelDown.PlayerState.ALIVE) {
+                    this.gameTimer.stopTimer();
+
+                    let sGameEnd: impelDown.S_Game_End = new impelDown.S_Game_End({ playerId: player.getPlayerData().getPlayerId() })
+                    this.broadCastMessage(sGameEnd.serialize(), impelDown.MSGID.S_GAME_END);
+                    break;
+                }
+            }
+
+
+        }
+    }
+
     diePlayer(player: SocketSession): void {
         player.getPlayerData().setPlayerState(impelDown.PlayerState.GHOST);
         this._catchedPlayerCount += 1;
+
+        this.checkGameResult();
     }
 
-    exitGame(player: SocketSession) {
+    gameExit(player: SocketSession) {
+        let playerState: impelDown.PlayerState = player.getPlayerData().getPlayerState();
+        let p: SocketSession | null = null;
+        switch (playerState) {
+            case impelDown.PlayerState.ALIVE:
+                let pIndex: SocketSession | null = this._tailManager.getPlayer(player.getPlayerData().getTailIndex());
 
+                if (pIndex == null) break;
+                p = pIndex;
+                this._tailManager.refreshTargetTail(p, player.getPlayerData().getTargetTailIndex() - 1);
+                break;
+            case impelDown.PlayerState.GHOST:
+                this._catchedPlayerCount -= 1;
+                break;
+        }
+
+        if (this._playerCount > 1) {
+            // 플레이어가 2명 이상이면
+            if (this._hostSocket == player) {
+                // 호스트 변경
+                for (let index in this._playerMap) {
+                    if (this._playerMap[index] != player) {
+                        this._hostSocket = this._playerMap[index];
+                        break;
+                    }
+                }
+            }
+        }
+
+        for (let index in this._playerMap) {
+            if (this._playerMap[index] == player) {
+                delete this._playerMap[index];
+                this._playerCount -= 1;
+                player.getRoomData().setRoomIndex();
+                player.getPlayerData().setCharacterIndex();
+
+                if (p == null) break;
+                let sGameExit: impelDown.S_Game_Exit = new impelDown.S_Game_Exit({ playerId: player.getPlayerData().getPlayerId(), playerInfo: p.getPlayerInfo() });
+
+                player.SendData(sGameExit.serialize(), impelDown.MSGID.S_GAME_EXIT);
+                this.broadCastMessage(sGameExit.serialize(), impelDown.MSGID.S_GAME_EXIT);
+
+                break;
+            }
+        }
+
+        this.sPlayerList();
+
+        this.checkGameResult();
     }
 
     endGame(): void {
@@ -155,7 +217,8 @@ export default class Room {
             }
         }
 
-        if (this._playerCount == 0) {
+        // 게임 중이 아니고 플레이어가 없으면 방 삭제
+        if (this._playerCount == 0 && this._isGameing == false) {
             RoomManager.Instance.deleteRoom(this._roomIndex);
         }
 
@@ -208,6 +271,15 @@ export default class Room {
     sRefreshRoom(): void {
         let sRefreshRoom: impelDown.S_Refresh_Room = new impelDown.S_Refresh_Room({ roomInfo: this.getRoomPlayersInfo() });
         this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
+    }
+
+    sPlayerList(): void {
+        let list: impelDown.PlayerInfo[] = [];
+        for (let index in this._playerMap) {
+            list.push(this._playerMap[index].getPlayerInfo());
+        }
+        let data: impelDown.S_PlayerList = new impelDown.S_PlayerList({ playerInfos: list });
+        this.broadCastMessage(data.serialize(), impelDown.MSGID.S_PLAYERLIST);
     }
 
     getRoomPlayersInfo(): impelDown.RoomInfo {

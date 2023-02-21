@@ -1,5 +1,6 @@
 import Room from "./Room/Room";
 import SocketSession from "../PlayerData/SocketSession";
+import { impelDown } from "../packet/packet";
 
 interface PlayerDictionary {
     [key: number]: SocketSession;
@@ -25,7 +26,7 @@ export default class TailManager {
             list[i] = i;
         }
         let count: number = Math.floor(Math.random() * 2000);
-        
+
         // 꼬리 섞기
         while (count--) {
             let temp1: number = Math.floor(Math.random() * playerCount);
@@ -47,6 +48,17 @@ export default class TailManager {
     }
 
     refreshTargetTail(player: SocketSession, tailIndex: number): void {
-        player.getPlayerData().setTargetTailIndex(tailIndex);
+        player?.getPlayerData().setTargetTailIndex(tailIndex);
     }
+
+    getPlayer(tailIndex: number): SocketSession | null {
+        for (let index in this._playerMap) {
+            let player: SocketSession = this._playerMap[index];
+            if (player.getPlayerData().getTailIndex() < tailIndex && tailIndex < player.getPlayerData().getTargetTailIndex() && player.getPlayerData().getPlayerState() != impelDown.PlayerState.GHOST) {
+                return player;
+            }
+        }
+        return null;
+    }
+
 }

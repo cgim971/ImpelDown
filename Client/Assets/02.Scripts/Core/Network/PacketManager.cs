@@ -39,6 +39,9 @@ public class PacketManager : MonoBehaviour {
         _onRecv.Add((ushort)MSGID.SGameStart, MakePacket<S_Game_Start>);
         _handlers.Add((ushort)MSGID.SGameStart, new SGameStartHandler());
 
+        _onRecv.Add((ushort)MSGID.SGameExit, MakePacket<S_Game_Exit>);
+        _handlers.Add((ushort)MSGID.SGameExit, new SGameExitHandler());
+
         _onRecv.Add((ushort)MSGID.SPlayerlist, MakePacket<S_PlayerList>);
         _handlers.Add((ushort)MSGID.SPlayerlist, new SPlayerListHandler());
 
@@ -46,6 +49,8 @@ public class PacketManager : MonoBehaviour {
         _handlers.Add((ushort)MSGID.SCatch, new SCatchHandler());
 
 
+        _onRecv.Add((ushort)MSGID.SGameEnd, MakePacket<S_Game_End>);
+        _handlers.Add((ushort)MSGID.SGameEnd, new SGameEndHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

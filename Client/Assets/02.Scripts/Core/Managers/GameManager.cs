@@ -31,8 +31,9 @@ public class GameManager : MonoBehaviour {
 
 
     private void Awake() {
-        if (_instance != null)
+        if (_instance != null) {
             Debug.LogError("Multiple GameManager is running!");
+        }
         _instance = this;
         DontDestroyOnLoad(_instance);
 
@@ -60,5 +61,12 @@ public class GameManager : MonoBehaviour {
         PlayerManager.Instance = new PlayerManager();
         PlayerManager.Instance.CreatePlayer(roomInfo.PlayerInfos);
         PlayerManager.Instance.UpdatePlayerState(roomInfo.PlayerInfos);
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.P)) {
+            C_Game_Exit cGameExit = new C_Game_Exit { PlayerId = playerId };
+            NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameExit, cGameExit);
+        }
     }
 }
