@@ -44,6 +44,7 @@ public class BasePlayer : MonoBehaviour {
     private void Awake() {
         _width = Screen.width / 2;
         _agentRendererTs = transform.Find("AgentRenderer");
+        Init(true, 0, 0);
     }
 
     public virtual void Init(bool isPlayer, int playerId, int tailIndex) {

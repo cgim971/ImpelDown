@@ -4,13 +4,10 @@ using UnityEngine;
 
 public class NinjaInputModule : BaseInputModule
 {
-    protected override void Update()
-    {
-        base.Update();
-    }
+    public NinjaPlayer NinjaPlayer => _player as NinjaPlayer;
 
-    protected override void FixedUpdate()
+    public override void Init()
     {
-        base.FixedUpdate();
+        _player = GetComponent<NinjaPlayer>();
     }
 }

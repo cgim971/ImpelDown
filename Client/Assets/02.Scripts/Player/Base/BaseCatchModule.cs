@@ -22,7 +22,7 @@ public abstract class BaseCatchModule : MonoBehaviour {
     }
 
     public virtual void Catch() {
-        if (_isCatchable == false || Input.GetKey(KeyCode.R) == false)
+        if (_isCatchable == false || Input.GetKey(KeyCode.T) == false)
             return;
 
         if (!Input.GetMouseButtonDown(0))
