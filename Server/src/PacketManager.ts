@@ -8,7 +8,8 @@ import { PacketHandler } from "./packet/PacketHandler";
 import CGameStartHandler from "./packet/CGameStartHandler";
 import CMoveHandler from "./packet/CMoveHandler";
 import CCatchHandler from "./packet/CCatchHandler";
-import CGameExitHandler from "./packet/CGameExitHandler";
+// import CGameExitHandler from "./packet/CGameExitHandler";
+import CNinjaSkillHandler from "./packet/Players/CNinjaSkillHandler";
 
 interface HandlerDictionary {
     [key: number]: PacketHandler;
@@ -37,8 +38,13 @@ export default class PacketManager {
 
 
         this._handlerMap[impelDown.MSGID.C_GAME_START] = new CGameStartHandler();
-        this._handlerMap[impelDown.MSGID.C_GAME_EXIT] = new CGameExitHandler();
+        // this._handlerMap[impelDown.MSGID.C_GAME_EXIT] = new CGameExitHandler();
         this._handlerMap[impelDown.MSGID.C_MOVE] = new CMoveHandler();
         this._handlerMap[impelDown.MSGID.C_CATCH] = new CCatchHandler();
+
+
+        
+        this._handlerMap[impelDown.MSGID.C_NINJA_SKILL] = new CNinjaSkillHandler();
+
     }
 }

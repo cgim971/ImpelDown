@@ -64,9 +64,9 @@ public class GameManager : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.GetKeyDown(KeyCode.P)) {
-            C_Game_Exit cGameExit = new C_Game_Exit { PlayerId = playerId };
-            NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameExit, cGameExit);
-        }
+        //if (Input.GetKeyDown(KeyCode.P)) {
+        //    C_Game_Exit cGameExit = new C_Game_Exit { PlayerId = playerId };
+        //    NetworkManager.Instance.RegisterSend((ushort)MSGID.CGameExit, cGameExit);
+        //}
     }
 }

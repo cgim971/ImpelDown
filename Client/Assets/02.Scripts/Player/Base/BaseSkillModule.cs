@@ -23,5 +23,11 @@ public abstract class BaseSkillModule : MonoBehaviour {
     }
 
     // ½ºÅ³ Q
-    public abstract void Skill();
+    public virtual void Skill() {
+        if (Input.GetKeyDown(KeyCode.Q) == false || _isSkillable == false)
+            return;
+
+        if (_player.PlayerState == ImpelDown.Proto.PlayerState.Ghost)
+            return;
+    }
 }

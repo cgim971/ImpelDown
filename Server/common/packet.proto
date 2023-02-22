@@ -165,3 +165,14 @@ message S_Catch {
 message S_Game_End {
     int32 playerId = 1;
 }
+
+
+
+
+message C_Ninja_Skill {
+    int32 playerId = 1;
+}
+
+message S_Ninja_Skill {
+    int32 playerId = 1;
+}

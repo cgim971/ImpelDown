@@ -1,3 +1,4 @@
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine;
 public class NinjaSkillModule : BaseSkillModule {
     public NinjaPlayer NinjaPlayer => _player as NinjaPlayer;
 
-    
+
     private bool isDashing;
 
     private Vector3 mouseDir;
@@ -15,20 +16,22 @@ public class NinjaSkillModule : BaseSkillModule {
     }
 
     public override void Skill() {
-        if (Input.GetKeyDown(KeyCode.Q) == false || isDashing == true || _isSkillable == false)
-            return;
+        base.Skill();
 
-        if (_player.PlayerState == ImpelDown.Proto.PlayerState.Ghost)
+        if (isDashing == true)
             return;
 
         isDashing = true;
         mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         StartCoroutine(CoolTime());
+
+        C_Ninja_Skill cNinjaSkill = new C_Ninja_Skill { PlayerId = GameManager.Instance.PlayerId };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.SNinjaSkill, cNinjaSkill);
     }
 
     private void FixedUpdate() {
         if (isDashing) {
-            _player.Rigidbody.MovePosition(transform.position + mouseDir *  NinjaPlayer.NinjaDataSO.dashAmount);
+            _player.Rigidbody.MovePosition(transform.position + mouseDir * NinjaPlayer.NinjaDataSO.dashAmount);
             isDashing = false;
         }
     }
