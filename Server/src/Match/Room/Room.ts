@@ -177,7 +177,7 @@ export default class Room {
         this._playerMap[playerIndex] = player;
         this._playerCount += 1;
         player.getRoomData().setRoomIndex(this._roomIndex);
-        player.getPlayerData().setCharacterIndex(5);
+        player.getPlayerData().setCharacterIndex(4);
 
         let sJoinRoom: impelDown.S_Join_Room = new impelDown.S_Join_Room();
         player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);

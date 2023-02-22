@@ -1719,7 +1719,6 @@ GameObject:
   - component: {fileID: 1119783450}
   - component: {fileID: 1119783451}
   - component: {fileID: 1119783452}
-  - component: {fileID: 1119783453}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1766,20 +1765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b982aa2d2fb6cc144958ec36acb72167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _piratePrefab: {fileID: 4152200519119026491, guid: d6e9662634a11624e8ffebfb358ae96a, type: 3}
---- !u!114 &1119783453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1119783449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 163288d5578d554489a80c4166b13ed4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _snakeTailList: []
+  _piratePrefab: {fileID: 4152200519119026491, guid: 301511eb8654b054dae02687e2f141d5, type: 3}
+  _ninjaPrefab: {fileID: 6416212586555830353, guid: 73ee244b122a25d44a2683e2ebe3bb75, type: 3}
 --- !u!1 &1151194094
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,16 +4,16 @@ TextureImporter:
   internalIDToNameTable:
   - first:
       213: -3833419063375098767
-    second: ninjja_walk_0
+    second: ninja_walk_0
   - first:
       213: 6153392022891711183
-    second: ninjja_walk_1
+    second: ninja_walk_1
   - first:
       213: 7844019477773994794
-    second: ninjja_walk_2
+    second: ninja_walk_2
   - first:
       213: 4771076478180388335
-    second: ninjja_walk_3
+    second: ninja_walk_3
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
@@ -104,7 +104,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ninjja_walk_0
+      name: ninja_walk_0
       rect:
         serializedVersion: 2
         x: 0
@@ -112,7 +112,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -125,7 +125,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ninjja_walk_1
+      name: ninja_walk_1
       rect:
         serializedVersion: 2
         x: 64
@@ -133,7 +133,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -146,7 +146,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ninjja_walk_2
+      name: ninja_walk_2
       rect:
         serializedVersion: 2
         x: 128
@@ -154,7 +154,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -167,7 +167,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ninjja_walk_3
+      name: ninja_walk_3
       rect:
         serializedVersion: 2
         x: 192
@@ -175,7 +175,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []

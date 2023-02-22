@@ -13,7 +13,7 @@ public abstract class BaseSkillModule : MonoBehaviour {
 
     protected BasePlayer _player;
 
-    protected bool _isSkillable;
+    protected bool _isSkillable = true;
 
     public abstract void Init();
 
@@ -22,5 +22,6 @@ public abstract class BaseSkillModule : MonoBehaviour {
         _isSkillable = true;
     }
 
+    // ½ºÅ³ Q
     public abstract void Skill();
 }

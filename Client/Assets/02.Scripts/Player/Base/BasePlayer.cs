@@ -13,6 +13,7 @@ public class BasePlayer : MonoBehaviour {
     public BaseCatchModule CatchModule => _baseCatchModule;
     public BaseSkillModule SkillModule => _baseSkillModule;
     public BaseTailModule TailModule => _baseTailModule;
+    public BaseItemModule ItemModule => _baseItemModule;
 
     public BasePlayerDataSO PlayerDataSO => _basePlayerDataSO;
 
@@ -30,8 +31,9 @@ public class BasePlayer : MonoBehaviour {
     protected BaseCatchModule _baseCatchModule;
     protected BaseSkillModule _baseSkillModule;
     protected BaseTailModule _baseTailModule;
+    protected BaseItemModule _baseItemModule;
 
-    [SerializeField] private BasePlayerDataSO _basePlayerDataSO;
+    [SerializeField] protected BasePlayerDataSO _basePlayerDataSO;
 
     protected Rigidbody2D _rigidbody;
     private Transform _agentRendererTs;
@@ -84,6 +86,7 @@ public class BasePlayer : MonoBehaviour {
         _baseCatchModule.Init();
         _baseSkillModule.Init();
         _baseTailModule.Init();
+        _baseItemModule.Init();
     }
 
     protected virtual void Start() {
