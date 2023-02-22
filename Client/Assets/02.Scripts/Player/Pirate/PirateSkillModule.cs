@@ -9,7 +9,7 @@ public class PirateSkillModule : BaseSkillModule {
         _player = GetComponent<PiratePlayer>();
     }
 
-    protected override void Skill() {
+    public override void Skill() {
 
     }
 }

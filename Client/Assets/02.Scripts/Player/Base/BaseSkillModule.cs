@@ -22,5 +22,5 @@ public abstract class BaseSkillModule : MonoBehaviour {
         _isSkillable = true;
     }
 
-    protected abstract void Skill();
+    public abstract void Skill();
 }
