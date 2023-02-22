@@ -2,23 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoBehaviour {
-
+public class TailManager : MonoBehaviour
+{
     #region Property
-    public static CharacterManager Instance {
+    public static TailManager Instance {
         get {
             if (_instance == null)
-                _instance = FindObjectOfType<CharacterManager>();
+                _instance = FindObjectOfType<TailManager>();
 
             return _instance;
         }
     }
     #endregion
-    private static CharacterManager _instance = null;
+    private static TailManager _instance = null;
 
-    [SerializeField] private BasePlayer _piratePrefab;
+    [SerializeField] private List<Sprite> _snakeTailList = new List<Sprite>();
 
-    public BasePlayer PlayerCharacterPrefab(int characterIndex) {
+    public Sprite GetSnakeTail(int characterIndex) {
         switch (characterIndex) {
             case 0:
                 break;
@@ -31,12 +31,10 @@ public class CharacterManager : MonoBehaviour {
             case 4:
                 break;
             case 5:
-                return _piratePrefab;
             case 6:
                 break;
         }
         return null;
     }
-
 
 }

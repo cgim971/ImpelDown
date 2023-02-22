@@ -27,5 +27,6 @@ public class PiratePlayer : BasePlayer {
         _baseMoveModule = gameObject.AddComponent<PirateMoveModule>();
         _baseCatchModule = gameObject.AddComponent<PirateCatchModule>();
         _baseSkillModule = gameObject.AddComponent<PirateSkillModule>();
+        _baseTailModule = gameObject.AddComponent<PirateTailModule>();
     }
 }

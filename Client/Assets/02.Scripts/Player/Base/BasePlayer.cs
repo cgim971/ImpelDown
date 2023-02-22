@@ -12,6 +12,7 @@ public class BasePlayer : MonoBehaviour {
     public BaseMoveModule MoveModule => _baseMoveModule;
     public BaseCatchModule CatchModule => _baseCatchModule;
     public BaseSkillModule SkillModule => _baseSkillModule;
+    public BaseTailModule TailModule => _baseTailModule;
 
     public BasePlayerDataSO PlayerDataSO => _basePlayerDataSO;
 
@@ -28,6 +29,7 @@ public class BasePlayer : MonoBehaviour {
     protected BaseMoveModule _baseMoveModule;
     protected BaseCatchModule _baseCatchModule;
     protected BaseSkillModule _baseSkillModule;
+    protected BaseTailModule _baseTailModule;
 
     [SerializeField] private BasePlayerDataSO _basePlayerDataSO;
 
@@ -62,6 +64,8 @@ public class BasePlayer : MonoBehaviour {
         SetPlayerState(playerState);
         SetTargetTailIndex(targetTailIndex);
 
+
+
         _rigidbody = GetComponent<Rigidbody2D>();
 
         if (isPlayer) {
@@ -79,6 +83,7 @@ public class BasePlayer : MonoBehaviour {
         _baseMoveModule.Init();
         _baseCatchModule.Init();
         _baseSkillModule.Init();
+        _baseTailModule.Init();
     }
 
     protected virtual void Start() {

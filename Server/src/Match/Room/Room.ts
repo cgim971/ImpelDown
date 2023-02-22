@@ -101,8 +101,6 @@ export default class Room {
                     break;
                 }
             }
-
-
         }
     }
 
@@ -114,54 +112,54 @@ export default class Room {
     }
 
     gameExit(player: SocketSession) {
-        let playerState: impelDown.PlayerState = player.getPlayerData().getPlayerState();
-        let p: SocketSession | null = null;
-        switch (playerState) {
-            case impelDown.PlayerState.ALIVE:
-                let pIndex: SocketSession | null = this._tailManager.getPlayer(player.getPlayerData().getTailIndex());
+        // let playerState: impelDown.PlayerState = player.getPlayerData().getPlayerState();
+        // let p: SocketSession | null = null;
+        // switch (playerState) {
+        //     case impelDown.PlayerState.ALIVE:
+        //         let pIndex: SocketSession | null = this._tailManager.getPlayer(player.getPlayerData().getTailIndex());
 
-                if (pIndex == null) break;
-                p = pIndex;
-                this._tailManager.refreshTargetTail(p, player.getPlayerData().getTargetTailIndex() - 1);
-                break;
-            case impelDown.PlayerState.GHOST:
-                this._catchedPlayerCount -= 1;
-                break;
-        }
+        //         if (pIndex == null) break;
+        //         p = pIndex;
+        //         this._tailManager.refreshTargetTail(p, player.getPlayerData().getTargetTailIndex() - 1);
+        //         break;
+        //     case impelDown.PlayerState.GHOST:
+        //         this._catchedPlayerCount -= 1;
+        //         break;
+        // }
 
-        if (this._playerCount > 1) {
-            // 플레이어가 2명 이상이면
-            if (this._hostSocket == player) {
-                // 호스트 변경
-                for (let index in this._playerMap) {
-                    if (this._playerMap[index] != player) {
-                        this._hostSocket = this._playerMap[index];
-                        break;
-                    }
-                }
-            }
-        }
+        // if (this._playerCount > 1) {
+        //     // 플레이어가 2명 이상이면
+        //     if (this._hostSocket == player) {
+        //         // 호스트 변경
+        //         for (let index in this._playerMap) {
+        //             if (this._playerMap[index] != player) {
+        //                 this._hostSocket = this._playerMap[index];
+        //                 break;
+        //             }
+        //         }
+        //     }
+        // }
 
-        for (let index in this._playerMap) {
-            if (this._playerMap[index] == player) {
-                delete this._playerMap[index];
-                this._playerCount -= 1;
-                player.getRoomData().setRoomIndex();
-                player.getPlayerData().setCharacterIndex();
+        // for (let index in this._playerMap) {
+        //     if (this._playerMap[index] == player) {
+        //         delete this._playerMap[index];
+        //         this._playerCount -= 1;
+        //         player.getRoomData().setRoomIndex();
+        //         player.getPlayerData().setCharacterIndex();
 
-                if (p == null) break;
-                let sGameExit: impelDown.S_Game_Exit = new impelDown.S_Game_Exit({ playerId: player.getPlayerData().getPlayerId(), playerInfo: p.getPlayerInfo() });
+        //         if (p == null) break;
+        //         let sGameExit: impelDown.S_Game_Exit = new impelDown.S_Game_Exit({ playerId: player.getPlayerData().getPlayerId(), playerInfo: p.getPlayerInfo() });
 
-                player.SendData(sGameExit.serialize(), impelDown.MSGID.S_GAME_EXIT);
-                this.broadCastMessage(sGameExit.serialize(), impelDown.MSGID.S_GAME_EXIT);
+        //         player.SendData(sGameExit.serialize(), impelDown.MSGID.S_GAME_EXIT);
+        //         this.broadCastMessage(sGameExit.serialize(), impelDown.MSGID.S_GAME_EXIT);
 
-                break;
-            }
-        }
+        //         break;
+        //     }
+        // }
 
-        this.sPlayerList();
+        // this.sPlayerList();
 
-        this.checkGameResult();
+        // this.checkGameResult();
     }
 
     endGame(): void {
