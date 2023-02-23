@@ -10,6 +10,8 @@ public class PirateSkillModule : BaseSkillModule {
     }
 
     public override void Skill() {
+        if (Skillable() == false)
+            return;
 
     }
 }

@@ -16,7 +16,8 @@ public class NinjaSkillModule : BaseSkillModule {
     }
 
     public override void Skill() {
-        base.Skill();
+        if (Skillable() == false)
+            return;
 
         if (isDashing == true)
             return;
@@ -25,8 +26,8 @@ public class NinjaSkillModule : BaseSkillModule {
         mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         StartCoroutine(CoolTime());
 
-        C_Ninja_Skill cNinjaSkill = new C_Ninja_Skill { PlayerId = GameManager.Instance.PlayerId };
-        NetworkManager.Instance.RegisterSend((ushort)MSGID.SNinjaSkill, cNinjaSkill);
+        //C_Ninja_Skill cNinjaSkill = new C_Ninja_Skill { PlayerId = GameManager.Instance.PlayerId };
+        //NetworkManager.Instance.RegisterSend((ushort)MSGID.SNinjaSkill, cNinjaSkill);
     }
 
     private void FixedUpdate() {
