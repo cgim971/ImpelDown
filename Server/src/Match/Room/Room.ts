@@ -96,6 +96,8 @@ export default class Room {
                 if (player.getPlayerData().getPlayerState() == impelDown.PlayerState.ALIVE) {
                     this.gameTimer.stopTimer();
 
+                    this._isGameing = false;
+                    
                     let sGameEnd: impelDown.S_Game_End = new impelDown.S_Game_End({ playerId: player.getPlayerData().getPlayerId() })
                     this.broadCastMessage(sGameEnd.serialize(), impelDown.MSGID.S_GAME_END);
                     break;

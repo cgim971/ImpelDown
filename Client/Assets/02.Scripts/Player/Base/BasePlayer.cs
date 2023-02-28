@@ -67,7 +67,6 @@ public class BasePlayer : MonoBehaviour {
         SetTargetTailIndex(targetTailIndex);
 
 
-
         _rigidbody = GetComponent<Rigidbody2D>();
 
         if (isPlayer) {

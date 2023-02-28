@@ -9,7 +9,4 @@ export default class MatchManager {
         // 랜덤으로 찾기
         RoomManager.Instance.matchMaking(player);
     }
-
-
-
 }

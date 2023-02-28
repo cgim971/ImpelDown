@@ -26,6 +26,7 @@ public class NinjaSkillModule : BaseSkillModule {
         mouseDir = (Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position).normalized;
         StartCoroutine(CoolTime());
 
+        // °íÃÄ
         //C_Ninja_Skill cNinjaSkill = new C_Ninja_Skill { PlayerId = GameManager.Instance.PlayerId };
         //NetworkManager.Instance.RegisterSend((ushort)MSGID.SNinjaSkill, cNinjaSkill);
     }

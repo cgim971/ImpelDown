@@ -11,5 +11,4 @@ public abstract class BaseTailModule : MonoBehaviour {
     protected BasePlayer _player;
 
     public abstract void Init();
-
-}
+}   
