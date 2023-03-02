@@ -27,7 +27,10 @@ public abstract class BaseSkillModule : MonoBehaviour {
 
     protected bool Skillable() {
         if (Input.GetKeyDown(KeyCode.Q) == false || _isSkillable == false)
-            return false; 
+            return false;
+
+        if (!Input.GetMouseButtonDown(0))
+            return false;
 
         if (_player.PlayerState == ImpelDown.Proto.PlayerState.Ghost)
             return false;
