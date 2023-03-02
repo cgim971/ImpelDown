@@ -30,7 +30,6 @@ MapDataManager.Instance = new MapDataManager();
 let playerId: number = 0;
 socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     const id: number = playerId;
-
     let session: SocketSession = new SocketSession(soc, id, () => {
         SessionManager.Instance.removeSession(id);
         return;
