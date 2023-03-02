@@ -16,6 +16,7 @@ public class BasePlayer : MonoBehaviour {
     public BaseItemModule ItemModule => _baseItemModule;
 
     public BasePlayerDataSO PlayerDataSO => _basePlayerDataSO;
+    public TailSO TailSO => _tailSO;
 
     public Rigidbody2D Rigidbody => _rigidbody;
 
@@ -34,6 +35,7 @@ public class BasePlayer : MonoBehaviour {
     protected BaseItemModule _baseItemModule;
 
     [SerializeField] protected BasePlayerDataSO _basePlayerDataSO;
+    [SerializeField] protected TailSO _tailSO;
 
     protected Rigidbody2D _rigidbody;
     private Transform _agentRendererTs;
@@ -64,7 +66,8 @@ public class BasePlayer : MonoBehaviour {
         _tailIndex = tailIndex;
 
         SetPlayerState(playerState);
-        SetTargetTailIndex(targetTailIndex);
+        _targetTailIndex = targetTailIndex;
+
 
 
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -84,8 +87,8 @@ public class BasePlayer : MonoBehaviour {
         _baseMoveModule.Init();
         _baseCatchModule.Init();
         _baseSkillModule.Init();
-        _baseTailModule.Init();
         _baseItemModule.Init();
+        _baseTailModule.Init();
     }
 
     protected virtual void Start() {
@@ -120,7 +123,13 @@ public class BasePlayer : MonoBehaviour {
         transform.localScale = new Vector3(positionData.scaleX, 1, 1);
     }
 
-    public void SetTargetTailIndex(int targetTailIndex) => _targetTailIndex = targetTailIndex;
+    public void SetTargetTailIndex(int targetTailIndex)
+    {
+        // 꼬리 추가
+        _baseTailModule.CreateTail(targetTailIndex);
+
+        _targetTailIndex = targetTailIndex;
+    }
 
     public void SetPlayerState(PlayerState playerState) {
         _playerState = playerState;
@@ -141,8 +150,11 @@ public class BasePlayer : MonoBehaviour {
                 if (IsPlayer)
                     Camera.main.cullingMask |= 1 << LayerMask.NameToLayer("GhostTs");
 
+                // 유령일 때
                 SetActiveTs(_agentRendererTs, false);
                 SetActiveTs(_agentGhostRendererTs);
+
+
                 break;
         }
     }

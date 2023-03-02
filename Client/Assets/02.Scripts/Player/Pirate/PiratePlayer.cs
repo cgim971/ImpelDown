@@ -12,7 +12,6 @@ public class PiratePlayer : BasePlayer {
     public PirateMoveModule PirateMoveModule => _baseMoveModule as PirateMoveModule;
     public PirateCatchModule PirateCatchModule => _baseCatchModule as PirateCatchModule;
     public PirateSkillModule PirateSkillModule => _baseSkillModule as PirateSkillModule;
-    public PirateTailModule PirateTailModule =>_baseTailModule as PirateTailModule;
     public PirateItemModule PirateItemModule => _baseItemModule as PirateItemModule;
     public PirateDataSO PirateDataSO => _basePlayerDataSO as PirateDataSO;
     #endregion
@@ -30,7 +29,7 @@ public class PiratePlayer : BasePlayer {
         _baseMoveModule = gameObject.AddComponent<PirateMoveModule>();
         _baseCatchModule = gameObject.AddComponent<PirateCatchModule>();
         _baseSkillModule = gameObject.AddComponent<PirateSkillModule>();
-        _baseTailModule = gameObject.AddComponent<PirateTailModule>();
         _baseItemModule = gameObject.AddComponent<PirateItemModule>();
+        _baseTailModule = gameObject.AddComponent<PirateTailModule>();
     }
 }

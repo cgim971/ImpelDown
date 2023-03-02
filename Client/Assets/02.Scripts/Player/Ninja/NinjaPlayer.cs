@@ -9,7 +9,6 @@ public class NinjaPlayer : BasePlayer {
     public NinjaMoveModule NinjaMoveModule => _baseMoveModule as NinjaMoveModule;
     public NinjaCatchModule NinjaCatchModule => _baseCatchModule as NinjaCatchModule;
     public NinjaSkillModule NinjaSkillModule => _baseSkillModule as NinjaSkillModule;
-    public NinjaTailModule NinjaTailModule => _baseTailModule as NinjaTailModule;
     public NinjaItemModule NinjaItemModule => _baseItemModule as NinjaItemModule;
     public NinjaDataSO NinjaDataSO => _basePlayerDataSO as NinjaDataSO;
     #endregion
@@ -28,7 +27,7 @@ public class NinjaPlayer : BasePlayer {
         _baseMoveModule = gameObject.AddComponent<NinjaMoveModule>();
         _baseCatchModule = gameObject.AddComponent<NinjaCatchModule>();
         _baseSkillModule = gameObject.AddComponent<NinjaSkillModule>();
-        _baseTailModule = gameObject.AddComponent<NinjaTailModule>();
         _baseItemModule = gameObject.AddComponent<NinjaItemModule>();
+        _baseTailModule = gameObject.AddComponent<NinjaTailModule>();
     }
 }

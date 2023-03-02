@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &5424895397437104714
 Animator:
-  serializedVersion: 5
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -98,11 +98,10 @@ Animator:
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5390831041415446390
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,7 +187,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &1434092001544948008
 Animator:
-  serializedVersion: 5
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -201,11 +200,10 @@ Animator:
   m_UpdateMode: 1
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5390831041914283852
 GameObject:
   m_ObjectHideFlags: 0
@@ -301,3 +299,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _basePlayerDataSO: {fileID: 11400000, guid: 8a22926b94c58dd42a9b8f2134c8543b, type: 2}
+  _tailSO: {fileID: 11400000, guid: ca5079a1704880b4cb67c2ae9f3e2931, type: 2}
