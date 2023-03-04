@@ -21,7 +21,7 @@ public class BaseTailModule : MonoBehaviour
     public void CreateTail(ETailName tailName,int tailIndex)
     {
         GameObject tail = Instantiate(Player.TailSO.allTails[(int)tailName].colorTail[tailIndex]);
-        tail.transform.parent = transform;
+        tail.transform.parent = transform.Find("Tails");
         tail.transform.localPosition = new Vector3(-0.5f, -0.5f, 0f);
     }
 

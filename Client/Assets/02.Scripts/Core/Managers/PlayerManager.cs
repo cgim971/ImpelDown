@@ -62,6 +62,7 @@ public class PlayerManager
                 break;
             }
         }
+        Debug.Log(list[0].name);
 
         TailInfo[] tailInfo = list[0].transform.Find("Tails").GetComponentsInChildren<TailInfo>();
 
