@@ -15,27 +15,12 @@ public class BaseTailModule : MonoBehaviour
 
     public virtual void Init()
     {
-        CreateTail(Player.TailIndex);
+        CreateTail(_tailName, Player.TailIndex);
     }
 
-    public void CreateTail(int tailIndex)
+    public void CreateTail(ETailName tailName,int tailIndex)
     {
-        //GameObject Tails = transform.Find("Tails").gameObject;
-
-        //if (Tails == null)
-        //{
-        //    Debug.Log("A");
-        //    Tails = new GameObject
-        //    {
-        //        name = "Tails",
-        //    };
-        //    Tails.transform.SetParent(transform);
-        //}
-
-        //int tailIndex = 0;
-        //tailIndex = Player.TargetTailIndex - 1 >= 0 ? Player.TargetTailIndex - 1 : PlayerManager.Instance.GetPlayerCount();
-
-        GameObject tail = Instantiate(Player.TailSO.allTails[(int)_tailName].colorTail[tailIndex]);
+        GameObject tail = Instantiate(Player.TailSO.allTails[(int)tailName].colorTail[tailIndex]);
         tail.transform.parent = transform;
         tail.transform.localPosition = new Vector3(-0.5f, -0.5f, 0f);
     }

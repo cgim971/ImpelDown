@@ -49,10 +49,10 @@ public class PlayerManager
         }
     }
 
-    public List<BasePlayer> GetPlayerTails(int targetTailIndex)
+    public Dictionary<ETailName, int> GetPlayerTails(int targetTailIndex)
     {
         List<BasePlayer> list = new List<BasePlayer>();
-        List<int> tailIndexs = new List<int>();
+        Dictionary<ETailName, int> tails = new Dictionary<ETailName, int>();
 
         foreach (BasePlayer player in _remotePlayerList.Values)
         {
@@ -63,9 +63,14 @@ public class PlayerManager
             }
         }
 
+        TailInfo[] tailInfo = list[0].transform.Find("Tails").GetComponentsInChildren<TailInfo>();
 
+        foreach(TailInfo tail in tailInfo)
+        {
+            tails.Add(tail.name, tail.index);
+        }
 
-        return null;
+        return tails;
     }
 
     public void AddRemotePlayer(BasePlayer player)

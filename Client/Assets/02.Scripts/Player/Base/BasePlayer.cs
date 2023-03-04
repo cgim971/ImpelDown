@@ -126,7 +126,11 @@ public class BasePlayer : MonoBehaviour {
     public void SetTargetTailIndex(int targetTailIndex)
     {
         // ²¿¸® Ãß°¡
-        _baseTailModule.CreateTail(targetTailIndex);
+        Dictionary<ETailName, int> tails = PlayerManager.Instance.GetPlayerTails(targetTailIndex);
+        foreach(KeyValuePair<ETailName,int> tail in tails)
+        {
+            _baseTailModule.CreateTail(tail.Key,tail.Value);
+        }
 
         _targetTailIndex = targetTailIndex;
     }
