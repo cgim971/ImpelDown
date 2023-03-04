@@ -52,6 +52,7 @@ public class PlayerManager
     public Dictionary<ETailName, int> GetPlayerTails(int targetTailIndex)
     {
         List<BasePlayer> list = new List<BasePlayer>();
+        //여기만 수정 하면 될듯 잡은 사람이 아니라 다른 사람이 나옴
         Dictionary<ETailName, int> tails = new Dictionary<ETailName, int>();
 
         foreach (BasePlayer player in _remotePlayerList.Values)
