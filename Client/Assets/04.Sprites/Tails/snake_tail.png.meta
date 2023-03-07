@@ -24,7 +24,7 @@ TextureImporter:
       213: -4070303855140774728
     second: snake_tail_6
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -45,6 +45,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -83,7 +84,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -269,6 +269,14 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      snake_tail_2: -4664220522251039056
+      snake_tail_3: -1848892926768664231
+      snake_tail_1: 5667615626245127692
+      snake_tail_6: -4070303855140774728
+      snake_tail_5: -1662085391340636790
+      snake_tail_4: -315518169941022506
+      snake_tail_0: -7375601946653368358
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

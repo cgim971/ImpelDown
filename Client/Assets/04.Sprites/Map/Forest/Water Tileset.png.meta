@@ -285,7 +285,7 @@ TextureImporter:
       213: -2388037830629461612
     second: Water Tileset_93
   externalObjects: {}
-  serializedVersion: 12
+  serializedVersion: 11
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -306,6 +306,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -344,7 +345,6 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
-  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -2357,6 +2357,101 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Water Tileset_72: 4114352531416912160
+      Water Tileset_18: -1431669076513328077
+      Water Tileset_24: -8586803414718124781
+      Water Tileset_41: 2957483066806022630
+      Water Tileset_84: -2932732150444015382
+      Water Tileset_36: 4807349713723713286
+      Water Tileset_8: 3551929799340116869
+      Water Tileset_29: -8439306796293013021
+      Water Tileset_14: 8654345271132401142
+      Water Tileset_42: 6584337647359049513
+      Water Tileset_74: -7897153402131114083
+      Water Tileset_49: -1022392810504280442
+      Water Tileset_70: -4699512382723839009
+      Water Tileset_2: -3621297580983062207
+      Water Tileset_93: -2388037830629461612
+      Water Tileset_85: -600493875724779286
+      Water Tileset_77: 2185069401586989642
+      Water Tileset_57: 5081003486230976483
+      Water Tileset_52: 4952873080686279663
+      Water Tileset_5: -9176971375060426052
+      Water Tileset_48: 5416865031079408197
+      Water Tileset_76: -2928738288721174479
+      Water Tileset_82: 8889704047886932261
+      Water Tileset_17: -7038513076684994913
+      Water Tileset_37: 1465093499738510750
+      Water Tileset_51: -5664891402143376216
+      Water Tileset_79: -5521186875979747192
+      Water Tileset_71: 4385119749606265465
+      Water Tileset_13: -8484880717727314873
+      Water Tileset_10: 7087710848402891874
+      Water Tileset_30: 4703458258857826209
+      Water Tileset_0: 488384870445764654
+      Water Tileset_91: 6540021359517031760
+      Water Tileset_92: -2377023923643576654
+      Water Tileset_62: -7146475364718036011
+      Water Tileset_47: 3277777633751866494
+      Water Tileset_60: -5638704109819842515
+      Water Tileset_40: -4928350032346029118
+      Water Tileset_38: -4591570531199575891
+      Water Tileset_65: 379555207886557091
+      Water Tileset_34: 2343890108700758952
+      Water Tileset_33: -5795015503195179387
+      Water Tileset_6: -7399881332254874512
+      Water Tileset_39: -7267149414840718168
+      Water Tileset_1: 2204913207491128707
+      Water Tileset_43: -7552603852247004971
+      Water Tileset_9: -2240313358774611161
+      Water Tileset_22: -5580749066474477109
+      Water Tileset_90: 396720987378286874
+      Water Tileset_75: 3592019467404428454
+      Water Tileset_7: 5825123688880453880
+      Water Tileset_25: 285396383309005719
+      Water Tileset_21: -3668187397874019432
+      Water Tileset_61: 4531754545678637392
+      Water Tileset_88: -391151269535859353
+      Water Tileset_23: -4432210749328580973
+      Water Tileset_27: -1270342294822305096
+      Water Tileset_69: 599346536488523600
+      Water Tileset_4: 1768598835246986910
+      Water Tileset_50: 2118705941795971824
+      Water Tileset_46: -2072480137410622821
+      Water Tileset_59: 6647680824626030917
+      Water Tileset_54: -5395792755699481920
+      Water Tileset_55: -449882327069361044
+      Water Tileset_80: -8541777389453298933
+      Water Tileset_53: 7570518813998686499
+      Water Tileset_28: -6244408895701321315
+      Water Tileset_12: 2095452996998908078
+      Water Tileset_66: -3256364680102915741
+      Water Tileset_44: -7049077254289687326
+      Water Tileset_26: -5752990092685482473
+      Water Tileset_35: -8900394893166386971
+      Water Tileset_63: 8830693940941464578
+      Water Tileset_78: 7894331226582051693
+      Water Tileset_11: 7164241571715886336
+      Water Tileset_89: 8309130330203353058
+      Water Tileset_73: -5844892132219114687
+      Water Tileset_45: 1024385381923093400
+      Water Tileset_32: -2242401632933298094
+      Water Tileset_58: -7517955139698263308
+      Water Tileset_19: 7880292228176638368
+      Water Tileset_56: -187340429177708678
+      Water Tileset_83: 3945945946639898257
+      Water Tileset_16: 781120229334825239
+      Water Tileset_67: -7858741223594428701
+      Water Tileset_20: -4607055637023025792
+      Water Tileset_86: 3488001348022165133
+      Water Tileset_64: -4601205118871261686
+      Water Tileset_31: 3985049409625064993
+      Water Tileset_15: 4934985551404337615
+      Water Tileset_68: -352117790458385152
+      Water Tileset_3: 1161165128968186942
+      Water Tileset_81: 3856639836270166213
+      Water Tileset_87: 3729086920640889374
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
