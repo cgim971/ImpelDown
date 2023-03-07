@@ -26,14 +26,13 @@ socketServer.on("connection", (soc: WS, req: IncomingMessage) => {
     const id: number = playerId;
 
     let session: SocketSession = new SocketSession(soc, id, () => {
-
+        SessionManager.Instance.removeSession(id);
     });
 
     SessionManager.Instance.addSession(session, id);
     let playerInfo: impelDown.PlayerInfo = new impelDown.PlayerInfo({ playerId: id });
     let msg: impelDown.S_Init = new impelDown.S_Init({ playerInfo: playerInfo });
     session.SendData(msg.serialize(), impelDown.MSGID.S_INIT);
-    console.log(id);
     playerId += 1;
     
     soc.on("message", (data: RawData, isBinary: boolean) => {

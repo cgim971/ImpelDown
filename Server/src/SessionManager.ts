@@ -32,7 +32,6 @@ export default class SessionManager {
     broadCastMessage(payload: Uint8Array, msgCode: number, senderId: number = 0, exceptSender: boolean = false): void {
         for (let index in this._sessionMap) {
             if (exceptSender == true && senderId == this._sessionMap[index].getPlayerId()) continue;
-
             this._sessionMap[index].SendData(payload, msgCode);
         }
     }

@@ -13,32 +13,22 @@ public class GameManager : MonoBehaviour {
             return _instance;
         }
     }
-    public PlayerController PlayerController => _playerController;
-
     #endregion
     private static GameManager _instance = null;
 
 
     [SerializeField] private string _url = string.Empty;
 
-    [SerializeField] private PlayerController _playerControllerPrefab;
-
-    private PlayerController _playerController;
-
 
     private void Awake() {
-        if (_instance != null)
+        if (_instance != null) {
             Debug.LogError("Multiple GameManager is running!");
-
+            Destroy(this.gameObject);
+        }
         _instance = this;
 
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
-    }
-
-    public PlayerController SetPlayer() {
-        _playerController = Instantiate(_playerControllerPrefab);
-        return _playerController;
     }
 }

@@ -294,5 +294,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841e17eac0bac8849aa65827c2b1de47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _url: ws://172.31.3.19:8181
+  _url: ws://localhost:8181
   _playerControllerPrefab: {fileID: 3099569841542094996, guid: be125ff8acb95214dbcedbb9ff4f9e4f, type: 3}

@@ -9,7 +9,5 @@ public class SInitHandler : IPacketHandler {
         S_Init msg = packet as S_Init;
 
         Debug.Log(msg.PlayerInfo.PlayerId);
-        PlayerController player  = GameManager.Instance.SetPlayer();
-        player.PlayerId = msg.PlayerInfo.PlayerId;
     }
 }
