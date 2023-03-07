@@ -4,6 +4,6 @@ import { impelDown } from "../../packet";
 
 export default class CJoinRoomHandler implements PacketHandler {
     handleMsg(session: SocketSession, buffer: Buffer): void {
-        let cSetRoom = impelDown.C_JoinRoom.deserialize(buffer);
+        let msg = impelDown.C_JoinRoom.deserialize(buffer);
     }
 }

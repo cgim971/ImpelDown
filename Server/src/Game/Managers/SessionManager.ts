@@ -1,8 +1,7 @@
-import { impelDown } from "./packet/packet";
-import SocketSession from "./SocketSession";
+import PlayerSocket from "../../Player/PlayerSocket";
 
-interface SessionDictionary {
-    [key: number]: SocketSession;
+export interface SessionDictionary {
+    [key: number]: PlayerSocket;
 }
 
 export default class SessionManager {
@@ -15,7 +14,7 @@ export default class SessionManager {
         this._count = 0;
     }
 
-    addSession(session: SocketSession, id: number): void {
+    addSession(session: PlayerSocket, id: number): void {
         this._sessionMap[id] = session;
         this._count += 1;
     }
@@ -25,7 +24,7 @@ export default class SessionManager {
         this._count -= 1;
     }
 
-    getSession(id: number): SocketSession {
+    getSession(id: number): PlayerSocket {
         return this._sessionMap[id];
     }
 

@@ -1,10 +1,10 @@
-import { impelDown } from "./packet/packet";
-import { PacketHandler } from "./packet/PacketHandler";
-import CCreateRoomHandler from "./packet/PacketHandlers/Room/CCreateRoomHandler";
-import CExitRoomHandler from "./packet/PacketHandlers/Room/CExitRoomHandler";
-import CJoinRoomHandler from "./packet/PacketHandlers/Room/CJoinRoomHandler";
-import CRefreshRoomListHandler from "./packet/PacketHandlers/Room/CRefreshRoomListHandler";
-import CSetRoomHandler from "./packet/PacketHandlers/Room/CSetRoomHandler";
+import { impelDown } from "../../packet/packet";
+import { PacketHandler } from "../../packet/PacketHandler";
+import CCreateRoomHandler from "../../packet/PacketHandlers/Room/CCreateRoomHandler";
+import CExitRoomHandler from "../../packet/PacketHandlers/Room/CExitRoomHandler";
+import CJoinRoomHandler from "../../packet/PacketHandlers/Room/CJoinRoomHandler";
+import CRefreshRoomListHandler from "../../packet/PacketHandlers/Room/CRefreshRoomListHandler";
+import CSetRoomHandler from "../../packet/PacketHandlers/Room/CSetRoomHandler";
 
 interface HandlerDictionary {
     [key: number]: PacketHandler;

@@ -26,33 +26,37 @@ namespace ImpelDown.Proto {
           string.Concat(
             "CgxwYWNrZXQucHJvdG8SCWltcGVsRG93biJdCgpQbGF5ZXJJbmZvEhAKCHBs",
             "YXllcklkGAEgASgFEiUKCHJvb21JbmZvGAIgASgLMhMuaW1wZWxEb3duLlJv",
-            "b21JbmZvEhYKDmNoYXJhY3RlckluZGV4GAMgASgFIlwKClBsYXllckRhdGES",
-            "JwoIcGxheWVySWQYASABKAsyFS5pbXBlbERvd24uUGxheWVySW5mbxIlCghw",
-            "b3NpdGlvbhgCIAEoCzITLmltcGVsRG93bi5Qb3NpdGlvbiJFCg1QbGF5ZXJQ",
-            "b3NEYXRhEiUKCHBvc2l0aW9uGAEgASgLMhMuaW1wZWxEb3duLlBvc2l0aW9u",
-            "Eg0KBWZsaXBYGAIgASgIIiAKCFBvc2l0aW9uEgkKAXgYASABKAISCQoBeRgC",
-            "IAEoAiKSAQoIUm9vbUluZm8SJwoJcm9vbVN0YXRlGAEgASgOMhQuaW1wZWxE",
-            "b3duLlJvb21TdGF0ZRIOCgZob3N0SWQYAiABKAUSEQoJcm9vbUluZGV4GAMg",
-            "ASgFEhAKCG1hcEluZGV4GAQgASgFEhUKDWN1cnJlbnRQZW9wbGUYBSABKAUS",
-            "EQoJbWF4UGVvcGxlGAYgASgFIjMKBlNfSW5pdBIpCgpwbGF5ZXJJbmZvGAEg",
-            "ASgLMhUuaW1wZWxEb3duLlBsYXllckluZm8iDgoMQ19DcmVhdGVSb29tIgwK",
-            "CkNfSm9pblJvb20iDAoKQ19FeGl0Um9vbSITChFDX1JlZnJlc2hSb29tTGlz",
-            "dCIOCgxTX0NyZWF0ZVJvb20iDAoKU19Kb2luUm9vbSIMCgpTX0V4aXRSb29t",
-            "Ig8KDVNfUmVmcmVzaFJvb20iEwoRU19SZWZyZXNoUm9vbUxpc3QiMgoJQ19T",
-            "ZXRSb29tEiUKCHJvb21JbmZvGAEgASgLMhMuaW1wZWxEb3duLlJvb21JbmZv",
-            "IjIKCVNfU2V0Um9vbRIlCghyb29tSW5mbxgBIAEoCzITLmltcGVsRG93bi5S",
-            "b29tSW5mbyrjAQoFTVNHSUQSCgoGU19JTklUEAASEQoNQ19DUkVBVEVfUk9P",
-            "TRAKEg8KC0NfSk9JTl9ST09NEAsSDwoLQ19FWElUX1JPT00QDBIXChNDX1JF",
-            "RlJFU0hfUk9PTV9MSVNUEA0SEQoNU19DUkVBVEVfUk9PTRAOEg8KC1NfSk9J",
-            "Tl9ST09NEA8SDwoLU19FWElUX1JPT00QEBISCg5TX1JFRlJFU0hfUk9PTRAR",
-            "EhcKE1NfUkVGUkVTSF9ST09NX0xJU1QQEhIOCgpDX1NFVF9ST09NEBMSDgoK",
-            "U19TRVRfUk9PTRAUKioKCVJvb21TdGF0ZRIICgROT05FEAASCAoESE9TVBAB",
-            "EgkKBUdVRVNUEAJCEqoCD0ltcGVsRG93bi5Qcm90b2IGcHJvdG8z"));
+            "b21JbmZvEhYKDmNoYXJhY3RlckluZGV4GAMgASgFIqgBCgpQbGF5ZXJEYXRh",
+            "EikKCnBsYXllckluZm8YASABKAsyFS5pbXBlbERvd24uUGxheWVySW5mbxIv",
+            "Cg1wbGF5ZXJQb3NEYXRhGAIgASgLMhguaW1wZWxEb3duLlBsYXllclBvc0Rh",
+            "dGESEQoJdGFpbEluZGV4GAMgASgFEisKC3BsYXllclN0YXRlGAQgASgOMhYu",
+            "aW1wZWxEb3duLlBsYXllclN0YXRlIkUKDVBsYXllclBvc0RhdGESJQoIcG9z",
+            "aXRpb24YASABKAsyEy5pbXBlbERvd24uUG9zaXRpb24SDQoFZmxpcFgYAiAB",
+            "KAgiIAoIUG9zaXRpb24SCQoBeBgBIAEoAhIJCgF5GAIgASgCIpIBCghSb29t",
+            "SW5mbxInCglyb29tU3RhdGUYASABKA4yFC5pbXBlbERvd24uUm9vbVN0YXRl",
+            "Eg4KBmhvc3RJZBgCIAEoBRIRCglyb29tSW5kZXgYAyABKAUSEAoIbWFwSW5k",
+            "ZXgYBCABKAUSFQoNY3VycmVudFBlb3BsZRgFIAEoBRIRCgltYXhQZW9wbGUY",
+            "BiABKAUiMwoGU19Jbml0EikKCnBsYXllckluZm8YASABKAsyFS5pbXBlbERv",
+            "d24uUGxheWVySW5mbyIOCgxDX0NyZWF0ZVJvb20iDAoKQ19Kb2luUm9vbSIM",
+            "CgpDX0V4aXRSb29tIhMKEUNfUmVmcmVzaFJvb21MaXN0Ig4KDFNfQ3JlYXRl",
+            "Um9vbSIMCgpTX0pvaW5Sb29tIgwKClNfRXhpdFJvb20iDwoNU19SZWZyZXNo",
+            "Um9vbSITChFTX1JlZnJlc2hSb29tTGlzdCIyCglDX1NldFJvb20SJQoIcm9v",
+            "bUluZm8YASABKAsyEy5pbXBlbERvd24uUm9vbUluZm8iMgoJU19TZXRSb29t",
+            "EiUKCHJvb21JbmZvGAEgASgLMhMuaW1wZWxEb3duLlJvb21JbmZvKuMBCgVN",
+            "U0dJRBIKCgZTX0lOSVQQABIRCg1DX0NSRUFURV9ST09NEAoSDwoLQ19KT0lO",
+            "X1JPT00QCxIPCgtDX0VYSVRfUk9PTRAMEhcKE0NfUkVGUkVTSF9ST09NX0xJ",
+            "U1QQDRIRCg1TX0NSRUFURV9ST09NEA4SDwoLU19KT0lOX1JPT00QDxIPCgtT",
+            "X0VYSVRfUk9PTRAQEhIKDlNfUkVGUkVTSF9ST09NEBESFwoTU19SRUZSRVNI",
+            "X1JPT01fTElTVBASEg4KCkNfU0VUX1JPT00QExIOCgpTX1NFVF9ST09NEBQq",
+            "QQoLUGxheWVyU3RhdGUSDwoLUExBWUVSX05PTkUQABIJCgVBTElWRRABEgsK",
+            "B0NBVENIRUQQAhIJCgVHSE9TVBADKi8KCVJvb21TdGF0ZRINCglST09NX05P",
+            "TkUQABIJCgVMT0JCWRABEggKBEdBTUUQAkISqgIPSW1wZWxEb3duLlByb3Rv",
+            "YgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
-          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), typeof(global::ImpelDown.Proto.RoomState), }, null, new pbr::GeneratedClrTypeInfo[] {
+          new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), typeof(global::ImpelDown.Proto.PlayerState), typeof(global::ImpelDown.Proto.RoomState), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerInfo), global::ImpelDown.Proto.PlayerInfo.Parser, new[]{ "PlayerId", "RoomInfo", "CharacterIndex" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerData), global::ImpelDown.Proto.PlayerData.Parser, new[]{ "PlayerId", "Position" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerData), global::ImpelDown.Proto.PlayerData.Parser, new[]{ "PlayerInfo", "PlayerPosData", "TailIndex", "PlayerState" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerPosData), global::ImpelDown.Proto.PlayerPosData.Parser, new[]{ "Position", "FlipX" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.Position), global::ImpelDown.Proto.Position.Parser, new[]{ "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.RoomInfo), global::ImpelDown.Proto.RoomInfo.Parser, new[]{ "RoomState", "HostId", "RoomIndex", "MapIndex", "CurrentPeople", "MaxPeople" }, null, null, null, null),
@@ -89,10 +93,17 @@ namespace ImpelDown.Proto {
     [pbr::OriginalName("S_SET_ROOM")] SSetRoom = 20,
   }
 
+  public enum PlayerState {
+    [pbr::OriginalName("PLAYER_NONE")] PlayerNone = 0,
+    [pbr::OriginalName("ALIVE")] Alive = 1,
+    [pbr::OriginalName("CATCHED")] Catched = 2,
+    [pbr::OriginalName("GHOST")] Ghost = 3,
+  }
+
   public enum RoomState {
-    [pbr::OriginalName("NONE")] None = 0,
-    [pbr::OriginalName("HOST")] Host = 1,
-    [pbr::OriginalName("GUEST")] Guest = 2,
+    [pbr::OriginalName("ROOM_NONE")] RoomNone = 0,
+    [pbr::OriginalName("LOBBY")] Lobby = 1,
+    [pbr::OriginalName("GAME")] Game = 2,
   }
 
   #endregion
@@ -404,8 +415,10 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlayerData(PlayerData other) : this() {
-      playerId_ = other.playerId_ != null ? other.playerId_.Clone() : null;
-      position_ = other.position_ != null ? other.position_.Clone() : null;
+      playerInfo_ = other.playerInfo_ != null ? other.playerInfo_.Clone() : null;
+      playerPosData_ = other.playerPosData_ != null ? other.playerPosData_.Clone() : null;
+      tailIndex_ = other.tailIndex_;
+      playerState_ = other.playerState_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -415,27 +428,51 @@ namespace ImpelDown.Proto {
       return new PlayerData(this);
     }
 
-    /// <summary>Field number for the "playerId" field.</summary>
-    public const int PlayerIdFieldNumber = 1;
-    private global::ImpelDown.Proto.PlayerInfo playerId_;
+    /// <summary>Field number for the "playerInfo" field.</summary>
+    public const int PlayerInfoFieldNumber = 1;
+    private global::ImpelDown.Proto.PlayerInfo playerInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::ImpelDown.Proto.PlayerInfo PlayerId {
-      get { return playerId_; }
+    public global::ImpelDown.Proto.PlayerInfo PlayerInfo {
+      get { return playerInfo_; }
       set {
-        playerId_ = value;
+        playerInfo_ = value;
       }
     }
 
-    /// <summary>Field number for the "position" field.</summary>
-    public const int PositionFieldNumber = 2;
-    private global::ImpelDown.Proto.Position position_;
+    /// <summary>Field number for the "playerPosData" field.</summary>
+    public const int PlayerPosDataFieldNumber = 2;
+    private global::ImpelDown.Proto.PlayerPosData playerPosData_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public global::ImpelDown.Proto.Position Position {
-      get { return position_; }
+    public global::ImpelDown.Proto.PlayerPosData PlayerPosData {
+      get { return playerPosData_; }
       set {
-        position_ = value;
+        playerPosData_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "tailIndex" field.</summary>
+    public const int TailIndexFieldNumber = 3;
+    private int tailIndex_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int TailIndex {
+      get { return tailIndex_; }
+      set {
+        tailIndex_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "playerState" field.</summary>
+    public const int PlayerStateFieldNumber = 4;
+    private global::ImpelDown.Proto.PlayerState playerState_ = global::ImpelDown.Proto.PlayerState.PlayerNone;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::ImpelDown.Proto.PlayerState PlayerState {
+      get { return playerState_; }
+      set {
+        playerState_ = value;
       }
     }
 
@@ -454,8 +491,10 @@ namespace ImpelDown.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
-      if (!object.Equals(PlayerId, other.PlayerId)) return false;
-      if (!object.Equals(Position, other.Position)) return false;
+      if (!object.Equals(PlayerInfo, other.PlayerInfo)) return false;
+      if (!object.Equals(PlayerPosData, other.PlayerPosData)) return false;
+      if (TailIndex != other.TailIndex) return false;
+      if (PlayerState != other.PlayerState) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -463,8 +502,10 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (playerId_ != null) hash ^= PlayerId.GetHashCode();
-      if (position_ != null) hash ^= Position.GetHashCode();
+      if (playerInfo_ != null) hash ^= PlayerInfo.GetHashCode();
+      if (playerPosData_ != null) hash ^= PlayerPosData.GetHashCode();
+      if (TailIndex != 0) hash ^= TailIndex.GetHashCode();
+      if (PlayerState != global::ImpelDown.Proto.PlayerState.PlayerNone) hash ^= PlayerState.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -483,13 +524,21 @@ namespace ImpelDown.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (playerId_ != null) {
+      if (playerInfo_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(PlayerId);
+        output.WriteMessage(PlayerInfo);
       }
-      if (position_ != null) {
+      if (playerPosData_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(Position);
+        output.WriteMessage(PlayerPosData);
+      }
+      if (TailIndex != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(TailIndex);
+      }
+      if (PlayerState != global::ImpelDown.Proto.PlayerState.PlayerNone) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) PlayerState);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -501,13 +550,21 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (playerId_ != null) {
+      if (playerInfo_ != null) {
         output.WriteRawTag(10);
-        output.WriteMessage(PlayerId);
+        output.WriteMessage(PlayerInfo);
       }
-      if (position_ != null) {
+      if (playerPosData_ != null) {
         output.WriteRawTag(18);
-        output.WriteMessage(Position);
+        output.WriteMessage(PlayerPosData);
+      }
+      if (TailIndex != 0) {
+        output.WriteRawTag(24);
+        output.WriteInt32(TailIndex);
+      }
+      if (PlayerState != global::ImpelDown.Proto.PlayerState.PlayerNone) {
+        output.WriteRawTag(32);
+        output.WriteEnum((int) PlayerState);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -519,11 +576,17 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (playerId_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerId);
+      if (playerInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerInfo);
       }
-      if (position_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
+      if (playerPosData_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(PlayerPosData);
+      }
+      if (TailIndex != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(TailIndex);
+      }
+      if (PlayerState != global::ImpelDown.Proto.PlayerState.PlayerNone) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) PlayerState);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -537,17 +600,23 @@ namespace ImpelDown.Proto {
       if (other == null) {
         return;
       }
-      if (other.playerId_ != null) {
-        if (playerId_ == null) {
-          PlayerId = new global::ImpelDown.Proto.PlayerInfo();
+      if (other.playerInfo_ != null) {
+        if (playerInfo_ == null) {
+          PlayerInfo = new global::ImpelDown.Proto.PlayerInfo();
         }
-        PlayerId.MergeFrom(other.PlayerId);
+        PlayerInfo.MergeFrom(other.PlayerInfo);
       }
-      if (other.position_ != null) {
-        if (position_ == null) {
-          Position = new global::ImpelDown.Proto.Position();
+      if (other.playerPosData_ != null) {
+        if (playerPosData_ == null) {
+          PlayerPosData = new global::ImpelDown.Proto.PlayerPosData();
         }
-        Position.MergeFrom(other.Position);
+        PlayerPosData.MergeFrom(other.PlayerPosData);
+      }
+      if (other.TailIndex != 0) {
+        TailIndex = other.TailIndex;
+      }
+      if (other.PlayerState != global::ImpelDown.Proto.PlayerState.PlayerNone) {
+        PlayerState = other.PlayerState;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -565,17 +634,25 @@ namespace ImpelDown.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
           case 10: {
-            if (playerId_ == null) {
-              PlayerId = new global::ImpelDown.Proto.PlayerInfo();
+            if (playerInfo_ == null) {
+              PlayerInfo = new global::ImpelDown.Proto.PlayerInfo();
             }
-            input.ReadMessage(PlayerId);
+            input.ReadMessage(PlayerInfo);
             break;
           }
           case 18: {
-            if (position_ == null) {
-              Position = new global::ImpelDown.Proto.Position();
+            if (playerPosData_ == null) {
+              PlayerPosData = new global::ImpelDown.Proto.PlayerPosData();
             }
-            input.ReadMessage(Position);
+            input.ReadMessage(PlayerPosData);
+            break;
+          }
+          case 24: {
+            TailIndex = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            PlayerState = (global::ImpelDown.Proto.PlayerState) input.ReadEnum();
             break;
           }
         }
@@ -594,17 +671,25 @@ namespace ImpelDown.Proto {
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
           case 10: {
-            if (playerId_ == null) {
-              PlayerId = new global::ImpelDown.Proto.PlayerInfo();
+            if (playerInfo_ == null) {
+              PlayerInfo = new global::ImpelDown.Proto.PlayerInfo();
             }
-            input.ReadMessage(PlayerId);
+            input.ReadMessage(PlayerInfo);
             break;
           }
           case 18: {
-            if (position_ == null) {
-              Position = new global::ImpelDown.Proto.Position();
+            if (playerPosData_ == null) {
+              PlayerPosData = new global::ImpelDown.Proto.PlayerPosData();
             }
-            input.ReadMessage(Position);
+            input.ReadMessage(PlayerPosData);
+            break;
+          }
+          case 24: {
+            TailIndex = input.ReadInt32();
+            break;
+          }
+          case 32: {
+            PlayerState = (global::ImpelDown.Proto.PlayerState) input.ReadEnum();
             break;
           }
         }
@@ -1126,7 +1211,7 @@ namespace ImpelDown.Proto {
 
     /// <summary>Field number for the "roomState" field.</summary>
     public const int RoomStateFieldNumber = 1;
-    private global::ImpelDown.Proto.RoomState roomState_ = global::ImpelDown.Proto.RoomState.None;
+    private global::ImpelDown.Proto.RoomState roomState_ = global::ImpelDown.Proto.RoomState.RoomNone;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public global::ImpelDown.Proto.RoomState RoomState {
@@ -1224,7 +1309,7 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
-      if (RoomState != global::ImpelDown.Proto.RoomState.None) hash ^= RoomState.GetHashCode();
+      if (RoomState != global::ImpelDown.Proto.RoomState.RoomNone) hash ^= RoomState.GetHashCode();
       if (HostId != 0) hash ^= HostId.GetHashCode();
       if (RoomIndex != 0) hash ^= RoomIndex.GetHashCode();
       if (MapIndex != 0) hash ^= MapIndex.GetHashCode();
@@ -1248,7 +1333,7 @@ namespace ImpelDown.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
-      if (RoomState != global::ImpelDown.Proto.RoomState.None) {
+      if (RoomState != global::ImpelDown.Proto.RoomState.RoomNone) {
         output.WriteRawTag(8);
         output.WriteEnum((int) RoomState);
       }
@@ -1282,7 +1367,7 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
-      if (RoomState != global::ImpelDown.Proto.RoomState.None) {
+      if (RoomState != global::ImpelDown.Proto.RoomState.RoomNone) {
         output.WriteRawTag(8);
         output.WriteEnum((int) RoomState);
       }
@@ -1316,7 +1401,7 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
-      if (RoomState != global::ImpelDown.Proto.RoomState.None) {
+      if (RoomState != global::ImpelDown.Proto.RoomState.RoomNone) {
         size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) RoomState);
       }
       if (HostId != 0) {
@@ -1346,7 +1431,7 @@ namespace ImpelDown.Proto {
       if (other == null) {
         return;
       }
-      if (other.RoomState != global::ImpelDown.Proto.RoomState.None) {
+      if (other.RoomState != global::ImpelDown.Proto.RoomState.RoomNone) {
         RoomState = other.RoomState;
       }
       if (other.HostId != 0) {

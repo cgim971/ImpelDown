@@ -20,11 +20,9 @@ enum MSGID
     S_EXIT_ROOM = 16;
     S_REFRESH_ROOM = 17;
     S_REFRESH_ROOM_LIST = 18;
-    
-    
-    
     C_SET_ROOM = 19;
     S_SET_ROOM = 20;
+
 
 
 
@@ -36,9 +34,18 @@ message PlayerInfo{
     int32 characterIndex = 3;
 }
 
+enum PlayerState {
+    PLAYER_NONE = 0;
+    ALIVE = 1;
+    CATCHED = 2;
+    GHOST = 3;
+}
+
 message PlayerData {
-    PlayerInfo playerId = 1;
-    Position position = 2;
+    PlayerInfo playerInfo = 1;
+    PlayerPosData playerPosData = 2;
+    int32 tailIndex = 3;
+    PlayerState playerState = 4;
 }
 
 message PlayerPosData {
@@ -61,9 +68,9 @@ message RoomInfo {
 }
 
 enum RoomState {
-    NONE = 0;
-    HOST = 1;
-    GUEST = 2;
+    ROOM_NONE = 0;
+    LOBBY = 1;
+    GAME = 2;
 }
 
 
@@ -109,19 +116,6 @@ message S_RefreshRoom {
 message S_RefreshRoomList {
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 message C_SetRoom {
     RoomInfo roomInfo = 1;

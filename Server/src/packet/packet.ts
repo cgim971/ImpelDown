@@ -19,10 +19,16 @@ export namespace impelDown {
         C_SET_ROOM = 19,
         S_SET_ROOM = 20
     }
+    export enum PlayerState {
+        PLAYER_NONE = 0,
+        ALIVE = 1,
+        CATCHED = 2,
+        GHOST = 3
+    }
     export enum RoomState {
-        NONE = 0,
-        HOST = 1,
-        GUEST = 2
+        ROOM_NONE = 0,
+        LOBBY = 1,
+        GAME = 2
     }
     export class PlayerInfo extends pb_1.Message {
         #one_of_decls: number[][] = [];
@@ -143,61 +149,97 @@ export namespace impelDown {
     export class PlayerData extends pb_1.Message {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
-            playerId?: PlayerInfo;
-            position?: Position;
+            playerInfo?: PlayerInfo;
+            playerPosData?: PlayerPosData;
+            tailIndex?: number;
+            playerState?: PlayerState;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
-                if ("playerId" in data && data.playerId != undefined) {
-                    this.playerId = data.playerId;
+                if ("playerInfo" in data && data.playerInfo != undefined) {
+                    this.playerInfo = data.playerInfo;
                 }
-                if ("position" in data && data.position != undefined) {
-                    this.position = data.position;
+                if ("playerPosData" in data && data.playerPosData != undefined) {
+                    this.playerPosData = data.playerPosData;
+                }
+                if ("tailIndex" in data && data.tailIndex != undefined) {
+                    this.tailIndex = data.tailIndex;
+                }
+                if ("playerState" in data && data.playerState != undefined) {
+                    this.playerState = data.playerState;
                 }
             }
         }
-        get playerId() {
+        get playerInfo() {
             return pb_1.Message.getWrapperField(this, PlayerInfo, 1) as PlayerInfo;
         }
-        set playerId(value: PlayerInfo) {
+        set playerInfo(value: PlayerInfo) {
             pb_1.Message.setWrapperField(this, 1, value);
         }
-        get has_playerId() {
+        get has_playerInfo() {
             return pb_1.Message.getField(this, 1) != null;
         }
-        get position() {
-            return pb_1.Message.getWrapperField(this, Position, 2) as Position;
+        get playerPosData() {
+            return pb_1.Message.getWrapperField(this, PlayerPosData, 2) as PlayerPosData;
         }
-        set position(value: Position) {
+        set playerPosData(value: PlayerPosData) {
             pb_1.Message.setWrapperField(this, 2, value);
         }
-        get has_position() {
+        get has_playerPosData() {
             return pb_1.Message.getField(this, 2) != null;
         }
+        get tailIndex() {
+            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        }
+        set tailIndex(value: number) {
+            pb_1.Message.setField(this, 3, value);
+        }
+        get playerState() {
+            return pb_1.Message.getFieldWithDefault(this, 4, PlayerState.PLAYER_NONE) as PlayerState;
+        }
+        set playerState(value: PlayerState) {
+            pb_1.Message.setField(this, 4, value);
+        }
         static fromObject(data: {
-            playerId?: ReturnType<typeof PlayerInfo.prototype.toObject>;
-            position?: ReturnType<typeof Position.prototype.toObject>;
+            playerInfo?: ReturnType<typeof PlayerInfo.prototype.toObject>;
+            playerPosData?: ReturnType<typeof PlayerPosData.prototype.toObject>;
+            tailIndex?: number;
+            playerState?: PlayerState;
         }): PlayerData {
             const message = new PlayerData({});
-            if (data.playerId != null) {
-                message.playerId = PlayerInfo.fromObject(data.playerId);
+            if (data.playerInfo != null) {
+                message.playerInfo = PlayerInfo.fromObject(data.playerInfo);
             }
-            if (data.position != null) {
-                message.position = Position.fromObject(data.position);
+            if (data.playerPosData != null) {
+                message.playerPosData = PlayerPosData.fromObject(data.playerPosData);
+            }
+            if (data.tailIndex != null) {
+                message.tailIndex = data.tailIndex;
+            }
+            if (data.playerState != null) {
+                message.playerState = data.playerState;
             }
             return message;
         }
         toObject() {
             const data: {
-                playerId?: ReturnType<typeof PlayerInfo.prototype.toObject>;
-                position?: ReturnType<typeof Position.prototype.toObject>;
+                playerInfo?: ReturnType<typeof PlayerInfo.prototype.toObject>;
+                playerPosData?: ReturnType<typeof PlayerPosData.prototype.toObject>;
+                tailIndex?: number;
+                playerState?: PlayerState;
             } = {};
-            if (this.playerId != null) {
-                data.playerId = this.playerId.toObject();
+            if (this.playerInfo != null) {
+                data.playerInfo = this.playerInfo.toObject();
             }
-            if (this.position != null) {
-                data.position = this.position.toObject();
+            if (this.playerPosData != null) {
+                data.playerPosData = this.playerPosData.toObject();
+            }
+            if (this.tailIndex != null) {
+                data.tailIndex = this.tailIndex;
+            }
+            if (this.playerState != null) {
+                data.playerState = this.playerState;
             }
             return data;
         }
@@ -205,10 +247,14 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.has_playerId)
-                writer.writeMessage(1, this.playerId, () => this.playerId.serialize(writer));
-            if (this.has_position)
-                writer.writeMessage(2, this.position, () => this.position.serialize(writer));
+            if (this.has_playerInfo)
+                writer.writeMessage(1, this.playerInfo, () => this.playerInfo.serialize(writer));
+            if (this.has_playerPosData)
+                writer.writeMessage(2, this.playerPosData, () => this.playerPosData.serialize(writer));
+            if (this.tailIndex != 0)
+                writer.writeInt32(3, this.tailIndex);
+            if (this.playerState != PlayerState.PLAYER_NONE)
+                writer.writeEnum(4, this.playerState);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -219,10 +265,16 @@ export namespace impelDown {
                     break;
                 switch (reader.getFieldNumber()) {
                     case 1:
-                        reader.readMessage(message.playerId, () => message.playerId = PlayerInfo.deserialize(reader));
+                        reader.readMessage(message.playerInfo, () => message.playerInfo = PlayerInfo.deserialize(reader));
                         break;
                     case 2:
-                        reader.readMessage(message.position, () => message.position = Position.deserialize(reader));
+                        reader.readMessage(message.playerPosData, () => message.playerPosData = PlayerPosData.deserialize(reader));
+                        break;
+                    case 3:
+                        message.tailIndex = reader.readInt32();
+                        break;
+                    case 4:
+                        message.playerState = reader.readEnum();
                         break;
                     default: reader.skipField();
                 }
@@ -453,7 +505,7 @@ export namespace impelDown {
             }
         }
         get roomState() {
-            return pb_1.Message.getFieldWithDefault(this, 1, RoomState.NONE) as RoomState;
+            return pb_1.Message.getFieldWithDefault(this, 1, RoomState.ROOM_NONE) as RoomState;
         }
         set roomState(value: RoomState) {
             pb_1.Message.setField(this, 1, value);
@@ -550,7 +602,7 @@ export namespace impelDown {
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
-            if (this.roomState != RoomState.NONE)
+            if (this.roomState != RoomState.ROOM_NONE)
                 writer.writeEnum(1, this.roomState);
             if (this.hostId != 0)
                 writer.writeInt32(2, this.hostId);
