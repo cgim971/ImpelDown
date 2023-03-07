@@ -5,14 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour {
 
     #region Property
-    public static GameManager Instance {
-        get {
-            if (_instance == null)
-                _instance = FindObjectOfType<GameManager>();
-
-            return _instance;
-        }
-    }
+    public static GameManager Instance => _instance;
     #endregion
     private static GameManager _instance = null;
 
@@ -21,11 +14,14 @@ public class GameManager : MonoBehaviour {
 
 
     private void Awake() {
-        if (_instance != null) {
+        if (_instance == null) {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
             Debug.LogError("Multiple GameManager is running!");
             Destroy(this.gameObject);
         }
-        _instance = this;
 
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);

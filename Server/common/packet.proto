@@ -6,15 +6,33 @@ option csharp_namespace = "ImpelDown.Proto";
 enum MSGID 
 {
     S_INIT = 0;
+
+    
+
+
+    C_CREATE_ROOM = 10;
+    C_JOIN_ROOM = 11;
+    C_EXIT_ROOM = 12;
+    C_REFRESH_ROOM_LIST = 13;
+    
+    S_CREATE_ROOM = 14;
+    S_JOIN_ROOM = 15;
+    S_EXIT_ROOM = 16;
+    S_REFRESH_ROOM = 17;
+    S_REFRESH_ROOM_LIST = 18;
     
     
+    
+    C_SET_ROOM = 19;
+    S_SET_ROOM = 20;
+
 
 
 }
 
 message PlayerInfo{
     int32 playerId = 1;
-    int32 roomIndex = 2;
+    RoomInfo roomInfo = 2;
     int32 characterIndex = 3;
 }
 
@@ -33,13 +51,82 @@ message Position {
     float y = 2;
 }
 
+message RoomInfo {
+    RoomState roomState = 1;
+    int32 hostId = 2;
+    int32 roomIndex = 3;
+    int32 mapIndex = 4;
+    int32 currentPeople = 5;
+    int32 maxPeople = 6;
+}
+
+enum RoomState {
+    NONE = 0;
+    HOST = 1;
+    GUEST = 2;
+}
 
 
 
 
-
-
-
-message S_Init{
+message S_Init {
     PlayerInfo playerInfo = 1;
+}
+
+
+message C_CreateRoom {
+
+}
+
+message C_JoinRoom {
+
+}
+
+message C_ExitRoom {
+
+}
+
+message C_RefreshRoomList {
+
+}
+
+message S_CreateRoom {
+
+}
+
+message S_JoinRoom {
+
+}
+
+message S_ExitRoom {
+
+}
+
+message S_RefreshRoom {
+
+}
+
+message S_RefreshRoomList {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+message C_SetRoom {
+    RoomInfo roomInfo = 1;
+}
+
+message S_SetRoom {
+    RoomInfo roomInfo = 1;
 }

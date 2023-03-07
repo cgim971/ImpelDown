@@ -215,7 +215,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 730530446}
-  - component: {fileID: 730530445}
   m_Layer: 0
   m_Name: RoomManager
   m_TagString: Untagged
@@ -223,20 +222,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &730530445
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 730530444}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2dadae2ccae3ae4ba42209ef9be03ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maximumPeople: 5
-  deleteRoomIndex: 3
 --- !u!4 &730530446
 Transform:
   m_ObjectHideFlags: 0
@@ -295,4 +280,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _url: ws://localhost:8181
-  _playerControllerPrefab: {fileID: 3099569841542094996, guid: be125ff8acb95214dbcedbb9ff4f9e4f, type: 3}
