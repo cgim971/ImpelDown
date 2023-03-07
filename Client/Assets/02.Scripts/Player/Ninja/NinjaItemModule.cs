@@ -7,5 +7,6 @@ public class NinjaItemModule : BaseItemModule {
 
     public override void Init() {
         _player = GetComponent<NinjaPlayer>();
+        base.Init();
     }
 }

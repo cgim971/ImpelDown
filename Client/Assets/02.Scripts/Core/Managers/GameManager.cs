@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
         yield return null;
         // 게임 시작시 맵 이동 후 플레이어 생성
         // 맵 이동
-        SceneManager.LoadScene(Define.MapName(roomInfo.MapIndex));
+        SceneManager.LoadScene("HyunjunDevScene");
 
         yield return null;
         // 플레이어 생성
