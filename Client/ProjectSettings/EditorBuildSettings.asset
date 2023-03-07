@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/01.Scenes/Forest.unity
     guid: 6377f17ee086dec4991240367550da18
+  - enabled: 1
+    path: Assets/Hyunjun/HyunjunDevScene.unity
+    guid: 8dd87ebb5e3bec94aba9203cde686e3d
   m_configObjects: {}

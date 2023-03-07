@@ -88,7 +88,6 @@ public abstract class BaseItemModule : MonoBehaviour {
     {
         if (!inventoryData.GetItemAt(0).IsEmpty)
         {
-            Debug.Log("Á¡°Ë");
             PerformAction(0);
         }
     }
@@ -105,15 +104,9 @@ public abstract class BaseItemModule : MonoBehaviour {
             {
                 time = 0;
                 int rand = Random.Range(0, item.InventoryItem.Count);
-                int reminder = inventoryData.AddItem(item.InventoryItem[rand], item.Quantity);
-                if (reminder == 0)
-                {
-                    item.DestroyItem();
-                }
-                else
-                {
-                    item.Quantity = reminder;
-                }
+                inventoryData.RemoveItem(0, 1);
+                inventoryData.AddItem(item.InventoryItem[rand], item.Quantity);
+                item.DestroyItem();
                 UpdateItem();
             }
         }
