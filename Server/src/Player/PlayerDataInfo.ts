@@ -11,33 +11,31 @@ export default class PlayerDataInfo {
     private _playerState: impelDown.PlayerState;
 
     constructor(playerId: number) {
-        {
-            this._playerId = playerId;
-            this._playerName = "";
-            this._playerInfo = new impelDown.PlayerInfo({
-                playerId: this._playerId,
-                playerName: this._playerName,
-                roomIndex: -1,
-                characterIndex: -1,
-                roomInIndex: -1
-            });
-            this._playerPosData = new impelDown.PlayerPosData({
-                position: new impelDown.Position({
-                    x: 0,
-                    y: 0
-                }),
-                flipX: false
-            });
-            this._tailIndex = -1;
-            this._playerState = impelDown.PlayerState.PLAYER_NONE;
-        }
+        this._playerId = playerId;
+        this._playerName = "";
+        this._playerInfo = new impelDown.PlayerInfo({
+            playerId: this._playerId,
+            playerName: this._playerName,
+            roomIndex: -1,
+            characterIndex: -1,
+            roomInIndex: -1
+        });
+        this._playerPosData = new impelDown.PlayerPosData({
+            position: new impelDown.Position({
+                x: 0,
+                y: 0
+            }),
+            flipX: false
+        });
+        this._tailIndex = -1;
+        this._playerState = impelDown.PlayerState.PLAYER_NONE;
     }
 
     getPlayerId(): number {
-        return this._playerId;
+        return this._playerInfo.playerId;
     }
     getPlayerName(): string {
-        return this._playerName;
+        return this._playerInfo.playerName;
     }
 
     getPlayerInfo(): impelDown.PlayerInfo {
@@ -65,7 +63,7 @@ export default class PlayerDataInfo {
             playerState: this._playerState
         });
     }
-    getRoomIndex():number{
+    getRoomIndex(): number {
         return this._playerInfo.roomIndex;
     }
 
@@ -78,7 +76,7 @@ export default class PlayerDataInfo {
     setRoomInIndex(index: number): void {
         this._playerInfo.roomInIndex = index;
     }
-    setRoomIndex(index : number):void{
+    setRoomIndex(index: number): void {
         this._playerInfo.roomIndex = index;
     }
 

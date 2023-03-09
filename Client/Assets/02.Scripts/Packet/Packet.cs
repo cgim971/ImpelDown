@@ -33,31 +33,32 @@ namespace ImpelDown.Proto {
             "CgtwbGF5ZXJTdGF0ZRgFIAEoDjIWLmltcGVsRG93bi5QbGF5ZXJTdGF0ZSJF",
             "Cg1QbGF5ZXJQb3NEYXRhEiUKCHBvc2l0aW9uGAEgASgLMhMuaW1wZWxEb3du",
             "LlBvc2l0aW9uEg0KBWZsaXBYGAIgASgIIiAKCFBvc2l0aW9uEgkKAXgYASAB",
-            "KAISCQoBeRgCIAEoAiK6AQoIUm9vbUluZm8SJwoJcm9vbVN0YXRlGAEgASgO",
-            "MhQuaW1wZWxEb3duLlJvb21TdGF0ZRIOCgZob3N0SWQYAiABKAUSEQoJcm9v",
-            "bUluZGV4GAMgASgFEhAKCG1hcEluZGV4GAQgASgFEhUKDWN1cnJlbnRQZW9w",
-            "bGUYBSABKAUSEQoJbWF4UGVvcGxlGAYgASgFEiYKCXJvb21EYXRhcxgHIAMo",
-            "CzITLmltcGVsRG93bi5Sb29tRGF0YSJACghSb29tRGF0YRIOCgZpc0xvY2sY",
-            "ASABKAgSEAoIcGxheWVySWQYAiABKAUSEgoKcGxheWVyTmFtZRgDIAEoCSIa",
-            "CgZTX0luaXQSEAoIcGxheWVySWQYASABKAUiMAoIQ19QbGF5ZXISEAoIcGxh",
-            "eWVySWQYASABKAUSEgoKcGxheWVyTmFtZRgCIAEoCSI1CghTX1BsYXllchIp",
-            "CgpwbGF5ZXJJbmZvGAEgASgLMhUuaW1wZWxEb3duLlBsYXllckluZm8iIAoM",
-            "Q19DcmVhdGVSb29tEhAKCHBsYXllcklkGAEgASgFIgwKCkNfSm9pblJvb20i",
-            "DAoKQ19FeGl0Um9vbSIhCg1DX01hdGNoTWFraW5nEhAKCHBsYXllcklkGAEg",
-            "ASgFIg4KDFNfQ3JlYXRlUm9vbSIcCgpTX0pvaW5Sb29tEg4KBmlzSG9zdBgB",
-            "IAEoCCIMCgpTX0V4aXRSb29tIjYKDVNfUmVmcmVzaFJvb20SJQoIcm9vbUlu",
-            "Zm8YASABKAsyEy5pbXBlbERvd24uUm9vbUluZm8iDwoNU19NYXRjaE1ha2lu",
-            "ZyIqCglDX1NldFJvb20SDQoFaW5kZXgYASABKAUSDgoGaXNMb2NrGAIgASgI",
-            "IioKCVNfU2V0Um9vbRINCgVpbmRleBgBIAEoBRIOCgZpc0xvY2sYAiABKAgq",
-            "9QEKBU1TR0lEEgoKBlNfSU5JVBAAEgwKCENfUExBWUVSEAESDAoIU19QTEFZ",
-            "RVIQAhIRCg1DX0NSRUFURV9ST09NEAoSDwoLQ19KT0lOX1JPT00QCxIPCgtD",
-            "X0VYSVRfUk9PTRAMEhIKDkNfTUFUQ0hfTUFLSU5HEA0SEQoNU19DUkVBVEVf",
-            "Uk9PTRAPEg8KC1NfSk9JTl9ST09NEBASDwoLU19FWElUX1JPT00QERISCg5T",
-            "X1JFRlJFU0hfUk9PTRASEhIKDlNfTUFUQ0hfTUFLSU5HEBQSDgoKQ19TRVRf",
-            "Uk9PTRAZEg4KClNfU0VUX1JPT00QGipBCgtQbGF5ZXJTdGF0ZRIPCgtQTEFZ",
-            "RVJfTk9ORRAAEgkKBUFMSVZFEAESCwoHQ0FUQ0hFRBACEgkKBUdIT1NUEAMq",
-            "LwoJUm9vbVN0YXRlEg0KCVJPT01fTk9ORRAAEgkKBUxPQkJZEAESCAoER0FN",
-            "RRACQhKqAg9JbXBlbERvd24uUHJvdG9iBnByb3RvMw=="));
+            "KAISCQoBeRgCIAEoAiLMAQoIUm9vbUluZm8SJwoJcm9vbVN0YXRlGAEgASgO",
+            "MhQuaW1wZWxEb3duLlJvb21TdGF0ZRIOCgZob3N0SWQYAiABKAUSEAoIaG9z",
+            "dE5hbWUYAyABKAkSEQoJcm9vbUluZGV4GAQgASgFEhAKCG1hcEluZGV4GAUg",
+            "ASgFEhUKDWN1cnJlbnRQZW9wbGUYBiABKAUSEQoJbWF4UGVvcGxlGAcgASgF",
+            "EiYKCXJvb21EYXRhcxgIIAMoCzITLmltcGVsRG93bi5Sb29tRGF0YSJACghS",
+            "b29tRGF0YRIOCgZpc0xvY2sYASABKAgSEAoIcGxheWVySWQYAiABKAUSEgoK",
+            "cGxheWVyTmFtZRgDIAEoCSIaCgZTX0luaXQSEAoIcGxheWVySWQYASABKAUi",
+            "MAoIQ19QbGF5ZXISEAoIcGxheWVySWQYASABKAUSEgoKcGxheWVyTmFtZRgC",
+            "IAEoCSI1CghTX1BsYXllchIpCgpwbGF5ZXJJbmZvGAEgASgLMhUuaW1wZWxE",
+            "b3duLlBsYXllckluZm8iIAoMQ19DcmVhdGVSb29tEhAKCHBsYXllcklkGAEg",
+            "ASgFIgwKCkNfSm9pblJvb20iDAoKQ19FeGl0Um9vbSIhCg1DX01hdGNoTWFr",
+            "aW5nEhAKCHBsYXllcklkGAEgASgFIg4KDFNfQ3JlYXRlUm9vbSIcCgpTX0pv",
+            "aW5Sb29tEg4KBmlzSG9zdBgBIAEoCCIMCgpTX0V4aXRSb29tIjYKDVNfUmVm",
+            "cmVzaFJvb20SJQoIcm9vbUluZm8YASABKAsyEy5pbXBlbERvd24uUm9vbUlu",
+            "Zm8iDwoNU19NYXRjaE1ha2luZyIqCglDX1NldFJvb20SDQoFaW5kZXgYASAB",
+            "KAUSDgoGaXNMb2NrGAIgASgIIioKCVNfU2V0Um9vbRINCgVpbmRleBgBIAEo",
+            "BRIOCgZpc0xvY2sYAiABKAgq9QEKBU1TR0lEEgoKBlNfSU5JVBAAEgwKCENf",
+            "UExBWUVSEAESDAoIU19QTEFZRVIQAhIRCg1DX0NSRUFURV9ST09NEAoSDwoL",
+            "Q19KT0lOX1JPT00QCxIPCgtDX0VYSVRfUk9PTRAMEhIKDkNfTUFUQ0hfTUFL",
+            "SU5HEA0SEQoNU19DUkVBVEVfUk9PTRAPEg8KC1NfSk9JTl9ST09NEBASDwoL",
+            "U19FWElUX1JPT00QERISCg5TX1JFRlJFU0hfUk9PTRASEhIKDlNfTUFUQ0hf",
+            "TUFLSU5HEBQSDgoKQ19TRVRfUk9PTRAZEg4KClNfU0VUX1JPT00QGipBCgtQ",
+            "bGF5ZXJTdGF0ZRIPCgtQTEFZRVJfTk9ORRAAEgkKBUFMSVZFEAESCwoHQ0FU",
+            "Q0hFRBACEgkKBUdIT1NUEAMqLwoJUm9vbVN0YXRlEg0KCVJPT01fTk9ORRAA",
+            "EgkKBUxPQkJZEAESCAoER0FNRRACQhKqAg9JbXBlbERvd24uUHJvdG9iBnBy",
+            "b3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), typeof(global::ImpelDown.Proto.PlayerState), typeof(global::ImpelDown.Proto.RoomState), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -65,7 +66,7 @@ namespace ImpelDown.Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerInGameData), global::ImpelDown.Proto.PlayerInGameData.Parser, new[]{ "PlayerId", "PlayerNmae", "PlayerPosData", "TailIndex", "PlayerState" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerPosData), global::ImpelDown.Proto.PlayerPosData.Parser, new[]{ "Position", "FlipX" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.Position), global::ImpelDown.Proto.Position.Parser, new[]{ "X", "Y" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.RoomInfo), global::ImpelDown.Proto.RoomInfo.Parser, new[]{ "RoomState", "HostId", "RoomIndex", "MapIndex", "CurrentPeople", "MaxPeople", "RoomDatas" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.RoomInfo), global::ImpelDown.Proto.RoomInfo.Parser, new[]{ "RoomState", "HostId", "HostName", "RoomIndex", "MapIndex", "CurrentPeople", "MaxPeople", "RoomDatas" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.RoomData), global::ImpelDown.Proto.RoomData.Parser, new[]{ "IsLock", "PlayerId", "PlayerName" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Init), global::ImpelDown.Proto.S_Init.Parser, new[]{ "PlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Player), global::ImpelDown.Proto.C_Player.Parser, new[]{ "PlayerId", "PlayerName" }, null, null, null, null),
@@ -1300,6 +1301,7 @@ namespace ImpelDown.Proto {
     public RoomInfo(RoomInfo other) : this() {
       roomState_ = other.roomState_;
       hostId_ = other.hostId_;
+      hostName_ = other.hostName_;
       roomIndex_ = other.roomIndex_;
       mapIndex_ = other.mapIndex_;
       currentPeople_ = other.currentPeople_;
@@ -1338,8 +1340,20 @@ namespace ImpelDown.Proto {
       }
     }
 
+    /// <summary>Field number for the "hostName" field.</summary>
+    public const int HostNameFieldNumber = 3;
+    private string hostName_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public string HostName {
+      get { return hostName_; }
+      set {
+        hostName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
     /// <summary>Field number for the "roomIndex" field.</summary>
-    public const int RoomIndexFieldNumber = 3;
+    public const int RoomIndexFieldNumber = 4;
     private int roomIndex_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1351,7 +1365,7 @@ namespace ImpelDown.Proto {
     }
 
     /// <summary>Field number for the "mapIndex" field.</summary>
-    public const int MapIndexFieldNumber = 4;
+    public const int MapIndexFieldNumber = 5;
     private int mapIndex_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1363,7 +1377,7 @@ namespace ImpelDown.Proto {
     }
 
     /// <summary>Field number for the "currentPeople" field.</summary>
-    public const int CurrentPeopleFieldNumber = 5;
+    public const int CurrentPeopleFieldNumber = 6;
     private int currentPeople_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1375,7 +1389,7 @@ namespace ImpelDown.Proto {
     }
 
     /// <summary>Field number for the "maxPeople" field.</summary>
-    public const int MaxPeopleFieldNumber = 6;
+    public const int MaxPeopleFieldNumber = 7;
     private int maxPeople_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1387,9 +1401,9 @@ namespace ImpelDown.Proto {
     }
 
     /// <summary>Field number for the "roomDatas" field.</summary>
-    public const int RoomDatasFieldNumber = 7;
+    public const int RoomDatasFieldNumber = 8;
     private static readonly pb::FieldCodec<global::ImpelDown.Proto.RoomData> _repeated_roomDatas_codec
-        = pb::FieldCodec.ForMessage(58, global::ImpelDown.Proto.RoomData.Parser);
+        = pb::FieldCodec.ForMessage(66, global::ImpelDown.Proto.RoomData.Parser);
     private readonly pbc::RepeatedField<global::ImpelDown.Proto.RoomData> roomDatas_ = new pbc::RepeatedField<global::ImpelDown.Proto.RoomData>();
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
@@ -1414,6 +1428,7 @@ namespace ImpelDown.Proto {
       }
       if (RoomState != other.RoomState) return false;
       if (HostId != other.HostId) return false;
+      if (HostName != other.HostName) return false;
       if (RoomIndex != other.RoomIndex) return false;
       if (MapIndex != other.MapIndex) return false;
       if (CurrentPeople != other.CurrentPeople) return false;
@@ -1428,6 +1443,7 @@ namespace ImpelDown.Proto {
       int hash = 1;
       if (RoomState != global::ImpelDown.Proto.RoomState.RoomNone) hash ^= RoomState.GetHashCode();
       if (HostId != 0) hash ^= HostId.GetHashCode();
+      if (HostName.Length != 0) hash ^= HostName.GetHashCode();
       if (RoomIndex != 0) hash ^= RoomIndex.GetHashCode();
       if (MapIndex != 0) hash ^= MapIndex.GetHashCode();
       if (CurrentPeople != 0) hash ^= CurrentPeople.GetHashCode();
@@ -1459,20 +1475,24 @@ namespace ImpelDown.Proto {
         output.WriteRawTag(16);
         output.WriteInt32(HostId);
       }
+      if (HostName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(HostName);
+      }
       if (RoomIndex != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(RoomIndex);
       }
       if (MapIndex != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteInt32(MapIndex);
       }
       if (CurrentPeople != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(48);
         output.WriteInt32(CurrentPeople);
       }
       if (MaxPeople != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(56);
         output.WriteInt32(MaxPeople);
       }
       roomDatas_.WriteTo(output, _repeated_roomDatas_codec);
@@ -1494,20 +1514,24 @@ namespace ImpelDown.Proto {
         output.WriteRawTag(16);
         output.WriteInt32(HostId);
       }
+      if (HostName.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(HostName);
+      }
       if (RoomIndex != 0) {
-        output.WriteRawTag(24);
+        output.WriteRawTag(32);
         output.WriteInt32(RoomIndex);
       }
       if (MapIndex != 0) {
-        output.WriteRawTag(32);
+        output.WriteRawTag(40);
         output.WriteInt32(MapIndex);
       }
       if (CurrentPeople != 0) {
-        output.WriteRawTag(40);
+        output.WriteRawTag(48);
         output.WriteInt32(CurrentPeople);
       }
       if (MaxPeople != 0) {
-        output.WriteRawTag(48);
+        output.WriteRawTag(56);
         output.WriteInt32(MaxPeople);
       }
       roomDatas_.WriteTo(ref output, _repeated_roomDatas_codec);
@@ -1526,6 +1550,9 @@ namespace ImpelDown.Proto {
       }
       if (HostId != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(HostId);
+      }
+      if (HostName.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(HostName);
       }
       if (RoomIndex != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(RoomIndex);
@@ -1557,6 +1584,9 @@ namespace ImpelDown.Proto {
       }
       if (other.HostId != 0) {
         HostId = other.HostId;
+      }
+      if (other.HostName.Length != 0) {
+        HostName = other.HostName;
       }
       if (other.RoomIndex != 0) {
         RoomIndex = other.RoomIndex;
@@ -1594,23 +1624,27 @@ namespace ImpelDown.Proto {
             HostId = input.ReadInt32();
             break;
           }
-          case 24: {
-            RoomIndex = input.ReadInt32();
+          case 26: {
+            HostName = input.ReadString();
             break;
           }
           case 32: {
-            MapIndex = input.ReadInt32();
+            RoomIndex = input.ReadInt32();
             break;
           }
           case 40: {
-            CurrentPeople = input.ReadInt32();
+            MapIndex = input.ReadInt32();
             break;
           }
           case 48: {
+            CurrentPeople = input.ReadInt32();
+            break;
+          }
+          case 56: {
             MaxPeople = input.ReadInt32();
             break;
           }
-          case 58: {
+          case 66: {
             roomDatas_.AddEntriesFrom(input, _repeated_roomDatas_codec);
             break;
           }
@@ -1637,23 +1671,27 @@ namespace ImpelDown.Proto {
             HostId = input.ReadInt32();
             break;
           }
-          case 24: {
-            RoomIndex = input.ReadInt32();
+          case 26: {
+            HostName = input.ReadString();
             break;
           }
           case 32: {
-            MapIndex = input.ReadInt32();
+            RoomIndex = input.ReadInt32();
             break;
           }
           case 40: {
-            CurrentPeople = input.ReadInt32();
+            MapIndex = input.ReadInt32();
             break;
           }
           case 48: {
+            CurrentPeople = input.ReadInt32();
+            break;
+          }
+          case 56: {
             MaxPeople = input.ReadInt32();
             break;
           }
-          case 58: {
+          case 66: {
             roomDatas_.AddEntriesFrom(ref input, _repeated_roomDatas_codec);
             break;
           }

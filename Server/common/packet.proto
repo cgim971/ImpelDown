@@ -62,11 +62,12 @@ message Position {
 message RoomInfo {
     RoomState roomState = 1;
     int32 hostId = 2;
-    int32 roomIndex = 3;
-    int32 mapIndex = 4;
-    int32 currentPeople = 5;
-    int32 maxPeople = 6;
-    repeated RoomData roomDatas =7;
+    string hostName = 3;
+    int32 roomIndex = 4;
+    int32 mapIndex = 5;
+    int32 currentPeople = 6;
+    int32 maxPeople = 7;
+    repeated RoomData roomDatas = 8;
 }
 
 message RoomData {

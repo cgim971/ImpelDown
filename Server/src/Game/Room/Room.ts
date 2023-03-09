@@ -25,10 +25,10 @@ export default class Room {
     constructor(hostSocket: PlayerSocket, roomIndex: number) {
         this._hostSocket = hostSocket;
 
-
         this._roomInfo = new impelDown.RoomInfo({
             roomState: impelDown.RoomState.LOBBY,
             hostId: hostSocket.getPlayerId(),
+            hostName: hostSocket.getPlayerName(),
             roomIndex: roomIndex,
             mapIndex: 0,
             currentPeople: 0,
@@ -104,6 +104,7 @@ export default class Room {
             return Result.FAIL;
 
         this._roomInfo.roomDatas[index].playerId = player.getPlayerId();
+        this._roomInfo.roomDatas[index].playerName = player.getPlayerName();
         this._roomInfo.currentPeople += 1;
         player.getPlayerDataInfo().setRoomInIndex(index);
         player.getPlayerDataInfo().setRoomIndex(this._roomInfo.roomIndex);
@@ -127,7 +128,7 @@ export default class Room {
     }
 
     broadCastMessage(payload: Uint8Array, msgCode: number): void {
-            for (let index in this._roomInfo.roomDatas) {
+        for (let index in this._roomInfo.roomDatas) {
             if (this._roomInfo.roomDatas[index].playerId != -1) {
                 let player: PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
                 player.SendData(payload, msgCode);

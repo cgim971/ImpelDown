@@ -3,12 +3,14 @@ using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using TMPro;
 using UnityEngine;
 
 public class RoomInPanelUI : MonoBehaviour {
 
 
     [SerializeField] private List<UserUIData> _userUIDataList = new List<UserUIData>();
+    [SerializeField] private TMP_Text _roomNameText;
 
     private void Start() { }
 
@@ -20,14 +22,12 @@ public class RoomInPanelUI : MonoBehaviour {
     }
 
     public void RefreshRoomData(RoomInfo roomInfo) {
-        Debug.Log(roomInfo.CurrentPeople);
         for (int i = 0; i < 8; i++) {
-            //roomInfo.RoomDatas[i].PlayerId
-            _userUIDataList[i].UserUI.Refresh("");
+            _userUIDataList[i].UserUI.Refresh(roomInfo.RoomDatas[i].PlayerName);
         }
+
+        _roomNameText.SetText($"{roomInfo.HostName}ÀÇ ¹æ");
     }
-
-
 }
 
 [System.Serializable]

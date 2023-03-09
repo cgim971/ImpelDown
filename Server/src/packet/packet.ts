@@ -541,6 +541,7 @@ export namespace impelDown {
         constructor(data?: any[] | {
             roomState?: RoomState;
             hostId?: number;
+            hostName?: string;
             roomIndex?: number;
             mapIndex?: number;
             currentPeople?: number;
@@ -548,13 +549,16 @@ export namespace impelDown {
             roomDatas?: RoomData[];
         }) {
             super();
-            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [7], this.#one_of_decls);
+            pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [8], this.#one_of_decls);
             if (!Array.isArray(data) && typeof data == "object") {
                 if ("roomState" in data && data.roomState != undefined) {
                     this.roomState = data.roomState;
                 }
                 if ("hostId" in data && data.hostId != undefined) {
                     this.hostId = data.hostId;
+                }
+                if ("hostName" in data && data.hostName != undefined) {
+                    this.hostName = data.hostName;
                 }
                 if ("roomIndex" in data && data.roomIndex != undefined) {
                     this.roomIndex = data.roomIndex;
@@ -585,39 +589,46 @@ export namespace impelDown {
         set hostId(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
-        get roomIndex() {
-            return pb_1.Message.getFieldWithDefault(this, 3, 0) as number;
+        get hostName() {
+            return pb_1.Message.getFieldWithDefault(this, 3, "") as string;
         }
-        set roomIndex(value: number) {
+        set hostName(value: string) {
             pb_1.Message.setField(this, 3, value);
         }
-        get mapIndex() {
+        get roomIndex() {
             return pb_1.Message.getFieldWithDefault(this, 4, 0) as number;
         }
-        set mapIndex(value: number) {
+        set roomIndex(value: number) {
             pb_1.Message.setField(this, 4, value);
         }
-        get currentPeople() {
+        get mapIndex() {
             return pb_1.Message.getFieldWithDefault(this, 5, 0) as number;
         }
-        set currentPeople(value: number) {
+        set mapIndex(value: number) {
             pb_1.Message.setField(this, 5, value);
         }
-        get maxPeople() {
+        get currentPeople() {
             return pb_1.Message.getFieldWithDefault(this, 6, 0) as number;
         }
-        set maxPeople(value: number) {
+        set currentPeople(value: number) {
             pb_1.Message.setField(this, 6, value);
         }
+        get maxPeople() {
+            return pb_1.Message.getFieldWithDefault(this, 7, 0) as number;
+        }
+        set maxPeople(value: number) {
+            pb_1.Message.setField(this, 7, value);
+        }
         get roomDatas() {
-            return pb_1.Message.getRepeatedWrapperField(this, RoomData, 7) as RoomData[];
+            return pb_1.Message.getRepeatedWrapperField(this, RoomData, 8) as RoomData[];
         }
         set roomDatas(value: RoomData[]) {
-            pb_1.Message.setRepeatedWrapperField(this, 7, value);
+            pb_1.Message.setRepeatedWrapperField(this, 8, value);
         }
         static fromObject(data: {
             roomState?: RoomState;
             hostId?: number;
+            hostName?: string;
             roomIndex?: number;
             mapIndex?: number;
             currentPeople?: number;
@@ -630,6 +641,9 @@ export namespace impelDown {
             }
             if (data.hostId != null) {
                 message.hostId = data.hostId;
+            }
+            if (data.hostName != null) {
+                message.hostName = data.hostName;
             }
             if (data.roomIndex != null) {
                 message.roomIndex = data.roomIndex;
@@ -652,6 +666,7 @@ export namespace impelDown {
             const data: {
                 roomState?: RoomState;
                 hostId?: number;
+                hostName?: string;
                 roomIndex?: number;
                 mapIndex?: number;
                 currentPeople?: number;
@@ -663,6 +678,9 @@ export namespace impelDown {
             }
             if (this.hostId != null) {
                 data.hostId = this.hostId;
+            }
+            if (this.hostName != null) {
+                data.hostName = this.hostName;
             }
             if (this.roomIndex != null) {
                 data.roomIndex = this.roomIndex;
@@ -689,16 +707,18 @@ export namespace impelDown {
                 writer.writeEnum(1, this.roomState);
             if (this.hostId != 0)
                 writer.writeInt32(2, this.hostId);
+            if (this.hostName.length)
+                writer.writeString(3, this.hostName);
             if (this.roomIndex != 0)
-                writer.writeInt32(3, this.roomIndex);
+                writer.writeInt32(4, this.roomIndex);
             if (this.mapIndex != 0)
-                writer.writeInt32(4, this.mapIndex);
+                writer.writeInt32(5, this.mapIndex);
             if (this.currentPeople != 0)
-                writer.writeInt32(5, this.currentPeople);
+                writer.writeInt32(6, this.currentPeople);
             if (this.maxPeople != 0)
-                writer.writeInt32(6, this.maxPeople);
+                writer.writeInt32(7, this.maxPeople);
             if (this.roomDatas.length)
-                writer.writeRepeatedMessage(7, this.roomDatas, (item: RoomData) => item.serialize(writer));
+                writer.writeRepeatedMessage(8, this.roomDatas, (item: RoomData) => item.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -715,19 +735,22 @@ export namespace impelDown {
                         message.hostId = reader.readInt32();
                         break;
                     case 3:
-                        message.roomIndex = reader.readInt32();
+                        message.hostName = reader.readString();
                         break;
                     case 4:
-                        message.mapIndex = reader.readInt32();
+                        message.roomIndex = reader.readInt32();
                         break;
                     case 5:
-                        message.currentPeople = reader.readInt32();
+                        message.mapIndex = reader.readInt32();
                         break;
                     case 6:
-                        message.maxPeople = reader.readInt32();
+                        message.currentPeople = reader.readInt32();
                         break;
                     case 7:
-                        reader.readMessage(message.roomDatas, () => pb_1.Message.addToRepeatedWrapperField(message, 7, RoomData.deserialize(reader), RoomData));
+                        message.maxPeople = reader.readInt32();
+                        break;
+                    case 8:
+                        reader.readMessage(message.roomDatas, () => pb_1.Message.addToRepeatedWrapperField(message, 8, RoomData.deserialize(reader), RoomData));
                         break;
                     default: reader.skipField();
                 }
