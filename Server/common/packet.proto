@@ -7,31 +7,31 @@ enum MSGID
 {
     S_INIT = 0;
 
-    
-
+    C_PLAYER = 1;
+    S_PLAYER = 2;
 
     C_CREATE_ROOM = 10;
     C_JOIN_ROOM = 11;
     C_EXIT_ROOM = 12;
-    C_REFRESH_ROOM_LIST = 13;
+    C_MATCH_MAKING = 13;
     
-    S_CREATE_ROOM = 14;
-    S_JOIN_ROOM = 15;
-    S_EXIT_ROOM = 16;
-    S_REFRESH_ROOM = 17;
-    S_REFRESH_ROOM_LIST = 18;
-    C_SET_ROOM = 19;
-    S_SET_ROOM = 20;
+    S_CREATE_ROOM = 15;
+    S_JOIN_ROOM = 16;
+    S_EXIT_ROOM = 17;
+    S_REFRESH_ROOM = 18;
+    S_MATCH_MAKING = 20;
 
-
-
+    C_SET_ROOM = 25;
+    S_SET_ROOM = 26;
 
 }
 
 message PlayerInfo{
     int32 playerId = 1;
-    RoomInfo roomInfo = 2;
-    int32 characterIndex = 3;
+    string playerName = 2;
+    int32 roomIndex = 3;
+    int32 characterIndex = 4;
+    int32 roomInIndex = 5;
 }
 
 enum PlayerState {
@@ -41,22 +41,23 @@ enum PlayerState {
     GHOST = 3;
 }
 
-message PlayerData {
-    PlayerInfo playerInfo = 1;
-    PlayerPosData playerPosData = 2;
-    int32 tailIndex = 3;
-    PlayerState playerState = 4;
+message PlayerInGameData {
+    int32 playerId = 1;
+    string playerNmae = 2;
+    PlayerPosData playerPosData = 3;    
+    int32 tailIndex = 4;
+    PlayerState playerState = 5;
 }
 
 message PlayerPosData {
     Position position = 1;    
     bool flipX = 2;
 }
-
 message Position {
     float x = 1;
     float y = 2;
 }
+
 
 message RoomInfo {
     RoomState roomState = 1;
@@ -65,6 +66,13 @@ message RoomInfo {
     int32 mapIndex = 4;
     int32 currentPeople = 5;
     int32 maxPeople = 6;
+    repeated RoomData roomDatas =7;
+}
+
+message RoomData {
+    bool isLock = 1;
+    int32 playerId = 2;
+    string playerName = 3;
 }
 
 enum RoomState {
@@ -77,12 +85,26 @@ enum RoomState {
 
 
 message S_Init {
+    int32 playerId = 1;
+}
+
+message C_Player {
+    int32 playerId = 1;
+    string playerName = 2;
+}
+
+message S_Player {
     PlayerInfo playerInfo = 1;
 }
 
 
-message C_CreateRoom {
 
+
+
+
+
+message C_CreateRoom {
+    int32 playerId = 1;
 }
 
 message C_JoinRoom {
@@ -93,16 +115,18 @@ message C_ExitRoom {
 
 }
 
-message C_RefreshRoomList {
-
+message C_MatchMaking {
+    int32 playerId = 1;
 }
+
+
 
 message S_CreateRoom {
 
 }
 
 message S_JoinRoom {
-
+    bool isHost = 1;
 }
 
 message S_ExitRoom {
@@ -110,17 +134,20 @@ message S_ExitRoom {
 }
 
 message S_RefreshRoom {
+    RoomInfo roomInfo = 1;
+}
+
+message S_MatchMaking {
 
 }
 
-message S_RefreshRoomList {
-
-}
 
 message C_SetRoom {
-    RoomInfo roomInfo = 1;
+    int32 index = 1;
+    bool isLock = 2;
 }
 
 message S_SetRoom {
-    RoomInfo roomInfo = 1;
+    int32 index = 1;
+    bool isLock = 2;
 }

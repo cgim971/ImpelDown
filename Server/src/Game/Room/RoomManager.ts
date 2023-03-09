@@ -1,5 +1,6 @@
 import PlayerSocket from "../../Player/PlayerSocket";
 import { impelDown } from "../../packet/packet";
+import SessionManager, { SessionDictionary } from "../Managers/SessionManager";
 import Room from "./Room";
 
 interface RoomDictionary {
@@ -20,17 +21,15 @@ export default class RoomManager {
     }
 
 
-    public createRoom(hostSocket: PlayerSocket, maxPeople: number): void {
-        if (hostSocket.getRoomDataInfo().getRoomState() != impelDown.RoomState.ROOM_NONE) {
-            return;
-        }
+    public createRoom(hostSocket: PlayerSocket): void {
+        if (hostSocket.getPlayerDataInfo().getRoomIndex() != -1) return;
 
         let roomIndex: number = 0;
         while (this._roomMap[roomIndex] != null) {
             roomIndex++;
         }
 
-        let room: Room = new Room(hostSocket, roomIndex, maxPeople);
+        let room: Room = new Room(hostSocket, roomIndex);
         this._roomMap[roomIndex] = room;
     }
 
@@ -39,6 +38,38 @@ export default class RoomManager {
         room.joinRoom(player);
     }
 
+    public matchMaking(player: PlayerSocket): void {
+        for (let index in this._roomMap) {
+            if (this._roomMap[index] != null) {
+                if (this._roomMap[index].isEmpty() == true) {
+                    this._roomMap[index].joinRoom(player);
+                    return;
+                }
+            }
+        }
 
+        this.createRoom(player);
+    }
+
+    getRoomInfos(): impelDown.RoomInfo[] {
+        let list: impelDown.RoomInfo[] = [];
+
+        for (let index in this._roomMap) {
+            if (this._roomMap[index] != null) {
+                list.push(this._roomMap[index].getRoomInfo());
+            }
+        }
+
+        return list;
+    }
+
+    broadCastMessage(payload: Uint8Array, msgCode: number): void {
+        let sessionMap: SessionDictionary = SessionManager.Instance.getSessionMap();
+
+        for (let index in sessionMap) {
+            if (sessionMap[index].getPlayerDataInfo().getRoomIndex() == -1)
+                sessionMap[index].SendData(payload, msgCode);
+        }
+    }
 
 }

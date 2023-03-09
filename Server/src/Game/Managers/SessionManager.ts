@@ -24,6 +24,10 @@ export default class SessionManager {
         this._count -= 1;
     }
 
+    getSessionMap():SessionDictionary{
+        return this._sessionMap;
+    }
+    
     getSession(id: number): PlayerSocket {
         return this._sessionMap[id];
     }

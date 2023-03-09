@@ -21,6 +21,15 @@ public class PacketManager : MonoBehaviour {
     private void Register() {
         _onRecv.Add((ushort)MSGID.SInit, MakePacket<S_Init>);
         _handlers.Add((ushort)MSGID.SInit, new SInitHandler());
+
+        _onRecv.Add((ushort)MSGID.SPlayer, MakePacket<S_Player>);
+        _handlers.Add((ushort)MSGID.SPlayer, new SPlayerHandler());
+
+        _onRecv.Add((ushort)MSGID.SJoinRoom, MakePacket<S_JoinRoom>);
+        _handlers.Add((ushort)MSGID.SJoinRoom, new SJoinRoomHandler());
+
+        _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_RefreshRoom>);
+        _handlers.Add((ushort)MSGID.SRefreshRoom, new SRefreshRoomHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

@@ -1,22 +1,30 @@
 import JobTimer from "../../JobTimer";
 import PlayerSocket from "../../Player/PlayerSocket";
-import { SessionDictionary } from "../Managers/SessionManager";
+import SocketSession from "../../SocketSession";
 import { impelDown } from "../../packet/packet";
 import MapManager from "../Managers/MapManager";
+import SessionManager from "../Managers/SessionManager";
 import TailManager from "../Managers/TailManager";
+
+
+enum Result {
+    NONE = 0,
+    SUCCESS = 1,
+    FAIL = 2,
+    CLOSE = 3,
+}
 
 export default class Room {
     private _hostSocket: PlayerSocket;
     private _roomInfo: impelDown.RoomInfo;
 
-    // 방에 들어온 플레이어 정보 저장
-    private _playerMap: SessionDictionary = {};
     private _tailManager: TailManager = new TailManager();
     private _mapManager: MapManager = new MapManager();
 
 
-    constructor(hostSocket: PlayerSocket, roomIndex: number, maxPeople: number) {
+    constructor(hostSocket: PlayerSocket, roomIndex: number) {
         this._hostSocket = hostSocket;
+
 
         this._roomInfo = new impelDown.RoomInfo({
             roomState: impelDown.RoomState.LOBBY,
@@ -24,9 +32,12 @@ export default class Room {
             roomIndex: roomIndex,
             mapIndex: 0,
             currentPeople: 0,
-            maxPeople: maxPeople
+            maxPeople: 8,
         });
 
+        for (let index: number = 0; index < 8; index++) {
+            this._roomInfo.roomDatas[index] = new impelDown.RoomData({ isLock: false, playerId: -1 });
+        }
         this.joinRoom(hostSocket);
     }
 
@@ -47,25 +58,80 @@ export default class Room {
 
     joinRoom(player: PlayerSocket): void {
         if (this._roomInfo.roomState == impelDown.RoomState.GAME) return;
-        if(this.isEmpty() == false) return;
- 
+        if (this.isEmpty() == false) return;
+
         let playerIndex: number = 0;
-        while (this._playerMap[playerIndex] != null) {
-            playerIndex++;
+        while (playerIndex < 8) {
+            let result: Result = this.setPlayer(playerIndex, player);
+            if (result == Result.SUCCESS)
+                break;
+            else if (result == Result.FAIL) {
+                playerIndex++;
+            }
+            else if (result == Result.CLOSE) {
+                return;
+            }
         }
 
-        this._playerMap[playerIndex] = player;
-        this._roomInfo.currentPeople += 1;
-        player.getRoomDataInfo().setRoomIndex(this._roomInfo.roomIndex);
+        let sJoinRoom: impelDown.S_JoinRoom = new impelDown.S_JoinRoom({});
+        player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
+
+        this.sRefreshRoom();
     }
 
+    sRefreshRoom(): void {
+        let sRefreshRoom: impelDown.S_RefreshRoom = new impelDown.S_RefreshRoom({
+            roomInfo: this.getRoomInfo()
+        });
+        this.broadCastMessage(sRefreshRoom.serialize(), impelDown.MSGID.S_REFRESH_ROOM);
+    }
+
+    setLock(index: number, isLock: boolean = false): void {
+        if (this._roomInfo.roomDatas[index].playerId != -1) {
+            return;
+        }
+
+        this._roomInfo.roomDatas[index].isLock = isLock;
+    }
+
+    setPlayer(index: number, player: PlayerSocket): Result {
+        if (index >= 8) return Result.CLOSE;
+
+        if (this._roomInfo.roomDatas[index].isLock == true)
+            return Result.FAIL;
+
+        if (this._roomInfo.roomDatas[index].playerId != -1)
+            return Result.FAIL;
+
+        this._roomInfo.roomDatas[index].playerId = player.getPlayerId();
+        this._roomInfo.currentPeople += 1;
+        player.getPlayerDataInfo().setRoomInIndex(index);
+        player.getPlayerDataInfo().setRoomIndex(this._roomInfo.roomIndex);
+        return Result.SUCCESS;
+    }
 
     getRoomInfo(): impelDown.RoomInfo {
         return this._roomInfo;
     }
 
-    isEmpty() : boolean{
-        return this._roomInfo.maxPeople >  this._roomInfo.currentPeople;
+    isEmpty(): boolean {
+        for (let index: number = 0; index < 8; index++) {
+            if (this._roomInfo.roomDatas[index].isLock == false) {
+                if (this._roomInfo.roomDatas[index].playerId == -1) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
-    
+
+    broadCastMessage(payload: Uint8Array, msgCode: number): void {
+            for (let index in this._roomInfo.roomDatas) {
+            if (this._roomInfo.roomDatas[index].playerId != -1) {
+                let player: PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
+                player.SendData(payload, msgCode);
+            }
+        }
+    }
 }

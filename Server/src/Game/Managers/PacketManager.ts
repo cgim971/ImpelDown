@@ -1,9 +1,10 @@
 import { impelDown } from "../../packet/packet";
 import { PacketHandler } from "../../packet/PacketHandler";
+import CPlayerHandler from "../../packet/PacketHandlers/CPlayerHandler";
 import CCreateRoomHandler from "../../packet/PacketHandlers/Room/CCreateRoomHandler";
 import CExitRoomHandler from "../../packet/PacketHandlers/Room/CExitRoomHandler";
 import CJoinRoomHandler from "../../packet/PacketHandlers/Room/CJoinRoomHandler";
-import CRefreshRoomListHandler from "../../packet/PacketHandlers/Room/CRefreshRoomListHandler";
+import CMatchMakingHandler from "../../packet/PacketHandlers/Room/CMatchMakingHandler";
 import CSetRoomHandler from "../../packet/PacketHandlers/Room/CSetRoomHandler";
 
 interface HandlerDictionary {
@@ -25,10 +26,12 @@ export default class PacketManager {
     }
 
     register(): void {
+        this.handlerMap[impelDown.MSGID.C_PLAYER] = new CPlayerHandler();
+
         this.handlerMap[impelDown.MSGID.C_CREATE_ROOM] = new CCreateRoomHandler();
         this.handlerMap[impelDown.MSGID.C_JOIN_ROOM] = new CJoinRoomHandler();
         this.handlerMap[impelDown.MSGID.C_EXIT_ROOM] = new CExitRoomHandler();
-        this.handlerMap[impelDown.MSGID.C_REFRESH_ROOM_LIST] = new CRefreshRoomListHandler();
-        this.handlerMap[impelDown.MSGID.C_SET_ROOM] = new  CSetRoomHandler();
+        this.handlerMap[impelDown.MSGID.C_MATCH_MAKING] = new CMatchMakingHandler();
+        this.handlerMap[impelDown.MSGID.C_SET_ROOM] = new CSetRoomHandler();
     }
 }
