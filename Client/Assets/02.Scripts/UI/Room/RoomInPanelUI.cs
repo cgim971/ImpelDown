@@ -8,9 +8,21 @@ using UnityEngine;
 
 public class RoomInPanelUI : MonoBehaviour {
 
+    #region Property
+
+    public bool IsHost {
+        get => _isHost;
+        set => _isHost = value;
+    }
+
+    #endregion
 
     [SerializeField] private List<UserUIData> _userUIDataList = new List<UserUIData>();
     [SerializeField] private TMP_Text _roomNameText;
+
+
+    private bool _isHost = false;
+
 
     private void Start() { }
 
@@ -22,11 +34,12 @@ public class RoomInPanelUI : MonoBehaviour {
     }
 
     public void RefreshRoomData(RoomInfo roomInfo) {
+        _roomNameText.SetText($"{roomInfo.HostName}의 방");
+        _isHost = roomInfo.HostId == GameManager.Instance.PlayerId ? true : false;
+
         for (int i = 0; i < 8; i++) {
             _userUIDataList[i].UserUI.Refresh(roomInfo.RoomDatas[i].PlayerName);
         }
-
-        _roomNameText.SetText($"{roomInfo.HostName}의 방");
     }
 }
 

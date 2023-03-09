@@ -55,7 +55,7 @@ message PlayerPosData {
 }
 message Position {
     float x = 1;
-    float y = 2;
+    float y = 2 ;
 }
 
 
