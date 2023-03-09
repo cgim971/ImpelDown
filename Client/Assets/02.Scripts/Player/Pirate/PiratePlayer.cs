@@ -13,6 +13,7 @@ public class PiratePlayer : BasePlayer {
     public PirateCatchModule PirateCatchModule => _baseCatchModule as PirateCatchModule;
     public PirateSkillModule PirateSkillModule => _baseSkillModule as PirateSkillModule;
     public PirateItemModule PirateItemModule => _baseItemModule as PirateItemModule;
+    public PirateTailModule PirateTailModule => _baseTailModule as PirateTailModule;
     public PirateDataSO PirateDataSO => _basePlayerDataSO as PirateDataSO;
     #endregion
 

@@ -13,6 +13,7 @@ public class RaccoonPlayer : BasePlayer
     public RaccoonCatchModule RaccoonCatchModule => _baseCatchModule as RaccoonCatchModule;
     public RaccoonSkillModule RaccoonSkillModule => _baseSkillModule as RaccoonSkillModule;
     public RaccoonItemModule RaccoonItemModule => _baseItemModule as RaccoonItemModule;
+    public RaccoonTailMoudule RaccoonTailModule => _baseTailModule as RaccoonTailMoudule;
     public RaccoonDataSO RaccoonDataSO => _basePlayerDataSO as RaccoonDataSO;
     #endregion
 

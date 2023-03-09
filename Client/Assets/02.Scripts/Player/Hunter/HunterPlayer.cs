@@ -13,6 +13,7 @@ public class HunterPlayer : BasePlayer {
     public HunterCatchModule HunterCatchModule => _baseCatchModule as HunterCatchModule;
     public HunterSkillModule HunterSkillModule => _baseSkillModule as HunterSkillModule;
     public HunterItemModule HunterItemModule => _baseItemModule as HunterItemModule;
+    public HunterTailModule HunterTailModule => _baseTailModule as HunterTailModule;
     public HunterDataSO HunterDataSO => _basePlayerDataSO as HunterDataSO;
     #endregion
 

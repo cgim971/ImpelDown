@@ -10,6 +10,7 @@ public class NinjaPlayer : BasePlayer {
     public NinjaCatchModule NinjaCatchModule => _baseCatchModule as NinjaCatchModule;
     public NinjaSkillModule NinjaSkillModule => _baseSkillModule as NinjaSkillModule;
     public NinjaItemModule NinjaItemModule => _baseItemModule as NinjaItemModule;
+    public NinjaTailModule NinjaTailModule => _baseTailModule as NinjaTailModule;
     public NinjaDataSO NinjaDataSO => _basePlayerDataSO as NinjaDataSO;
     #endregion
 
