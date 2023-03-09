@@ -15,7 +15,6 @@ public class RoomUI : MonoBehaviour
     [SerializeField]
     private TMP_Text _hostName;
     #endregion
-
     #region Ready/Start
     private bool isReady = false;
     [SerializeField]
@@ -24,39 +23,109 @@ public class RoomUI : MonoBehaviour
     #region Users
     [SerializeField]
     private List<GameObject> _playerList;
-    [SerializeField] 
+    [SerializeField]
     private List<Image> _imageList;
 
+    private Dictionary<Image, UserUI> _imageToUserUIDic = new Dictionary<Image, UserUI>();
+
+    [SerializeField]
+    private int userIdx = 1;
+
     #endregion
     #endregion
 
-
-    void Start()
+    private void Awake()
     {
         _hostName.text = GetHostName();
         isHost = CheckIsHost("플레이어 1");
         SetBtnColor();
-        ReadyOrStartBtn.onClick.AddListener(ClickReadyOrStartBtn);
-        if(isHost)
+        if (isHost)
+        {
             ButtonSetting();
+        }
+        ButtionDictionary();
+        ReadyOrStartBtn.onClick.AddListener(ClickReadyOrStartBtn);
+    }
+    void Start()
+    {
+    }
+    private void Update()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            
+        }
     }
 
-    
+    #region FirstSetting
+    /// <summary>
+    /// 버튼 이벤트 설정
+    /// </summary>
     public void ButtonSetting()
     {
         foreach(Image image in _imageList)
         {
-            image.GetComponent<Button>().onClick.AddListener(HostLock);
+            image.GetComponent<Button>().onClick.AddListener(delegate { HostLock(image.GetComponent<UserUI>()); });
         }
     }
+
+    public void ButtionDictionary()
+    {
+        foreach (Image image in _imageList)
+        {
+            _imageToUserUIDic[image] = image.gameObject.GetComponent<UserUI>();
+            Debug.Log(_imageToUserUIDic[image]);
+        }
+    }
+    #endregion
+
+    /// <summary>
+    /// 현재 유저 ui가 잠겨있는지 
+    /// </summary>
+    /// <param name="userUI"></param>
+    /// <returns>bool</returns>
+    bool CheckIsLocked(UserUI userUI)
+    {
+        return userUI.GetComponent<UserUI>()._IsLock;
+    }
+
+
+    void UserReady(int idx)
+    {
+        if (!CheckIsLocked(_imageToUserUIDic[_imageList[idx]]))
+        {
+            _imageToUserUIDic[_imageList[idx]].SetReady();
+        }
+    }
+
+    void UserWait(int idx)
+    {
+        if (!CheckIsLocked(_imageToUserUIDic[_imageList[idx]]))
+        {
+            _imageToUserUIDic[_imageList[idx]].SetWait();
+        }
+    }
+
+    
+    
 
 
     /// <summary>
     /// 방 호스트가 자리를 잠군다
     /// </summary>
-    public void HostLock()
+    public void HostLock(UserUI userUI)
     {
-        Debug.Log("Lock");
+        Debug.Log("asdfdsf");
+        if(CheckIsLocked(userUI))
+        {
+            userUI.GetComponent<UserUI>().SetNONE();
+            userUI.GetComponent<UserUI>()._IsLock = false;
+        }
+        else
+        {
+            userUI.GetComponent<UserUI>().SetLock();
+            userUI.GetComponent<UserUI>()._IsLock = true;
+        }
     }
 
 
@@ -66,7 +135,7 @@ public class RoomUI : MonoBehaviour
     /// <returns>string</returns>
     public string GetHostName()
     {
-        string hostName = "플레이어 12";
+        string hostName = "플레이어 11";
         // 어쩌고 저쩌고 호스트 이름 가져옴
         return hostName;
     }
@@ -88,7 +157,14 @@ public class RoomUI : MonoBehaviour
         if (isHost)
             StartButton();
         else
+        {
             ReadyButton();
+            Debug.Log("asdf");
+            if (_imageToUserUIDic[_imageList[userIdx]].GetCurState() == CurState.WAIT)
+                UserReady(userIdx);
+            else
+                UserWait(userIdx);
+        }
     }
     /// <summary>
     /// 시작 버튼
@@ -138,15 +214,15 @@ public class RoomUI : MonoBehaviour
         }
     }
 
-
-
-
-    public void CurPlayer()
+    public void CurUsers()
     {
         foreach (GameObject player in _playerList)
         {
             //만약 준비중이라면
         }
     }
+
+
+
 
 }
