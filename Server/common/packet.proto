@@ -21,6 +21,9 @@ enum MSGID
     S_REFRESH_ROOM = 18;
     S_MATCH_MAKING = 20;
 
+    C_ISREADY = 21;
+    S_ISREADY = 22;
+
     C_SET_ROOM = 25;
     S_SET_ROOM = 26;
 

@@ -10,12 +10,10 @@ using UnityEngine.UI;
 public class RoomInPanelUI : MonoBehaviour {
 
     #region Property
-
     public bool IsHost {
         get => _isHost;
         set => _isHost = value;
     }
-
     #endregion
 
     [SerializeField] private List<UserUIData> _userUIDataList = new List<UserUIData>();
@@ -23,6 +21,8 @@ public class RoomInPanelUI : MonoBehaviour {
 
     [SerializeField] private Button _exitBtn;
     [SerializeField] private Button _readyBtn;
+
+    [SerializeField] private List<Sprite> _playerSpriteList;
 
 
     private bool _isHost = false;
@@ -44,7 +44,7 @@ public class RoomInPanelUI : MonoBehaviour {
         _isHost = roomInfo.HostId == GameManager.Instance.PlayerId ? true : false;
 
         for (int i = 0; i < 8; i++) {
-            _userUIDataList[i].UserUI.Refresh(roomInfo.RoomDatas[i].PlayerName);
+            _userUIDataList[i].UserUI.Refresh(GetPlayerSprite(roomInfo.RoomDatas[i]), roomInfo.RoomDatas[i].PlayerId != -1, roomInfo.RoomDatas[i].PlayerName);
         }
 
         MatchManager.Instance.RoomMapPanelUI.Init(_isHost, roomInfo.MapIndex);
@@ -53,6 +53,23 @@ public class RoomInPanelUI : MonoBehaviour {
     public void ExitRoom() {
         C_ExitRoom data = new C_ExitRoom { PlayerId = GameManager.Instance.PlayerId };
         NetworkManager.Instance.RegisterSend((ushort)MSGID.CExitRoom, data);
+    }
+
+    public Sprite GetPlayerSprite(RoomData roomData) {
+        if (roomData.IsLock == true) {
+            return _playerSpriteList[2];
+        }
+        else {
+            // 플레이어가 있다.
+            if (roomData.PlayerId != -1) {
+                if (roomData.IsReady == true)
+                    return _playerSpriteList[0];
+
+                return _playerSpriteList[1];
+            }
+        }
+
+        return _playerSpriteList[3];
     }
 }
 
