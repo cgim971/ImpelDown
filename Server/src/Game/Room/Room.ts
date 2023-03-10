@@ -5,6 +5,7 @@ import { impelDown } from "../../packet/packet";
 import MapManager from "../Managers/MapManager";
 import SessionManager from "../Managers/SessionManager";
 import TailManager from "../Managers/TailManager";
+import RoomManager from "./RoomManager";
 
 
 enum Result {
@@ -80,8 +81,6 @@ export default class Room {
     }
 
     exitRoom(player: PlayerSocket): void {
-        console.log("EXIT_ROOM");
-
         let playerId = player.getPlayerId();
 
         if (this._roomInfo.currentPeople > 1) {
@@ -102,6 +101,7 @@ export default class Room {
             if (this._roomInfo.roomDatas[index].playerId == playerId) {
                 this._roomInfo.roomDatas[index] = new impelDown.RoomData({ isLock: false, playerId: -1, playerName: "", isReady: false });
                 this._roomInfo.currentPeople -= 1;
+                player.getPlayerDataInfo().setRoomIndex();
 
                 let sExitRoom: impelDown.S_ExitRoom = new impelDown.S_ExitRoom({});
                 player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
@@ -111,6 +111,7 @@ export default class Room {
 
         if (this._roomInfo.currentPeople == 0) {
             // 방삭제
+            RoomManager.Instance.deleteRoom(this._roomInfo.roomIndex);
         }
         this.sRefreshRoom();
         return;

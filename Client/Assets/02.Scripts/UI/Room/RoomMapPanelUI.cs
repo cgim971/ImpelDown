@@ -23,7 +23,6 @@ public class RoomMapPanelUI : MonoBehaviour {
             UnshownBtns();
         }
 
-        Debug.Log("mapIndex : " + mapIndex);
         switch (mapIndex) {
             case 0:
                 break;

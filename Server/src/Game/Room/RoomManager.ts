@@ -39,8 +39,15 @@ export default class RoomManager {
     }
 
     public exitRoom(player: PlayerSocket, roomIndex: number) {
-        let room : Room  = this._roomMap[roomIndex];
+        let room: Room = this._roomMap[roomIndex];
         room.exitRoom(player);
+    }
+
+    public deleteRoom(roomIndex: number) {
+        let room :Room = this._roomMap[roomIndex];
+        delete this._roomMap[roomIndex];
+
+        
     }
 
     public matchMaking(player: PlayerSocket): void {

@@ -73,10 +73,10 @@ export default class PlayerDataInfo {
     setPlayerCharacterIndex(characterIndex: number): void {
         this._playerInfo.characterIndex = characterIndex;
     }
-    setRoomInIndex(index: number): void {
+    setRoomInIndex(index: number = -1): void {
         this._playerInfo.roomInIndex = index;
     }
-    setRoomIndex(index: number): void {
+    setRoomIndex(index: number = -1): void {
         this._playerInfo.roomIndex = index;
     }
 
