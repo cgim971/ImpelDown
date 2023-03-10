@@ -28,6 +28,9 @@ public class PacketManager : MonoBehaviour {
         _onRecv.Add((ushort)MSGID.SJoinRoom, MakePacket<S_JoinRoom>);
         _handlers.Add((ushort)MSGID.SJoinRoom, new SJoinRoomHandler());
 
+        _onRecv.Add((ushort)MSGID.SExitRoom, MakePacket<S_ExitRoom>);
+        _handlers.Add((ushort)MSGID.SExitRoom, new SExitRoomHandler());
+
         _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_RefreshRoom>);
         _handlers.Add((ushort)MSGID.SRefreshRoom, new SRefreshRoomHandler());
     }

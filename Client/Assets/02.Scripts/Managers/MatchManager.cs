@@ -17,6 +17,7 @@ public class MatchManager : MonoBehaviour {
     }
 
     public RoomInPanelUI RoomInPanelUI { get; private set; }
+    public RoomMapPanelUI RoomMapPanelUI { get; private set; }
     #endregion
     private static MatchManager _instance = null;
 
@@ -29,6 +30,7 @@ public class MatchManager : MonoBehaviour {
 
     private void Awake() {
         RoomInPanelUI = FindObjectOfType<RoomInPanelUI>();
+        RoomMapPanelUI = FindObjectOfType<RoomMapPanelUI>();
     }
 
     public void Init(PlayerInfo playerInfo) {

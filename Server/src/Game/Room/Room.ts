@@ -36,7 +36,7 @@ export default class Room {
         });
 
         for (let index: number = 0; index < 8; index++) {
-            this._roomInfo.roomDatas[index] = new impelDown.RoomData({ isLock: false, playerId: -1 });
+            this._roomInfo.roomDatas[index] = new impelDown.RoomData({ isLock: false, playerId: -1, playerName: "", isReady: false });
         }
         this.joinRoom(hostSocket);
     }
@@ -77,6 +77,43 @@ export default class Room {
         player.SendData(sJoinRoom.serialize(), impelDown.MSGID.S_JOIN_ROOM);
 
         this.sRefreshRoom();
+    }
+
+    exitRoom(player: PlayerSocket): void {
+        console.log("EXIT_ROOM");
+
+        let playerId = player.getPlayerId();
+
+        if (this._roomInfo.currentPeople > 1) {
+            // 호스트 변경
+            if (this._hostSocket == player) {
+                for (let index in this._roomInfo.roomDatas) {
+                    let roomPlayer: impelDown.RoomData = this._roomInfo.roomDatas[index];
+                    if (roomPlayer.playerId != -1 && playerId != roomPlayer.playerId) {
+                        this._hostSocket = SessionManager.Instance.getSession(roomPlayer.playerId);
+                        this._roomInfo.hostId = roomPlayer.playerId;
+                        this._roomInfo.hostName = roomPlayer.playerName;
+                    }
+                }
+            }
+        }
+
+        for (let index in this._roomInfo.roomDatas) {
+            if (this._roomInfo.roomDatas[index].playerId == playerId) {
+                this._roomInfo.roomDatas[index] = new impelDown.RoomData({ isLock: false, playerId: -1, playerName: "", isReady: false });
+                this._roomInfo.currentPeople -= 1;
+
+                let sExitRoom: impelDown.S_ExitRoom = new impelDown.S_ExitRoom({});
+                player.SendData(sExitRoom.serialize(), impelDown.MSGID.S_EXIT_ROOM);
+                break;
+            }
+        }
+
+        if (this._roomInfo.currentPeople == 0) {
+            // 방삭제
+        }
+        this.sRefreshRoom();
+        return;
     }
 
     sRefreshRoom(): void {

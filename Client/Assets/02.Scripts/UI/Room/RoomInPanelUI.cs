@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RoomInPanelUI : MonoBehaviour {
 
@@ -20,11 +21,16 @@ public class RoomInPanelUI : MonoBehaviour {
     [SerializeField] private List<UserUIData> _userUIDataList = new List<UserUIData>();
     [SerializeField] private TMP_Text _roomNameText;
 
+    [SerializeField] private Button _exitBtn;
+    [SerializeField] private Button _readyBtn;
+
 
     private bool _isHost = false;
 
 
-    private void Start() { }
+    private void Start() {
+        _exitBtn.onClick.AddListener(() => ExitRoom());
+    }
 
     public void Init() {
         foreach (UserUIData user in _userUIDataList) {
@@ -40,6 +46,13 @@ public class RoomInPanelUI : MonoBehaviour {
         for (int i = 0; i < 8; i++) {
             _userUIDataList[i].UserUI.Refresh(roomInfo.RoomDatas[i].PlayerName);
         }
+
+        MatchManager.Instance.RoomMapPanelUI.Init(_isHost, roomInfo.MapIndex);
+    }
+
+    public void ExitRoom() {
+        C_ExitRoom data = new C_ExitRoom { PlayerId = GameManager.Instance.PlayerId };
+        NetworkManager.Instance.RegisterSend((ushort)MSGID.CExitRoom, data);
     }
 }
 

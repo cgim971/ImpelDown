@@ -38,6 +38,11 @@ export default class RoomManager {
         room.joinRoom(player);
     }
 
+    public exitRoom(player: PlayerSocket, roomIndex: number) {
+        let room : Room  = this._roomMap[roomIndex];
+        room.exitRoom(player);
+    }
+
     public matchMaking(player: PlayerSocket): void {
         for (let index in this._roomMap) {
             if (this._roomMap[index] != null) {
