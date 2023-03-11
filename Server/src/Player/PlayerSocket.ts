@@ -1,7 +1,7 @@
-import SocketSession from "../SocketSession";
 import { impelDown } from "../packet/packet";
 import WebSocket, { RawData } from "ws";
 import PlayerDataInfo from "./PlayerDataInfo";
+import SocketSession from "./SocketSession";
 
 
 export default class PlayerSocket extends SocketSession {

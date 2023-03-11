@@ -1,6 +1,5 @@
 import WebSocket, { RawData } from "ws";
-import { impelDown } from "./packet/packet";
-import PacketManager from "./Game/Managers/PacketManager";
+import PacketManager from "../Game/Managers/PacketManager";
 
 
 export default class SocketSession {

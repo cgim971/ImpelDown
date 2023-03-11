@@ -1,6 +1,5 @@
 import JobTimer from "../../JobTimer";
 import PlayerSocket from "../../Player/PlayerSocket";
-import SocketSession from "../../SocketSession";
 import { impelDown } from "../../packet/packet";
 import MapManager from "../Managers/MapManager";
 import SessionManager from "../Managers/SessionManager";

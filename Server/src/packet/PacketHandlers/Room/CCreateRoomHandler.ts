@@ -1,7 +1,7 @@
 import SessionManager from "../../../Game/Managers/SessionManager";
 import RoomManager from "../../../Game/Room/RoomManager";
 import PlayerSocket from "../../../Player/PlayerSocket";
-import SocketSession from "../../../SocketSession";
+import SocketSession from "../../../Player/SocketSession";
 import { PacketHandler } from "../../PacketHandler";
 import { impelDown } from "../../packet";
 
