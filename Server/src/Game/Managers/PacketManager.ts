@@ -5,7 +5,6 @@ import CCreateRoomHandler from "../../packet/PacketHandlers/Room/CCreateRoomHand
 import CExitRoomHandler from "../../packet/PacketHandlers/Room/CExitRoomHandler";
 import CJoinRoomHandler from "../../packet/PacketHandlers/Room/CJoinRoomHandler";
 import CMatchMakingHandler from "../../packet/PacketHandlers/Room/CMatchMakingHandler";
-import CSetRoomHandler from "../../packet/PacketHandlers/Room/CSetRoomHandler";
 
 interface HandlerDictionary {
     [key: number]: PacketHandler;
@@ -32,6 +31,5 @@ export default class PacketManager {
         this.handlerMap[impelDown.MSGID.C_JOIN_ROOM] = new CJoinRoomHandler();
         this.handlerMap[impelDown.MSGID.C_EXIT_ROOM] = new CExitRoomHandler();
         this.handlerMap[impelDown.MSGID.C_MATCH_MAKING] = new CMatchMakingHandler();
-        this.handlerMap[impelDown.MSGID.C_SET_ROOM] = new CSetRoomHandler();
     }
 }

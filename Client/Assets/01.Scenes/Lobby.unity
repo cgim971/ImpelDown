@@ -1746,7 +1746,7 @@ GameObject:
   - component: {fileID: 484729990}
   - component: {fileID: 484729989}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2697,7 +2697,7 @@ GameObject:
   - component: {fileID: 863938898}
   - component: {fileID: 863938897}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3940,7 +3940,7 @@ GameObject:
   - component: {fileID: 1136829986}
   - component: {fileID: 1136829985}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4284,7 +4284,7 @@ GameObject:
   - component: {fileID: 1221707514}
   - component: {fileID: 1221707513}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4411,7 +4411,7 @@ GameObject:
   - component: {fileID: 1252914491}
   - component: {fileID: 1252914490}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4741,7 +4741,7 @@ GameObject:
   - component: {fileID: 1431063341}
   - component: {fileID: 1431063340}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4816,7 +4816,7 @@ GameObject:
   - component: {fileID: 1455637251}
   - component: {fileID: 1455637250}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5201,23 +5201,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7afc39a8f867624e961132954b6569e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _userUIDataList:
-  - UserUI: {fileID: 423287472}
-    IsLock: 0
-  - UserUI: {fileID: 2025523822}
-    IsLock: 0
-  - UserUI: {fileID: 2035558570}
-    IsLock: 0
-  - UserUI: {fileID: 495581498}
-    IsLock: 0
-  - UserUI: {fileID: 2136225902}
-    IsLock: 0
-  - UserUI: {fileID: 1973946954}
-    IsLock: 0
-  - UserUI: {fileID: 1138595703}
-    IsLock: 0
-  - UserUI: {fileID: 485834635}
-    IsLock: 0
+  _userUIList:
+  - {fileID: 423287472}
+  - {fileID: 2025523822}
+  - {fileID: 2035558570}
+  - {fileID: 495581498}
+  - {fileID: 2136225902}
+  - {fileID: 1973946954}
+  - {fileID: 1138595703}
+  - {fileID: 485834635}
   _roomNameText: {fileID: 502279689}
   _exitBtn: {fileID: 1380260497}
   _readyBtn: {fileID: 276801831}
@@ -5633,7 +5625,7 @@ GameObject:
   - component: {fileID: 1867581337}
   - component: {fileID: 1867581336}
   m_Layer: 5
-  m_Name: image
+  m_Name: userImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

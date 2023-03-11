@@ -16,7 +16,7 @@ public class RoomInPanelUI : MonoBehaviour {
     }
     #endregion
 
-    [SerializeField] private List<UserUIData> _userUIDataList = new List<UserUIData>();
+    [SerializeField] private List<UserUI> _userUIList = new List<UserUI>();
     [SerializeField] private TMP_Text _roomNameText;
 
     [SerializeField] private Button _exitBtn;
@@ -33,9 +33,8 @@ public class RoomInPanelUI : MonoBehaviour {
     }
 
     public void Init() {
-        foreach (UserUIData user in _userUIDataList) {
-            user.UserUI.Init();
-            user.IsLock = false;
+        for (int index = 0; index < _userUIList.Count; index++) {
+            _userUIList[index].Init();
         }
     }
 
@@ -44,7 +43,7 @@ public class RoomInPanelUI : MonoBehaviour {
         _isHost = roomInfo.HostId == GameManager.Instance.PlayerId ? true : false;
 
         for (int i = 0; i < 8; i++) {
-            _userUIDataList[i].UserUI.Refresh(GetPlayerSprite(roomInfo.RoomDatas[i]), roomInfo.RoomDatas[i].PlayerId != -1, roomInfo.RoomDatas[i].PlayerName);
+            _userUIList[i].Refresh(GetPlayerSprite(roomInfo.RoomDatas[i]), roomInfo.RoomDatas[i].PlayerId != -1, roomInfo.RoomDatas[i].PlayerName);
         }
 
         MatchManager.Instance.RoomMapPanelUI.Init(_isHost, roomInfo.MapIndex);
@@ -71,10 +70,4 @@ public class RoomInPanelUI : MonoBehaviour {
 
         return _playerSpriteList[3];
     }
-}
-
-[System.Serializable]
-class UserUIData {
-    public UserUI UserUI;
-    public bool IsLock;
 }
