@@ -22,46 +22,17 @@ public class PacketManager : MonoBehaviour {
         _onRecv.Add((ushort)MSGID.SInit, MakePacket<S_Init>);
         _handlers.Add((ushort)MSGID.SInit, new SInitHandler());
 
-        _onRecv.Add((ushort)MSGID.SJoinRoom, MakePacket<S_Join_Room>);
+        _onRecv.Add((ushort)MSGID.SPlayer, MakePacket<S_Player>);
+        _handlers.Add((ushort)MSGID.SPlayer, new SPlayerHandler());
+
+        _onRecv.Add((ushort)MSGID.SJoinRoom, MakePacket<S_JoinRoom>);
         _handlers.Add((ushort)MSGID.SJoinRoom, new SJoinRoomHandler());
 
-        _onRecv.Add((ushort)MSGID.SExitRoom, MakePacket<S_Exit_Room>);
+        _onRecv.Add((ushort)MSGID.SExitRoom, MakePacket<S_ExitRoom>);
         _handlers.Add((ushort)MSGID.SExitRoom, new SExitRoomHandler());
 
-        _onRecv.Add((ushort)MSGID.SRefreshRoomlist, MakePacket<S_Refresh_RoomList>);
-        _handlers.Add((ushort)MSGID.SRefreshRoomlist, new SRefreshRoomListHandler());
-
-        _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_Refresh_Room>);
+        _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_RefreshRoom>);
         _handlers.Add((ushort)MSGID.SRefreshRoom, new SRefreshRoomHandler());
-
-
-
-        _onRecv.Add((ushort)MSGID.SGameStart, MakePacket<S_Game_Start>);
-        _handlers.Add((ushort)MSGID.SGameStart, new SGameStartHandler());
-
-        //_onRecv.Add((ushort)MSGID.SGameExit, MakePacket<S_Game_Exit>);
-        //_handlers.Add((ushort)MSGID.SGameExit, new SGameExitHandler());
-
-        _onRecv.Add((ushort)MSGID.SPlayerlist, MakePacket<S_PlayerList>);
-        _handlers.Add((ushort)MSGID.SPlayerlist, new SPlayerListHandler());
-
-        _onRecv.Add((ushort)MSGID.SCatch, MakePacket<S_Catch>);
-        _handlers.Add((ushort)MSGID.SCatch, new SCatchHandler());
-
-
-        _onRecv.Add((ushort)MSGID.SGameEnd, MakePacket<S_Game_End>);
-        _handlers.Add((ushort)MSGID.SGameEnd, new SGameEndHandler());
-
-
-
-
-
-
-        _onRecv.Add((ushort)MSGID.SNinjaSkill, MakePacket<S_Ninja_Skill>);
-        _handlers.Add((ushort)MSGID.SNinjaSkill, new SNinjaSkillHandler());
-
-
-
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

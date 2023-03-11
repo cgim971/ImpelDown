@@ -1,38 +1,20 @@
 import WebSocket, { RawData } from "ws";
-import { impelDown } from "../packet/packet";
-import PacketManager from "../PacketManager";
-import RoomData from "./RoomData";
-import PlayerData from "./PlayerData";
+import { impelDown } from "./packet/packet";
+import PacketManager from "./Game/Managers/PacketManager";
 
 
 export default class SocketSession {
-    private _socket: WebSocket;
-    
-    private _playerData :PlayerData;
-    private _roomData : RoomData;
-    
-    constructor(socket: WebSocket, playerId: number, CloseCallback: Function) {
+
+    protected _socket: WebSocket;
+
+    constructor(socket: WebSocket, CloseCallback: Function) {
         this._socket = socket;
-        
-        this._playerData = new PlayerData(playerId, "");
-        this._roomData = new RoomData();
-        
+
         this._socket.on("close", () => {
             CloseCallback();
         });
     }
 
-    getPlayerData(): PlayerData {
-        return this._playerData;
-    }
-    getRoomData() :RoomData{
-        return this._roomData;
-    }
-
-    getPlayerInfo(): impelDown.PlayerInfo{
-        return this._playerData.getPlayerInfo();
-    }
-    
     getInt16FEFromBuffer(buffer: Buffer): number {
         return buffer.readInt16LE();
     }
