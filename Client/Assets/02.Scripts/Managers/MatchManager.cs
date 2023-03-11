@@ -34,6 +34,7 @@ public class MatchManager : MonoBehaviour {
     }
 
     public void Init(PlayerInfo playerInfo) {
+        TitleManager.Instance.ClosePanel();
         RoomOut();
         _nameText.SetText(playerInfo.PlayerName);
     }
