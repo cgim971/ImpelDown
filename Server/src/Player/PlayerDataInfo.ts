@@ -25,7 +25,7 @@ export default class PlayerDataInfo {
                 x: 0,
                 y: 0
             }),
-            flipX: false
+            scaleX: 1
         });
         this._tailIndex = -1;
         this._playerState = impelDown.PlayerState.PLAYER_NONE;
