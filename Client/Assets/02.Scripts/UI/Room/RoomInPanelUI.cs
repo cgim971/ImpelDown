@@ -79,7 +79,8 @@ public class RoomInPanelUI : MonoBehaviour {
 
     public void ReadyBtn() {
         if (_isHost == true) {
-
+            C_Start data = new C_Start { PlayerId = GameManager.Instance.PlayerId };
+            NetworkManager.Instance.RegisterSend((ushort)MSGID.CStart, data);
         }
         else {
             C_IsReady data = new C_IsReady { PlayerId = GameManager.Instance.PlayerId, IsReady = !_isReady };

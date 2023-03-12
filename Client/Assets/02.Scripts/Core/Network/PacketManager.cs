@@ -39,6 +39,9 @@ public class PacketManager : MonoBehaviour {
 
         _onRecv.Add((ushort)MSGID.SIslock, MakePacket<S_IsLock>);
         _handlers.Add((ushort)MSGID.SIslock, new SIsLockHandler());
+
+        _onRecv.Add((ushort)MSGID.SStart, MakePacket<S_Start>);
+        _handlers.Add((ushort)MSGID.SStart, new SStartHandler());
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

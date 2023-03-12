@@ -26,6 +26,8 @@ enum MSGID
     C_ISLOCK = 23;
     S_ISLOCK = 24;
 
+    C_START = 25;
+    S_START = 26;
 
 }
 
@@ -149,3 +151,9 @@ message C_IsLock {
 message S_IsLock {
     RoomInfo roomInfo = 1;
 }
+
+message C_Start {
+    int32 playerId = 1;
+}
+
+message S_Start { }

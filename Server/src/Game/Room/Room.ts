@@ -47,6 +47,20 @@ export default class Room {
             return;
         }
 
+        for (let index in this._roomInfo.roomDatas) {
+            if (this._roomInfo.roomDatas[index].playerId == this._roomInfo.hostId)
+                continue;
+                
+            if (this._roomInfo.roomDatas[index].playerId != -1) {
+                if(this._roomInfo.roomDatas[index].isReady == false) {
+                    return;
+                }
+            }
+        }
+        
+        let sStart :impelDown.S_Start = new impelDown.S_Start({});
+        this.broadCastMessage(sStart.serialize(), impelDown.MSGID.S_START);
+        
         // 게임 시작 시 실행
         this.gameTimer.startTimer();
     }
@@ -79,9 +93,6 @@ export default class Room {
         this.sRefreshRoom();
     }
 
-    setRoomData(){
-
-    }
     
     exitRoom(player: PlayerSocket): void {
         let playerId = player.getPlayerId();
