@@ -30,46 +30,47 @@ namespace ImpelDown.Proto {
             "GAUgASgFIqkBChBQbGF5ZXJJbkdhbWVEYXRhEhAKCHBsYXllcklkGAEgASgF",
             "EhIKCnBsYXllck5tYWUYAiABKAkSLwoNcGxheWVyUG9zRGF0YRgDIAEoCzIY",
             "LmltcGVsRG93bi5QbGF5ZXJQb3NEYXRhEhEKCXRhaWxJbmRleBgEIAEoBRIr",
-            "CgtwbGF5ZXJTdGF0ZRgFIAEoDjIWLmltcGVsRG93bi5QbGF5ZXJTdGF0ZSJF",
+            "CgtwbGF5ZXJTdGF0ZRgFIAEoDjIWLmltcGVsRG93bi5QbGF5ZXJTdGF0ZSJG",
             "Cg1QbGF5ZXJQb3NEYXRhEiUKCHBvc2l0aW9uGAEgASgLMhMuaW1wZWxEb3du",
-            "LlBvc2l0aW9uEg0KBWZsaXBYGAIgASgIIiAKCFBvc2l0aW9uEgkKAXgYASAB",
-            "KAISCQoBeRgCIAEoAiLMAQoIUm9vbUluZm8SJwoJcm9vbVN0YXRlGAEgASgO",
-            "MhQuaW1wZWxEb3duLlJvb21TdGF0ZRIOCgZob3N0SWQYAiABKAUSEAoIaG9z",
-            "dE5hbWUYAyABKAkSEQoJcm9vbUluZGV4GAQgASgFEhAKCG1hcEluZGV4GAUg",
-            "ASgFEhUKDWN1cnJlbnRQZW9wbGUYBiABKAUSEQoJbWF4UGVvcGxlGAcgASgF",
-            "EiYKCXJvb21EYXRhcxgIIAMoCzITLmltcGVsRG93bi5Sb29tRGF0YSJRCghS",
-            "b29tRGF0YRIOCgZpc0xvY2sYASABKAgSEAoIcGxheWVySWQYAiABKAUSEgoK",
-            "cGxheWVyTmFtZRgDIAEoCRIPCgdpc1JlYWR5GAQgASgIIhoKBlNfSW5pdBIQ",
-            "CghwbGF5ZXJJZBgBIAEoBSIwCghDX1BsYXllchIQCghwbGF5ZXJJZBgBIAEo",
-            "BRISCgpwbGF5ZXJOYW1lGAIgASgJIjUKCFNfUGxheWVyEikKCnBsYXllcklu",
-            "Zm8YASABKAsyFS5pbXBlbERvd24uUGxheWVySW5mbyIgCgxDX0NyZWF0ZVJv",
-            "b20SEAoIcGxheWVySWQYASABKAUiDAoKQ19Kb2luUm9vbSIeCgpDX0V4aXRS",
-            "b29tEhAKCHBsYXllcklkGAEgASgFIiEKDUNfTWF0Y2hNYWtpbmcSEAoIcGxh",
-            "eWVySWQYASABKAUiDgoMU19DcmVhdGVSb29tIhwKClNfSm9pblJvb20SDgoG",
-            "aXNIb3N0GAEgASgIIgwKClNfRXhpdFJvb20iNgoNU19SZWZyZXNoUm9vbRIl",
-            "Cghyb29tSW5mbxgBIAEoCzITLmltcGVsRG93bi5Sb29tSW5mbyIPCg1TX01h",
-            "dGNoTWFraW5nIi4KCUNfSXNSZWFkeRIQCghwbGF5ZXJJZBgBIAEoBRIPCgdp",
-            "c1JlYWR5GAIgASgIIjIKCVNfSXNSZWFkeRIlCghyb29tSW5mbxgBIAEoCzIT",
-            "LmltcGVsRG93bi5Sb29tSW5mbyJBCghDX0lzTG9jaxIQCghwbGF5ZXJJZBgB",
-            "IAEoBRITCgtyb29tSW5JbmRleBgCIAEoBRIOCgZpc0xvY2sYAyABKAgiMQoI",
-            "U19Jc0xvY2sSJQoIcm9vbUluZm8YASABKAsyEy5pbXBlbERvd24uUm9vbUlu",
-            "Zm8iGwoHQ19TdGFydBIQCghwbGF5ZXJJZBgBIAEoBSIJCgdTX1N0YXJ0KqkC",
-            "CgVNU0dJRBIKCgZTX0lOSVQQABIMCghDX1BMQVlFUhABEgwKCFNfUExBWUVS",
-            "EAISEQoNQ19DUkVBVEVfUk9PTRAKEg8KC0NfSk9JTl9ST09NEAsSDwoLQ19F",
-            "WElUX1JPT00QDBISCg5DX01BVENIX01BS0lORxANEhEKDVNfQ1JFQVRFX1JP",
-            "T00QDxIPCgtTX0pPSU5fUk9PTRAQEg8KC1NfRVhJVF9ST09NEBESEgoOU19S",
-            "RUZSRVNIX1JPT00QEhISCg5TX01BVENIX01BS0lORxAUEg0KCUNfSVNSRUFE",
-            "WRAVEg0KCVNfSVNSRUFEWRAWEgwKCENfSVNMT0NLEBcSDAoIU19JU0xPQ0sQ",
-            "GBILCgdDX1NUQVJUEBkSCwoHU19TVEFSVBAaKkEKC1BsYXllclN0YXRlEg8K",
-            "C1BMQVlFUl9OT05FEAASCQoFQUxJVkUQARILCgdDQVRDSEVEEAISCQoFR0hP",
-            "U1QQAyovCglSb29tU3RhdGUSDQoJUk9PTV9OT05FEAASCQoFTE9CQlkQARII",
-            "CgRHQU1FEAJCEqoCD0ltcGVsRG93bi5Qcm90b2IGcHJvdG8z"));
+            "LlBvc2l0aW9uEg4KBnNjYWxlWBgCIAEoAiIgCghQb3NpdGlvbhIJCgF4GAEg",
+            "ASgCEgkKAXkYAiABKAIizAEKCFJvb21JbmZvEicKCXJvb21TdGF0ZRgBIAEo",
+            "DjIULmltcGVsRG93bi5Sb29tU3RhdGUSDgoGaG9zdElkGAIgASgFEhAKCGhv",
+            "c3ROYW1lGAMgASgJEhEKCXJvb21JbmRleBgEIAEoBRIQCghtYXBJbmRleBgF",
+            "IAEoBRIVCg1jdXJyZW50UGVvcGxlGAYgASgFEhEKCW1heFBlb3BsZRgHIAEo",
+            "BRImCglyb29tRGF0YXMYCCADKAsyEy5pbXBlbERvd24uUm9vbURhdGEiUQoI",
+            "Um9vbURhdGESDgoGaXNMb2NrGAEgASgIEhAKCHBsYXllcklkGAIgASgFEhIK",
+            "CnBsYXllck5hbWUYAyABKAkSDwoHaXNSZWFkeRgEIAEoCCIaCgZTX0luaXQS",
+            "EAoIcGxheWVySWQYASABKAUiMAoIQ19QbGF5ZXISEAoIcGxheWVySWQYASAB",
+            "KAUSEgoKcGxheWVyTmFtZRgCIAEoCSI1CghTX1BsYXllchIpCgpwbGF5ZXJJ",
+            "bmZvGAEgASgLMhUuaW1wZWxEb3duLlBsYXllckluZm8iIAoMQ19DcmVhdGVS",
+            "b29tEhAKCHBsYXllcklkGAEgASgFIgwKCkNfSm9pblJvb20iHgoKQ19FeGl0",
+            "Um9vbRIQCghwbGF5ZXJJZBgBIAEoBSIhCg1DX01hdGNoTWFraW5nEhAKCHBs",
+            "YXllcklkGAEgASgFIg4KDFNfQ3JlYXRlUm9vbSIcCgpTX0pvaW5Sb29tEg4K",
+            "BmlzSG9zdBgBIAEoCCIMCgpTX0V4aXRSb29tIjYKDVNfUmVmcmVzaFJvb20S",
+            "JQoIcm9vbUluZm8YASABKAsyEy5pbXBlbERvd24uUm9vbUluZm8iDwoNU19N",
+            "YXRjaE1ha2luZyIuCglDX0lzUmVhZHkSEAoIcGxheWVySWQYASABKAUSDwoH",
+            "aXNSZWFkeRgCIAEoCCIyCglTX0lzUmVhZHkSJQoIcm9vbUluZm8YASABKAsy",
+            "Ey5pbXBlbERvd24uUm9vbUluZm8iQQoIQ19Jc0xvY2sSEAoIcGxheWVySWQY",
+            "ASABKAUSEwoLcm9vbUluSW5kZXgYAiABKAUSDgoGaXNMb2NrGAMgASgIIjEK",
+            "CFNfSXNMb2NrEiUKCHJvb21JbmZvGAEgASgLMhMuaW1wZWxEb3duLlJvb21J",
+            "bmZvIhsKB0NfU3RhcnQSEAoIcGxheWVySWQYASABKAUiMAoHU19TdGFydBIl",
+            "Cghyb29tSW5mbxgBIAEoCzITLmltcGVsRG93bi5Sb29tSW5mbyqpAgoFTVNH",
+            "SUQSCgoGU19JTklUEAASDAoIQ19QTEFZRVIQARIMCghTX1BMQVlFUhACEhEK",
+            "DUNfQ1JFQVRFX1JPT00QChIPCgtDX0pPSU5fUk9PTRALEg8KC0NfRVhJVF9S",
+            "T09NEAwSEgoOQ19NQVRDSF9NQUtJTkcQDRIRCg1TX0NSRUFURV9ST09NEA8S",
+            "DwoLU19KT0lOX1JPT00QEBIPCgtTX0VYSVRfUk9PTRAREhIKDlNfUkVGUkVT",
+            "SF9ST09NEBISEgoOU19NQVRDSF9NQUtJTkcQFBINCglDX0lTUkVBRFkQFRIN",
+            "CglTX0lTUkVBRFkQFhIMCghDX0lTTE9DSxAXEgwKCFNfSVNMT0NLEBgSCwoH",
+            "Q19TVEFSVBAZEgsKB1NfU1RBUlQQGipBCgtQbGF5ZXJTdGF0ZRIPCgtQTEFZ",
+            "RVJfTk9ORRAAEgkKBUFMSVZFEAESCwoHQ0FUQ0hFRBACEgkKBUdIT1NUEAMq",
+            "LwoJUm9vbVN0YXRlEg0KCVJPT01fTk9ORRAAEgkKBUxPQkJZEAESCAoER0FN",
+            "RRACQhKqAg9JbXBlbERvd24uUHJvdG9iBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), typeof(global::ImpelDown.Proto.PlayerState), typeof(global::ImpelDown.Proto.RoomState), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerInfo), global::ImpelDown.Proto.PlayerInfo.Parser, new[]{ "PlayerId", "PlayerName", "RoomIndex", "CharacterIndex", "RoomInIndex" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerInGameData), global::ImpelDown.Proto.PlayerInGameData.Parser, new[]{ "PlayerId", "PlayerNmae", "PlayerPosData", "TailIndex", "PlayerState" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerPosData), global::ImpelDown.Proto.PlayerPosData.Parser, new[]{ "Position", "FlipX" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerPosData), global::ImpelDown.Proto.PlayerPosData.Parser, new[]{ "Position", "ScaleX" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.Position), global::ImpelDown.Proto.Position.Parser, new[]{ "X", "Y" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.RoomInfo), global::ImpelDown.Proto.RoomInfo.Parser, new[]{ "RoomState", "HostId", "HostName", "RoomIndex", "MapIndex", "CurrentPeople", "MaxPeople", "RoomDatas" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.RoomData), global::ImpelDown.Proto.RoomData.Parser, new[]{ "IsLock", "PlayerId", "PlayerName", "IsReady" }, null, null, null, null),
@@ -90,7 +91,7 @@ namespace ImpelDown.Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_IsLock), global::ImpelDown.Proto.C_IsLock.Parser, new[]{ "PlayerId", "RoomInIndex", "IsLock" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_IsLock), global::ImpelDown.Proto.S_IsLock.Parser, new[]{ "RoomInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Start), global::ImpelDown.Proto.C_Start.Parser, new[]{ "PlayerId" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Start), global::ImpelDown.Proto.S_Start.Parser, null, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Start), global::ImpelDown.Proto.S_Start.Parser, new[]{ "RoomInfo" }, null, null, null, null)
           }));
     }
     #endregion
@@ -852,7 +853,7 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public PlayerPosData(PlayerPosData other) : this() {
       position_ = other.position_ != null ? other.position_.Clone() : null;
-      flipX_ = other.flipX_;
+      scaleX_ = other.scaleX_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -874,15 +875,15 @@ namespace ImpelDown.Proto {
       }
     }
 
-    /// <summary>Field number for the "flipX" field.</summary>
-    public const int FlipXFieldNumber = 2;
-    private bool flipX_;
+    /// <summary>Field number for the "scaleX" field.</summary>
+    public const int ScaleXFieldNumber = 2;
+    private float scaleX_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
-    public bool FlipX {
-      get { return flipX_; }
+    public float ScaleX {
+      get { return scaleX_; }
       set {
-        flipX_ = value;
+        scaleX_ = value;
       }
     }
 
@@ -902,7 +903,7 @@ namespace ImpelDown.Proto {
         return true;
       }
       if (!object.Equals(Position, other.Position)) return false;
-      if (FlipX != other.FlipX) return false;
+      if (!pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.Equals(ScaleX, other.ScaleX)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -911,7 +912,7 @@ namespace ImpelDown.Proto {
     public override int GetHashCode() {
       int hash = 1;
       if (position_ != null) hash ^= Position.GetHashCode();
-      if (FlipX != false) hash ^= FlipX.GetHashCode();
+      if (ScaleX != 0F) hash ^= pbc::ProtobufEqualityComparers.BitwiseSingleEqualityComparer.GetHashCode(ScaleX);
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -934,9 +935,9 @@ namespace ImpelDown.Proto {
         output.WriteRawTag(10);
         output.WriteMessage(Position);
       }
-      if (FlipX != false) {
-        output.WriteRawTag(16);
-        output.WriteBool(FlipX);
+      if (ScaleX != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(ScaleX);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
@@ -952,9 +953,9 @@ namespace ImpelDown.Proto {
         output.WriteRawTag(10);
         output.WriteMessage(Position);
       }
-      if (FlipX != false) {
-        output.WriteRawTag(16);
-        output.WriteBool(FlipX);
+      if (ScaleX != 0F) {
+        output.WriteRawTag(21);
+        output.WriteFloat(ScaleX);
       }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
@@ -969,8 +970,8 @@ namespace ImpelDown.Proto {
       if (position_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Position);
       }
-      if (FlipX != false) {
-        size += 1 + 1;
+      if (ScaleX != 0F) {
+        size += 1 + 4;
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -990,8 +991,8 @@ namespace ImpelDown.Proto {
         }
         Position.MergeFrom(other.Position);
       }
-      if (other.FlipX != false) {
-        FlipX = other.FlipX;
+      if (other.ScaleX != 0F) {
+        ScaleX = other.ScaleX;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -1015,8 +1016,8 @@ namespace ImpelDown.Proto {
             input.ReadMessage(Position);
             break;
           }
-          case 16: {
-            FlipX = input.ReadBool();
+          case 21: {
+            ScaleX = input.ReadFloat();
             break;
           }
         }
@@ -1041,8 +1042,8 @@ namespace ImpelDown.Proto {
             input.ReadMessage(Position);
             break;
           }
-          case 16: {
-            FlipX = input.ReadBool();
+          case 21: {
+            ScaleX = input.ReadFloat();
             break;
           }
         }
@@ -5298,6 +5299,7 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_Start(S_Start other) : this() {
+      roomInfo_ = other.roomInfo_ != null ? other.roomInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -5305,6 +5307,18 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public S_Start Clone() {
       return new S_Start(this);
+    }
+
+    /// <summary>Field number for the "roomInfo" field.</summary>
+    public const int RoomInfoFieldNumber = 1;
+    private global::ImpelDown.Proto.RoomInfo roomInfo_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public global::ImpelDown.Proto.RoomInfo RoomInfo {
+      get { return roomInfo_; }
+      set {
+        roomInfo_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -5322,6 +5336,7 @@ namespace ImpelDown.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (!object.Equals(RoomInfo, other.RoomInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -5329,6 +5344,7 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (roomInfo_ != null) hash ^= RoomInfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -5347,6 +5363,10 @@ namespace ImpelDown.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (roomInfo_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(RoomInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -5357,6 +5377,10 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (roomInfo_ != null) {
+        output.WriteRawTag(10);
+        output.WriteMessage(RoomInfo);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -5367,6 +5391,9 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (roomInfo_ != null) {
+        size += 1 + pb::CodedOutputStream.ComputeMessageSize(RoomInfo);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -5378,6 +5405,12 @@ namespace ImpelDown.Proto {
     public void MergeFrom(S_Start other) {
       if (other == null) {
         return;
+      }
+      if (other.roomInfo_ != null) {
+        if (roomInfo_ == null) {
+          RoomInfo = new global::ImpelDown.Proto.RoomInfo();
+        }
+        RoomInfo.MergeFrom(other.RoomInfo);
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -5394,6 +5427,13 @@ namespace ImpelDown.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 10: {
+            if (roomInfo_ == null) {
+              RoomInfo = new global::ImpelDown.Proto.RoomInfo();
+            }
+            input.ReadMessage(RoomInfo);
+            break;
+          }
         }
       }
     #endif
@@ -5409,6 +5449,13 @@ namespace ImpelDown.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 10: {
+            if (roomInfo_ == null) {
+              RoomInfo = new global::ImpelDown.Proto.RoomInfo();
+            }
+            input.ReadMessage(RoomInfo);
+            break;
+          }
         }
       }
     }

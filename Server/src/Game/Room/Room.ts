@@ -50,17 +50,19 @@ export default class Room {
         for (let index in this._roomInfo.roomDatas) {
             if (this._roomInfo.roomDatas[index].playerId == this._roomInfo.hostId)
                 continue;
-                
+
             if (this._roomInfo.roomDatas[index].playerId != -1) {
-                if(this._roomInfo.roomDatas[index].isReady == false) {
+                if (this._roomInfo.roomDatas[index].isReady == false) {
                     return;
                 }
             }
         }
-        
-        let sStart :impelDown.S_Start = new impelDown.S_Start({});
+
+        this._roomInfo.roomState = impelDown.RoomState.GAME;
+
+        let sStart: impelDown.S_Start = new impelDown.S_Start({ roomInfo: this._roomInfo });
         this.broadCastMessage(sStart.serialize(), impelDown.MSGID.S_START);
-        
+
         // 게임 시작 시 실행
         this.gameTimer.startTimer();
     }
@@ -93,7 +95,7 @@ export default class Room {
         this.sRefreshRoom();
     }
 
-    
+
     exitRoom(player: PlayerSocket): void {
         let playerId = player.getPlayerId();
 
@@ -138,7 +140,7 @@ export default class Room {
         for (let index in this._roomInfo.roomDatas) {
             if (this._roomInfo.roomDatas[index].playerId == playerId) {
                 this._roomInfo.roomDatas[index].isReady = isReady;
-                break;                
+                break;
             }
         }
 
@@ -147,7 +149,7 @@ export default class Room {
         });
         this.broadCastMessage(sIsReady.serialize(), impelDown.MSGID.S_ISREADY);
     }
-    
+
     sRefreshRoom(): void {
         let sRefreshRoom: impelDown.S_RefreshRoom = new impelDown.S_RefreshRoom({
             roomInfo: this.getRoomInfo()

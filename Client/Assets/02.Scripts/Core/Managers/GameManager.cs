@@ -1,6 +1,8 @@
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
@@ -31,5 +33,17 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance = gameObject.AddComponent<NetworkManager>();
         NetworkManager.Instance.Init(_url);
         NetworkManager.Instance.Connection();
+    }
+
+    public void GameStart(RoomInfo roomInfo) {
+        StartCoroutine(GameStarting(roomInfo));
+    }
+
+    public IEnumerator GameStarting(RoomInfo roomInfo) {
+        yield return null;
+        SceneManager.LoadScene(Define.MapName(roomInfo.MapIndex));
+
+        yield return null;
+
     }
 }

@@ -56,7 +56,7 @@ message PlayerInGameData {
 
 message PlayerPosData {
     Position position = 1;    
-    bool flipX = 2;
+    float scaleX = 2;
 }
 message Position {
     float x = 1;
@@ -156,4 +156,6 @@ message C_Start {
     int32 playerId = 1;
 }
 
-message S_Start { }
+message S_Start { 
+    RoomInfo roomInfo = 1;    
+}

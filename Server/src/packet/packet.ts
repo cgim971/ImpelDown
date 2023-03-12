@@ -361,7 +361,7 @@ export namespace impelDown {
         #one_of_decls: number[][] = [];
         constructor(data?: any[] | {
             position?: Position;
-            flipX?: boolean;
+            scaleX?: number;
         }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
@@ -369,8 +369,8 @@ export namespace impelDown {
                 if ("position" in data && data.position != undefined) {
                     this.position = data.position;
                 }
-                if ("flipX" in data && data.flipX != undefined) {
-                    this.flipX = data.flipX;
+                if ("scaleX" in data && data.scaleX != undefined) {
+                    this.scaleX = data.scaleX;
                 }
             }
         }
@@ -383,35 +383,35 @@ export namespace impelDown {
         get has_position() {
             return pb_1.Message.getField(this, 1) != null;
         }
-        get flipX() {
-            return pb_1.Message.getFieldWithDefault(this, 2, false) as boolean;
+        get scaleX() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
         }
-        set flipX(value: boolean) {
+        set scaleX(value: number) {
             pb_1.Message.setField(this, 2, value);
         }
         static fromObject(data: {
             position?: ReturnType<typeof Position.prototype.toObject>;
-            flipX?: boolean;
+            scaleX?: number;
         }): PlayerPosData {
             const message = new PlayerPosData({});
             if (data.position != null) {
                 message.position = Position.fromObject(data.position);
             }
-            if (data.flipX != null) {
-                message.flipX = data.flipX;
+            if (data.scaleX != null) {
+                message.scaleX = data.scaleX;
             }
             return message;
         }
         toObject() {
             const data: {
                 position?: ReturnType<typeof Position.prototype.toObject>;
-                flipX?: boolean;
+                scaleX?: number;
             } = {};
             if (this.position != null) {
                 data.position = this.position.toObject();
             }
-            if (this.flipX != null) {
-                data.flipX = this.flipX;
+            if (this.scaleX != null) {
+                data.scaleX = this.scaleX;
             }
             return data;
         }
@@ -421,8 +421,8 @@ export namespace impelDown {
             const writer = w || new pb_1.BinaryWriter();
             if (this.has_position)
                 writer.writeMessage(1, this.position, () => this.position.serialize(writer));
-            if (this.flipX != false)
-                writer.writeBool(2, this.flipX);
+            if (this.scaleX != 0)
+                writer.writeFloat(2, this.scaleX);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -436,7 +436,7 @@ export namespace impelDown {
                         reader.readMessage(message.position, () => message.position = Position.deserialize(reader));
                         break;
                     case 2:
-                        message.flipX = reader.readBool();
+                        message.scaleX = reader.readFloat();
                         break;
                     default: reader.skipField();
                 }
@@ -2041,23 +2041,50 @@ export namespace impelDown {
     }
     export class S_Start extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            roomInfo?: RoomInfo;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("roomInfo" in data && data.roomInfo != undefined) {
+                    this.roomInfo = data.roomInfo;
+                }
+            }
         }
-        static fromObject(data: {}): S_Start {
+        get roomInfo() {
+            return pb_1.Message.getWrapperField(this, RoomInfo, 1) as RoomInfo;
+        }
+        set roomInfo(value: RoomInfo) {
+            pb_1.Message.setWrapperField(this, 1, value);
+        }
+        get has_roomInfo() {
+            return pb_1.Message.getField(this, 1) != null;
+        }
+        static fromObject(data: {
+            roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
+        }): S_Start {
             const message = new S_Start({});
+            if (data.roomInfo != null) {
+                message.roomInfo = RoomInfo.fromObject(data.roomInfo);
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                roomInfo?: ReturnType<typeof RoomInfo.prototype.toObject>;
+            } = {};
+            if (this.roomInfo != null) {
+                data.roomInfo = this.roomInfo.toObject();
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.has_roomInfo)
+                writer.writeMessage(1, this.roomInfo, () => this.roomInfo.serialize(writer));
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2067,6 +2094,9 @@ export namespace impelDown {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        reader.readMessage(message.roomInfo, () => message.roomInfo = RoomInfo.deserialize(reader));
+                        break;
                     default: reader.skipField();
                 }
             }

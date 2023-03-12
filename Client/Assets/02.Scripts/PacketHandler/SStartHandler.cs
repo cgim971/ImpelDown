@@ -7,6 +7,6 @@ using UnityEngine;
 public class SStartHandler : IPacketHandler {
     public void Process(IMessage packet) {
         S_Start msg = packet as S_Start;
-        Debug.Log("start");
+        GameManager.Instance.GameStart(msg.RoomInfo);
     }
 }
