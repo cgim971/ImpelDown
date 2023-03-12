@@ -1,18 +1,12 @@
+using Google.Protobuf;
+using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SIsLockHandler : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+public class SIsLockHandler : IPacketHandler {
+    public void Process(IMessage packet) {
+        S_IsLock msg = packet as S_IsLock;
+        MatchManager.Instance.RoomInPanelUI.RefreshRoomData(msg.RoomInfo);
     }
 }

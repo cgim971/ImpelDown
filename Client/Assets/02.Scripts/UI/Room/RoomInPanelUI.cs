@@ -35,7 +35,7 @@ public class RoomInPanelUI : MonoBehaviour {
 
     public void Init() {
         for (int index = 0; index < _userUIList.Count; index++) {
-            _userUIList[index].Init();
+            _userUIList[index].Init(index);
         }
     }
 
@@ -44,7 +44,7 @@ public class RoomInPanelUI : MonoBehaviour {
         _isHost = roomInfo.HostId == GameManager.Instance.PlayerId ? true : false;
 
         for (int i = 0; i < 8; i++) {
-            _userUIList[i].Refresh(GetPlayerSprite(roomInfo.RoomDatas[i]), roomInfo.RoomDatas[i].PlayerId != -1, roomInfo.RoomDatas[i].PlayerName);
+            _userUIList[i].Refresh(GetPlayerSprite(roomInfo.RoomDatas[i]), roomInfo.RoomDatas[i].PlayerId != -1, roomInfo.RoomDatas[i].IsLock, roomInfo.RoomDatas[i].PlayerName);
 
             if (roomInfo.RoomDatas[i].PlayerId == GameManager.Instance.PlayerId) {
                 _isReady = roomInfo.RoomDatas[i].IsReady;

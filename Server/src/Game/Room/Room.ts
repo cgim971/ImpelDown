@@ -136,7 +136,7 @@ export default class Room {
         });
         this.broadCastMessage(sIsReady.serialize(), impelDown.MSGID.S_ISREADY);
     }
-
+    
     sRefreshRoom(): void {
         let sRefreshRoom: impelDown.S_RefreshRoom = new impelDown.S_RefreshRoom({
             roomInfo: this.getRoomInfo()
@@ -150,6 +150,10 @@ export default class Room {
         }
 
         this._roomInfo.roomDatas[index].isLock = isLock;
+        let sIsLock: impelDown.S_IsLock = new impelDown.S_IsLock({
+            roomInfo: this.getRoomInfo()
+        });
+        this.broadCastMessage(sIsLock.serialize(), impelDown.MSGID.S_ISLOCK);
     }
 
     setPlayer(index: number, player: PlayerSocket): Result {
