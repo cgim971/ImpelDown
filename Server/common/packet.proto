@@ -23,6 +23,8 @@ enum MSGID
 
     C_ISREADY = 21;
     S_ISREADY = 22;
+    C_ISLOCK = 23;
+    S_ISLOCK = 24;
 
 
 }
@@ -95,7 +97,6 @@ message C_Player {
     int32 playerId = 1;
     string playerName = 2;
 }
-
 message S_Player {
     PlayerInfo playerInfo = 1;
 }
@@ -109,39 +110,42 @@ message S_Player {
 message C_CreateRoom {
     int32 playerId = 1;
 }
-
-message C_JoinRoom {
-
-}
-
+message C_JoinRoom {}
 message C_ExitRoom {
     int32 playerId = 1;
 }
-
 message C_MatchMaking {
     int32 playerId = 1;
 }
 
 
 
-message S_CreateRoom {
-
-}
-
+message S_CreateRoom {}
 message S_JoinRoom {
     bool isHost = 1;
 }
-
-message S_ExitRoom {
-
-}
-
+message S_ExitRoom {}
 message S_RefreshRoom {
     RoomInfo roomInfo = 1;
 }
+message S_MatchMaking {}
 
-message S_MatchMaking {
 
+message C_IsReady {
+    int32 playerId = 1;
+    bool isReady = 2;
 }
 
+message S_IsReady {
+    RoomInfo roomInfo = 1;
+}
 
+message C_IsLock {
+    int32 playerId = 1;
+    int32 roomInIndex = 2;
+    bool isLock = 3;
+}
+
+message S_IsLock {
+    RoomInfo roomInfo = 1;
+}

@@ -33,6 +33,10 @@ public class PacketManager : MonoBehaviour {
 
         _onRecv.Add((ushort)MSGID.SRefreshRoom, MakePacket<S_RefreshRoom>);
         _handlers.Add((ushort)MSGID.SRefreshRoom, new SRefreshRoomHandler());
+
+        _onRecv.Add((ushort)MSGID.SIsready, MakePacket<S_IsReady>);
+        _handlers.Add((ushort)MSGID.SIsready, new SIsReadyHandler());
+
     }
 
     public IPacketHandler GetPacketHandler(ushort id) {

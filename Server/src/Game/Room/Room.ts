@@ -79,6 +79,10 @@ export default class Room {
         this.sRefreshRoom();
     }
 
+    setRoomData(){
+
+    }
+    
     exitRoom(player: PlayerSocket): void {
         let playerId = player.getPlayerId();
 
@@ -91,6 +95,8 @@ export default class Room {
                         this._hostSocket = SessionManager.Instance.getSession(roomPlayer.playerId);
                         this._roomInfo.hostId = roomPlayer.playerId;
                         this._roomInfo.hostName = roomPlayer.playerName;
+                        this._roomInfo.roomDatas[index].isReady = false;
+                        break;
                     }
                 }
             }
@@ -114,6 +120,21 @@ export default class Room {
         }
         this.sRefreshRoom();
         return;
+    }
+
+
+    setReady(playerId: number, isReady: boolean) {
+        for (let index in this._roomInfo.roomDatas) {
+            if (this._roomInfo.roomDatas[index].playerId == playerId) {
+                this._roomInfo.roomDatas[index].isReady = isReady;
+                break;                
+            }
+        }
+
+        let sIsReady: impelDown.S_IsReady = new impelDown.S_IsReady({
+            roomInfo: this.getRoomInfo()
+        });
+        this.broadCastMessage(sIsReady.serialize(), impelDown.MSGID.S_ISREADY);
     }
 
     sRefreshRoom(): void {

@@ -26,10 +26,11 @@ public class RoomInPanelUI : MonoBehaviour {
 
 
     private bool _isHost = false;
-
+    private bool _isReady = false;
 
     private void Start() {
         _exitBtn.onClick.AddListener(() => ExitRoom());
+        _readyBtn.onClick.AddListener(() => ReadyBtn());
     }
 
     public void Init() {
@@ -44,6 +45,11 @@ public class RoomInPanelUI : MonoBehaviour {
 
         for (int i = 0; i < 8; i++) {
             _userUIList[i].Refresh(GetPlayerSprite(roomInfo.RoomDatas[i]), roomInfo.RoomDatas[i].PlayerId != -1, roomInfo.RoomDatas[i].PlayerName);
+
+            if (roomInfo.RoomDatas[i].PlayerId == GameManager.Instance.PlayerId) {
+                _isReady = roomInfo.RoomDatas[i].IsReady;
+                RefreshReadyBtn();
+            }
         }
 
         MatchManager.Instance.RoomMapPanelUI.Init(_isHost, roomInfo.MapIndex);
@@ -69,5 +75,38 @@ public class RoomInPanelUI : MonoBehaviour {
         }
 
         return _playerSpriteList[3];
+    }
+
+    public void ReadyBtn() {
+        if (_isHost == true) {
+
+        }
+        else {
+            C_IsReady data = new C_IsReady { PlayerId = GameManager.Instance.PlayerId, IsReady = !_isReady };
+            NetworkManager.Instance.RegisterSend((ushort)MSGID.CIsready, data);
+        }
+    }
+
+    private void RefreshReadyBtn() {
+        Color color = Color.white;
+        string text = "";
+
+        if (_isHost == true) {
+            color = Color.white;
+            text = "시작";
+        }
+        else {
+            if (_isReady == true) {
+                color = Color.green;
+                text = "준비 완료";
+            }
+            else {
+                color = Color.red;
+                text = "준비 중";
+            }
+        }
+
+        _readyBtn.image.color = color;
+        _readyBtn.GetComponentInChildren<TMP_Text>().SetText(text);
     }
 }
