@@ -57,7 +57,7 @@ public class PlayerManager {
     public void UpdateRemotePlayer(RepeatedField<PlayerInGameData> playerDataList) {
             foreach (PlayerInGameData playerData in playerDataList) {
             PositionData positionData = Util.ChangePosition(playerData.PlayerPosData);
-
+                
             BasePlayer player = null;
             if (_remotePlayerList.TryGetValue(playerData.PlayerId, out player)) {
                 player.SetPositionInfo(positionData);

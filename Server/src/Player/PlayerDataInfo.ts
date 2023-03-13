@@ -6,7 +6,6 @@ export default class PlayerDataInfo {
     private _playerInfo: impelDown.PlayerInfo;
     private _playerId: number;
     private _playerName: string;
-    private _playerPosData: impelDown.PlayerPosData;
     private _tailIndex: number;
     private _playerState: impelDown.PlayerState;
 
@@ -17,15 +16,15 @@ export default class PlayerDataInfo {
             playerId: this._playerId,
             playerName: this._playerName,
             roomIndex: -1,
+            playerPosData: new impelDown.PlayerPosData({
+                position: new impelDown.Position({
+                    x: 0,
+                    y: 0
+                }),
+                scaleX: 1
+            }),
             characterIndex: -1,
             roomInIndex: -1
-        });
-        this._playerPosData = new impelDown.PlayerPosData({
-            position: new impelDown.Position({
-                x: 0,
-                y: 0
-            }),
-            scaleX: 1
         });
         this._tailIndex = -1;
         this._playerState = impelDown.PlayerState.PLAYER_NONE;
@@ -43,7 +42,7 @@ export default class PlayerDataInfo {
     }
 
     getPlayerPosition(): impelDown.PlayerPosData {
-        return this._playerPosData;
+        return this._playerInfo.playerPosData;
     }
 
     getTailIndex(): number {
@@ -58,7 +57,7 @@ export default class PlayerDataInfo {
         return new impelDown.PlayerInGameData({
             playerId: this._playerId,
             playerNmae: this._playerName,
-            playerPosData: this._playerPosData,
+            playerPosData: this._playerInfo.playerPosData,
             tailIndex: this._tailIndex,
             playerState: this._playerState
         });
@@ -66,7 +65,7 @@ export default class PlayerDataInfo {
     getRoomIndex(): number {
         return this._playerInfo.roomIndex;
     }
-    getPlayerCharacterIndex() :number{
+    getPlayerCharacterIndex(): number {
         return this._playerInfo.characterIndex;
     }
 
@@ -81,6 +80,9 @@ export default class PlayerDataInfo {
     }
     setRoomIndex(index: number = -1): void {
         this._playerInfo.roomIndex = index;
+    }
+    setPlayerPosData(playerPosData: impelDown.PlayerPosData): void {
+        this._playerInfo.playerPosData = playerPosData;
     }
 
 }

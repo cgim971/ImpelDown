@@ -102,8 +102,15 @@ export default class Room {
         let list: impelDown.PlayerInGameData[] = [];
         for (let index in this._roomInfo.roomDatas) {
             if (this._roomInfo.roomDatas[index].playerId == -1) continue;
-
-            let data: impelDown.PlayerInGameData = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId).getPlayerDataInfo().getPlayerData();
+            
+            let player : PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
+            let data: impelDown.PlayerInGameData = new impelDown.PlayerInGameData({
+               playerId:player.getPlayerId(),
+               playerNmae:player.getPlayerName(),
+               playerPosData:player.getPlayerDataInfo().getPlayerPosition(),
+               tailIndex:player.getPlayerDataInfo().getTailIndex(),
+               playerState:player.getPlayerDataInfo().getPlayerState(), 
+            });
             list.push(data);
         }
 
