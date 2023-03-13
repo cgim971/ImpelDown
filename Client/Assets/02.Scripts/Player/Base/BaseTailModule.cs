@@ -10,7 +10,10 @@ public class BaseTailModule : MonoBehaviour {
 
     protected BasePlayer _player;
 
-    public virtual void Init() {
+    public virtual void Init() { }
+
+    public void SetTail(int tailIndex) {
+        _player.TailIndex = tailIndex;
     }
 
 }

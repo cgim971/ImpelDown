@@ -62,21 +62,22 @@ namespace ImpelDown.Proto {
             "bERvd24uUGxheWVyUG9zRGF0YRIRCgl0YWlsSW5kZXgYBSABKAUSKwoLcGxh",
             "eWVyU3RhdGUYBiABKA4yFi5pbXBlbERvd24uUGxheWVyU3RhdGUiSwoGQ19N",
             "b3ZlEhAKCHBsYXllcklkGAEgASgFEi8KDXBsYXllclBvc0RhdGEYAiABKAsy",
-            "GC5pbXBlbERvd24uUGxheWVyUG9zRGF0YSIICgZTX01vdmUiCQoHQ19DYXRj",
-            "aCIJCgdTX0NhdGNoIkYKDFNfUGxheWVyTGlzdBI2ChFwbGF5ZXJJbkdhbWVE",
-            "YXRhcxgBIAMoCzIbLmltcGVsRG93bi5QbGF5ZXJJbkdhbWVEYXRhKu0CCgVN",
-            "U0dJRBIKCgZTX0lOSVQQABIMCghDX1BMQVlFUhABEgwKCFNfUExBWUVSEAIS",
-            "EQoNQ19DUkVBVEVfUk9PTRAKEg8KC0NfSk9JTl9ST09NEAsSDwoLQ19FWElU",
-            "X1JPT00QDBISCg5DX01BVENIX01BS0lORxANEhEKDVNfQ1JFQVRFX1JPT00Q",
-            "DxIPCgtTX0pPSU5fUk9PTRAQEg8KC1NfRVhJVF9ST09NEBESEgoOU19SRUZS",
-            "RVNIX1JPT00QEhISCg5TX01BVENIX01BS0lORxAUEg0KCUNfSVNSRUFEWRAV",
-            "Eg0KCVNfSVNSRUFEWRAWEgwKCENfSVNMT0NLEBcSDAoIU19JU0xPQ0sQGBIL",
-            "CgdDX1NUQVJUEBkSCwoHU19TVEFSVBAaEgoKBkNfTU9WRRAfEgoKBlNfTU9W",
-            "RRAgEgsKB0NfQ0FUQ0gQIRILCgdTX0NBVENIECISEAoMU19QTEFZRVJMSVNU",
-            "ECMqQQoLUGxheWVyU3RhdGUSDwoLUExBWUVSX05PTkUQABIJCgVBTElWRRAB",
-            "EgsKB0NBVENIRUQQAhIJCgVHSE9TVBADKi8KCVJvb21TdGF0ZRINCglST09N",
-            "X05PTkUQABIJCgVMT0JCWRABEggKBEdBTUUQAkISqgIPSW1wZWxEb3duLlBy",
-            "b3RvYgZwcm90bzM="));
+            "GC5pbXBlbERvd24uUGxheWVyUG9zRGF0YSIICgZTX01vdmUiNAoHQ19DYXRj",
+            "aBIQCghwbGF5ZXJJZBgBIAEoBRIXCg9jYXRjaGVkUGxheWVySWQYAiABKAUi",
+            "CQoHU19DYXRjaCJGCgxTX1BsYXllckxpc3QSNgoRcGxheWVySW5HYW1lRGF0",
+            "YXMYASADKAsyGy5pbXBlbERvd24uUGxheWVySW5HYW1lRGF0YSrtAgoFTVNH",
+            "SUQSCgoGU19JTklUEAASDAoIQ19QTEFZRVIQARIMCghTX1BMQVlFUhACEhEK",
+            "DUNfQ1JFQVRFX1JPT00QChIPCgtDX0pPSU5fUk9PTRALEg8KC0NfRVhJVF9S",
+            "T09NEAwSEgoOQ19NQVRDSF9NQUtJTkcQDRIRCg1TX0NSRUFURV9ST09NEA8S",
+            "DwoLU19KT0lOX1JPT00QEBIPCgtTX0VYSVRfUk9PTRAREhIKDlNfUkVGUkVT",
+            "SF9ST09NEBISEgoOU19NQVRDSF9NQUtJTkcQFBINCglDX0lTUkVBRFkQFRIN",
+            "CglTX0lTUkVBRFkQFhIMCghDX0lTTE9DSxAXEgwKCFNfSVNMT0NLEBgSCwoH",
+            "Q19TVEFSVBAZEgsKB1NfU1RBUlQQGhIKCgZDX01PVkUQHxIKCgZTX01PVkUQ",
+            "IBILCgdDX0NBVENIECESCwoHU19DQVRDSBAiEhAKDFNfUExBWUVSTElTVBAj",
+            "KkEKC1BsYXllclN0YXRlEg8KC1BMQVlFUl9OT05FEAASCQoFQUxJVkUQARIL",
+            "CgdDQVRDSEVEEAISCQoFR0hPU1QQAyovCglSb29tU3RhdGUSDQoJUk9PTV9O",
+            "T05FEAASCQoFTE9CQlkQARIICgRHQU1FEAJCEqoCD0ltcGVsRG93bi5Qcm90",
+            "b2IGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::ImpelDown.Proto.MSGID), typeof(global::ImpelDown.Proto.PlayerState), typeof(global::ImpelDown.Proto.RoomState), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -107,7 +108,7 @@ namespace ImpelDown.Proto {
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.PlayerInitData), global::ImpelDown.Proto.PlayerInitData.Parser, new[]{ "PlayerId", "PlayerName", "CharacterIndex", "PlayerPosData", "TailIndex", "PlayerState" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Move), global::ImpelDown.Proto.C_Move.Parser, new[]{ "PlayerId", "PlayerPosData" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Move), global::ImpelDown.Proto.S_Move.Parser, null, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Catch), global::ImpelDown.Proto.C_Catch.Parser, null, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.C_Catch), global::ImpelDown.Proto.C_Catch.Parser, new[]{ "PlayerId", "CatchedPlayerId" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_Catch), global::ImpelDown.Proto.S_Catch.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::ImpelDown.Proto.S_PlayerList), global::ImpelDown.Proto.S_PlayerList.Parser, new[]{ "PlayerInGameDatas" }, null, null, null, null)
           }));
@@ -6353,6 +6354,8 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_Catch(C_Catch other) : this() {
+      playerId_ = other.playerId_;
+      catchedPlayerId_ = other.catchedPlayerId_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -6360,6 +6363,30 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public C_Catch Clone() {
       return new C_Catch(this);
+    }
+
+    /// <summary>Field number for the "playerId" field.</summary>
+    public const int PlayerIdFieldNumber = 1;
+    private int playerId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int PlayerId {
+      get { return playerId_; }
+      set {
+        playerId_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "catchedPlayerId" field.</summary>
+    public const int CatchedPlayerIdFieldNumber = 2;
+    private int catchedPlayerId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
+    public int CatchedPlayerId {
+      get { return catchedPlayerId_; }
+      set {
+        catchedPlayerId_ = value;
+      }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -6377,6 +6404,8 @@ namespace ImpelDown.Proto {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (PlayerId != other.PlayerId) return false;
+      if (CatchedPlayerId != other.CatchedPlayerId) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -6384,6 +6413,8 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public override int GetHashCode() {
       int hash = 1;
+      if (PlayerId != 0) hash ^= PlayerId.GetHashCode();
+      if (CatchedPlayerId != 0) hash ^= CatchedPlayerId.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -6402,6 +6433,14 @@ namespace ImpelDown.Proto {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (PlayerId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(PlayerId);
+      }
+      if (CatchedPlayerId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(CatchedPlayerId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -6412,6 +6451,14 @@ namespace ImpelDown.Proto {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (PlayerId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(PlayerId);
+      }
+      if (CatchedPlayerId != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(CatchedPlayerId);
+      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -6422,6 +6469,12 @@ namespace ImpelDown.Proto {
     [global::System.CodeDom.Compiler.GeneratedCode("protoc", null)]
     public int CalculateSize() {
       int size = 0;
+      if (PlayerId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PlayerId);
+      }
+      if (CatchedPlayerId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(CatchedPlayerId);
+      }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -6433,6 +6486,12 @@ namespace ImpelDown.Proto {
     public void MergeFrom(C_Catch other) {
       if (other == null) {
         return;
+      }
+      if (other.PlayerId != 0) {
+        PlayerId = other.PlayerId;
+      }
+      if (other.CatchedPlayerId != 0) {
+        CatchedPlayerId = other.CatchedPlayerId;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -6449,6 +6508,14 @@ namespace ImpelDown.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
+          case 8: {
+            PlayerId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CatchedPlayerId = input.ReadInt32();
+            break;
+          }
         }
       }
     #endif
@@ -6464,6 +6531,14 @@ namespace ImpelDown.Proto {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
+          case 8: {
+            PlayerId = input.ReadInt32();
+            break;
+          }
+          case 16: {
+            CatchedPlayerId = input.ReadInt32();
+            break;
+          }
         }
       }
     }

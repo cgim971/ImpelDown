@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class HunterPlayer : BasePlayer {
 
-    public override void Init(bool isPlayer, int playerId, PlayerState playerState) {
-        base.Init(isPlayer, playerId, playerState);
+    public override void Init(bool isPlayer, int playerId, PlayerState playerState, int tailIndex) {
+        base.Init(isPlayer, playerId, playerState, tailIndex);
 
         AddComponents();
 

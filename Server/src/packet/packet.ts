@@ -2480,23 +2480,67 @@ export namespace impelDown {
     }
     export class C_Catch extends pb_1.Message {
         #one_of_decls: number[][] = [];
-        constructor(data?: any[] | {}) {
+        constructor(data?: any[] | {
+            playerId?: number;
+            catchedPlayerId?: number;
+        }) {
             super();
             pb_1.Message.initialize(this, Array.isArray(data) ? data : [], 0, -1, [], this.#one_of_decls);
-            if (!Array.isArray(data) && typeof data == "object") { }
+            if (!Array.isArray(data) && typeof data == "object") {
+                if ("playerId" in data && data.playerId != undefined) {
+                    this.playerId = data.playerId;
+                }
+                if ("catchedPlayerId" in data && data.catchedPlayerId != undefined) {
+                    this.catchedPlayerId = data.catchedPlayerId;
+                }
+            }
         }
-        static fromObject(data: {}): C_Catch {
+        get playerId() {
+            return pb_1.Message.getFieldWithDefault(this, 1, 0) as number;
+        }
+        set playerId(value: number) {
+            pb_1.Message.setField(this, 1, value);
+        }
+        get catchedPlayerId() {
+            return pb_1.Message.getFieldWithDefault(this, 2, 0) as number;
+        }
+        set catchedPlayerId(value: number) {
+            pb_1.Message.setField(this, 2, value);
+        }
+        static fromObject(data: {
+            playerId?: number;
+            catchedPlayerId?: number;
+        }): C_Catch {
             const message = new C_Catch({});
+            if (data.playerId != null) {
+                message.playerId = data.playerId;
+            }
+            if (data.catchedPlayerId != null) {
+                message.catchedPlayerId = data.catchedPlayerId;
+            }
             return message;
         }
         toObject() {
-            const data: {} = {};
+            const data: {
+                playerId?: number;
+                catchedPlayerId?: number;
+            } = {};
+            if (this.playerId != null) {
+                data.playerId = this.playerId;
+            }
+            if (this.catchedPlayerId != null) {
+                data.catchedPlayerId = this.catchedPlayerId;
+            }
             return data;
         }
         serialize(): Uint8Array;
         serialize(w: pb_1.BinaryWriter): void;
         serialize(w?: pb_1.BinaryWriter): Uint8Array | void {
             const writer = w || new pb_1.BinaryWriter();
+            if (this.playerId != 0)
+                writer.writeInt32(1, this.playerId);
+            if (this.catchedPlayerId != 0)
+                writer.writeInt32(2, this.catchedPlayerId);
             if (!w)
                 return writer.getResultBuffer();
         }
@@ -2506,6 +2550,12 @@ export namespace impelDown {
                 if (reader.isEndGroup())
                     break;
                 switch (reader.getFieldNumber()) {
+                    case 1:
+                        message.playerId = reader.readInt32();
+                        break;
+                    case 2:
+                        message.catchedPlayerId = reader.readInt32();
+                        break;
                     default: reader.skipField();
                 }
             }

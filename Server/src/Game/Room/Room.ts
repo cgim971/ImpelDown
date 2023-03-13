@@ -58,6 +58,11 @@ export default class Room {
             }
         }
 
+        this._tailManager = new TailManager();
+        this._mapManager = new MapManager();
+
+        this._tailManager.init(this._roomInfo.currentPeople);
+
         this._roomInfo.roomState = impelDown.RoomState.GAME;
 
         let sStart: impelDown.S_Start = new impelDown.S_Start({
@@ -79,10 +84,14 @@ export default class Room {
     private playerInitData(): impelDown.PlayerInitData[] {
         let list: impelDown.PlayerInitData[] = [];
 
+        let idx: number = 0;
+
         for (let index in this._roomInfo.roomDatas) {
             if (this._roomInfo.roomDatas[index].playerId == -1) continue;
-
             let player: PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
+
+            this._tailManager.setArray(player);
+
             let data: impelDown.PlayerInitData = new impelDown.PlayerInitData({
                 playerId: player.getPlayerId(),
                 playerName: player.getPlayerName(),
@@ -102,14 +111,14 @@ export default class Room {
         let list: impelDown.PlayerInGameData[] = [];
         for (let index in this._roomInfo.roomDatas) {
             if (this._roomInfo.roomDatas[index].playerId == -1) continue;
-            
-            let player : PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
+
+            let player: PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
             let data: impelDown.PlayerInGameData = new impelDown.PlayerInGameData({
-               playerId:player.getPlayerId(),
-               playerNmae:player.getPlayerName(),
-               playerPosData:player.getPlayerDataInfo().getPlayerPosition(),
-               tailIndex:player.getPlayerDataInfo().getTailIndex(),
-               playerState:player.getPlayerDataInfo().getPlayerState(), 
+                playerId: player.getPlayerId(),
+                playerNmae: player.getPlayerName(),
+                playerPosData: player.getPlayerDataInfo().getPlayerPosition(),
+                tailIndex: player.getPlayerDataInfo().getTailIndex(),
+                playerState: player.getPlayerDataInfo().getPlayerState(),
             });
             list.push(data);
         }

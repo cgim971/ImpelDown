@@ -196,7 +196,8 @@ message C_Move {
 message S_Move { }
 
 message C_Catch {
-
+    int32 playerId = 1;
+    int32 catchedPlayerId = 2;
 }
 
 message S_Catch {

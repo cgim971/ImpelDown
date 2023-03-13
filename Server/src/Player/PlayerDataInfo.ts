@@ -84,5 +84,8 @@ export default class PlayerDataInfo {
     setPlayerPosData(playerPosData: impelDown.PlayerPosData): void {
         this._playerInfo.playerPosData = playerPosData;
     }
+    setTailIndex(tailIndex:number){
+        this._tailIndex = tailIndex;
+    }
 
 }

@@ -21,6 +21,10 @@ public class BasePlayer : MonoBehaviour {
 
     public bool IsPlayer => _isPlayer;
     public int PlayerId => _playerId;
+    public int TailIndex {
+        get => _tailIndex;
+        set => _tailIndex = value;
+    }
     public PlayerState PlayerState => _playerState;
     #endregion
 
@@ -40,6 +44,7 @@ public class BasePlayer : MonoBehaviour {
 
     protected bool _isPlayer = false;
     protected int _playerId = -1;
+    protected int _tailIndex = -1;
 
 
     private float _width = 0;
@@ -53,12 +58,12 @@ public class BasePlayer : MonoBehaviour {
         _agentGhostRendererTs = transform.Find("AgentGhostRenderer");
     }
 
-    public virtual void Init(bool isPlayer, int playerId, PlayerState playerState) {
+    public virtual void Init(bool isPlayer, int playerId, PlayerState playerState, int tailIndex) {
         _isPlayer = isPlayer;
         _playerId = playerId;
 
         SetPlayerState(playerState);
-
+        //_baseTailModule.SetTail(tailIndex);
         _rigidbody = GetComponent<Rigidbody2D>();
 
         if (isPlayer) {

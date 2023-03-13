@@ -34,7 +34,7 @@ public class PlayerManager {
         foreach (PlayerInitData playerData in playerDataList) {
             BasePlayer newPlayer = GameObject.Instantiate(GameManager.Instance.HunterPlayer);
             bool isPlayer = (playerData.PlayerId == GameManager.Instance.PlayerId) ? true : false;
-            newPlayer.Init(isPlayer, playerData.PlayerId, playerData.PlayerState);
+            newPlayer.Init(isPlayer, playerData.PlayerId, playerData.PlayerState, playerData.TailIndex);
             PositionData positionData = Util.ChangePosition(playerData.PlayerPosData);
             newPlayer.SetPositionInfo(positionData, true);
 
