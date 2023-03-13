@@ -7,8 +7,8 @@ public class PirateMoveModule : BaseMoveModule {
 
     public override void Init() {
         _player = GetComponent<PiratePlayer>();
-
         _rigidbody = _player.Rigidbody;
+        base.Init();
     }
 
     public override void Move() {

@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "RobotSO", menuName = "SO/Player/Robot")]
 public class RobotDataSO : BasePlayerDataSO
 {
-
+    public float SkillRunTime;
 }

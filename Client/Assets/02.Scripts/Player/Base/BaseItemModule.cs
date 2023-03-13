@@ -13,8 +13,9 @@ public abstract class BaseItemModule : MonoBehaviour {
 
     protected BasePlayer _player;
 
+    [SerializeField]
     private UIInventoryPage inventoryUI;
-
+    [SerializeField]
     private InventorySO inventoryData;
 
     public List<InventoryItem> initialItems = new List<InventoryItem>();
@@ -86,6 +87,9 @@ public abstract class BaseItemModule : MonoBehaviour {
 
     public void UseItem()
     {
+        if (Input.GetKeyDown(KeyCode.T) == false)
+            return;
+
         if (!inventoryData.GetItemAt(0).IsEmpty)
         {
             PerformAction(0);

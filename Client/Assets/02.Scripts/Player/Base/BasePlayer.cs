@@ -25,6 +25,8 @@ public class BasePlayer : MonoBehaviour {
     public int TailIndex => _tailIndex;
     public int TargetTailIndex => _targetTailIndex;
     public PlayerState PlayerState => _playerState;
+
+    public bool SuperArmer { get; set; }
     #endregion
 
     protected BaseInputModule _baseInputModule;
@@ -53,6 +55,7 @@ public class BasePlayer : MonoBehaviour {
     private float _width = 0;
     CinemachineVirtualCamera vCam = null;
 
+    private bool _superArmer;
 
     private void Awake() {
         _width = Screen.width / 2;
@@ -101,7 +104,9 @@ public class BasePlayer : MonoBehaviour {
         if (_isPlayer == true) {
             _baseInputModule.InputCatch();
             _baseInputModule.InputSkill();
-            LookMouse();
+            _baseInputModule.InputItem();
+            if (MoveModule.MoveAble)
+                LookMouse();
         }
     }
 

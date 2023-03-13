@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "MagicianSO", menuName = "SO/Player/Magician")]
 public class MagicianDataSO : BasePlayerDataSO
 {
-    
+    public float SkillRunTime;
 }

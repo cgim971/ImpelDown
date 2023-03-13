@@ -133,7 +133,7 @@ PrefabInstance:
     - target: {fileID: 2926266595998712464, guid: b6187ef01703b04418146e73f72134df, type: 3}
       propertyPath: <InventoryItem>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: e307edb78e901124c95555e6c87f0990, type: 2}
+      objectReference: {fileID: 11400000, guid: d017d5dd83a1c1e41a8d5b94f94fd979, type: 2}
     - target: {fileID: 2926266595998712465, guid: b6187ef01703b04418146e73f72134df, type: 3}
       propertyPath: m_SortingLayer
       value: 1
@@ -41054,7 +41054,7 @@ PrefabInstance:
     - target: {fileID: 2926266595998712464, guid: b6187ef01703b04418146e73f72134df, type: 3}
       propertyPath: <InventoryItem>k__BackingField.Array.data[0]
       value: 
-      objectReference: {fileID: 11400000, guid: 3b08e2f452cf3f04e806267660027029, type: 2}
+      objectReference: {fileID: 11400000, guid: d017d5dd83a1c1e41a8d5b94f94fd979, type: 2}
     - target: {fileID: 2926266595998712465, guid: b6187ef01703b04418146e73f72134df, type: 3}
       propertyPath: m_SortingLayer
       value: 1

@@ -1767,6 +1767,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _piratePrefab: {fileID: 4152200519119026491, guid: 301511eb8654b054dae02687e2f141d5, type: 3}
   _ninjaPrefab: {fileID: 6416212586555830353, guid: 73ee244b122a25d44a2683e2ebe3bb75, type: 3}
+  _raccoonPrefab: {fileID: 396722214289227114, guid: 1d6cf75929dab574b852e590f187e1b6, type: 3}
+  _robotPrefab: {fileID: 53879421284926542, guid: 8514dad669123114380d5a7d94b39115, type: 3}
 --- !u!1 &1151194094
 GameObject:
   m_ObjectHideFlags: 0

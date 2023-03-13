@@ -9,8 +9,8 @@ public class RobotMoveModule : BaseMoveModule
     public override void Init()
     {
         _player = GetComponent<RobotPlayer>();
-
         _rigidbody = _player.Rigidbody;
+        base.Init();
     }
 
     public override void Move()

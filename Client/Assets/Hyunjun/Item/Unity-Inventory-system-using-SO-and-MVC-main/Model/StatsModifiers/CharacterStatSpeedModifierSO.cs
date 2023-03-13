@@ -5,12 +5,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class CharacterStatSpeedModifierSO : CharacterStatModifierSO
 {
-    public override void AffectCharacter(GameObject character, float val)
+    public override void AffectCharacter(GameObject character, float val, float runtime)
     {
-        //Player speed = character.GetComponent<Player>();
-        //if (speed != null)
-        //{
-        //    speed.AddSpeed();
-        //}
+        character.GetComponent<BasePlayer>().MoveModule.SpeedItem(val, runtime);
     }
 }

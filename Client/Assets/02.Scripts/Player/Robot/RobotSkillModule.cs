@@ -13,8 +13,17 @@ public class RobotSkillModule : BaseSkillModule
 
     public override void Skill()
     {
-        if (Skillable() == false)
+        if (!Input.GetKeyDown(KeyCode.Q) || !_player.SkillModule.IsSkillable)
             return;
+        RobotPlayer.SkillModule.IsSkillable = false;
+        RobotPlayer.SuperArmer = true;
+        StartCoroutine(RunTime());
+        StartCoroutine(CoolTime());
+    }
 
+    IEnumerator RunTime()
+    {
+        yield return new WaitForSeconds(RobotPlayer.RobotDataSO.SkillRunTime);
+        RobotPlayer.SuperArmer = false;
     }
 }

@@ -5,15 +5,22 @@ using UnityEngine;
 public abstract class BaseMoveModule : MonoBehaviour {
     #region Property
     public BasePlayer Player => _player;
+    public float Speed { get { return _speed; } set { _speed = value; } }
+    public bool MoveAble { get { return _moveable; } set { _moveable = value; } }
     #endregion
 
     protected BasePlayer _player;
     protected Vector2 _targetPos;
 
     protected Rigidbody2D _rigidbody;
+    protected float _speed;
 
+    private bool _moveable = true; 
 
-    public abstract void Init();
+    public virtual void Init()
+    {
+        _speed = Player.PlayerDataSO.Speed;
+    }
 
 
     public virtual void Move() {
@@ -33,8 +40,11 @@ public abstract class BaseMoveModule : MonoBehaviour {
         }
 
         velocity.Normalize();
+        if (!_moveable)
+            velocity = Vector2.zero;
 
-        _rigidbody.velocity = velocity * Player.PlayerDataSO.Speed;
+        _rigidbody.velocity = velocity * _speed;
+        
     }
 
     public void SetPositionData(Vector2 pos, bool isImmediate) {
@@ -55,4 +65,16 @@ public abstract class BaseMoveModule : MonoBehaviour {
         }
     }
 
+    public void SpeedItem(float val, float runTime)
+    {
+        float tmp = _speed;
+        _speed = _speed * val;
+        StartCoroutine(RunTime(tmp, runTime));
+    }
+
+    IEnumerator RunTime(float speed, float runTime)
+    {
+        yield return new WaitForSeconds(runTime);
+        _speed = speed;
+    }
 }

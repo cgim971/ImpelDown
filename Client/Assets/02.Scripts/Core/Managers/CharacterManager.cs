@@ -18,6 +18,8 @@ public class CharacterManager : MonoBehaviour {
 
     [SerializeField] private BasePlayer _piratePrefab;
     [SerializeField] private BasePlayer _ninjaPrefab;
+    [SerializeField] private BasePlayer _raccoonPrefab;
+    [SerializeField] private BasePlayer _robotPrefab;
 
     public BasePlayer PlayerCharacterPrefab(int characterIndex) {
         switch (characterIndex) {
@@ -26,13 +28,13 @@ public class CharacterManager : MonoBehaviour {
             case 1:
                 break;
             case 2:
-                break;
+                return _raccoonPrefab;
             case 3:
-                break;
-            case 4:
-                return _ninjaPrefab;
-            case 5:
                 return _piratePrefab;
+            case 4:
+                return _robotPrefab;
+            case 5:
+                return _ninjaPrefab;
             case 6:
                 break;
         }
