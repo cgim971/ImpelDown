@@ -3928,6 +3928,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _url: ws://172.31.3.19:8181
+  HunterPlayer: {fileID: 3641869214418315974, guid: 1e1a16b85e6cd6840a8fa2c8a724fc73, type: 3}
 --- !u!1 &1136829983
 GameObject:
   m_ObjectHideFlags: 0

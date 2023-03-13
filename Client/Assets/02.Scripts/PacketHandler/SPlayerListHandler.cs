@@ -4,9 +4,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SStartHandler : IPacketHandler {
+public class SPlayerListHandler : IPacketHandler {
     public void Process(IMessage packet) {
-        S_Start msg = packet as S_Start;
-        GameManager.Instance.GameStart(msg.MapIndex, msg.PlayerDatas);
+        S_PlayerList msg = packet as S_PlayerList;
+        PlayerManager.Instance.UpdateRemotePlayer(msg.PlayerInGameDatas);
     }
 }

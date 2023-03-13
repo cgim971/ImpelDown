@@ -66,6 +66,9 @@ export default class PlayerDataInfo {
     getRoomIndex(): number {
         return this._playerInfo.roomIndex;
     }
+    getPlayerCharacterIndex() :number{
+        return this._playerInfo.characterIndex;
+    }
 
     setPlayerName(playerName: string): void {
         this._playerInfo.playerName = playerName;

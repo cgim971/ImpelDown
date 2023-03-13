@@ -1,3 +1,4 @@
+using Google.Protobuf.Collections;
 using ImpelDown.Proto;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,6 +19,8 @@ public class GameManager : MonoBehaviour {
     private static GameManager _instance = null;
     [SerializeField] private string _url = string.Empty;
 
+    public BasePlayer HunterPlayer;
+
     private int _playerId = -1;
 
     private void Awake() {
@@ -35,15 +38,16 @@ public class GameManager : MonoBehaviour {
         NetworkManager.Instance.Connection();
     }
 
-    public void GameStart(RoomInfo roomInfo) {
-        StartCoroutine(GameStarting(roomInfo));
+    public void GameStart(int mapIndex, RepeatedField<PlayerInitData> playerDatas) {
+        StartCoroutine(GameStarting(mapIndex, playerDatas));
     }
 
-    public IEnumerator GameStarting(RoomInfo roomInfo) {
+    public IEnumerator GameStarting(int mapIndex, RepeatedField<PlayerInitData> playerDatas) {
         yield return null;
-        SceneManager.LoadScene(Define.MapName(roomInfo.MapIndex));
+        SceneManager.LoadScene(Define.MapName(mapIndex));
 
         yield return null;
-
+        PlayerManager.Instance = new PlayerManager();
+        PlayerManager.Instance.CreatePlayer(playerDatas);
     }
 }

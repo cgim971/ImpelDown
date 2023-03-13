@@ -60,7 +60,10 @@ export default class Room {
 
         this._roomInfo.roomState = impelDown.RoomState.GAME;
 
-        let sStart: impelDown.S_Start = new impelDown.S_Start({ roomInfo: this._roomInfo });
+        let sStart: impelDown.S_Start = new impelDown.S_Start({
+            mapIndex: this._roomInfo.mapIndex,
+            playerDatas: this.playerInitData()
+        });
         this.broadCastMessage(sStart.serialize(), impelDown.MSGID.S_START);
 
         // 게임 시작 시 실행
@@ -69,8 +72,44 @@ export default class Room {
 
     private gameTimer: JobTimer = new JobTimer(40, () => {
         // 게임 중에 계속 실행
+        let sPlayerList: impelDown.S_PlayerList = new impelDown.S_PlayerList({ playerInGameDatas: this.playerGameDatas() });
+        this.broadCastMessage(sPlayerList.serialize(), impelDown.MSGID.S_PLAYERLIST);
     });
 
+    private playerInitData(): impelDown.PlayerInitData[] {
+        let list: impelDown.PlayerInitData[] = [];
+
+        for (let index in this._roomInfo.roomDatas) {
+            if (this._roomInfo.roomDatas[index].playerId == -1) continue;
+
+            let player: PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
+            let data: impelDown.PlayerInitData = new impelDown.PlayerInitData({
+                playerId: player.getPlayerId(),
+                playerName: player.getPlayerName(),
+                characterIndex: player.getPlayerDataInfo().getPlayerCharacterIndex(),
+                playerPosData: new impelDown.PlayerPosData({ position: new impelDown.Position({ x: 0, y: 0 }), scaleX: 1 }),
+                tailIndex: player.getPlayerDataInfo().getTailIndex(),
+                playerState: player.getPlayerDataInfo().getPlayerState()
+            });
+
+            list.push(data);
+        }
+
+        return list;
+    }
+
+    private playerGameDatas(): impelDown.PlayerInGameData[] {
+        let list: impelDown.PlayerInGameData[] = [];
+        for (let index in this._roomInfo.roomDatas) {
+            if (this._roomInfo.roomDatas[index].playerId == -1) continue;
+
+            let data: impelDown.PlayerInGameData = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId).getPlayerDataInfo().getPlayerData();
+            list.push(data);
+        }
+
+        return list;
+
+    }
 
     joinRoom(player: PlayerSocket): void {
         if (this._roomInfo.roomState == impelDown.RoomState.GAME) return;

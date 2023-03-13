@@ -30,18 +30,18 @@ public class PlayerManager {
         _remotePlayerList = new Dictionary<int, BasePlayer>();
     }
 
-    public void CreatePlayer(RepeatedField<PlayerInGameData> playerList) {
-        foreach (PlayerInGameData player in playerList) {
-            //BasePlayer newPlayer = GameObject.Instantiate(CharacterManager.Instance.PlayerCharacterPrefab(player.CharacterIndex));
-            //bool isPlayer = (player.PlayerId == GameManager.Instance.PlayerId) ? true : false;
-            ////newPlayer.Init(isPlayer, player.PlayerId, player.PlayerState, player.TailIndex, player.);
-            //PositionData positionData = Util.ChangePosition(player.PlayerPosData);
-            //newPlayer.SetPositionInfo(positionData, true);
+    public void CreatePlayer(RepeatedField<PlayerInitData> playerDataList) {
+        foreach (PlayerInitData playerData in playerDataList) {
+            BasePlayer newPlayer = GameObject.Instantiate(GameManager.Instance.HunterPlayer);
+            bool isPlayer = (playerData.PlayerId == GameManager.Instance.PlayerId) ? true : false;
+            newPlayer.Init(isPlayer, playerData.PlayerId, playerData.PlayerState);
+            PositionData positionData = Util.ChangePosition(playerData.PlayerPosData);
+            newPlayer.SetPositionInfo(positionData, true);
 
-            //AddRemotePlayer(newPlayer);
+            AddRemotePlayer(newPlayer);
         }
     }
-    
+
     public void AddRemotePlayer(BasePlayer player) {
         _remotePlayerList.Add(player.PlayerId, player);
     }
@@ -54,28 +54,23 @@ public class PlayerManager {
         }
     }
 
-    public void UpdateRemotePlayer(RepeatedField<PlayerInGameData> playerInfos) {
-        foreach (PlayerInGameData player in playerInfos) {
-            PositionData positionData = Util.ChangePosition(player.PlayerPosData);
+    public void UpdateRemotePlayer(RepeatedField<PlayerInGameData> playerDataList) {
+            foreach (PlayerInGameData playerData in playerDataList) {
+            PositionData positionData = Util.ChangePosition(playerData.PlayerPosData);
 
-            //BasePlayer player = null;
-            //if (_remotePlayerList.TryGetValue(player.PlayerId, out player)) {
-            //    player.SetPositionInfo(positionData);
-            //}
-        }
-    }
-
-    public void UpdatePlayerTargetTailIndex(PlayerInfo playerInfo) {
-        if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out BasePlayer player)) {
-            //player.SetTargetTailIndex(playerInfo.TargetTailIndex);
-        }
-    }
-
-    public void UpdatePlayerState(RepeatedField<PlayerInfo> playerInfos) {
-        foreach (PlayerInfo playerInfo in playerInfos) {
             BasePlayer player = null;
-            if (_remotePlayerList.TryGetValue(playerInfo.PlayerId, out player)) {
-                //player.SetPlayerState(playerInfo.PlayerState);
+            if (_remotePlayerList.TryGetValue(playerData.PlayerId, out player)) {
+                player.SetPositionInfo(positionData);
+            }
+        }
+    }
+
+
+    public void UpdatePlayerState(RepeatedField<PlayerInGameData> playerDataList) {
+        foreach (PlayerInGameData playerData in playerDataList) {
+            BasePlayer player = null;
+            if (_remotePlayerList.TryGetValue(playerData.PlayerId, out player)) {
+                player.SetPlayerState(playerData.PlayerState);
             }
         }
     }

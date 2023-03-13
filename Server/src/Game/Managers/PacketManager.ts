@@ -7,6 +7,7 @@ import CIsLockHandler from "../../packet/PacketHandlers/Room/CIsLockHandler";
 import CIsReadyHandler from "../../packet/PacketHandlers/Room/CIsReadyHandler";
 import CJoinRoomHandler from "../../packet/PacketHandlers/Room/CJoinRoomHandler";
 import CMatchMakingHandler from "../../packet/PacketHandlers/Room/CMatchMakingHandler";
+import CMoveHandler from "../../packet/PacketHandlers/Room/CMoveHandler";
 import CStartHandler from "../../packet/PacketHandlers/Room/CStartHandler";
 
 interface HandlerDictionary {
@@ -37,5 +38,6 @@ export default class PacketManager {
         this.handlerMap[impelDown.MSGID.C_ISREADY] = new CIsReadyHandler();
         this.handlerMap[impelDown.MSGID.C_ISLOCK] = new CIsLockHandler();
         this.handlerMap[impelDown.MSGID.C_START] = new CStartHandler();
+        this.handlerMap[impelDown.MSGID.C_MOVE] = new CMoveHandler();
     }
 }
