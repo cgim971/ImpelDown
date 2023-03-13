@@ -24,10 +24,15 @@ public class ItemUI : MonoBehaviour
 
     [SerializeField]
     private Image _icon;
+
+    [SerializeField]
+    private bool isHaving = false;
     #endregion
 
     [SerializeField]
     private Button _changeBtn;
+
+    public Button _buyBtn;
 
     public List<Image> _changeImageList;
     private bool isIcon = true;
@@ -41,15 +46,29 @@ public class ItemUI : MonoBehaviour
         _skillInfo.text = _itemDataSO._skillInfo;
         _backgroundInfo.text = _itemDataSO._backGroundInfo;
         _icon.sprite = _itemDataSO._icon;
+        isHaving = _itemDataSO._isHave;
         _changeBtn.onClick.AddListener(ChangeButton);
         ChangeButton();
+        _buyBtn.onClick.AddListener(ItemBuy);
     }
 
-    // Update is called once per frame
-    void Update()
+    void ItemBuy()
     {
-        
+        Debug.Log("clk");
+        int _curMoney = ItemManager.Instance._CurMoney;//현재 가지고 있는 돈 저장
+        int _itemCost = int.Parse(_cost.text);
+        if (_itemCost > _curMoney)
+        {
+
+            return;
+        }
+        else
+        {
+            ItemManager.Instance._CurMoney -= _itemCost;
+            isHaving = true;
+        }
     }
+
 
     void ChangeButton()
     {

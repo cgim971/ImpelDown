@@ -15,11 +15,13 @@ public class RoomUI : MonoBehaviour
     [SerializeField]
     private TMP_Text _hostName;
     #endregion
+
     #region Ready/Start
     private bool isReady = false;
     [SerializeField]
     private Button ReadyOrStartBtn;
     #endregion
+
     #region Users
     [SerializeField]
     private List<GameObject> _playerList;
@@ -37,7 +39,7 @@ public class RoomUI : MonoBehaviour
     private void Awake()
     {
         _hostName.text = GetHostName();
-        isHost = CheckIsHost("플레이어 1");
+        isHost = CheckIsHost("플레이어 11");
         SetBtnColor();
         if (isHost)
         {
@@ -45,16 +47,6 @@ public class RoomUI : MonoBehaviour
         }
         ButtionDictionary();
         ReadyOrStartBtn.onClick.AddListener(ClickReadyOrStartBtn);
-    }
-    void Start()
-    {
-    }
-    private void Update()
-    {
-        if(Input.GetMouseButtonDown(0))
-        {
-            
-        }
     }
 
     #region FirstSetting

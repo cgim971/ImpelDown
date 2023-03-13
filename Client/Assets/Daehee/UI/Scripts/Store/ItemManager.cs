@@ -15,14 +15,17 @@ public class ItemManager : MonoBehaviour
     public static ItemManager Instance;
 
     [SerializeField]
+    private int _itemAmount = 5;
+
+    private int _curMoney;
+    public int _CurMoney { get { return _curMoney; } set { _curMoney = value; } }
+
+    [SerializeField]
     private GameObject _uiSlot;                                                                                                                                     
     private void Awake()
     {
         Instance = this;
         SetItemUI();
-    }
-    void Start()
-    {
     }
 
     void SetItemUI()

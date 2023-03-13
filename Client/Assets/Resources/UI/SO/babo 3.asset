@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3306d5ae5e7664499321164aa224df9, type: 3}
-  m_Name: babo
+  m_Name: babo 3
   m_EditorClassIdentifier: 
-  _itemName: babo
-  _itemCost: 100
-  _icon: {fileID: 1634276567, guid: 10546e22df25d8b4a84dbcbb553b9bc5, type: 3}
-  _skillInfo: "\uC81C\uD615\uC8FC\uB294 \uBC14\uBCF4\uB2E4 \uC2A4\uD0AC"
-  _backGroundInfo: "\uC81C\uD615\uC8FC\uB294 \uBC14\uBCF4\uC600\uB2E4..."
+  _itemName: babo3
+  _itemCost: 1003
+  _icon: {fileID: 21300000, guid: 0da63bf69e254aa4a83c345c3de497c8, type: 3}
+  _skillInfo: "\uC81C\uD615\uC8FC\uB294 \uBC14\uBCF4\uB2E4 \uC2A4\uD0AC3"
+  _backGroundInfo: "\uC81C\uD615\uC8FC\uB294 \uBC14\uBCF4\uC600\uB2E4...3"
   _isHave: 0
