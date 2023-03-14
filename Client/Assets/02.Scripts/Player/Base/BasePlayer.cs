@@ -90,6 +90,7 @@ public class BasePlayer : MonoBehaviour {
         if (_isPlayer == true) {
             _baseInputModule.InputCatch();
             _baseInputModule.InputSkill();
+            _baseInputModule.InputItem();
             LookMouse();
         }
     }

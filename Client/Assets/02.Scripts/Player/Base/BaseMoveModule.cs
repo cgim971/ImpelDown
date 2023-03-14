@@ -5,12 +5,15 @@ using UnityEngine;
 public abstract class BaseMoveModule : MonoBehaviour {
     #region Property
     public BasePlayer Player => _player;
+    public float Speed { get; set; }
     #endregion
 
     protected BasePlayer _player;
     protected Vector2 _targetPos;
 
     protected Rigidbody2D _rigidbody;
+
+    protected float _speed = 10f;
 
 
     public abstract void Init();
@@ -34,7 +37,7 @@ public abstract class BaseMoveModule : MonoBehaviour {
 
         velocity.Normalize();
 
-        _rigidbody.velocity = velocity * Player.PlayerDataSO.Speed;
+        _rigidbody.velocity = velocity * _speed;
     }
 
     public void SetPositionData(Vector2 pos, bool isImmediate) {

@@ -23,4 +23,9 @@ public abstract class BaseInputModule : MonoBehaviour {
     public void InputSkill() {
         _player.SkillModule.Skill();
     }
+
+    public void InputItem()
+    {
+        _player.ItemModule.UseItem();
+    }
 }

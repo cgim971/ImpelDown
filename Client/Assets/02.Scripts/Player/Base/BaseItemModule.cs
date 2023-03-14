@@ -87,7 +87,7 @@ public abstract class BaseItemModule : MonoBehaviour {
 
     public void UseItem()
     {
-        if (Input.GetKeyDown(KeyCode.T) == false)
+        if (Input.GetKeyDown(KeyCode.E) == false)
             return;
 
         if (!inventoryData.GetItemAt(0).IsEmpty)
