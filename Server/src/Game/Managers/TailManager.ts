@@ -39,10 +39,10 @@ export default class TailManager {
         this._index++;
     }
 
-    catch(playerId: number, catchedPlayerId:number) {
-        this._tailMap[playerId];
-        this._tailMap[catchedPlayerId];
+    catch(playerId: number, catchedPlayerId: number) {
+        let playerTail: number = this._tailMap[playerId];
+        let catchedPlayerTail: number = this._tailMap[catchedPlayerId];
 
-        
+        // 꼬리 인덱스 확인 필요
     }
 }
