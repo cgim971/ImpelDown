@@ -3894,6 +3894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1119783450}
   - component: {fileID: 1119783451}
+  - component: {fileID: 1119783452}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3928,7 +3929,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _url: ws://172.31.3.19:8181
-  HunterPlayer: {fileID: 3641869214418315974, guid: 1e1a16b85e6cd6840a8fa2c8a724fc73, type: 3}
+--- !u!114 &1119783452
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119783449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae86be2113b26e5459632dde631905a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hunterPlayer: {fileID: 3641869214418315974, guid: 1e1a16b85e6cd6840a8fa2c8a724fc73, type: 3}
 --- !u!1 &1136829983
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,7 +32,7 @@ public class PlayerManager {
 
     public void CreatePlayer(RepeatedField<PlayerInitData> playerDataList) {
         foreach (PlayerInitData playerData in playerDataList) {
-            BasePlayer newPlayer = GameObject.Instantiate(GameManager.Instance.HunterPlayer);
+            BasePlayer newPlayer = GameObject.Instantiate(CharacterManager.Instance.GetPlayer(playerData.CharacterIndex));
             bool isPlayer = (playerData.PlayerId == GameManager.Instance.PlayerId) ? true : false;
             newPlayer.Init(isPlayer, playerData.PlayerId, playerData.PlayerState, playerData.TailIndex);
             PositionData positionData = Util.ChangePosition(playerData.PlayerPosData);
@@ -55,9 +55,9 @@ public class PlayerManager {
     }
 
     public void UpdateRemotePlayer(RepeatedField<PlayerInGameData> playerDataList) {
-            foreach (PlayerInGameData playerData in playerDataList) {
+        foreach (PlayerInGameData playerData in playerDataList) {
             PositionData positionData = Util.ChangePosition(playerData.PlayerPosData);
-                
+
             BasePlayer player = null;
             if (_remotePlayerList.TryGetValue(playerData.PlayerId, out player)) {
                 player.SetPositionInfo(positionData);

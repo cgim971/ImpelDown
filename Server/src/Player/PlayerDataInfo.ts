@@ -41,7 +41,7 @@ export default class PlayerDataInfo {
         return this._playerInfo;
     }
 
-    getPlayerPosition(): impelDown.PlayerPosData {
+    getPlayerPosData(): impelDown.PlayerPosData {
         return this._playerInfo.playerPosData;
     }
 

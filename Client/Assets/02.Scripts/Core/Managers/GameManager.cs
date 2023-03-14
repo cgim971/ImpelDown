@@ -14,12 +14,11 @@ public class GameManager : MonoBehaviour {
         get => _playerId;
         set => _playerId = value;
     }
-
     #endregion
     private static GameManager _instance = null;
     [SerializeField] private string _url = string.Empty;
 
-    public BasePlayer HunterPlayer;
+
 
     private int _playerId = -1;
 

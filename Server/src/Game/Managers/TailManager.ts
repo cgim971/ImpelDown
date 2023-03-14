@@ -4,6 +4,7 @@ import SessionManager from "./SessionManager";
 interface TailDictionary {
     [key: number]: number;
 }
+
 export default class TailManager {
 
     private _array: number[] = [];

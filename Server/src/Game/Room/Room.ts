@@ -18,8 +18,8 @@ export default class Room {
     private _hostSocket: PlayerSocket;
     private _roomInfo: impelDown.RoomInfo;
 
-    private _tailManager: TailManager = new TailManager();
-    private _mapManager: MapManager = new MapManager();
+    private _tailManager: TailManager;
+    private _mapManager: MapManager ;
 
 
     constructor(hostSocket: PlayerSocket, roomIndex: number) {
@@ -39,6 +39,9 @@ export default class Room {
             this._roomInfo.roomDatas[index] = new impelDown.RoomData({ isLock: false, playerId: -1, playerName: "", isReady: false });
         }
         this.joinRoom(hostSocket);
+
+        this._tailManager = new TailManager();
+        this._mapManager= new MapManager(this);
     }
 
 
@@ -58,10 +61,8 @@ export default class Room {
             }
         }
 
-        this._tailManager = new TailManager();
-        this._mapManager = new MapManager();
-
         this._tailManager.init(this._roomInfo.currentPeople);
+        this._mapManager.init();
 
         this._roomInfo.roomState = impelDown.RoomState.GAME;
 
@@ -91,12 +92,13 @@ export default class Room {
             let player: PlayerSocket = SessionManager.Instance.getSession(this._roomInfo.roomDatas[index].playerId);
 
             this._tailManager.setArray(player);
+            this._mapManager.setPosition(player);
 
             let data: impelDown.PlayerInitData = new impelDown.PlayerInitData({
                 playerId: player.getPlayerId(),
                 playerName: player.getPlayerName(),
                 characterIndex: player.getPlayerDataInfo().getPlayerCharacterIndex(),
-                playerPosData: new impelDown.PlayerPosData({ position: new impelDown.Position({ x: 0, y: 0 }), scaleX: 1 }),
+                playerPosData: player.getPlayerDataInfo().getPlayerPosData(),
                 tailIndex: player.getPlayerDataInfo().getTailIndex(),
                 playerState: player.getPlayerDataInfo().getPlayerState()
             });
@@ -116,7 +118,7 @@ export default class Room {
             let data: impelDown.PlayerInGameData = new impelDown.PlayerInGameData({
                 playerId: player.getPlayerId(),
                 playerNmae: player.getPlayerName(),
-                playerPosData: player.getPlayerDataInfo().getPlayerPosition(),
+                playerPosData: player.getPlayerDataInfo().getPlayerPosData(),
                 tailIndex: player.getPlayerDataInfo().getTailIndex(),
                 playerState: player.getPlayerDataInfo().getPlayerState(),
             });
