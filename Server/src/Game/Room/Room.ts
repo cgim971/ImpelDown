@@ -19,7 +19,7 @@ export default class Room {
     private _roomInfo: impelDown.RoomInfo;
 
     private _tailManager: TailManager;
-    private _mapManager: MapManager ;
+    private _mapManager: MapManager;
 
 
     constructor(hostSocket: PlayerSocket, roomIndex: number) {
@@ -41,7 +41,7 @@ export default class Room {
         this.joinRoom(hostSocket);
 
         this._tailManager = new TailManager();
-        this._mapManager= new MapManager(this);
+        this._mapManager = new MapManager(this);
     }
 
 
@@ -81,6 +81,12 @@ export default class Room {
         let sPlayerList: impelDown.S_PlayerList = new impelDown.S_PlayerList({ playerInGameDatas: this.playerGameDatas() });
         this.broadCastMessage(sPlayerList.serialize(), impelDown.MSGID.S_PLAYERLIST);
     });
+
+
+    catchPlayer(playerId: number, catchedPlayerId:number): void {
+        this._tailManager.catch(playerId, catchedPlayerId);
+    }
+
 
     private playerInitData(): impelDown.PlayerInitData[] {
         let list: impelDown.PlayerInitData[] = [];

@@ -38,14 +38,14 @@ public abstract class BaseCatchModule : MonoBehaviour {
             if (beCatchedPlayerId == Player.PlayerId)
                 continue;
 
-            //C_Catch cCatch = new C_Catch {
-            //    //PlayerId = Player.PlayerId,
-            //    //BeCatchedPlayerId = beCatchedPlayerId,
-            //};
-
-            //NetworkManager.Instance.RegisterSend((ushort)MSGID.CCatch, cCatch);
+            C_Catch cCatch = new C_Catch {
+                PlayerId = Player.PlayerId,
+                CatchedPlayerId = beCatchedPlayerId,
+            };
+            NetworkManager.Instance.RegisterSend((ushort)MSGID.CCatch, cCatch);
             return;
         }
+
         StartCoroutine(CatchTime());
     }
 

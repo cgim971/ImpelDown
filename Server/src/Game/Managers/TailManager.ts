@@ -35,7 +35,14 @@ export default class TailManager {
     setArray(player: PlayerSocket) {
         this._tailMap[player.getPlayerId()] = this._array[this._index];
         player.getPlayerDataInfo().setTailIndex(this._array[this._index]);
-        
+
         this._index++;
+    }
+
+    catch(playerId: number, catchedPlayerId:number) {
+        this._tailMap[playerId];
+        this._tailMap[catchedPlayerId];
+
+        
     }
 }
