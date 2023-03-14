@@ -5,10 +5,6 @@ using UnityEngine;
 public abstract class BaseSkillModule : MonoBehaviour {
     #region Property
     public BasePlayer Player => _player;
-    public bool IsSkillable {
-        get => _isSkillable;
-        set => _isSkillable = value;
-    }
     #endregion
 
     protected BasePlayer _player;
@@ -19,14 +15,14 @@ public abstract class BaseSkillModule : MonoBehaviour {
 
     protected virtual IEnumerator CoolTime() {
         yield return new WaitForSeconds(_player.PlayerDataSO.ActiveCoolTime);
-        _isSkillable = true;
+        Player.InputModule.Skillable = true;
     }
 
     // ½ºÅ³ Q
     public abstract void Skill();
 
     protected bool Skillable() {
-        if (Input.GetKeyDown(KeyCode.Q) == false || _isSkillable == false)
+        if (Input.GetKeyDown(KeyCode.Q) == false || Player.InputModule.Skillable == false)
             return false;
 
         if (!Input.GetMouseButtonDown(0))

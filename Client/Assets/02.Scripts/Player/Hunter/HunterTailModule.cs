@@ -7,7 +7,6 @@ public class HunterTailModule : BaseTailModule {
 
     public override void Init() {
         _player = GetComponent<HunterPlayer>();
+        base.Init();
     }
-
-
 }
