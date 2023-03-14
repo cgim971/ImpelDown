@@ -9,11 +9,21 @@ public class BaseTailModule : MonoBehaviour {
     #endregion
 
     protected BasePlayer _player;
+    Transform _tailsTs;
 
-    public virtual void Init() { }
+    public virtual void Init() {
+        _tailsTs = transform.Find("Tails");
+    }
 
     public void SetTail(int tailIndex) {
         _player.TailIndex = tailIndex;
+
+        CreateTail();
+    }
+
+    public void CreateTail() {
+        GameObject tail = Instantiate(TailManager.Instance.GetTail(_player.TailIndex), transform);
+
     }
 
 }

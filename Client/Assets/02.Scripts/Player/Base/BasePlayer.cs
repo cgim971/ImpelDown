@@ -62,8 +62,8 @@ public class BasePlayer : MonoBehaviour {
         _isPlayer = isPlayer;
         _playerId = playerId;
 
+        SetPlayerTail(tailIndex);
         SetPlayerState(playerState);
-        _tailIndex = tailIndex;
 
         _rigidbody = GetComponent<Rigidbody2D>();
 
@@ -90,6 +90,8 @@ public class BasePlayer : MonoBehaviour {
         if (_isPlayer == true) {
             StartCoroutine(SendPosition());
         }
+
+        _baseTailModule.SetTail(_tailIndex);
     }
 
     protected virtual void Update() {
@@ -118,6 +120,9 @@ public class BasePlayer : MonoBehaviour {
         transform.localScale = new Vector3(positionData.scaleX, 1, 1);
     }
 
+    public void SetPlayerTail(int tailIndex) {
+        _tailIndex = tailIndex;
+    }
 
     public void SetPlayerState(PlayerState playerState) {
         _playerState = playerState;
@@ -141,8 +146,6 @@ public class BasePlayer : MonoBehaviour {
                 // 유령일 때
                 SetActiveTs(_agentRendererTs, false);
                 SetActiveTs(_agentGhostRendererTs);
-
-
                 break;
         }
     }

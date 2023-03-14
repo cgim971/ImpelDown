@@ -3895,6 +3895,7 @@ GameObject:
   - component: {fileID: 1119783450}
   - component: {fileID: 1119783451}
   - component: {fileID: 1119783452}
+  - component: {fileID: 1119783453}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -3942,6 +3943,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hunterPlayer: {fileID: 3641869214418315974, guid: 1e1a16b85e6cd6840a8fa2c8a724fc73, type: 3}
+--- !u!114 &1119783453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119783449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d110a03bc33e94c459dffd295c6104df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _redTail: {fileID: 2756098733475569666, guid: ae9bf2edec85413409a55ac1b720f06b, type: 3}
+  _orangeTail: {fileID: 2611322901441498794, guid: c6bf901a017bd404a803b6c989861e89, type: 3}
+  _yellowTail: {fileID: 8571770586710197224, guid: 9a51f0c142ea2fb4fbd836344a8866fc, type: 3}
+  _greenTail: {fileID: 1703224558456236938, guid: 5709259fc8563414bb4ac57c76738460, type: 3}
+  _blueTail: {fileID: 3808949494015400542, guid: 0b52fd6f4ee894b48aafd9e1137e0fba, type: 3}
+  _navyTail: {fileID: 8935217009688063923, guid: 5de9712988f3c8443986fa72aa0fe226, type: 3}
+  _purpleTail: {fileID: 9078323230127577211, guid: 62dea1e97d592ee4bb0e93adc267bd82, type: 3}
+  _pinkTail: {fileID: 6061194626096276355, guid: 2326779b509ff354d809c63c2e279c04, type: 3}
 --- !u!1 &1136829983
 GameObject:
   m_ObjectHideFlags: 0
