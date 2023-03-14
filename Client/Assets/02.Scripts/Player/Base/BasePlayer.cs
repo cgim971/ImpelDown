@@ -63,7 +63,8 @@ public class BasePlayer : MonoBehaviour {
         _playerId = playerId;
 
         SetPlayerState(playerState);
-        //_baseTailModule.SetTail(tailIndex);
+        _tailIndex = tailIndex;
+
         _rigidbody = GetComponent<Rigidbody2D>();
 
         if (isPlayer) {
@@ -163,7 +164,7 @@ public class BasePlayer : MonoBehaviour {
             playerPosData.Position.X = pos.x;
             playerPosData.Position.Y = pos.y;
 
-            playerPosData.ScaleX = _agentRendererTs.localScale.x;
+            playerPosData.ScaleX = transform.localScale.x;
 
             C_Move cMove = new C_Move { PlayerId = PlayerId, PlayerPosData = playerPosData };
             NetworkManager.Instance.RegisterSend((ushort)MSGID.CMove, cMove);
