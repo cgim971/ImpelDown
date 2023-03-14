@@ -7,5 +7,6 @@ public class HunterItemModule : BaseItemModule {
 
     public override void Init() {
         _player = GetComponent<HunterPlayer>();
+        base.Init();
     }
 }
