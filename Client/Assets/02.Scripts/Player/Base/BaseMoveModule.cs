@@ -37,6 +37,9 @@ public abstract class BaseMoveModule : MonoBehaviour {
 
         velocity.Normalize();
 
+        if (!Player.InputModule.Moveable)
+            velocity = Vector2.zero;
+
         _rigidbody.velocity = velocity * _speed;
     }
 
@@ -56,6 +59,19 @@ public abstract class BaseMoveModule : MonoBehaviour {
 
             transform.position = pos;
         }
+    }
+
+    public void SpeedItem(float val, float runTime)
+    {
+        float tmp = _speed;
+        _speed = _speed * val;
+        StartCoroutine(RunTime(tmp, runTime));
+    }
+
+    IEnumerator RunTime(float speed, float runTime)
+    {
+        yield return new WaitForSeconds(runTime);
+        _speed = speed;
     }
 
 }
